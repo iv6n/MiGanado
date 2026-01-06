@@ -14,7 +14,6 @@ class MiGanadoDatabase {
   late Box<Map> _pesajesBox;
   late Box<Map> _ubicacionesBox;
   late Box<Map> _ganaderoBox;
-  late Box<Map> _eventosMantenimientoBox;
 
   /// Inicializa la base de datos
   Future<void> init() async {
@@ -24,7 +23,6 @@ class MiGanadoDatabase {
     _pesajesBox = await Hive.openBox<Map>(pesajesBox);
     _ubicacionesBox = await Hive.openBox<Map>(ubicacionesBox);
     _ganaderoBox = await Hive.openBox<Map>(ganaderoBox);
-    _eventosMantenimientoBox = await Hive.openBox<Map>(eventosMantenimientoBox);
   }
 
   // ============ ANIMALES ============

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:miganado/models/index.dart';
+import 'package:miganado/features/animals/data/models/animal_model.dart';
 import 'package:miganado/theme/app_theme.dart';
-import 'package:miganado/providers/data_providers.dart';
+import 'package:miganado/features/animals/presentation/providers/animals_providers.dart'
+    hide databaseProvider;
 
 /// Pantalla para seleccionar un animal de la lista
 class SeleccionarAnimalScreen extends ConsumerWidget {
@@ -10,7 +11,7 @@ class SeleccionarAnimalScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final animalesAsync = ref.watch(animalesProvider);
+    final animalesAsync = ref.watch(allAnimalesProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -77,7 +78,7 @@ class SeleccionarAnimalScreen extends ConsumerWidget {
 
 /// Tarjeta individual de animal
 class _AnimalCard extends StatelessWidget {
-  final Animal animal;
+  final AnimalModel animal;
   final VoidCallback onTap;
 
   const _AnimalCard({
@@ -172,7 +173,7 @@ class _AnimalCard extends StatelessWidget {
     );
   }
 
-  String _getEstadoLabel(Animal animal) {
+  String _getEstadoLabel(AnimalModel animal) {
     if (animal.sexo == Sexo.hembra) {
       switch (animal.estadoReproductivo) {
         case EstadoReproductivo.prenada:
@@ -188,7 +189,7 @@ class _AnimalCard extends StatelessWidget {
     return animal.sexo.name == 'macho' ? 'Macho' : 'Hembra';
   }
 
-  Color _getEstadoColor(Animal animal) {
+  Color _getEstadoColor(AnimalModel animal) {
     if (animal.sexo == Sexo.hembra) {
       switch (animal.estadoReproductivo) {
         case EstadoReproductivo.prenada:
@@ -237,4 +238,3 @@ class _Badge extends StatelessWidget {
     );
   }
 }
-

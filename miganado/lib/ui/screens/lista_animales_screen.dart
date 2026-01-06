@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:miganado/models/index.dart';
-import 'package:miganado/providers/data_providers.dart';
-import 'package:miganado/providers/database_providers.dart';
+import 'package:miganado/features/animals/data/models/animal_model.dart';
+import 'package:miganado/features/animals/presentation/providers/animals_providers.dart';
 import 'package:miganado/theme/app_theme.dart';
 import 'package:miganado/ui/screens/agregar_animal_screen.dart';
 import 'package:miganado/ui/screens/detalle_animal_screen.dart';
@@ -29,7 +28,7 @@ class ListaAnimalesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final animalesAsync = ref.watch(animalesProvider);
+    final animalesAsync = ref.watch(allAnimalesProvider);
     final filtroTipo = ref.watch(animalFilterTipoProvider);
     final filtroSexo = ref.watch(animalFilterSexoProvider);
     final busqueda = ref.watch(animalSearchProvider).toLowerCase();
@@ -398,7 +397,7 @@ class ListaAnimalesScreen extends ConsumerWidget {
   }
 
   /// Aplica el ordenamiento seleccionado a la lista
-  void _aplicarOrdenamiento(List<Animal> animales, String ordenamiento) {
+  void _aplicarOrdenamiento(List<AnimalModel> animales, String ordenamiento) {
     switch (ordenamiento) {
       case 'recientes':
         animales.sort((a, b) => b.fechaRegistro.compareTo(a.fechaRegistro));
@@ -508,7 +507,7 @@ class _FiltrosWidget extends StatelessWidget {
 
 /// Tarjeta de animal con alertas de mantenimiento
 class _AnimalCardWithAlertas extends ConsumerWidget {
-  final Animal animal;
+  final AnimalModel animal;
   final VoidCallback onTap;
 
   const _AnimalCardWithAlertas({
@@ -614,8 +613,7 @@ class _AnimalCardWithAlertas extends ConsumerWidget {
                       if (value == 'editar') {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) =>
-                                AgregarAnimalScreen(animal: animal),
+                            builder: (context) => const AgregarAnimalScreen(),
                           ),
                         );
                       } else if (value == 'eliminar') {
@@ -743,11 +741,8 @@ class _AnimalCardWithAlertas extends ConsumerWidget {
             onPressed: () {
               Navigator.pop(context);
               // Eliminar el animal
-              ref
-                  .read(animalRepositoryProvider)
-                  .deleteAnimal(animal.id)
-                  .then((_) {
-                ref.invalidate(animalesProvider);
+              final database = ref.read(databaseProvider);
+              database.deleteAnimal(animal.id).then((_) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                       content: Text('Animal eliminado exitosamente')),
@@ -761,7 +756,7 @@ class _AnimalCardWithAlertas extends ConsumerWidget {
     );
   }
 
-  String _getEstadoLabel(Animal animal) {
+  String _getEstadoLabel(AnimalModel animal) {
     switch (animal.estadoReproductivo) {
       case EstadoReproductivo.prenada:
         return 'Prenada';
@@ -774,7 +769,7 @@ class _AnimalCardWithAlertas extends ConsumerWidget {
     }
   }
 
-  Color _getEstadoColor(Animal animal) {
+  Color _getEstadoColor(AnimalModel animal) {
     switch (animal.estadoReproductivo) {
       case EstadoReproductivo.prenada:
         return Colors.purple;
@@ -787,7 +782,7 @@ class _AnimalCardWithAlertas extends ConsumerWidget {
     }
   }
 
-  List<String> _generarAlertas(Animal animal) {
+  List<String> _generarAlertas(AnimalModel animal) {
     List<String> alertas = [];
     final ahora = DateTime.now();
 

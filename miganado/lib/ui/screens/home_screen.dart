@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:miganado/models/index.dart';
-import 'package:miganado/providers/data_providers.dart';
+import 'package:miganado/features/animals/data/models/animal_model.dart';
+import 'package:miganado/features/animals/presentation/providers/animals_providers.dart';
 import 'package:miganado/theme/app_theme.dart';
 import 'package:miganado/ui/screens/lista_animales_screen.dart';
 import 'package:miganado/ui/screens/ubicaciones_screen.dart';
 import 'package:miganado/ui/screens/ganadero_info_screen.dart';
 import 'package:miganado/ui/screens/seleccionar_animal_screen.dart';
 import 'package:miganado/ui/screens/registrar_mantenimiento_screen.dart';
-import 'package:miganado/ui/screens/detalle_animal_screen.dart';
-import 'package:miganado/ui/screens/agregar_animal_screen.dart';
 
 /// Pantalla de inicio con menú principal y dashboard mejorado
 class HomeScreen extends ConsumerWidget {
@@ -17,8 +15,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final animalesAsync = ref.watch(animalesProvider);
-
+    final animalesAsync = ref.watch(allAnimalesProvider);
     return Scaffold(
       body: animalesAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -33,15 +30,37 @@ class HomeScreen extends ConsumerWidget {
           final tiposOrdenados = conteoTipos.entries.toList()
             ..sort((a, b) => b.value.compareTo(a.value));
 
-          // Contar alertas
+          // Contar alertas calculadas automáticamente
           int sinVacunar = 0;
           int sinDesparasitar = 0;
           int sinVitaminas = 0;
+          DateTime ahora = DateTime.now();
 
           for (var animal in animales) {
-            if (!animal.vacunado) sinVacunar++;
-            if (!animal.desparasitado) sinDesparasitar++;
-            if (!animal.tieneVitaminas) sinVitaminas++;
+            // Sin vacunar
+            if (!animal.vacunado) {
+              sinVacunar++;
+            } else if (animal.fechaUltimaVacuna != null) {
+              int dias = ahora.difference(animal.fechaUltimaVacuna!).inDays;
+              if (dias > 365) sinVacunar++;
+            }
+
+            // Sin desparasitar
+            if (!animal.desparasitado) {
+              sinDesparasitar++;
+            } else if (animal.fechaUltimoDesparasitante != null) {
+              int dias =
+                  ahora.difference(animal.fechaUltimoDesparasitante!).inDays;
+              if (dias > 180) sinDesparasitar++;
+            }
+
+            // Sin vitaminas
+            if (!animal.tieneVitaminas) {
+              sinVitaminas++;
+            } else if (animal.fechaVitaminas != null) {
+              int dias = ahora.difference(animal.fechaVitaminas!).inDays;
+              if (dias > 90) sinVitaminas++;
+            }
           }
           final totalAlertas = sinVacunar + sinDesparasitar + sinVitaminas;
 
@@ -155,7 +174,7 @@ class HomeScreen extends ConsumerWidget {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          const AgregarAnimalScreen(),
+                                          const ListaAnimalesScreen(),
                                     ),
                                   );
                                 },

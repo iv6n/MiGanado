@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:miganado/models/index.dart';
-import 'package:miganado/providers/data_providers.dart';
-import 'package:miganado/providers/database_providers.dart';
+import 'package:miganado/features/animals/data/models/animal_model.dart';
+import 'package:miganado/features/animals/presentation/providers/animals_providers.dart';
+import 'package:miganado/features/costs/presentation/providers/costos_providers.dart';
+import 'package:miganado/features/mantenimiento/presentation/providers/mantenimiento_providers.dart';
+import 'package:miganado/features/locations/presentation/providers/ubicaciones_providers.dart';
 import 'package:miganado/theme/app_theme.dart';
-import 'package:miganado/ui/screens/agregar_animal_screen.dart';
 import 'package:miganado/ui/screens/agregar_pesaje_screen.dart';
 
 /// Pantalla de detalle de un animal específico
@@ -29,7 +30,8 @@ class _DetalleAnimalScreenState extends ConsumerState<DetalleAnimalScreen> {
   @override
   Widget build(BuildContext context) {
     final animalAsync = ref.watch(animalByIdProvider(widget.animalId));
-    final pesajesAsync = ref.watch(pesajesByAnimalProvider(widget.animalId));
+    final costosAsync = ref.watch(costosByAnimalProvider(widget.animalId));
+    final eventosAsync = ref.watch(eventosByAnimalProvider(widget.animalId));
 
     return Scaffold(
       appBar: AppBar(
@@ -78,7 +80,9 @@ class _DetalleAnimalScreenState extends ConsumerState<DetalleAnimalScreen> {
                     });
                   },
                 ),
-                _InformacionSaludCard(animal: animal),
+                _InformacionSaludCard(
+                  animal: animal,
+                ),
                 if (animal.ubicacionId != null)
                   _UbicacionCard(ubicacionId: animal.ubicacionId!),
                 if (animal.precioCompra != null ||
@@ -88,10 +92,29 @@ class _DetalleAnimalScreenState extends ConsumerState<DetalleAnimalScreen> {
                 _AgregarMantenimientoCard(
                   animalId: widget.animalId,
                   onMantenimientoAdded: () {
-                    ref.invalidate(animalByIdProvider(widget.animalId));
+                    ref.invalidate(eventosByAnimalProvider(widget.animalId));
                   },
                 ),
-                _PesajesCard(pesajesAsync: pesajesAsync),
+                costosAsync.when(
+                  data: (costos) {
+                    if (costos.isEmpty) {
+                      return const SizedBox.shrink();
+                    }
+                    return _CostosCard(costos: costos);
+                  },
+                  loading: () => const SizedBox(height: AppSpacing.lg),
+                  error: (_, __) => const SizedBox.shrink(),
+                ),
+                eventosAsync.when(
+                  data: (eventos) {
+                    if (eventos.isEmpty) {
+                      return const SizedBox.shrink();
+                    }
+                    return _EventosTimelineCard(eventos: eventos);
+                  },
+                  loading: () => const SizedBox(height: AppSpacing.lg),
+                  error: (_, __) => const SizedBox.shrink(),
+                ),
               ],
             ),
           );
@@ -118,7 +141,7 @@ class _DetalleAnimalScreenState extends ConsumerState<DetalleAnimalScreen> {
       builder: (context) => AlertDialog(
         title: const Text('¿Eliminar animal?'),
         content: const Text(
-          'Esta acción eliminará el animal y todos sus pesajes. No se puede deshacer.',
+          'Esta acción eliminará el animal y todos sus registros asociados. No se puede deshacer.',
         ),
         actions: [
           TextButton(
@@ -128,9 +151,10 @@ class _DetalleAnimalScreenState extends ConsumerState<DetalleAnimalScreen> {
           TextButton(
             onPressed: () async {
               try {
-                final repository = ref.read(animalRepositoryProvider);
-                await repository.deleteAnimal(widget.animalId);
-                ref.invalidate(animalesProvider);
+                final animalNotifier =
+                    ref.read(animalNotifierProvider.notifier);
+                await animalNotifier.deleteAnimal(widget.animalId);
+                ref.invalidate(allAnimalesProvider);
 
                 if (context.mounted) {
                   Navigator.pop(context);
@@ -167,7 +191,7 @@ class _DetalleAnimalScreenState extends ConsumerState<DetalleAnimalScreen> {
 
 /// Tarjeta con foto y información básica editable
 class _FotoYBasicosCard extends ConsumerStatefulWidget {
-  final dynamic animal;
+  final AnimalModel animal;
   final bool isEditMode;
   final VoidCallback onAnimalUpdated;
 
@@ -190,7 +214,7 @@ class _FotoYBasicosCardState extends ConsumerState<_FotoYBasicosCard> {
     super.initState();
     _nombreController =
         TextEditingController(text: widget.animal.nombrePersonalizado ?? '');
-    _notasController = TextEditingController(text: widget.animal.notas ?? '');
+    _notasController = TextEditingController(text: widget.animal.notas);
   }
 
   @override
@@ -349,7 +373,7 @@ class _FotoYBasicosCardState extends ConsumerState<_FotoYBasicosCard> {
                             setState(() {
                               _nombreController.text =
                                   widget.animal.nombrePersonalizado ?? '';
-                              _notasController.text = widget.animal.notas ?? '';
+                              _notasController.text = widget.animal.notas;
                             });
                           },
                           icon: const Icon(Icons.cancel),
@@ -387,8 +411,7 @@ class _FotoYBasicosCardState extends ConsumerState<_FotoYBasicosCard> {
                         const SizedBox(height: 12),
                       ],
                     ),
-                  if (widget.animal.notas != null &&
-                      widget.animal.notas!.isNotEmpty)
+                  if (widget.animal.notas.isNotEmpty)
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -400,7 +423,7 @@ class _FotoYBasicosCardState extends ConsumerState<_FotoYBasicosCard> {
                             color: Colors.grey,
                           ),
                         ),
-                        Text(widget.animal.notas!),
+                        Text(widget.animal.notas),
                       ],
                     ),
                 ],
@@ -419,8 +442,8 @@ class _FotoYBasicosCardState extends ConsumerState<_FotoYBasicosCard> {
         notas: _notasController.text.isNotEmpty ? _notasController.text : null,
       );
 
-      final repository = ref.read(animalRepositoryProvider);
-      await repository.updateAnimal(animalActualizado);
+      final animalNotifier = ref.read(animalNotifierProvider.notifier);
+      await animalNotifier.saveAnimal(animalActualizado);
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -448,7 +471,7 @@ class _FotoYBasicosCardState extends ConsumerState<_FotoYBasicosCard> {
     super.didUpdateWidget(oldWidget);
     if (!widget.isEditMode) {
       _nombreController.text = widget.animal.nombrePersonalizado ?? '';
-      _notasController.text = widget.animal.notas ?? '';
+      _notasController.text = widget.animal.notas;
     }
   }
 }
@@ -991,25 +1014,24 @@ class _UbicacionCard extends ConsumerWidget {
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    if (ubicacion.tipo.isNotEmpty)
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.blue[100],
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Text(
-                          ubicacion.tipo.toUpperCase(),
-                          style: TextStyle(
-                            color: Colors.blue[700],
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.blue[100],
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Text(
+                        ubicacion.tipo.toString().split('.').last.toUpperCase(),
+                        style: TextStyle(
+                          color: Colors.blue[700],
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 16),
@@ -1101,5 +1123,205 @@ class _UbicacionCard extends ConsumerWidget {
   /// Convierte base64 a Uint8List para mostrar imagen
   Uint8List _base64ToImage(String base64String) {
     return base64Decode(base64String.split(',').last);
+  }
+}
+
+/// Tarjeta de costos registrados
+class _CostosCard extends StatelessWidget {
+  final List<dynamic> costos;
+
+  const _CostosCard({required this.costos});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.all(16),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Costos Registrados',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: costos.length,
+              separatorBuilder: (context, index) => const Divider(),
+              itemBuilder: (context, index) {
+                final costo = costos[index];
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            costo.tipo.toString().split('.').last,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          if (costo.descripcion != null)
+                            Text(
+                              costo.descripcion!,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                          Text(
+                            costo.fecha.toString().split(' ')[0],
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey[500],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Text(
+                      '\$${costo.monto.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.blue[50],
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Total:',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    '\$${costos.fold<double>(0, (sum, c) => sum + c.monto).toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Tarjeta de línea de tiempo de eventos de mantenimiento
+class _EventosTimelineCard extends StatelessWidget {
+  final List<dynamic> eventos;
+
+  const _EventosTimelineCard({required this.eventos});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.all(16),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Historial de Mantenimiento',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: eventos.length,
+              separatorBuilder: (context, index) => const Divider(),
+              itemBuilder: (context, index) {
+                final evento = eventos[index];
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 12,
+                      height: 12,
+                      margin: const EdgeInsets.only(top: 5),
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            evento.tipo.toString().split('.').last,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          if (evento.descripcion != null)
+                            Text(
+                              evento.descripcion!,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                          Text(
+                            evento.fecha.toString().split(' ')[0],
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey[500],
+                            ),
+                          ),
+                          if (evento.proximaFecha != null)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.orange[50],
+                                  border: Border.all(
+                                    color: Colors.orange[200]!,
+                                  ),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Text(
+                                  'Próximo: ${evento.proximaFecha.toString().split(' ')[0]}',
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    color: Colors.orange[700],
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

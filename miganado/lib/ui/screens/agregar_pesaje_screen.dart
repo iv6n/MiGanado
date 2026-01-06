@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/models/index.dart';
-import 'package:miganado/providers/database_providers.dart';
-import 'package:miganado/providers/data_providers.dart';
+import 'package:miganado/features/animals/presentation/providers/animals_providers.dart';
+import 'package:miganado/features/animals/data/models/pesaje_model.dart';
 import 'package:miganado/theme/app_theme.dart';
 import 'package:miganado/ui/widgets/custom_widgets.dart';
 
@@ -75,27 +75,20 @@ class _AgregarPesajeScreenState extends ConsumerState<AgregarPesajeScreen> {
     setState(() => isLoading = true);
 
     try {
-      final repository = ref.read(pesajeRepositoryProvider);
-
-      final nuevoPesaje = Pesaje(
+      // Crear el modelo de pesaje
+      final nuevoPesaje = PesajeModel(
         id: widget.pesajeEdit?.id,
         animalId: widget.animalId,
-        pesoKg: peso,
+        peso: peso,
         fecha: fechaPesaje ?? DateTime.now(),
         notas: notasController.text.isEmpty ? null : notasController.text,
       );
 
-      if (widget.pesajeEdit != null) {
-        await repository.updatePesaje(nuevoPesaje);
-      } else {
-        await repository.createPesaje(nuevoPesaje);
-      }
+      // Obtener la base de datos y guardar
+      final database = ref.read(databaseProvider);
+      await database.savePesaje(nuevoPesaje);
 
       if (mounted) {
-        // Invalida los providers para refrescar
-        ref.invalidate(pesajesByAnimalProvider(widget.animalId));
-        ref.invalidate(ultimoPesajeProvider(widget.animalId));
-
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -112,7 +105,7 @@ class _AgregarPesajeScreenState extends ConsumerState<AgregarPesajeScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error: $e'),
+            content: Text('Error al guardar pesaje: $e'),
             backgroundColor: Colors.red,
           ),
         );

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:miganado/models/index.dart';
+import 'package:miganado/features/mantenimiento/data/models/evento_mantenimiento_model.dart';
 import 'package:miganado/theme/app_theme.dart';
+import 'package:miganado/features/animals/presentation/providers/animals_providers.dart';
+import 'package:miganado/models/index.dart'
+    hide EventoMantenimiento, TipoMantenimiento;
 
 /// Pantalla para registrar mantenimiento de un animal
 class RegistrarMantenimientoScreen extends ConsumerStatefulWidget {
@@ -19,16 +22,14 @@ class RegistrarMantenimientoScreen extends ConsumerStatefulWidget {
 
 class _RegistrarMantenimientoScreenState
     extends ConsumerState<RegistrarMantenimientoScreen> {
-  late TipoMantenimiento _tipoSeleccionado = TipoMantenimiento.vacuna;
+  late TipoMantenimiento _tipoSeleccionado = TipoMantenimiento.vacunacion;
   late DateTime _fechaSeleccionada = DateTime.now();
   late String _producto = '';
-  late String _dosis = '';
-  late String _lote = '';
   late String _observaciones = '';
 
   // Listas predefinidas
   final Map<TipoMantenimiento, List<String>> productosMap = {
-    TipoMantenimiento.vacuna: [
+    TipoMantenimiento.vacunacion: [
       'Fiebre Aftosa',
       'Brucelosis',
       'Rabia',
@@ -37,21 +38,24 @@ class _RegistrarMantenimientoScreenState
       'IBR',
       'Otro'
     ],
-    TipoMantenimiento.banio: [
-      'Ivermectina',
-      'Levamisol',
-      'Albendazol',
-      'Cipermectrina',
-      'Otro'
-    ],
-    TipoMantenimiento.desparasitacion: [
+    TipoMantenimiento.desparasitante: [
       'Ivermectina',
       'Levamisol',
       'Albendazol',
       'Milbemicina',
       'Otro'
     ],
-    TipoMantenimiento.ubicacion: ['Potrero A', 'Potrero B', 'Establo', 'Otro'],
+    TipoMantenimiento.vitaminas: [
+      'Complejo B',
+      'Vitamina A',
+      'Vitamina D',
+      'Mineral Mix',
+      'Otro'
+    ],
+    TipoMantenimiento.revision_clinica: [],
+    TipoMantenimiento.curacion: [],
+    TipoMantenimiento.dentadura: [],
+    TipoMantenimiento.castracion: [],
     TipoMantenimiento.otro: [],
   };
 
@@ -129,47 +133,18 @@ class _RegistrarMantenimientoScreenState
             ),
             const SizedBox(height: AppSpacing.lg),
 
-            // Dosis
-            _SectionTitle(title: 'Dosis (Opcional)'),
-            const SizedBox(height: AppSpacing.md),
-            TextField(
-              onChanged: (value) => setState(() => _dosis = value),
-              decoration: InputDecoration(
-                hintText: 'Ejemplo: 10 ml, 2 dosis, etc.',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppRadius.md),
-                ),
-                prefixIcon: Icon(Icons.straighten, color: AppColors.primary),
-              ),
-            ),
-            const SizedBox(height: AppSpacing.lg),
-
-            // Lote
-            _SectionTitle(title: 'Lote (Opcional)'),
-            const SizedBox(height: AppSpacing.md),
-            TextField(
-              onChanged: (value) => setState(() => _lote = value),
-              decoration: InputDecoration(
-                hintText: 'Número de lote del producto',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppRadius.md),
-                ),
-                prefixIcon: Icon(Icons.numbers, color: AppColors.primary),
-              ),
-            ),
-            const SizedBox(height: AppSpacing.lg),
-
             // Observaciones
-            _SectionTitle(title: 'Observaciones'),
+            _SectionTitle(title: 'Observaciones (Opcional)'),
             const SizedBox(height: AppSpacing.md),
             TextField(
               onChanged: (value) => setState(() => _observaciones = value),
               maxLines: 3,
               decoration: InputDecoration(
-                hintText: 'Notas adicionales sobre el tratamiento',
+                hintText: 'Notas adicionales sobre el mantenimiento',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(AppRadius.md),
                 ),
+                prefixIcon: Icon(Icons.note, color: AppColors.primary),
               ),
             ),
             const SizedBox(height: AppSpacing.xxl),
@@ -208,34 +183,97 @@ class _RegistrarMantenimientoScreenState
     );
   }
 
-  void _guardarMantenimiento() {
+  Future<void> _guardarMantenimiento() async {
     if (_producto.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Por favor selecciona un producto')),
+        const SnackBar(
+          content: Text('Por favor selecciona un producto'),
+          backgroundColor: Colors.red,
+        ),
       );
       return;
     }
 
-    final evento = EventoMantenimiento(
-      animalId: widget.animal.id,
-      tipo: _tipoSeleccionado,
-      fecha: _fechaSeleccionada,
-      producto: _producto,
-      dosis: _dosis.isEmpty ? null : _dosis,
-      lote: _lote.isEmpty ? null : _lote,
-      observaciones: _observaciones,
-    );
+    try {
+      // Crear el modelo de evento de mantenimiento
+      final evento = EventoMantenimientoModel(
+        animalId: widget.animal.id,
+        tipo: _tipoSeleccionado,
+        fecha: _fechaSeleccionada,
+        descripcion: _producto,
+        notas: _observaciones.isEmpty ? null : _observaciones,
+      );
 
-    // Aquí se guardaría en la base de datos
-    // Por ahora mostramos un mensaje de éxito
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('${evento.nombreTipo} registrada exitosamente'),
-        backgroundColor: Colors.green,
-      ),
-    );
+      // Obtener la base de datos y guardar
+      final database = ref.read(databaseProvider);
+      await database.saveEvento(evento);
 
-    Navigator.of(context).pop();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+                '${_getNombreTipo(_tipoSeleccionado)} registrada exitosamente'),
+            backgroundColor: Colors.green,
+          ),
+        );
+        Navigator.of(context).pop();
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error al guardar mantenimiento: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
+  String _getNombreTipo(TipoMantenimiento tipo) {
+    switch (tipo) {
+      case TipoMantenimiento.vacunacion:
+        return 'Vacunación';
+      case TipoMantenimiento.desparasitante:
+        return 'Desparasitación';
+      case TipoMantenimiento.vitaminas:
+        return 'Vitaminas';
+      case TipoMantenimiento.revision_clinica:
+        return 'Revisión Clínica';
+      case TipoMantenimiento.curacion:
+        return 'Curación';
+      case TipoMantenimiento.dentadura:
+        return 'Dentadura';
+      case TipoMantenimiento.castracion:
+        return 'Castración';
+      case TipoMantenimiento.otro:
+        return 'Otro';
+      default:
+        return 'Desconocido';
+    }
+  }
+
+  IconData _getIconoTipo(TipoMantenimiento tipo) {
+    switch (tipo) {
+      case TipoMantenimiento.vacunacion:
+        return Icons.medical_services;
+      case TipoMantenimiento.desparasitante:
+        return Icons.local_pharmacy;
+      case TipoMantenimiento.vitaminas:
+        return Icons.health_and_safety;
+      case TipoMantenimiento.revision_clinica:
+        return Icons.health_and_safety;
+      case TipoMantenimiento.curacion:
+        return Icons.healing;
+      case TipoMantenimiento.dentadura:
+        return Icons.sentiment_satisfied;
+      case TipoMantenimiento.castracion:
+        return Icons.medical_information;
+      case TipoMantenimiento.otro:
+        return Icons.more_horiz;
+      default:
+        return Icons.help;
+    }
   }
 }
 
@@ -339,31 +377,47 @@ class _TipoMantenimientoSelector extends StatelessWidget {
 
   String _getNombreTipo(TipoMantenimiento tipo) {
     switch (tipo) {
-      case TipoMantenimiento.vacuna:
-        return 'Vacuna';
-      case TipoMantenimiento.banio:
-        return 'Banio';
-      case TipoMantenimiento.desparasitacion:
-        return 'Desparasito';
-      case TipoMantenimiento.ubicacion:
-        return 'Ubicacion';
+      case TipoMantenimiento.vacunacion:
+        return 'Vacunación';
+      case TipoMantenimiento.desparasitante:
+        return 'Desparasitación';
+      case TipoMantenimiento.vitaminas:
+        return 'Vitaminas';
+      case TipoMantenimiento.revision_clinica:
+        return 'Revisión Clínica';
+      case TipoMantenimiento.curacion:
+        return 'Curación';
+      case TipoMantenimiento.dentadura:
+        return 'Dentadura';
+      case TipoMantenimiento.castracion:
+        return 'Castración';
       case TipoMantenimiento.otro:
         return 'Otro';
+      default:
+        return 'Desconocido';
     }
   }
 
   IconData _getIconoTipo(TipoMantenimiento tipo) {
     switch (tipo) {
-      case TipoMantenimiento.vacuna:
+      case TipoMantenimiento.vacunacion:
         return Icons.medical_services;
-      case TipoMantenimiento.banio:
-        return Icons.shower;
-      case TipoMantenimiento.desparasitacion:
+      case TipoMantenimiento.desparasitante:
         return Icons.local_pharmacy;
-      case TipoMantenimiento.ubicacion:
-        return Icons.location_on;
+      case TipoMantenimiento.vitaminas:
+        return Icons.health_and_safety;
+      case TipoMantenimiento.revision_clinica:
+        return Icons.health_and_safety;
+      case TipoMantenimiento.curacion:
+        return Icons.healing;
+      case TipoMantenimiento.dentadura:
+        return Icons.sentiment_satisfied;
+      case TipoMantenimiento.castracion:
+        return Icons.medical_information;
       case TipoMantenimiento.otro:
         return Icons.more_horiz;
+      default:
+        return Icons.help;
     }
   }
 }

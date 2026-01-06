@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker_web/image_picker_web.dart';
-import 'dart:html' as html;
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:miganado/models/index.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:miganado/features/animals/data/models/animal_model.dart';
 import 'package:miganado/theme/app_theme.dart';
 import 'package:miganado/ui/widgets/custom_widgets.dart';
-import 'package:miganado/providers/database_providers.dart';
-import 'package:miganado/providers/data_providers.dart';
+import 'package:miganado/features/locations/presentation/providers/ubicaciones_providers.dart';
+import 'package:miganado/features/animals/presentation/providers/animals_providers.dart';
 
 /// Pantalla para agregar un nuevo animal con formulario dinámico
 class AgregarAnimalScreen extends ConsumerStatefulWidget {
-  final Animal? animal;
+  final AnimalModel? animal;
 
   const AgregarAnimalScreen({Key? key, this.animal}) : super(key: key);
 
@@ -445,7 +444,7 @@ class _AgregarAnimalScreenState extends ConsumerState<AgregarAnimalScreen> {
     );
   }
 
-  void _guardarAnimal() {
+  Future<void> _guardarAnimal() async {
     // Validar arete si es requerido
     if (_tipoSeleccionado.requiereArete && _areteController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -458,57 +457,69 @@ class _AgregarAnimalScreenState extends ConsumerState<AgregarAnimalScreen> {
       return;
     }
 
-    final animal = Animal(
-      id: widget.animal?.id,
-      numeroArete: _areteController.text,
-      nombrePersonalizado:
-          _nombreController.text.isNotEmpty ? _nombreController.text : null,
-      tipo: _tipoSeleccionado,
-      sexo: _sexoSeleccionado,
-      raza: _razaController.text,
-      fechaNacimiento: _fechaNacimiento,
-      notas: _notasController.text,
-      vacunado: _vacunado,
-      fechaUltimaVacuna: _fechaUltimaVacuna,
-      tipoVacuna: _tipoVacunaController.text.isNotEmpty
-          ? _tipoVacunaController.text
-          : null,
-      desparasitado: _desparasitado,
-      fechaUltimoDesparasitante: _fechaUltimoDesparasitante,
-      tipoDesparasitante: _tipoDesparasitanteController.text.isNotEmpty
-          ? _tipoDesparasitanteController.text
-          : null,
-      tieneVitaminas: _tieneVitaminas,
-      fechaVitaminas: _fechaVitaminas,
-      tieneOtrosTratamientos: _tieneOtrosTratamientos,
-      fechaOtrosTratamientos: _fechaOtrosTratamientos,
-      descripcionOtrosTratamientos:
-          _descripcionOtrosTratamientosController.text.isNotEmpty
-              ? _descripcionOtrosTratamientosController.text
-              : null,
-      estadoReproductivo: _estadoReproductivo,
-      ubicacionId: _ubicacionId,
-      fotoPath: _fotoBase64,
-    );
+    try {
+      // Crear el modelo de animal con los datos del formulario
+      final animalModel = AnimalModel(
+        id: widget.animal?.id,
+        numeroArete: _areteController.text,
+        nombrePersonalizado:
+            _nombreController.text.isEmpty ? null : _nombreController.text,
+        tipo: _tipoSeleccionado,
+        sexo: _sexoSeleccionado,
+        raza: _razaController.text.isEmpty
+            ? 'Sin especificar'
+            : _razaController.text,
+        fechaNacimiento: _fechaNacimiento,
+        ubicacionId: _ubicacionId,
+        vacunado: _vacunado,
+        fechaUltimaVacuna: _fechaUltimaVacuna,
+        tipoVacuna: _tipoVacunaController.text.isEmpty
+            ? null
+            : _tipoVacunaController.text,
+        desparasitado: _desparasitado,
+        fechaUltimoDesparasitante: _fechaUltimoDesparasitante,
+        tipoDesparasitante: _tipoDesparasitanteController.text.isEmpty
+            ? null
+            : _tipoDesparasitanteController.text,
+        tieneVitaminas: _tieneVitaminas,
+        fechaVitaminas: _fechaVitaminas,
+        tieneOtrosTratamientos: _tieneOtrosTratamientos,
+        fechaOtrosTratamientos: _fechaOtrosTratamientos,
+        descripcionOtrosTratamientos:
+            _descripcionOtrosTratamientosController.text.isEmpty
+                ? null
+                : _descripcionOtrosTratamientosController.text,
+        estadoReproductivo: _estadoReproductivo,
+        notas: _notasController.text,
+        fotoPath: _fotoBase64,
+      );
 
-    final repository = ref.watch(animalRepositoryProvider);
+      // Guardar el animal usando el provider de Riverpod
+      await ref.read(animalNotifierProvider.notifier).saveAnimal(animalModel);
 
-    if (widget.animal == null) {
-      repository.createAnimal(animal).then((_) {
-        ref.invalidate(animalesProvider);
+      if (mounted) {
+        // Refrescar la lista de animales (fire and forget)
+        final _ = ref.refresh(allAnimalesProvider);
+
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Animal guardado exitosamente')),
+          SnackBar(
+            content: Text(widget.animal == null
+                ? 'Animal guardado exitosamente'
+                : 'Animal actualizado exitosamente'),
+            backgroundColor: Colors.green,
+          ),
         );
-      });
-    } else {
-      repository.updateAnimal(animal).then((_) {
-        ref.invalidate(animalesProvider);
-        Navigator.pop(context);
+      }
+    } catch (e) {
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Animal actualizado exitosamente')),
+          SnackBar(
+            content: Text('Error al guardar el animal: $e'),
+            backgroundColor: Colors.red,
+          ),
         );
-      });
+      }
     }
   }
 }
@@ -976,24 +987,25 @@ class _FotoAnimalWidgetState extends State<_FotoAnimalWidget> {
 
   Future<void> _seleccionarFoto() async {
     try {
-      final imageAsFile = await ImagePickerWeb.getImageAsFile();
-      if (imageAsFile != null) {
-        // Convertir a bytes (el tipo File de web no tiene readAsBytes)
-        // Usamos el método toByteArray si está disponible o convertimos de otra forma
-        final reader = html.FileReader();
-        reader.readAsDataUrl(imageAsFile);
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: 80, // Reducir tamaño manteniendo calidad
+        maxHeight: 1024,
+        maxWidth: 1024,
+      );
 
-        await reader.onLoad.first;
-
-        // Obtener el data URL y extraer la parte base64
-        final dataUrl = reader.result as String;
-        final base64String = dataUrl.split(',')[1];
-        widget.onFotoSelected(base64String);
+      if (image != null) {
+        // Leer los bytes de la imagen
+        final bytes = await image.readAsBytes();
+        // Convertir a Base64
+        final base64String = base64Encode(bytes);
 
         if (mounted) {
+          widget.onFotoSelected(base64String);
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Foto cargada exitosamente'),
+              content: Text('Foto cargada correctamente'),
               backgroundColor: Colors.green,
             ),
           );
@@ -1024,7 +1036,7 @@ class _UbicacionSelector extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ubicacionesAsync = ref.watch(ubicacionesProvider);
+    final ubicacionesAsync = ref.watch(allUbicacionesProvider);
 
     return ubicacionesAsync.when(
       data: (ubicaciones) {
@@ -1149,29 +1161,32 @@ class _UbicacionCard extends ConsumerWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
-                    if (ubicacion.tipo.isNotEmpty)
-                      Padding(
-                        padding: const EdgeInsets.only(top: AppSpacing.xs),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.blue[100],
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            ubicacion.tipo.toUpperCase(),
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: Colors.blue[700],
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: AppSpacing.xs),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.blue[100],
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          ubicacion.tipo
+                              .toString()
+                              .split('.')
+                              .last
+                              .toUpperCase(),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: Colors.blue[700],
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                       ),
+                    ),
                   ],
                 ),
               ),
