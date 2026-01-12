@@ -22,7 +22,7 @@ final animalSortByProvider = StateProvider<String>((ref) => 'recientes');
 /// Provider para el filtro de mostrar solo últimos registrados
 final animalFilterUltimosProvider = StateProvider<bool>((ref) => true);
 
-/// Pantalla de lista de animales con filtros avanzados
+/// Pantalla de lista de animales con diseño moderno
 class ListaAnimalesScreen extends ConsumerWidget {
   const ListaAnimalesScreen({Key? key}) : super(key: key);
 
@@ -36,11 +36,19 @@ class ListaAnimalesScreen extends ConsumerWidget {
     final mostrarUltimos = ref.watch(animalFilterUltimosProvider);
 
     return Scaffold(
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text('Directorio de Animales'),
+        backgroundColor: Colors.white,
         elevation: 0,
+        title: const Text(
+          'Directorio de Animales',
+          style: TextStyle(
+            color: Colors.black87,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        iconTheme: const IconThemeData(color: Colors.black87),
         actions: [
-          // Botón de filtros
           IconButton(
             icon: const Icon(Icons.filter_list),
             tooltip: 'Filtrar',
@@ -48,7 +56,6 @@ class ListaAnimalesScreen extends ConsumerWidget {
               _mostrarDialogoFiltros(context, ref);
             },
           ),
-          // Botón de ordenamiento
           PopupMenuButton<String>(
             icon: const Icon(Icons.sort),
             tooltip: 'Ordenar',
@@ -84,11 +91,12 @@ class ListaAnimalesScreen extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.error_outline, color: Colors.red, size: 48),
-              const SizedBox(height: AppSpacing.md),
+              Icon(Icons.error_outline, color: Colors.red[300], size: 64),
+              const SizedBox(height: 16),
               Text(
                 'Error: $error',
                 style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.center,
               ),
             ],
           ),
@@ -97,7 +105,6 @@ class ListaAnimalesScreen extends ConsumerWidget {
           // Aplicar todos los filtros
           var animalesFiltrados = animales;
 
-          // Filtro de últimos registrados (predeterminado)
           if (mostrarUltimos) {
             animalesFiltrados = animalesFiltrados.take(10).toList();
           }
@@ -130,17 +137,25 @@ class ListaAnimalesScreen extends ConsumerWidget {
                 children: [
                   Icon(
                     Icons.pets_outlined,
-                    size: 64,
+                    size: 80,
                     color: Colors.grey[300],
                   ),
-                  const SizedBox(height: AppSpacing.md),
+                  const SizedBox(height: 20),
                   Text(
                     'Sin animales registrados',
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
                   ),
-                  const SizedBox(height: AppSpacing.lg),
-                  PrimaryButton(
-                    label: 'Agregar primer animal',
+                  const SizedBox(height: 8),
+                  Text(
+                    'Comienza agregando tu primer animal',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.grey[600],
+                        ),
+                  ),
+                  const SizedBox(height: 32),
+                  ElevatedButton.icon(
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -148,6 +163,14 @@ class ListaAnimalesScreen extends ConsumerWidget {
                         ),
                       );
                     },
+                    icon: const Icon(Icons.add),
+                    label: const Text('Agregar Animal'),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 32,
+                        vertical: 16,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -156,97 +179,117 @@ class ListaAnimalesScreen extends ConsumerWidget {
 
           return Column(
             children: [
-              // Buscador
-              Padding(
-                padding: const EdgeInsets.all(AppSpacing.md),
+              // Buscador con diseño moderno
+              Container(
+                color: Colors.white,
+                padding: const EdgeInsets.all(16),
                 child: TextField(
                   onChanged: (value) {
                     ref.read(animalSearchProvider.notifier).state = value;
                   },
                   decoration: InputDecoration(
                     hintText: 'Buscar por arete o raza...',
-                    prefixIcon: const Icon(Icons.search),
+                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    prefixIcon: Icon(Icons.search, color: Colors.grey[400]),
+                    filled: true,
+                    fillColor: Colors.grey[100],
                     contentPadding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.md,
-                      vertical: AppSpacing.sm,
+                      horizontal: 20,
+                      vertical: 16,
                     ),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(AppRadius.md),
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: Colors.green[600]!,
+                        width: 2,
+                      ),
                     ),
                   ),
                 ),
               ),
 
-              // Indicador de filtros activos y contador de resultados
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+              // Indicador de resultados
+              Container(
+                color: Colors.white,
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  bottom: 12,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${animalesFiltrados.length} ${animalesFiltrados.length == 1 ? 'animal' : 'animales'}',
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: Colors.grey[600],
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                        ),
-                        if (mostrarUltimos)
-                          Text(
-                            'Mostrando últimos registrados',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelSmall
-                                ?.copyWith(
-                                  color: Colors.blue[600],
-                                ),
+                    Text(
+                      '${animalesFiltrados.length} ${animalesFiltrados.length == 1 ? 'animal' : 'animales'}',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Colors.grey[600],
+                            fontWeight: FontWeight.w500,
                           ),
-                      ],
                     ),
-                    if (filtroTipo != null ||
-                        filtroSexo != null ||
-                        busqueda.isNotEmpty)
+                    if (mostrarUltimos)
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
+                          horizontal: 10,
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.orange[100],
-                          borderRadius: BorderRadius.circular(4),
+                          color: Colors.blue[50],
+                          borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
-                          'Filtros activos',
+                          'Mostrando últimos registrados',
                           style:
                               Theme.of(context).textTheme.labelSmall?.copyWith(
-                                    color: Colors.orange[700],
+                                    color: Colors.blue[700],
+                                    fontWeight: FontWeight.w500,
                                   ),
                         ),
                       ),
                   ],
                 ),
               ),
-              const SizedBox(height: AppSpacing.sm),
+
+              const SizedBox(height: 8),
 
               // Lista de animales
               Expanded(
                 child: animalesFiltrados.isEmpty
                     ? Center(
-                        child: Text(
-                          'No hay resultados',
-                          style: Theme.of(context).textTheme.bodyMedium,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.search_off,
+                              size: 64,
+                              color: Colors.grey[300],
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              'No hay resultados',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                    color: Colors.grey[600],
+                                  ),
+                            ),
+                          ],
                         ),
                       )
                     : ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: AppSpacing.md),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
                         itemCount: animalesFiltrados.length,
                         itemBuilder: (context, index) {
                           final animal = animalesFiltrados[index];
-                          return _AnimalCardWithAlertas(
+                          return _ModernAnimalCard(
                             animal: animal,
                             onTap: () {
                               Navigator.of(context).push(
@@ -256,6 +299,9 @@ class ListaAnimalesScreen extends ConsumerWidget {
                                 ),
                               );
                             },
+                            onDelete: () {
+                              _mostrarDialogoEliminacion(context, ref, animal);
+                            },
                           );
                         },
                       ),
@@ -264,7 +310,7 @@ class ListaAnimalesScreen extends ConsumerWidget {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
@@ -272,12 +318,13 @@ class ListaAnimalesScreen extends ConsumerWidget {
             ),
           );
         },
-        child: const Icon(Icons.add),
+        icon: const Icon(Icons.add),
+        label: const Text('Agregar'),
+        backgroundColor: Colors.green[600],
       ),
     );
   }
 
-  /// Abre un diálogo para filtrar la lista de animales
   void _mostrarDialogoFiltros(BuildContext context, WidgetRef ref) {
     final filtroTipo = ref.watch(animalFilterTipoProvider);
     final filtroSexo = ref.watch(animalFilterSexoProvider);
@@ -292,7 +339,6 @@ class ListaAnimalesScreen extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Filtro de últimos registrados
               CheckboxListTile(
                 title: const Text('Solo últimos registrados'),
                 value: mostrarUltimos,
@@ -302,15 +348,14 @@ class ListaAnimalesScreen extends ConsumerWidget {
                 },
               ),
               const Divider(),
-              // Filtro de tipo
               Text(
                 'Tipo de Ganado',
                 style: Theme.of(context).textTheme.labelLarge,
               ),
-              const SizedBox(height: AppSpacing.sm),
+              const SizedBox(height: 8),
               Wrap(
-                spacing: AppSpacing.sm,
-                runSpacing: AppSpacing.sm,
+                spacing: 8,
+                runSpacing: 8,
                 children: [
                   FilterChip(
                     label: const Text('Todos'),
@@ -337,15 +382,14 @@ class ListaAnimalesScreen extends ConsumerWidget {
                   }).toList(),
                 ],
               ),
-              const SizedBox(height: AppSpacing.md),
-              // Filtro de sexo
+              const SizedBox(height: 16),
               Text(
                 'Sexo',
                 style: Theme.of(context).textTheme.labelLarge,
               ),
-              const SizedBox(height: AppSpacing.sm),
+              const SizedBox(height: 8),
               Wrap(
-                spacing: AppSpacing.sm,
+                spacing: 8,
                 children: [
                   FilterChip(
                     label: const Text('Todos'),
@@ -396,7 +440,38 @@ class ListaAnimalesScreen extends ConsumerWidget {
     );
   }
 
-  /// Aplica el ordenamiento seleccionado a la lista
+  void _mostrarDialogoEliminacion(
+      BuildContext context, WidgetRef ref, AnimalModel animal) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('¿Eliminar animal?'),
+        content: Text(
+          'Estás a punto de eliminar a ${animal.nombrePersonalizado?.isNotEmpty == true ? animal.nombrePersonalizado! : animal.numeroArete}. Esta acción no se puede deshacer.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              final database = ref.read(databaseProvider);
+              database.deleteAnimal(animal.id).then((_) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content: Text('Animal eliminado exitosamente')),
+                );
+              });
+            },
+            child: const Text('Eliminar', style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
+  }
+
   void _aplicarOrdenamiento(List<AnimalModel> animales, String ordenamiento) {
     switch (ordenamiento) {
       case 'recientes':
@@ -416,342 +491,286 @@ class ListaAnimalesScreen extends ConsumerWidget {
   }
 }
 
-/// Widget de filtros
-class _FiltrosWidget extends StatelessWidget {
-  final TipoGanado? filtroTipo;
-  final Sexo? filtroSexo;
-  final Function(TipoGanado?) onFiltroTipoChanged;
-  final Function(Sexo?) onFiltroSexoChanged;
+/// Tarjeta moderna de animal
+class _ModernAnimalCard extends StatelessWidget {
+  final AnimalModel animal;
+  final VoidCallback onTap;
+  final VoidCallback onDelete;
 
-  const _FiltrosWidget({
-    required this.filtroTipo,
-    required this.filtroSexo,
-    required this.onFiltroTipoChanged,
-    required this.onFiltroSexoChanged,
+  const _ModernAnimalCard({
+    required this.animal,
+    required this.onTap,
+    required this.onDelete,
   });
+
+  // Mapeo de imágenes para cada tipo de ganado
+  static const imagenesAnimales = {
+    'vaca': 'assets/images/vaca.png',
+    'toro': 'assets/images/toro.png',
+    'becerro': 'assets/images/becerro.png',
+    'novillo': 'assets/images/novillo.png',
+    'caballo': 'assets/images/caballo.png',
+    'mula': 'assets/images/mula.png',
+    'burro': 'assets/images/burro.png',
+  };
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                'Tipo:',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              const SizedBox(width: AppSpacing.sm),
-              ...TipoGanado.values.map((tipo) {
-                final isSelected = filtroTipo == tipo;
-                return Padding(
-                  padding: const EdgeInsets.only(right: AppSpacing.sm),
-                  child: FilterChip(
-                    label: Text(tipo.toString().split('.').last.toUpperCase()),
-                    selected: isSelected,
-                    onSelected: (selected) {
-                      onFiltroTipoChanged(selected ? tipo : null);
-                    },
-                    backgroundColor: Colors.grey[200],
-                    selectedColor: AppColors.primary,
-                    labelStyle: TextStyle(
-                      color: isSelected ? Colors.white : Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                );
-              }).toList(),
-            ],
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          Row(
-            children: [
-              Text(
-                'Sexo:',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              const SizedBox(width: AppSpacing.sm),
-              ...Sexo.values.map((sexo) {
-                final isSelected = filtroSexo == sexo;
-                return Padding(
-                  padding: const EdgeInsets.only(right: AppSpacing.sm),
-                  child: FilterChip(
-                    label: Text(sexo.toString().split('.').last.toUpperCase()),
-                    selected: isSelected,
-                    onSelected: (selected) {
-                      onFiltroSexoChanged(selected ? sexo : null);
-                    },
-                    backgroundColor: Colors.grey[200],
-                    selectedColor: AppColors.secondary,
-                    labelStyle: TextStyle(
-                      color: isSelected ? AppColors.primary : Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                );
-              }).toList(),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/// Tarjeta de animal con alertas de mantenimiento
-class _AnimalCardWithAlertas extends ConsumerWidget {
-  final AnimalModel animal;
-  final VoidCallback onTap;
-
-  const _AnimalCardWithAlertas({
-    required this.animal,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
     final alertas = _generarAlertas(animal);
+    final tipoStr = animal.tipo.toString().split('.').last;
 
     return GestureDetector(
       onTap: onTap,
-      child: Card(
-        margin: const EdgeInsets.only(bottom: AppSpacing.md),
-        elevation: 1,
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.md),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Fila principal: Foto + Info + Menú
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Foto
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(AppRadius.md),
-                    ),
-                    child: animal.fotoPath != null &&
-                            animal.fotoPath!.isNotEmpty
-                        ? ClipRRect(
-                            borderRadius: BorderRadius.circular(AppRadius.md),
-                            child: Image.network(
-                              animal.fotoPath!,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Icon(Icons.pets,
-                                    color: AppColors.primary);
-                              },
-                            ),
-                          )
-                        : Icon(Icons.pets, color: AppColors.primary, size: 32),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.grey[200]!, width: 1),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 10,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Imagen del animal (foto del usuario o icono del tipo)
+                Container(
+                  width: 70,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[100],
+                    borderRadius: BorderRadius.circular(14),
                   ),
-                  const SizedBox(width: AppSpacing.md),
-                  // Nombre y datos
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Nombre - Arete
-                        Text(
-                          '${animal.nombrePersonalizado?.isNotEmpty == true ? animal.nombrePersonalizado! : animal.raza} • #${animal.numeroArete}',
-                          style:
-                              Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        // Tipo - Raza
-                        Text(
-                          '${animal.tipo.toString().split('.').last.toUpperCase()} • ${animal.raza}',
-                          style:
-                              Theme.of(context).textTheme.labelSmall?.copyWith(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(14),
+                    child:
+                        animal.fotoPath != null && animal.fotoPath!.isNotEmpty
+                            ? Image.network(
+                                animal.fotoPath!,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return _buildAnimalIcon(tipoStr);
+                                },
+                              )
+                            : _buildAnimalIcon(tipoStr),
+                  ),
+                ),
+                const SizedBox(width: 16),
+
+                // Información del animal
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Nombre y Arete
+                      Text(
+                        animal.nombrePersonalizado?.isNotEmpty == true
+                            ? animal.nombrePersonalizado!
+                            : 'Sin especificar',
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        '#${animal.numeroArete}',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Colors.grey[600],
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
+                      const SizedBox(height: 8),
+
+                      // Tipo y Raza
+                      Row(
+                        children: [
+                          Text(
+                            tipoStr.toUpperCase(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall
+                                ?.copyWith(
+                                  color: Colors.grey[700],
+                                  fontWeight: FontWeight.w600,
+                                ),
+                          ),
+                          Text(
+                            ' • ',
+                            style: TextStyle(color: Colors.grey[400]),
+                          ),
+                          Expanded(
+                            child: Text(
+                              animal.raza,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelSmall
+                                  ?.copyWith(
                                     color: Colors.grey[600],
                                   ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(height: 4),
-                        // Etiquetas
-                        Wrap(
-                          spacing: 4,
-                          runSpacing: 4,
-                          children: [
-                            _SimpleTag(
-                              label: animal.sexo == Sexo.hembra
-                                  ? 'Hembra'
-                                  : 'Macho',
-                              color: animal.sexo == Sexo.hembra
-                                  ? Colors.pink
-                                  : Colors.blue,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            if (animal.sexo == Sexo.hembra)
-                              _SimpleTag(
-                                label: _getEstadoLabel(animal),
-                                color: _getEstadoColor(animal),
-                              ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Botón editar
-                  PopupMenuButton<String>(
-                    icon: const Icon(Icons.more_vert, size: 20),
-                    onSelected: (value) {
-                      if (value == 'editar') {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const AgregarAnimalScreen(),
                           ),
-                        );
-                      } else if (value == 'eliminar') {
-                        _mostrarDialogoEliminacion(context, ref);
-                      }
-                    },
-                    itemBuilder: (context) => [
-                      const PopupMenuItem(
-                        value: 'editar',
-                        child: Row(
-                          children: [
-                            Icon(Icons.edit, color: Colors.blue, size: 18),
-                            SizedBox(width: 8),
-                            Text('Editar'),
-                          ],
-                        ),
+                        ],
                       ),
-                      const PopupMenuItem(
-                        value: 'eliminar',
-                        child: Row(
-                          children: [
-                            Icon(Icons.delete, color: Colors.red, size: 18),
-                            SizedBox(width: 8),
-                            Text('Eliminar'),
-                          ],
-                        ),
+                      const SizedBox(height: 8),
+
+                      // Etiquetas (Sexo y Estado)
+                      Wrap(
+                        spacing: 6,
+                        runSpacing: 6,
+                        children: [
+                          _ModernTag(
+                            label:
+                                animal.sexo == Sexo.hembra ? 'Hembra' : 'Macho',
+                            color: animal.sexo == Sexo.hembra
+                                ? Colors.pink
+                                : Colors.blue,
+                          ),
+                          if (animal.sexo == Sexo.hembra)
+                            _ModernTag(
+                              label: _getEstadoLabel(animal),
+                              color: _getEstadoColor(animal),
+                            ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
 
-              // Indicadores de salud en una fila compacta
-              const SizedBox(height: AppSpacing.sm),
-              Row(
-                children: [
-                  Expanded(
-                    child: Row(
-                      children: [
-                        _CompactHealthIcon(
-                          icon: Icons.vaccines,
-                          isActive: animal.vacunado,
-                          color: Colors.green,
-                          tooltip: 'Vacunado',
+                // Menú de opciones
+                PopupMenuButton<String>(
+                  icon:
+                      Icon(Icons.more_vert, size: 20, color: Colors.grey[600]),
+                  onSelected: (value) {
+                    if (value == 'editar') {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const AgregarAnimalScreen(),
                         ),
-                        const SizedBox(width: 8),
-                        _CompactHealthIcon(
-                          icon: Icons.bug_report,
-                          isActive: animal.desparasitado,
-                          color: Colors.orange,
-                          tooltip: 'Desparasitado',
-                        ),
-                        const SizedBox(width: 8),
-                        _CompactHealthIcon(
-                          icon: Icons.local_pharmacy,
-                          isActive: animal.tieneVitaminas,
-                          color: Colors.purple,
-                          tooltip: 'Vitaminas',
-                        ),
-                        const SizedBox(width: 8),
-                        _CompactHealthIcon(
-                          icon: Icons.medical_services,
-                          isActive: animal.tieneOtrosTratamientos,
-                          color: Colors.blue,
-                          tooltip: 'Otros',
-                        ),
-                      ],
+                      );
+                    } else if (value == 'eliminar') {
+                      onDelete();
+                    }
+                  },
+                  itemBuilder: (context) => [
+                    const PopupMenuItem(
+                      value: 'editar',
+                      child: Row(
+                        children: [
+                          Icon(Icons.edit, color: Colors.blue, size: 18),
+                          SizedBox(width: 8),
+                          Text('Editar'),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-
-              // Alertas si las hay
-              if (alertas.isNotEmpty) ...[
-                const SizedBox(height: AppSpacing.sm),
-                ..._construirAlertasCompactas(context, alertas),
+                    const PopupMenuItem(
+                      value: 'eliminar',
+                      child: Row(
+                        children: [
+                          Icon(Icons.delete, color: Colors.red, size: 18),
+                          SizedBox(width: 8),
+                          Text('Eliminar'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ],
+            ),
+
+            // Indicadores de salud
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                _ModernHealthIcon(
+                  icon: Icons.vaccines,
+                  isActive: animal.vacunado,
+                  color: Colors.green,
+                ),
+                const SizedBox(width: 10),
+                _ModernHealthIcon(
+                  icon: Icons.bug_report,
+                  isActive: animal.desparasitado,
+                  color: Colors.orange,
+                ),
+                const SizedBox(width: 10),
+                _ModernHealthIcon(
+                  icon: Icons.local_pharmacy,
+                  isActive: animal.tieneVitaminas,
+                  color: Colors.purple,
+                ),
+                const SizedBox(width: 10),
+                _ModernHealthIcon(
+                  icon: Icons.medical_services,
+                  isActive: animal.tieneOtrosTratamientos,
+                  color: Colors.blue,
+                ),
+              ],
+            ),
+
+            // Alertas en una línea combinada
+            if (alertas.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.red[50],
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.red[200]!, width: 1),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.warning_rounded,
+                        color: Colors.red[600], size: 16),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        alertas.join(' • '),
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                              color: Colors.red[700],
+                              fontWeight: FontWeight.w500,
+                            ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
-          ),
+          ],
         ),
       ),
     );
   }
 
-  List<Widget> _construirAlertasCompactas(
-      BuildContext context, List<String> alertas) {
-    return alertas
-        .map((alerta) => Padding(
-              padding: const EdgeInsets.only(bottom: 4),
-              child: Row(
-                children: [
-                  Icon(Icons.warning_rounded, color: Colors.red[600], size: 14),
-                  const SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      alerta,
-                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: Colors.red[700],
-                            fontWeight: FontWeight.w500,
-                          ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
-            ))
-        .toList();
-  }
-
-  void _mostrarDialogoEliminacion(BuildContext context, WidgetRef ref) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('¿Eliminar animal?'),
-        content: Text(
-          'Estás a punto de eliminar a ${animal.nombrePersonalizado?.isNotEmpty == true ? animal.nombrePersonalizado! : animal.numeroArete}. Esta acción no se puede deshacer.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancelar'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              // Eliminar el animal
-              final database = ref.read(databaseProvider);
-              database.deleteAnimal(animal.id).then((_) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content: Text('Animal eliminado exitosamente')),
-                );
-              });
-            },
-            child: const Text('Eliminar', style: TextStyle(color: Colors.red)),
-          ),
-        ],
+  Widget _buildAnimalIcon(String tipoStr) {
+    return Center(
+      child: Image.asset(
+        imagenesAnimales[tipoStr] ?? 'assets/images/default.png',
+        width: 40,
+        height: 40,
+        errorBuilder: (context, error, stackTrace) {
+          return Icon(
+            Icons.pets,
+            color: Colors.grey[400],
+            size: 36,
+          );
+        },
       ),
     );
   }
@@ -790,10 +809,9 @@ class _AnimalCardWithAlertas extends ConsumerWidget {
     if (!animal.vacunado) {
       alertas.add('Sin vacunar');
     } else if (animal.fechaUltimaVacuna != null) {
-      final diasDesdeUltimaVacuna =
-          ahora.difference(animal.fechaUltimaVacuna!).inDays;
-      if (diasDesdeUltimaVacuna > 365) {
-        alertas.add('Vacuna vencida (${diasDesdeUltimaVacuna} dias)');
+      final dias = ahora.difference(animal.fechaUltimaVacuna!).inDays;
+      if (dias > 365) {
+        alertas.add('Sin vacunar');
       }
     }
 
@@ -801,14 +819,23 @@ class _AnimalCardWithAlertas extends ConsumerWidget {
     if (!animal.desparasitado) {
       alertas.add('Sin desparasitar');
     } else if (animal.fechaUltimoDesparasitante != null) {
-      final diasDesdeUltimoDesparasitante =
-          ahora.difference(animal.fechaUltimoDesparasitante!).inDays;
-      if (diasDesdeUltimoDesparasitante > 180) {
-        alertas.add('Desparasitacion vencida');
+      final dias = ahora.difference(animal.fechaUltimoDesparasitante!).inDays;
+      if (dias > 180) {
+        alertas.add('Sin desparasitar');
       }
     }
 
-    // Alerta de estado reproductivo para hembras
+    // Alerta de vitaminas
+    if (!animal.tieneVitaminas) {
+      alertas.add('Sin vitaminas');
+    } else if (animal.fechaVitaminas != null) {
+      final dias = ahora.difference(animal.fechaVitaminas!).inDays;
+      if (dias > 90) {
+        alertas.add('Sin vitaminas');
+      }
+    }
+
+    // Alerta de estado reproductivo
     if (animal.sexo == Sexo.hembra &&
         animal.estadoReproductivo == EstadoReproductivo.no_definido) {
       alertas.add('Estado reproductivo sin definir');
@@ -816,51 +843,14 @@ class _AnimalCardWithAlertas extends ConsumerWidget {
 
     return alertas;
   }
-
-  List<Widget> _construirAlertas(BuildContext context, List<String> alertas) {
-    return alertas
-        .map((alerta) => Padding(
-              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.md,
-                  vertical: AppSpacing.sm,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.red[50],
-                  border: Border(
-                    left: BorderSide(color: Colors.red[400]!, width: 3),
-                  ),
-                  borderRadius: BorderRadius.circular(AppRadius.sm),
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.warning_rounded,
-                        color: Colors.red[600], size: 16),
-                    const SizedBox(width: AppSpacing.sm),
-                    Expanded(
-                      child: Text(
-                        alerta,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.red[700],
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ))
-        .toList();
-  }
 }
 
-/// Etiqueta simple
-class _SimpleTag extends StatelessWidget {
+/// Etiqueta moderna
+class _ModernTag extends StatelessWidget {
   final String label;
   final Color color;
 
-  const _SimpleTag({
+  const _ModernTag({
     required this.label,
     required this.color,
   });
@@ -868,45 +858,47 @@ class _SimpleTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: color.withOpacity(0.15),
-        border: Border.all(color: color, width: 0.5),
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
         label,
         style: Theme.of(context).textTheme.labelSmall?.copyWith(
               color: color,
               fontWeight: FontWeight.w600,
-              fontSize: 10,
+              fontSize: 11,
             ),
       ),
     );
   }
 }
 
-/// Icono de salud compacto
-class _CompactHealthIcon extends StatelessWidget {
+/// Icono de salud moderno
+class _ModernHealthIcon extends StatelessWidget {
   final IconData icon;
   final bool isActive;
   final Color color;
-  final String tooltip;
 
-  const _CompactHealthIcon({
+  const _ModernHealthIcon({
     required this.icon,
     required this.isActive,
     required this.color,
-    required this.tooltip,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Tooltip(
-      message: tooltip,
+    return Container(
+      width: 36,
+      height: 36,
+      decoration: BoxDecoration(
+        color: isActive ? color.withOpacity(0.15) : Colors.grey[100],
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Icon(
         icon,
-        size: 18,
+        size: 20,
         color: isActive ? color : Colors.grey[300],
       ),
     );
