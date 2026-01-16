@@ -8,7 +8,7 @@ part of 'pesaje_model.dart';
 
 class PesajeModelAdapter extends TypeAdapter<PesajeModel> {
   @override
-  final int typeId = 1;
+  final int typeId = 2;
 
   @override
   PesajeModel read(BinaryReader reader) {

@@ -8,7 +8,7 @@ part of 'ubicacion_model.dart';
 
 class UbicacionModelAdapter extends TypeAdapter<UbicacionModel> {
   @override
-  final int typeId = 2;
+  final int typeId = 7;
 
   @override
   UbicacionModel read(BinaryReader reader) {

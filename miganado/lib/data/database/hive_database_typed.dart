@@ -1,19 +1,38 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:miganado/features/animals/data/models/animal_model.dart';
+
+// LEGACY - Mantener para compatibilidad
+import 'package:miganado/features/animals/data/models/animal_model.dart'
+    as legacy;
 import 'package:miganado/features/animals/data/models/pesaje_model.dart';
 import 'package:miganado/features/animals/data/models/ubicacion_model.dart';
-import 'package:miganado/features/animals/data/models/tipo_ganado_adapter.dart';
-import 'package:miganado/features/animals/data/models/sexo_adapter.dart';
-import 'package:miganado/features/animals/data/models/estado_reproductivo_adapter.dart';
-import 'package:miganado/features/costs/data/models/costo_model.dart';
-import 'package:miganado/features/costs/data/models/tipo_costo_adapter.dart';
+// Hide TipoCosto de costo_model para evitar conflicto con core/enums
+import 'package:miganado/features/costs/data/models/costo_model.dart'
+    hide TipoCosto;
 import 'package:miganado/features/ganadero/data/models/ganadero_model.dart';
 import 'package:miganado/features/mantenimiento/data/models/evento_mantenimiento_model.dart';
-import 'package:miganado/features/mantenimiento/data/models/tipo_mantenimiento_adapter.dart';
+
+// NUEVOS MODELOS - REFACTORIZADOS
+// Importar TipoCosto del core para evitar ambigüedad
+import 'package:miganado/core/enums/tipo_costo.dart';
+import 'package:miganado/core/enums/tipo_ganado.dart';
+import 'package:miganado/core/enums/sexo.dart';
+import 'package:miganado/core/enums/estado_reproductivo.dart';
+import 'package:miganado/core/enums/metodo_edad.dart';
+import 'package:miganado/core/enums/tipo_mantenimiento.dart';
+import 'package:miganado/features/animals/data/models/animal_model_v2.dart'
+    as v2;
+import 'package:miganado/features/animals/data/models/peso_registro.dart';
+import 'package:miganado/features/animals/data/models/mantenimiento_registro.dart';
+import 'package:miganado/features/costs/data/models/costo_registro.dart';
 
 /// Servicio de base de datos usando Hive con TypeAdapters
 /// Versión mejorada con tipos seguros (No usa Box<Map>)
+///
+/// NOTA: Esta clase soporta ambos modelos:
+/// - LEGACY: AnimalModel, PesajeModel, CostoModel, EventoMantenimientoModel
+/// - NUEVOS: AnimalModelV2, PesoRegistro, MantenimientoRegistro, CostoRegistro
 class MiGanadoDatabaseTyped {
+  // LEGACY boxes
   static const String animalesBox = 'animales_typed';
   static const String pesajesBox = 'pesajes_typed';
   static const String ubicacionesBox = 'ubicaciones_typed';
@@ -21,63 +40,93 @@ class MiGanadoDatabaseTyped {
   static const String ganaderoBox = 'ganadero_typed';
   static const String eventosMantenimientoBox = 'eventos_mantenimiento_typed';
 
-  late Box<AnimalModel> _animalesBox;
+  // NUEVOS boxes
+  static const String animalesV2Box = 'animales_v2_typed';
+  static const String pesosBox = 'pesos_registro_typed';
+  static const String mantenimientosBox = 'mantenimientos_registro_typed';
+  static const String costosRegistroBox = 'costos_registro_typed';
+
+  // LEGACY
+  late Box<legacy.AnimalModel> _animalesBox;
   late Box<PesajeModel> _pesajesBox;
   late Box<UbicacionModel> _ubicacionesBox;
   late Box<CostoModel> _costosBox;
   late Box<GanaderoModel> _ganaderoBox;
   late Box<EventoMantenimientoModel> _eventosMantenimientoBox;
 
+  // NUEVOS
+  late Box<v2.AnimalModel> _animalesV2Box;
+  late Box<PesoRegistro> _pesosBox;
+  late Box<MantenimientoRegistro> _mantenimientosBox;
+  late Box<CostoRegistro> _costosRegistroBox;
+
   /// Inicializa la base de datos con TypeAdapters
   Future<void> init() async {
     await Hive.initFlutter();
 
-    // Registrar adapters automáticamente generados por build_runner
-    // Los números corresponden con @HiveType(typeId: X) en los modelos
-    Hive.registerAdapter(AnimalModelAdapter());
+    // Registrar enums centralizados (NUEVOS)
+    Hive.registerAdapter(TipoGanadoAdapter());
+    Hive.registerAdapter(SexoAdapter());
+    Hive.registerAdapter(EstadoReproductivoAdapter());
+    // Hive.registerAdapter(MetodoEdadAdapter());
+    Hive.registerAdapter(TipoMantenimientoAdapter());
+    Hive.registerAdapter(TipoCostoAdapter());
+
+    // Registrar nuevos modelos
+    Hive.registerAdapter(v2.AnimalModelAdapter());
+    Hive.registerAdapter(PesoRegistroAdapter());
+    Hive.registerAdapter(MantenimientoRegistroAdapter());
+    Hive.registerAdapter(CostoRegistroAdapter());
+
+    // Registrar adapters legacy (compatibilidad)
+    Hive.registerAdapter(legacy.AnimalModelAdapter());
     Hive.registerAdapter(PesajeModelAdapter());
     Hive.registerAdapter(UbicacionModelAdapter());
     Hive.registerAdapter(CostoModelAdapter());
     Hive.registerAdapter(GanaderoModelAdapter());
     Hive.registerAdapter(EventoMantenimientoModelAdapter());
-    Hive.registerAdapter(TipoGanadoAdapter());
-    Hive.registerAdapter(SexoAdapter());
-    Hive.registerAdapter(EstadoReproductivoAdapter());
-    Hive.registerAdapter(TipoCostoAdapter());
-    Hive.registerAdapter(TipoMantenimientoAdapter());
 
-    _animalesBox = await Hive.openBox<AnimalModel>(animalesBox);
+    // Abrir boxes LEGACY
+    _animalesBox = await Hive.openBox<legacy.AnimalModel>(animalesBox);
     _pesajesBox = await Hive.openBox<PesajeModel>(pesajesBox);
     _ubicacionesBox = await Hive.openBox<UbicacionModel>(ubicacionesBox);
     _costosBox = await Hive.openBox<CostoModel>(costosBox);
     _ganaderoBox = await Hive.openBox<GanaderoModel>(ganaderoBox);
     _eventosMantenimientoBox =
         await Hive.openBox<EventoMantenimientoModel>(eventosMantenimientoBox);
+
+    // Abrir boxes NUEVOS
+    _animalesV2Box = await Hive.openBox<v2.AnimalModel>(animalesV2Box);
+    _pesosBox = await Hive.openBox<PesoRegistro>(pesosBox);
+    _mantenimientosBox =
+        await Hive.openBox<MantenimientoRegistro>(mantenimientosBox);
+    _costosRegistroBox = await Hive.openBox<CostoRegistro>(costosRegistroBox);
   }
 
   // ============ ANIMALES ============
 
-  Future<List<AnimalModel>> getAllAnimales() async {
-    final List<AnimalModel> animales = List.from(_animalesBox.values);
+  Future<List<legacy.AnimalModel>> getAllAnimales() async {
+    final List<legacy.AnimalModel> animales = List.from(_animalesBox.values);
     // Ordena por número de arete
-    animales.sort((a, b) => a.numeroArete.compareTo(b.numeroArete));
+    animales
+        .sort((a, b) => (a.numeroArete ?? '').compareTo(b.numeroArete ?? ''));
     return animales;
   }
 
-  Future<AnimalModel?> getAnimalById(String id) async {
+  Future<legacy.AnimalModel?> getAnimalById(String id) async {
     return _animalesBox.get(id);
   }
 
-  Future<AnimalModel?> getAnimalByArete(String numeroArete) async {
+  Future<legacy.AnimalModel?> getAnimalByArete(String numeroArete) async {
     try {
       return _animalesBox.values
-          .firstWhere((animal) => animal.numeroArete == numeroArete);
+          .firstWhere((animal) => (animal.numeroArete ?? '') == numeroArete);
     } catch (e) {
       return null;
     }
   }
 
-  Future<void> saveAnimal(AnimalModel animal) async {
+  Future<void> saveAnimal(legacy.AnimalModel animal) async {
     await _animalesBox.put(animal.id, animal);
   }
 
@@ -184,6 +233,67 @@ class MiGanadoDatabaseTyped {
     await _eventosMantenimientoBox.delete(id);
   }
 
+  // ============ NUEVOS MÉTODOS - ANIMALES V2 ============
+
+  Future<List<v2.AnimalModel>> getAllAnimalesV2() async {
+    return List.from(_animalesV2Box.values);
+  }
+
+  Future<v2.AnimalModel?> getAnimalV2ById(String id) async {
+    return _animalesV2Box.get(id);
+  }
+
+  Future<void> addOrUpdateAnimalV2(v2.AnimalModel animal) async {
+    await _animalesV2Box.put(animal.id, animal);
+  }
+
+  Future<void> deleteAnimalV2(String id) async {
+    await _animalesV2Box.delete(id);
+  }
+
+  // ============ NUEVOS MÉTODOS - MANTENIMIENTOS ADICIONALES ============
+
+  Future<MantenimientoRegistro?> getMantenimientoById(String id) async {
+    return _mantenimientosBox.get(id);
+  }
+
+  Future<void> addOrUpdateMantenimiento(
+      MantenimientoRegistro mantenimiento) async {
+    await _mantenimientosBox.put(mantenimiento.id, mantenimiento);
+  }
+
+  Future<List<MantenimientoRegistro>> getMantenimientosByTipo(
+      String tipo) async {
+    final mantenimientos = _mantenimientosBox.values.toList();
+    return mantenimientos
+        .where((m) => m.tipo.toString().contains(tipo))
+        .toList();
+  }
+
+  // ============ NUEVOS MÉTODOS - PESOS ADICIONALES ============
+
+  Future<PesoRegistro?> getPesoById(String id) async {
+    return _pesosBox.get(id);
+  }
+
+  Future<void> addOrUpdatePeso(PesoRegistro peso) async {
+    await _pesosBox.put(peso.id, peso);
+  }
+
+  // ============ NUEVOS MÉTODOS - COSTOS ADICIONALES ============
+
+  Future<CostoRegistro?> getCostoById(String id) async {
+    return _costosRegistroBox.get(id);
+  }
+
+  Future<void> addOrUpdateCosto(CostoRegistro costo) async {
+    await _costosRegistroBox.put(costo.id, costo);
+  }
+
+  Future<List<CostoRegistro>> getAllCostos() async {
+    return List.from(_costosRegistroBox.values);
+  }
+
   // ============ LIMPIEZA Y MANTENIMIENTO ============
 
   Future<void> clear() async {
@@ -193,6 +303,10 @@ class MiGanadoDatabaseTyped {
     await _costosBox.clear();
     await _ganaderoBox.clear();
     await _eventosMantenimientoBox.clear();
+    await _animalesV2Box.clear();
+    await _pesosBox.clear();
+    await _mantenimientosBox.clear();
+    await _costosRegistroBox.clear();
   }
 
   Future<void> close() async {
@@ -202,6 +316,111 @@ class MiGanadoDatabaseTyped {
     await _costosBox.close();
     await _ganaderoBox.close();
     await _eventosMantenimientoBox.close();
+    await _animalesV2Box.close();
+    await _pesosBox.close();
+    await _mantenimientosBox.close();
+    await _costosRegistroBox.close();
+  }
+
+  // ============ NUEVOS MÉTODOS - PESOS ============
+
+  Future<List<PesoRegistro>> getPesosByAnimalId(String animalId) async {
+    final List<PesoRegistro> pesos =
+        _pesosBox.values.where((p) => p.animalId == animalId).toList();
+    pesos.sort((a, b) => b.fecha.compareTo(a.fecha)); // Más recientes primero
+    return pesos;
+  }
+
+  Future<void> savePeso(PesoRegistro peso) async {
+    await _pesosBox.put(peso.id, peso);
+  }
+
+  Future<void> deletePeso(String id) async {
+    await _pesosBox.delete(id);
+  }
+
+  // ============ NUEVOS MÉTODOS - MANTENIMIENTOS ============
+
+  Future<List<MantenimientoRegistro>> getMantenimientosByAnimalId(
+      String animalId) async {
+    final List<MantenimientoRegistro> mantenimientos =
+        _mantenimientosBox.values.where((m) => m.animalId == animalId).toList();
+    mantenimientos
+        .sort((a, b) => b.fecha.compareTo(a.fecha)); // Más recientes primero
+    return mantenimientos;
+  }
+
+  Future<List<MantenimientoRegistro>> getAllMantenimientos() async {
+    return List.from(_mantenimientosBox.values);
+  }
+
+  Future<void> saveMantenimiento(MantenimientoRegistro mantenimiento) async {
+    await _mantenimientosBox.put(mantenimiento.id, mantenimiento);
+  }
+
+  Future<void> deleteMantenimiento(String id) async {
+    await _mantenimientosBox.delete(id);
+  }
+
+  /// Obtiene mantenimientos vencidos de un animal
+  Future<List<MantenimientoRegistro>> getMantenimientosVencidos(
+      String animalId) async {
+    final mantenimientos = await getMantenimientosByAnimalId(animalId);
+    return mantenimientos.where((m) => m.estaVencido).toList();
+  }
+
+  /// Obtiene mantenimientos próximos a vencer (30 días)
+  Future<List<MantenimientoRegistro>> getMantenimientosProximos(
+      String animalId) async {
+    final mantenimientos = await getMantenimientosByAnimalId(animalId);
+    return mantenimientos.where((m) => m.estaProximo).toList();
+  }
+
+  // ============ NUEVOS MÉTODOS - COSTOS REGISTRO ============
+
+  Future<List<CostoRegistro>> getCostoRegistroByAnimalId(
+      String animalId) async {
+    final List<CostoRegistro> costos =
+        _costosRegistroBox.values.where((c) => c.animalId == animalId).toList();
+    costos.sort((a, b) => b.fecha.compareTo(a.fecha)); // Más recientes primero
+    return costos;
+  }
+
+  Future<double> getTotalCostoRegistroByAnimalId(String animalId) async {
+    double total = 0;
+    for (var costo
+        in _costosRegistroBox.values.where((c) => c.animalId == animalId)) {
+      total += costo.monto;
+    }
+    return total;
+  }
+
+  /// Obtiene costos por tipo (del enum TipoCosto centralizado)
+  Future<double> getCostosRegistroPorTipo(
+      String animalId, TipoCosto tipo) async {
+    double total = 0;
+    for (var costo in _costosRegistroBox.values) {
+      if (costo.animalId == animalId && costo.tipo == tipo) {
+        total += costo.monto;
+      }
+    }
+    return total;
+  }
+
+  Future<void> saveCostoRegistro(CostoRegistro costo) async {
+    await _costosRegistroBox.put(costo.id, costo);
+  }
+
+  Future<void> deleteCostoRegistro(String id) async {
+    await _costosRegistroBox.delete(id);
+  }
+
+  /// Obtiene costos asociados a un mantenimiento
+  Future<List<CostoRegistro>> getCostosByMantenimiento(
+      String mantenimientoId) async {
+    return _costosRegistroBox.values
+        .where((c) => c.mantenimientoRelacionadoId == mantenimientoId)
+        .toList();
   }
 
   /// Obtiene estadísticas generales

@@ -35,6 +35,9 @@ dependencies:
   riverpod: ^2.4.0
   flutter_riverpod: ^2.4.0
 
+  # Navigation
+  go_router: ^13.0.0
+
   # Database (Hive - web compatible)
   hive: ^2.2.3
   hive_flutter: ^1.1.0

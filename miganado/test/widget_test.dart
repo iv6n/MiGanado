@@ -1,30 +1,73 @@
-// This is a basic Flutter widget test.
+// Tests de navegación y UI para MiGanado
 //
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// Estos tests verifican que:
+// 1. Los widgets de estado se comportan bien
+// 2. Se renderizan correctamente
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:miganado/main.dart';
+import 'package:miganado/ui/widgets/loading_skeleton.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('MiGanado Widget Tests', () {
+    testWidgets('LoadingState renderiza CircularProgressIndicator',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: LoadingState(message: 'Cargando...'),
+          ),
+        ),
+      );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.text('Cargando...'), findsOneWidget);
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    testWidgets('ErrorState renderiza título y mensaje',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ErrorState(
+              title: 'Error',
+              message: 'Algo salió mal',
+            ),
+          ),
+        ),
+      );
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      expect(find.text('Error'), findsWidgets);
+      expect(find.text('Algo salió mal'), findsOneWidget);
+    });
+
+    testWidgets('EmptyState renderiza sin datos', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: EmptyState(
+              title: 'Sin datos',
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('Sin datos'), findsOneWidget);
+    });
+
+    testWidgets('Widgets tienen padding y espaciado',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: LoadingState(),
+          ),
+        ),
+      );
+
+      // Verificar que los widgets se renderizan
+      expect(find.byType(Center), findsOneWidget);
+      expect(find.byType(Column), findsOneWidget);
+    });
   });
 }

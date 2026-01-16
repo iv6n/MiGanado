@@ -8,7 +8,7 @@ part of 'animal_model.dart';
 
 class AnimalModelAdapter extends TypeAdapter<AnimalModel> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
   AnimalModel read(BinaryReader reader) {
