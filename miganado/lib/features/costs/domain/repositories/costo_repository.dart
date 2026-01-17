@@ -1,4 +1,5 @@
-import 'package:miganado/features/animals/data/models/mantenimiento_registro.dart';
+// TODO: [LEGACY] mantenimiento_registro.dart no existe
+// import 'package:miganado/features/animals/data/models/mantenimiento_registro.dart';
 
 /// Repositorio abstracto para operaciones de costos
 abstract class CostoRepository {

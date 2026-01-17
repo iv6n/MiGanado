@@ -1,165 +1,243 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:miganado/data/database/hive_database_typed.dart';
-import 'package:miganado/features/mantenimiento/data/models/evento_mantenimiento_model.dart';
+import 'package:miganado/features/mantenimiento/domain/entities/evento_mantenimiento.dart';
+import 'package:miganado/features/mantenimiento/domain/usecases/mantenimiento_usecases.dart';
 import 'package:miganado/features/animals/presentation/providers/animals_providers.dart';
 
-// ============ EVENTOS MANTENIMIENTO PROVIDERS ============
+// ============================================================================
+// PROVIDERS - Use Cases
+// ============================================================================
 
-/// Provider que obtiene eventos de mantenimiento de un animal
-final eventosByAnimalProvider =
-    FutureProvider.family<List<EventoMantenimientoModel>, String>(
-        (ref, animalId) async {
-  final database = ref.watch(databaseProvider);
-  return await database.getEventosByAnimalId(animalId);
+final registrarMantenimientoUseCaseProvider = Provider(
+  (ref) {
+    final database = ref.watch(databaseProvider);
+    return RegistrarMantenimientoUseCase(database: database);
+  },
+);
+
+final obtenerHistorialUseCaseProvider = Provider(
+  (ref) {
+    final database = ref.watch(databaseProvider);
+    return ObtenerHistorialMantenimientoUseCase(database: database);
+  },
+);
+
+final obtenerProximasDosisUseCaseProvider = Provider(
+  (ref) {
+    final database = ref.watch(databaseProvider);
+    return ObtenerProximasDosisUseCase(database: database);
+  },
+);
+
+// ============================================================================
+// PROVIDERS - Data
+// ============================================================================
+
+/// Obtener historial de mantenimiento para un animal
+final historialMantenimientoProvider =
+    FutureProvider.family<List<EventoMantenimiento>, String>(
+        (ref, animalUuid) async {
+  final useCase = ref.watch(obtenerHistorialUseCaseProvider);
+  return useCase.call(animalUuid);
 });
 
-/// Provider que obtiene todos los eventos de mantenimiento
-final allEventosProvider =
-    FutureProvider<List<EventoMantenimientoModel>>((ref) async {
-  final database = ref.watch(databaseProvider);
-  return await database.getAllEventos();
+/// Obtener próximas dosis pendientes
+final proximasDosisProvider =
+    FutureProvider.family<List<EventoMantenimiento>, String>(
+        (ref, animalUuid) async {
+  final useCase = ref.watch(obtenerProximasDosisUseCaseProvider);
+  return useCase.call(animalUuid);
 });
 
-// ============ CREATE/UPDATE EVENTOS ============
+// ============================================================================
+// STATE - Para registrar mantenimiento
+// ============================================================================
 
-/// State notifier para crear/actualizar eventos de mantenimiento
-class EventoMantenimientoNotifier extends StateNotifier<AsyncValue<void>> {
-  final MiGanadoDatabaseTyped database;
+class RegistrarMantenimientoState {
+  final String animalUuid;
+  final String tipo;
+  final String descripcion;
+  final DateTime fecha;
+  final String? veterinario;
+  final String? medicamento;
+  final String? dosisAplicada;
+  final String? rutaAplicacion;
+  final DateTime? proximaDosis;
+  final String? observaciones;
+  final bool isLoading;
+  final String? error;
+  final bool exitoso;
 
-  EventoMantenimientoNotifier(this.database)
-      : super(const AsyncValue.data(null));
-
-  Future<void> saveEvento(EventoMantenimientoModel evento) async {
-    state = const AsyncValue.loading();
-    try {
-      await database.saveEvento(evento);
-      state = const AsyncValue.data(null);
-    } catch (e) {
-      state = AsyncValue.error(e, StackTrace.current);
-    }
-  }
-
-  Future<void> deleteEvento(String id) async {
-    state = const AsyncValue.loading();
-    try {
-      await database.deleteEvento(id);
-      state = const AsyncValue.data(null);
-    } catch (e) {
-      state = AsyncValue.error(e, StackTrace.current);
-    }
-  }
-}
-
-/// Provider para el notifier de eventos de mantenimiento
-final eventoMantenimientoNotifierProvider =
-    StateNotifierProvider<EventoMantenimientoNotifier, AsyncValue<void>>((ref) {
-  final database = ref.watch(databaseProvider);
-  return EventoMantenimientoNotifier(database);
-});
-
-// ============ TIMELINE PROVIDERS ============
-
-/// Provider que obtiene una línea de tiempo de eventos para un animal
-final timelineEventosProvider =
-    FutureProvider.family<List<EventoMantenimientoModel>, String>(
-        (ref, animalId) async {
-  final eventos = await ref.watch(eventosByAnimalProvider(animalId).future);
-  // Los eventos ya están ordenados más recientes primero
-  return eventos;
-});
-
-// ============ STATISTICS ============
-
-/// Provider que calcula estadísticas de mantenimiento
-final maintenanceStatisticsProvider =
-    FutureProvider<MaintenanceStatistics>((ref) async {
-  final eventos = await ref.watch(allEventosProvider.future);
-  final allAnimales = await ref.watch(allAnimalesProvider.future);
-
-  if (eventos.isEmpty) {
-    return MaintenanceStatistics.empty();
-  }
-
-  final tipoEventoCounts = <TipoMantenimiento, int>{};
-  DateTime? ultimoEvento;
-  DateTime? proximoEvento;
-
-  for (var evento in eventos) {
-    tipoEventoCounts[evento.tipo] = (tipoEventoCounts[evento.tipo] ?? 0) + 1;
-
-    if (ultimoEvento == null || evento.fecha.isAfter(ultimoEvento)) {
-      ultimoEvento = evento.fecha;
-    }
-
-    if (evento.proximaFecha != null) {
-      if (proximoEvento == null ||
-          evento.proximaFecha!.isBefore(proximoEvento)) {
-        proximoEvento = evento.proximaFecha;
-      }
-    }
-  }
-
-  // Contar animales con alertas de mantenimiento
-  int animalesConAlertas = 0;
-  DateTime ahora = DateTime.now();
-
-  for (var animal in allAnimales) {
-    bool tieneAlerta = false;
-
-    // Sin vacunar
-    if (!animal.vacunado) {
-      tieneAlerta = true;
-    } else if (animal.fechaUltimaVacuna != null) {
-      int dias = ahora.difference(animal.fechaUltimaVacuna!).inDays;
-      if (dias > 365) tieneAlerta = true;
-    }
-
-    // Sin desparasitar
-    if (!tieneAlerta && !animal.desparasitado) {
-      tieneAlerta = true;
-    } else if (!tieneAlerta && animal.fechaUltimoDesparasitante != null) {
-      int dias = ahora.difference(animal.fechaUltimoDesparasitante!).inDays;
-      if (dias > 180) tieneAlerta = true;
-    }
-
-    if (tieneAlerta) animalesConAlertas++;
-  }
-
-  return MaintenanceStatistics(
-    totalEventos: eventos.length,
-    ultimoEvento: ultimoEvento,
-    proximoEvento: proximoEvento,
-    desglosePorTipo: tipoEventoCounts,
-    animalesConAlertas: animalesConAlertas,
-    tasaMantenimiento:
-        allAnimales.isNotEmpty ? eventos.length / allAnimales.length : 0,
-  );
-});
-
-/// Estadísticas de mantenimiento
-class MaintenanceStatistics {
-  final int totalEventos;
-  final DateTime? ultimoEvento;
-  final DateTime? proximoEvento;
-  final Map<TipoMantenimiento, int> desglosePorTipo;
-  final int animalesConAlertas;
-  final double tasaMantenimiento; // Eventos por animal
-
-  MaintenanceStatistics({
-    required this.totalEventos,
-    this.ultimoEvento,
-    this.proximoEvento,
-    required this.desglosePorTipo,
-    required this.animalesConAlertas,
-    required this.tasaMantenimiento,
+  RegistrarMantenimientoState({
+    required this.animalUuid,
+    this.tipo = 'Vacunacion',
+    this.descripcion = '',
+    required this.fecha,
+    this.veterinario,
+    this.medicamento,
+    this.dosisAplicada,
+    this.rutaAplicacion,
+    this.proximaDosis,
+    this.observaciones,
+    this.isLoading = false,
+    this.error,
+    this.exitoso = false,
   });
 
-  factory MaintenanceStatistics.empty() {
-    return MaintenanceStatistics(
-      totalEventos: 0,
-      desglosePorTipo: {},
-      animalesConAlertas: 0,
-      tasaMantenimiento: 0,
+  RegistrarMantenimientoState copyWith({
+    String? animalUuid,
+    String? tipo,
+    String? descripcion,
+    DateTime? fecha,
+    String? veterinario,
+    String? medicamento,
+    String? dosisAplicada,
+    String? rutaAplicacion,
+    DateTime? proximaDosis,
+    String? observaciones,
+    bool? isLoading,
+    String? error,
+    bool? exitoso,
+  }) {
+    return RegistrarMantenimientoState(
+      animalUuid: animalUuid ?? this.animalUuid,
+      tipo: tipo ?? this.tipo,
+      descripcion: descripcion ?? this.descripcion,
+      fecha: fecha ?? this.fecha,
+      veterinario: veterinario ?? this.veterinario,
+      medicamento: medicamento ?? this.medicamento,
+      dosisAplicada: dosisAplicada ?? this.dosisAplicada,
+      rutaAplicacion: rutaAplicacion ?? this.rutaAplicacion,
+      proximaDosis: proximaDosis ?? this.proximaDosis,
+      observaciones: observaciones ?? this.observaciones,
+      isLoading: isLoading ?? this.isLoading,
+      error: error,
+      exitoso: exitoso ?? this.exitoso,
     );
   }
+
+  @override
+  String toString() =>
+      'RegistrarMantenimientoState(animal: $animalUuid, tipo: $tipo, loading: $isLoading)';
 }
+
+// ============================================================================
+// NOTIFIER - Para registrar mantenimiento
+// ============================================================================
+
+class RegistrarMantenimientoNotifier
+    extends StateNotifier<RegistrarMantenimientoState> {
+  final RegistrarMantenimientoUseCase useCase;
+  final Ref ref;
+
+  RegistrarMantenimientoNotifier({
+    required this.useCase,
+    required this.ref,
+    required String animalUuid,
+  }) : super(RegistrarMantenimientoState(
+          animalUuid: animalUuid,
+          fecha: DateTime.now(),
+        ));
+
+  void updateTipo(String tipo) {
+    state = state.copyWith(tipo: tipo);
+  }
+
+  void updateDescripcion(String descripcion) {
+    state = state.copyWith(descripcion: descripcion);
+  }
+
+  void updateFecha(DateTime fecha) {
+    state = state.copyWith(fecha: fecha);
+  }
+
+  void updateVeterinario(String veterinario) {
+    state = state.copyWith(veterinario: veterinario);
+  }
+
+  void updateMedicamento(String medicamento) {
+    state = state.copyWith(medicamento: medicamento);
+  }
+
+  void updateDosisAplicada(String dosisAplicada) {
+    state = state.copyWith(dosisAplicada: dosisAplicada);
+  }
+
+  void updateRutaAplicacion(String rutaAplicacion) {
+    state = state.copyWith(rutaAplicacion: rutaAplicacion);
+  }
+
+  void updateProximaDosis(DateTime proximaDosis) {
+    state = state.copyWith(proximaDosis: proximaDosis);
+  }
+
+  void updateObservaciones(String observaciones) {
+    state = state.copyWith(observaciones: observaciones);
+  }
+
+  Future<void> registrar() async {
+    if (state.tipo.isEmpty) {
+      state = state.copyWith(error: 'Selecciona un tipo de mantenimiento');
+      return;
+    }
+
+    if (state.descripcion.isEmpty) {
+      state = state.copyWith(error: 'La descripción es requerida');
+      return;
+    }
+
+    state = state.copyWith(isLoading: true, error: null);
+
+    try {
+      await useCase.call(
+        animalUuid: state.animalUuid,
+        tipo: state.tipo,
+        descripcion: state.descripcion,
+        fecha: state.fecha,
+        veterinario: state.veterinario,
+        medicamento: state.medicamento,
+        dosisAplicada: state.dosisAplicada,
+        rutaAplicacion: state.rutaAplicacion,
+        proximaDosis: state.proximaDosis,
+        observaciones: state.observaciones,
+      );
+
+      // Invalidar historial para refrescar
+      ref.invalidate(historialMantenimientoProvider(state.animalUuid));
+
+      state = state.copyWith(isLoading: false, exitoso: true);
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        error: e.toString(),
+        exitoso: false,
+      );
+    }
+  }
+
+  void reset() {
+    state = RegistrarMantenimientoState(
+      animalUuid: state.animalUuid,
+      fecha: DateTime.now(),
+    );
+  }
+
+  void clearError() {
+    state = state.copyWith(error: null);
+  }
+}
+
+// ============================================================================
+// PROVIDER - Notifier para registrar mantenimiento
+// ============================================================================
+
+final registrarMantenimientoProvider = StateNotifierProvider.family<
+    RegistrarMantenimientoNotifier,
+    RegistrarMantenimientoState,
+    String>((ref, animalUuid) {
+  final useCase = ref.watch(registrarMantenimientoUseCaseProvider);
+  return RegistrarMantenimientoNotifier(
+    useCase: useCase,
+    ref: ref,
+    animalUuid: animalUuid,
+  );
+});

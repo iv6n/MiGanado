@@ -1,12 +1,18 @@
-import 'package:miganado/core/enums/index.dart';
-import 'package:miganado/features/animals/data/models/mantenimiento_registro.dart';
+// TODO: [LEGACY] Importar usado solo dentro del bloque comentado
+// import 'package:miganado/core/enums/index.dart';
+// TODO: [LEGACY] mantenimiento_registro.dart no existe en la estructura actual
+// import 'package:miganado/features/animals/data/models/mantenimiento_registro.dart';
 
 /// Use Case: Deducir alertas sanitarias del historial de mantenimientos
 ///
+/// NOTA [LEGACY]: Este archivo depende del modelo MantenimientoRegistro que no existe.
+/// Está deshabilitado para evitar errores de compilación.
+/// 
 /// Analiza el historial y determina:
 /// - 🔴 VENCIDO: La siguiente fecha recomendada ya pasó
 /// - 🟡 PRÓXIMO: La siguiente fecha está en los próximos 30 días
 /// - 🟢 OK: No hay alertas
+/*
 class DeducirAlertasSanitarias {
   /// Número de días para considerar como "próximo"
   static const int diasProximo = 30;
@@ -149,3 +155,4 @@ class DeducirAlertasSanitarias {
     return mantenimientos.where((m) => m.estaProximo).length;
   }
 }
+*/

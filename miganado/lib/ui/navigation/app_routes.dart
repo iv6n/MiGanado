@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:miganado/ui/screens/home_screen_v2.dart';
-import 'package:miganado/ui/screens/agregar_animal_screen_v2.dart';
-import 'package:miganado/ui/screens/detalle_animal_screen_v2.dart';
-import 'package:miganado/ui/screens/alertas_detail_screen_v2.dart';
-import 'package:miganado/ui/screens/lista_animales_screen_v2.dart';
+import 'package:miganado/ui/screens/home_screen.dart';
+import 'package:miganado/ui/screens/register_animal_screen.dart';
+import 'package:miganado/ui/screens/ganadero_info_screen.dart';
+
+// TODO: [LEGACY] Las siguientes importaciones V2 han sido reemplazadas con screens existentes
+// import 'package:miganado/ui/screens/home_screen_v2.dart';
+// import 'package:miganado/ui/screens/agregar_animal_screen_v2.dart';
+// import 'package:miganado/ui/screens/detalle_animal_screen_v2.dart';
+// import 'package:miganado/ui/screens/alertas_detail_screen_v2.dart';
+// import 'package:miganado/ui/screens/lista_animales_screen_v2.dart';
 
 /// Definición de rutas de navegación para la aplicación
 class AppRoutes {
@@ -27,37 +32,21 @@ final goRouter = GoRouter(
   routes: [
     GoRoute(
       path: AppRoutes.home,
-      builder: (context, state) => const HomeScreenV2(),
+      builder: (context, state) => const HomeScreen(),
       routes: [
         GoRoute(
           path: 'agregar-animal',
-          builder: (context, state) => const AgregarAnimalScreenV2(),
+          builder: (context, state) => const RegisterAnimalScreen(),
         ),
         GoRoute(
-          path: 'lista-animales',
-          builder: (context, state) => const ListaAnimalesScreenV2(),
+          path: 'ganadero-info',
+          builder: (context, state) => const GanaderoInfoScreen(),
         ),
-        GoRoute(
-          path: 'detalle-animal/:animalId',
-          builder: (context, state) {
-            final animalId = state.pathParameters['animalId']!;
-            return DetalleAnimalScreenV2(animalId: animalId);
-          },
-        ),
-        GoRoute(
-          path: 'editar-animal/:animalId',
-          builder: (context, state) {
-            final animalId = state.pathParameters['animalId']!;
-            return AgregarAnimalScreenV2(
-              esEdicion: true,
-              // TODO: Obtener animal del provider si es necesario
-            );
-          },
-        ),
-        GoRoute(
-          path: 'alertas',
-          builder: (context, state) => const AlertasDetailScreenV2(),
-        ),
+        // TODO: Implementar rutas para detalle animal, lista animales y alertas
+        // GoRoute(
+        //   path: 'detalle-animal/:animalId',
+        //   builder: (context, state) => DetalleAnimalScreen(...),
+        // ),
       ],
     ),
   ],

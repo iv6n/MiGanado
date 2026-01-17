@@ -1,136 +1,207 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:miganado/data/database/hive_database_typed.dart';
-import 'package:miganado/features/costs/data/models/costo_model.dart';
-import 'package:miganado/features/animals/presentation/providers/animals_providers.dart';
+import 'package:miganado/features/costs/domain/entities/costo.dart';
+import 'package:miganado/features/costs/domain/usecases/costos_usecases.dart';
+import 'package:miganado/providers/database_providers.dart';
 
-// ============ COSTOS PROVIDERS ============
+// ============================================================================
+// USE CASE PROVIDERS
+// ============================================================================
 
-/// Provider que obtiene costos de un animal
-final costosByAnimalProvider =
-    FutureProvider.family<List<CostoModel>, String>((ref, animalId) async {
+/// Provider para RegistrarCostoUseCase
+final registrarCostoUseCaseProvider = Provider<RegistrarCostoUseCase>((ref) {
   final database = ref.watch(databaseProvider);
-  return await database.getCostosByAnimalId(animalId);
+  return RegistrarCostoUseCase(database);
 });
 
-/// Provider que obtiene el total de costos de un animal
-final totalCostosByAnimalProvider =
-    FutureProvider.family<double, String>((ref, animalId) async {
+/// Provider para ObtenerHistorialCostosUseCase
+final obtenerHistorialCostosUseCaseProvider =
+    Provider<ObtenerHistorialCostosUseCase>((ref) {
   final database = ref.watch(databaseProvider);
-  return await database.getTotalCostosByAnimalId(animalId);
+  return ObtenerHistorialCostosUseCase(database);
 });
 
-/// Provider que obtiene todos los costos
-final allCostosProvider = FutureProvider<List<CostoModel>>((ref) async {
+/// Provider para ObtenerResumenFinancieroUseCase
+final obtenerResumenFinancieroUseCaseProvider =
+    Provider<ObtenerResumenFinancieroUseCase>((ref) {
   final database = ref.watch(databaseProvider);
-  // Obtener todos los costos iterando a través de todos los animales
-  final allAnimales = await ref.watch(allAnimalesProvider.future);
-  final List<CostoModel> allCostos = [];
-
-  for (var animal in allAnimales) {
-    final costos = await database.getCostosByAnimalId(animal.id);
-    allCostos.addAll(costos);
-  }
-
-  return allCostos;
+  return ObtenerResumenFinancieroUseCase(database);
 });
 
-// ============ CREATE/UPDATE COSTOS ============
+// ============================================================================
+// DATA PROVIDERS (FutureProvider.family)
+// ============================================================================
 
-/// State notifier para crear/actualizar costos
-class CostoNotifier extends StateNotifier<AsyncValue<void>> {
-  final MiGanadoDatabaseTyped database;
-
-  CostoNotifier(this.database) : super(const AsyncValue.data(null));
-
-  Future<void> saveCosto(CostoModel costo) async {
-    state = const AsyncValue.loading();
-    try {
-      await database.saveCosto(costo);
-      state = const AsyncValue.data(null);
-    } catch (e) {
-      state = AsyncValue.error(e, StackTrace.current);
-    }
-  }
-
-  Future<void> deleteCosto(String id) async {
-    state = const AsyncValue.loading();
-    try {
-      await database.deleteCosto(id);
-      state = const AsyncValue.data(null);
-    } catch (e) {
-      state = AsyncValue.error(e, StackTrace.current);
-    }
-  }
-}
-
-/// Provider para el notifier de costos
-final costoNotifierProvider =
-    StateNotifierProvider<CostoNotifier, AsyncValue<void>>((ref) {
-  final database = ref.watch(databaseProvider);
-  return CostoNotifier(database);
+/// Provider para obtener historial de costos por animal
+/// Usage: ref.watch(historialCostosProvider(animalUuid))
+final historialCostosProvider =
+    FutureProvider.family<List<Costo>, String>((ref, animalUuid) async {
+  final useCase = ref.watch(obtenerHistorialCostosUseCaseProvider);
+  return useCase(animalUuid);
 });
 
-// ============ STATISTICS ============
-
-/// Provider que calcula estadísticas de costos
-final costosStatisticsProvider = FutureProvider<CostoStatistics>((ref) async {
-  final costos = await ref.watch(allCostosProvider.future);
-
-  if (costos.isEmpty) {
-    return CostoStatistics.empty();
-  }
-
-  double total = 0;
-  double minCosto = costos.first.monto;
-  double maxCosto = costos.first.monto;
-  final tipoCostoCounts = <TipoCosto, int>{};
-
-  for (var costo in costos) {
-    total += costo.monto;
-    if (costo.monto < minCosto) minCosto = costo.monto;
-    if (costo.monto > maxCosto) maxCosto = costo.monto;
-
-    tipoCostoCounts[costo.tipo] = (tipoCostoCounts[costo.tipo] ?? 0) + 1;
-  }
-
-  double promedio = total / costos.length;
-
-  return CostoStatistics(
-    totalCostos: total,
-    promedioCostos: promedio,
-    minCosto: minCosto,
-    maxCosto: maxCosto,
-    cantidadRegistros: costos.length,
-    desglosePorTipo: tipoCostoCounts,
-  );
+/// Provider para obtener resumen financiero por animal
+/// Usage: ref.watch(resumenFinancieroProvider(animalUuid))
+final resumenFinancieroProvider =
+    FutureProvider.family<ResumenFinanciero, String>((ref, animalUuid) async {
+  final useCase = ref.watch(obtenerResumenFinancieroUseCaseProvider);
+  return useCase(animalUuid);
 });
 
-/// Estadísticas de costos
-class CostoStatistics {
-  final double totalCostos;
-  final double promedioCostos;
-  final double minCosto;
-  final double maxCosto;
-  final int cantidadRegistros;
-  final Map<TipoCosto, int> desglosePorTipo;
+// ============================================================================
+// FORM STATE PARA REGISTRAR COSTO
+// ============================================================================
 
-  CostoStatistics({
-    required this.totalCostos,
-    required this.promedioCostos,
-    required this.minCosto,
-    required this.maxCosto,
-    required this.cantidadRegistros,
-    required this.desglosePorTipo,
+/// Estado para el formulario de registrar costo
+class RegistrarCostoState {
+  final String? concepto;
+  final double? monto;
+  final String moneda;
+  final DateTime? fecha;
+  final String? categoria;
+  final String? eventoMantenimientoUuid;
+  final String? descripcion;
+  final String? proveedor;
+  final bool isLoading;
+  final String? error;
+  final bool isSuccess;
+
+  const RegistrarCostoState({
+    this.concepto,
+    this.monto,
+    this.moneda = 'COP',
+    this.fecha,
+    this.categoria,
+    this.eventoMantenimientoUuid,
+    this.descripcion,
+    this.proveedor,
+    this.isLoading = false,
+    this.error,
+    this.isSuccess = false,
   });
 
-  factory CostoStatistics.empty() {
-    return CostoStatistics(
-      totalCostos: 0,
-      promedioCostos: 0,
-      minCosto: 0,
-      maxCosto: 0,
-      cantidadRegistros: 0,
-      desglosePorTipo: {},
+  RegistrarCostoState copyWith({
+    String? concepto,
+    double? monto,
+    String? moneda,
+    DateTime? fecha,
+    String? categoria,
+    String? eventoMantenimientoUuid,
+    String? descripcion,
+    String? proveedor,
+    bool? isLoading,
+    String? error,
+    bool? isSuccess,
+  }) {
+    return RegistrarCostoState(
+      concepto: concepto ?? this.concepto,
+      monto: monto ?? this.monto,
+      moneda: moneda ?? this.moneda,
+      fecha: fecha ?? this.fecha,
+      categoria: categoria ?? this.categoria,
+      eventoMantenimientoUuid:
+          eventoMantenimientoUuid ?? this.eventoMantenimientoUuid,
+      descripcion: descripcion ?? this.descripcion,
+      proveedor: proveedor ?? this.proveedor,
+      isLoading: isLoading ?? this.isLoading,
+      error: error,
+      isSuccess: isSuccess ?? this.isSuccess,
     );
   }
+
+  /// Validar si el formulario es válido
+  bool get isValid => concepto != null && monto != null && fecha != null;
 }
+
+/// Notifier para registrar costo
+class RegistrarCostoNotifier extends StateNotifier<RegistrarCostoState> {
+  final RegistrarCostoUseCase _useCase;
+  final String _animalUuid;
+
+  RegistrarCostoNotifier(this._useCase, this._animalUuid)
+      : super(const RegistrarCostoState());
+
+  void setConcepto(String concepto) {
+    state = state.copyWith(concepto: concepto, error: null);
+  }
+
+  void setMonto(double monto) {
+    state = state.copyWith(monto: monto, error: null);
+  }
+
+  void setMoneda(String moneda) {
+    state = state.copyWith(moneda: moneda);
+  }
+
+  void setFecha(DateTime fecha) {
+    state = state.copyWith(fecha: fecha, error: null);
+  }
+
+  void setCategoria(String? categoria) {
+    state = state.copyWith(categoria: categoria);
+  }
+
+  void setEventoMantenimientoUuid(String? uuid) {
+    state = state.copyWith(eventoMantenimientoUuid: uuid);
+  }
+
+  void setDescripcion(String? descripcion) {
+    state = state.copyWith(descripcion: descripcion);
+  }
+
+  void setProveedor(String? proveedor) {
+    state = state.copyWith(proveedor: proveedor);
+  }
+
+  void resetForm() {
+    state = const RegistrarCostoState();
+  }
+
+  Future<void> registrar(WidgetRef ref) async {
+    if (!state.isValid) {
+      state = state.copyWith(error: 'Por favor completa todos los campos');
+      return;
+    }
+
+    state = state.copyWith(isLoading: true, error: null);
+
+    try {
+      await _useCase(
+        animalUuid: _animalUuid,
+        concepto: state.concepto!,
+        monto: state.monto!,
+        moneda: state.moneda,
+        fecha: state.fecha!,
+        categoria: state.categoria,
+        eventoMantenimientoUuid: state.eventoMantenimientoUuid,
+        descripcion: state.descripcion,
+        proveedor: state.proveedor,
+      );
+
+      state = state.copyWith(isSuccess: true, isLoading: false);
+
+      // Invalidar providers para actualizar lista
+      ref.invalidate(historialCostosProvider(_animalUuid));
+      ref.invalidate(resumenFinancieroProvider(_animalUuid));
+
+      // Reset después de un poco
+      Future.delayed(const Duration(milliseconds: 500), () {
+        resetForm();
+      });
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        error: e.toString(),
+        isSuccess: false,
+      );
+    }
+  }
+}
+
+/// Provider para registrar costo (StateNotifierProvider.family)
+/// Usage: ref.watch(registrarCostoProvider(animalUuid))
+///        ref.read(registrarCostoProvider(animalUuid).notifier).registrar()
+final registrarCostoProvider = StateNotifierProvider.family<
+    RegistrarCostoNotifier, RegistrarCostoState, String>((ref, animalUuid) {
+  final useCase = ref.watch(registrarCostoUseCaseProvider);
+  return RegistrarCostoNotifier(useCase, animalUuid);
+});

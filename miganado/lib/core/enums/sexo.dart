@@ -1,16 +1,9 @@
-import 'package:hive/hive.dart';
-
-part 'sexo.g.dart';
-
 /// Sexo del animal
-@HiveType(typeId: 11)
 enum Sexo {
   /// Macho
-  @HiveField(0)
   macho,
 
   /// Hembra
-  @HiveField(1)
   hembra,
 }
 

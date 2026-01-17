@@ -1,247 +1,163 @@
-# ▶️ PRÓXIMOS PASOS - EMPEZAR AQUÍ
+# ▶️ PRÓXIMOS PASOS
 
-**Tu app está lista. Esta es tu guía de 3 pasos.**
+Guía para continuar con el desarrollo de MiGanado.
 
----
+## 📊 Estado Actual
 
-## 🎯 LO QUE NECESITAS SABER
+- ✅ Estructura limpia de proyecto
+- ✅ Base de datos Isar funcionando
+- ✅ Modelos actualizados (etapa se calcula automáticamente)
+- ✅ Build runner sin errores
+- ✅ Flutter analyze: 0 errores críticos
 
-**Estado actual**: APK compilado (21.7MB) y listo para instalar  
-**Próximo**: Instalar en tu Android y probar  
-**Después**: Escalar a PlayStore (si todo funciona)
+## 🎯 Tareas Inmediatas
 
----
+### 1. Validar en dispositivo
 
-## 📱 PASO 1: INSTALAR EN ANDROID (15 minutos)
+```bash
+cd miganado
+flutter run
+```
 
-### Requisito
-Habilita en tu Android:  
-Settings → Security → **Unknown Sources** (ON) ✅
+Verificar que:
+- [ ] App inicia sin errores
+- [ ] Dashboard muestra 7 animales de prueba
+- [ ] Bessie (48 meses) muestra "vaca" (no "becerra")
+- [ ] Navegación funciona (Animales, Mantenimiento, Reproducción, etc.)
 
-### Ejecutar
-Abre PowerShell y corre:
+### 2. Corregir Lints (Opcional pero Recomendado)
 
-```powershell
-cd "c:\Users\Master\Desktop\Code\MiGanado\miganado"
+```bash
+flutter analyze
+```
+
+Se mostrarán ~580 lints informativos. Los principales son:
+- `prefer_const_constructors` - Usar constructores const
+- `unused_element` - Elementos no utilizados
+- `avoid_print` - Statements de print en código de producción
+
+**Recomendación**: No es crítico, pero ayuda a mantener código limpio.
+
+### 3. Ejecutar Tests
+
+```bash
+flutter test
+```
+
+Verificar que todos los tests pasen.
+
+## 🔄 Workflow de Desarrollo
+
+### Cuando agregues un nuevo modelo
+
+1. Crear archivo en `lib/features/*/data/models/`
+2. Decorar con `@Collection()`
+3. Ejecutar:
+   ```bash
+   flutter pub run build_runner build --delete-conflicting-outputs
+   ```
+4. Verificar con `flutter analyze`
+
+### Cuando agregues un nuevo provider
+
+1. Crear en `lib/providers/` o dentro de feature
+2. Usar `@riverpod` annotation
+3. El código se genera automáticamente con build_runner
+
+### Cuando modifiques la UI
+
+```bash
+# Hot reload durante flutter run
+r  # Recarga caliente
+
+# Si hot reload no funciona
+R  # Full restart
+```
+
+## 📝 Mejoras Pendientes
+
+### Alto Prioridad
+
+- [ ] Validación de formularios en registro de animales
+- [ ] Mejora de UI en pantalla de detalles del animal
+- [ ] Búsqueda y filtrado en listas
+- [ ] Exportación de reportes a PDF
+
+### Medio Prioridad
+
+- [ ] Sincronización con servidor (si aplica)
+- [ ] Backup de base de datos
+- [ ] Notificaciones de eventos próximos
+- [ ] Gráficas de evolución de pesos
+
+### Bajo Prioridad
+
+- [ ] Traducción de idiomas
+- [ ] Tema oscuro
+- [ ] Importación de datos desde Excel
+- [ ] API REST para datos
+
+## 🐛 Si Encuentras Bugs
+
+1. **Recolectar información**:
+   - Pasos exactos para reproducir
+   - Mensaje de error completo
+   - Screenshots
+
+2. **Debugging**:
+   - Ver [GUIA_CORRECCION_BUGS.md](./GUIA_CORRECCION_BUGS.md)
+   - Usar DevTools: `flutter pub global activate devtools && devtools`
+
+3. **Documentar**:
+   - Crear issue con detalles
+   - Incluir error log
+
+## 📚 Documentación
+
+Antes de hacer cambios, revisa:
+
+- [README.md](./README.md) - Visión general
+- [REFERENCIA_RAPIDA.md](./REFERENCIA_RAPIDA.md) - Comandos frecuentes
+- [GUIA_CORRECCION_BUGS.md](./GUIA_CORRECCION_BUGS.md) - Debugging
+- [INSTALACION_ANDROID.md](./INSTALACION_ANDROID.md) - Instalación
+- [RECOMENDACIONES_FEATURES.md](./RECOMENDACIONES_FEATURES.md) - Nuevas features
+
+## 🚀 Build para Android
+
+Cuando estés listo para compilar:
+
+```bash
+flutter build apk --release
+```
+
+Archivo: `build/app/outputs/flutter-apk/app-release.apk`
+
+Para instalar en dispositivo:
+
+```bash
 flutter install build/app/outputs/flutter-apk/app-release.apk
 ```
 
-**O manualmente:**
-1. Copiar archivo: `build\app\outputs\flutter-apk\app-release.apk`
-2. Transferir a tu Android (USB, email, cloud)
-3. Tocar archivo en Android
-4. Confirmar instalación
+## ✅ Checklist Antes de Cada Commit
 
-**Resultado esperado**: App aparece en pantalla de inicio de tu Android ✅
+- [ ] `flutter analyze` sin errores críticos
+- [ ] `flutter test` pasando
+- [ ] `flutter pub run build_runner build --delete-conflicting-outputs` ejecutado
+- [ ] Cambios documentados en código
+- [ ] No hay print statements de debug
+- [ ] Commit message es claro y descriptivo
 
----
+## 📞 Ayuda Rápida
 
-## 🧪 PASO 2: PROBAR EN DISPOSITIVO (30 min - 1 hora)
-
-### Pruebas básicas
-
-**Abrir app:**
-- [ ] App abre sin crashes
-- [ ] Se ve dashboard con animales
-
-**Navegación:**
-- [ ] Botón "+" en dashboard abre "Agregar Animal"
-- [ ] Botón "Lista" muestra lista de animales
-- [ ] Botón "Alertas" muestra alertas sanitarias
-- [ ] Botón "Estadísticas" muestra gráficos
-- [ ] Back button funciona
-
-**Funcionalidad:**
-- [ ] Agregar un animal nuevo funciona
-- [ ] Tocar animal muestra detalles
-- [ ] Editar animal funciona
-- [ ] Eliminar animal funciona
-
-**Estados:**
-- [ ] Si no hay animales, muestra "Sin datos"
-- [ ] Mientras carga, muestra loading spinner
-- [ ] Si hay error, muestra mensaje de error
-
-**Performance:**
-- [ ] App no lag/freeze
-- [ ] Navegar entre pantallas es fluido
-- [ ] Scroll de lista es suave
-
-### Si todo funciona ✅
-Ir a PASO 3
-
-### Si hay bugs ❌
-Documenta:
-1. ¿Qué pantalla?
-2. ¿Qué hiciste?
-3. ¿Qué pasó? (vs qué debería pasar)
-
-Luego reporta para corregir
+| Problema | Solución |
+|----------|----------|
+| Build error | `flutter clean && flutter pub get` |
+| Port ocupado | `flutter run --port 5038` |
+| Cambios no se ven | Presionar `R` en terminal (full restart) |
+| Isar no generado | `flutter pub run build_runner build --delete-conflicting-outputs` |
+| Tests fallan | `flutter test --verbose` |
 
 ---
 
-## 🚀 PASO 3: ESCALAR A PLAYSTORE (3-5 días)
-
-**Cuando**: Después de confirmar que app funciona bien en tu dispositivo
-
-**Qué hacer**: Seguir guía completa en: `FASE_5_ESCALADO_PLAYSTORE.md`
-
-**Resumen rápido**:
-1. Google Play Developer Account ($25)
-2. Preparar información: descripciones, screenshots, icono
-3. Generar firma digital (keystore)
-4. Compilar APK firmado
-5. Subir a Google Play Console
-6. Esperar aprobación (24-48 hrs)
-7. LIVE en PlayStore ✅
-
----
-
-## 📚 DOCUMENTOS QUE TIENES
-
-| Archivo | Para |
-|---------|------|
-| `RESUMEN_EJECUTIVO.md` | Visión general rápida |
-| `INSTALACION_ANDROID.md` | Cómo instalar APK (detalles) |
-| `FASE_4.4_INFORME_FINAL.md` | Qué se mejoró en esta fase |
-| `FASE_5_ESCALADO_PLAYSTORE.md` | Guía completa para PlayStore |
-
----
-
-## ⚠️ PUNTOS IMPORTANTES
-
-### ✅ HAZ ESTO
-- ✅ Prueba en dispositivo real (no emulador)
-- ✅ Documenta cualquier problema
-- ✅ Guarda contraseña del keystore segura (para PlayStore)
-- ✅ Toma screenshots de la app para PlayStore
-
-### ❌ NO HAGAS ESTO
-- ❌ No publiques sin probar primero
-- ❌ No pierdas el archivo keystore.jks
-- ❌ No compartas el keystore con nadie
-- ❌ No ignores bugs graves
-
----
-
-## 🆘 SI ALGO FALLA
-
-### App no instala
-```
-Soluciones:
-1. Habilitar "Unknown Sources" en Android
-2. Borrar versión anterior: adb uninstall com.example.miganado
-3. Reintentar instalación
-4. Si sigue fallando: `flutter clean` → recompilar
-```
-
-### App instala pero no abre
-```
-Ver logs:
-flutter logs
-
-O via ADB:
-adb logcat | grep flutter
-```
-
-### App abre pero falla en algo
-```
-1. Documentar exactamente qué falla
-2. Screenshots
-3. Reportar para corregir
-```
-
----
-
-## 📞 PREGUNTAS RÁPIDAS
-
-**P: ¿Perderé datos si desinstalo?**  
-R: Sí, los datos están en el almacenamiento de la app. Backup manual si es importante
-
-**P: ¿Puedo instalar la versión del PlayStore después?**  
-R: Sí, pero necesitará firma digital (paso 3)
-
-**P: ¿Cuánto tarda en aparecer en PlayStore?**  
-R: 24-48 horas desde que subes, luego aparece en búsqueda ~3 horas más
-
-**P: ¿Puedo hacer cambios después de publicar?**  
-R: Sí, subes nueva versión (v1.0.1, v1.1, etc) al PlayStore
-
-**P: ¿Necesito internet para usar la app?**  
-R: No (datos se guardan localmente), pero internet es útil para futura sincronización en la nube
-
----
-
-## ⏱️ TIMELINE
-
-```
-HOY:        Instalar y probar (Paso 1 & 2)
-1-3 días:   Corregir bugs si los hay
-4-7 días:   Escalar a PlayStore (Paso 3)
-8-9 días:   Esperar aprobación de Google
-10 días+:   LIVE en PlayStore ✅
-```
-
----
-
-## 🎬 ¡EMPEZAR AHORA!
-
-### Abre PowerShell y ejecuta:
-
-```powershell
-cd "c:\Users\Master\Desktop\Code\MiGanado\miganado"
-flutter install build/app/outputs/flutter-apk/app-release.apk
-```
-
-**O sigue**: `INSTALACION_ANDROID.md` para instalación manual
-
----
-
-## ✅ VERIFICACIÓN PRE-INSTALACIÓN
-
-Antes de instalar, confirma:
-
-- [ ] Android conectado (si usas cable)
-- [ ] Unknown Sources habilitado
-- [ ] Espacio libre: >100MB
-- [ ] Batería: >50%
-
----
-
-## 📊 AL TERMINAR DE PROBAR
-
-**Si todo OK ✅:**  
-Documenta: "App funciona correctamente" → Procede a PlayStore
-
-**Si hay bugs ❌:**  
-Documenta: "Bug en [pantalla] al [acción] → [resultado esperado vs actual]"  
-→ Corregir → Reprobar → PlayStore
-
----
-
-## 🎯 CHECKLIST FINAL
-
-- [ ] APK instalado en Android
-- [ ] App abre sin crashes
-- [ ] Todas las pantallas funcionan
-- [ ] Navegación fluida
-- [ ] Datos se guardan
-- [ ] Sin lags o freezes
-- [ ] Bugs documentados (si hay)
-
----
-
-## 🏁 ¡YA ESTÁS! 
-
-Tu app está lista. Solo instala, prueba y reporta.
-
-El resto es escalar a PlayStore (cuando estés listo).
-
-**¡Éxito!** 🚀
-
----
-
-**Documento**: Próximos Pasos  
-**Creado**: 14 Enero 2026  
-**Estado**: Listo para instalar  
-**Próximo**: Instalar APK en Android
+**Última actualización**: Enero 2026  
+**Versión**: 1.0.0

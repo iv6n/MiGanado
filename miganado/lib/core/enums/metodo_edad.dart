@@ -1,26 +1,18 @@
-import 'package:hive/hive.dart';
-
-part 'metodo_edad.g.dart';
-
 /// Método utilizado para determinar la edad del animal
 /// REGLA: La fecha de nacimiento es OPCIONAL
 /// Si no hay fecha, el sistema asume que el animal VA INICIANDO esa etapa
-@HiveType(typeId: 13)
 enum MetodoEdad {
   /// Edad calculada a partir de fecha de nacimiento conocida
   /// Más preciso y confiable
-  @HiveField(0)
   exacta_por_fecha_nacimiento,
 
   /// Edad simulada por categoría seleccionada sin fecha de nacimiento
   /// Se usa cuando no se conoce la fecha exacta
   /// El animal "comienza" en esa etapa el día que se registra
-  @HiveField(1)
   simulada_por_categoria,
 
   /// Edad estimada a partir del peso actual
   /// Futuro: Para ganaderos que no tienen registro preciso
-  @HiveField(2)
   estimada_por_peso,
 }
 

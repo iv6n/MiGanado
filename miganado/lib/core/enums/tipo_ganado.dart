@@ -1,39 +1,27 @@
-import 'package:hive/hive.dart';
-
-part 'tipo_ganado.g.dart';
-
 /// Tipos de ganado disponibles en el sistema
 /// REGLA: No existe "becerrón/becerrona"
 /// - < 12 meses, Macho → Becerro
 /// - < 12 meses, Hembra → Becerra
-@HiveType(typeId: 10)
 enum TipoGanado {
   /// Hembra adulta (> 36 meses)
-  @HiveField(0)
   vaca,
 
   /// Macho o hembra < 12 meses
-  @HiveField(1)
   becerro, // Becerro (M) o Becerra (H)
 
   /// Macho adulto castrado o entero
-  @HiveField(2)
   toro,
 
   /// Macho 12-36 meses
-  @HiveField(3)
   novillo,
 
   /// Caballo
-  @HiveField(4)
   caballo,
 
   /// Mula
-  @HiveField(5)
   mula,
 
   /// Burro
-  @HiveField(6)
   burro,
 }
 

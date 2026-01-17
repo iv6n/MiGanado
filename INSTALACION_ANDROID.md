@@ -1,225 +1,121 @@
-# 📱 Instrucciones para Instalar MiGanado en Dispositivo Android
+# 📱 Instalación en Android
 
-## ✅ APK Compilado
-
-**Ubicación**: `build\app\outputs\flutter-apk\app-release.apk`  
-**Tamaño**: 21.7MB  
-**Estado**: ✅ Listo para instalar
-
----
+Guía para instalar MiGanado en dispositivos Android.
 
 ## 🔧 Requisitos Previos
 
 1. **Habilitar instalación de fuentes desconocidas**:
-   - Ir a **Configuración → Seguridad**
-   - Activar **"Fuentes desconocidas"** o **"Instalar aplicaciones desconocidas"**
+   - Configuración → Seguridad → **Fuentes desconocidas** (ON)
 
-2. **USB Debugging (Opcional, si usas cable)**:
-   - Ir a **Configuración → Opciones de desarrollo**
-   - Activar **"Depuración USB"**
+2. **USB Debugging** (si usas cable):
+   - Configuración → Opciones de desarrollo → **Depuración USB** (ON)
 
----
+## 📥 Opción 1: Instalar via Flutter CLI (Recomendado)
 
-## 📥 Opción 1: Instalar via Cable USB (Recomendado)
+### Requisitos
+- Flutter instalado y configurado
+- Dispositivo Android conectado via USB
+- `flutter devices` debe mostrar tu dispositivo
 
-### Paso 1: Conectar dispositivo
+### Instalación
+
 ```bash
-# Conecta tu Android al PC via USB
-# El PC debe reconocer el dispositivo
-```
-
-### Paso 2: Verificar conexión
-```bash
-flutter devices
-# Debería listar tu dispositivo Android
-```
-
-### Paso 3: Instalar APK
-```bash
-# En terminal, desde el directorio del proyecto:
-cd c:\Users\Master\Desktop\Code\MiGanado\miganado
-
-# Opción A: Usar Flutter (automático)
-flutter install build/app/outputs/flutter-apk/app-release.apk
-
-# Opción B: Usar ADB directamente
-adb install -r build\app\outputs\flutter-apk\app-release.apk
-```
-
-### Paso 4: Lanzar la app
-```bash
-# Automático después de instalar, o:
-flutter run -r build/app/outputs/flutter-apk/app-release.apk
-```
-
----
-
-## 📥 Opción 2: Transferir APK Manualmente
-
-### Paso 1: Copiar APK a dispositivo
-```bash
-# Copiar el archivo APK a tu dispositivo via:
-- Bluetooth
-- Email
-- USB (arrastrar archivo)
-- Cualquier servicio de nube
-```
-
-### Paso 2: Instalar en el dispositivo
-- Abrir **Gestor de Archivos**
-- Navegar a descargas o donde esté el APK
-- Hacer tap en **app-release.apk**
-- Confirmar instalación
-
----
-
-## 🚀 Comandos Útiles
-
-### Ver dispositivos conectados
-```bash
-adb devices
-```
-
-### Instalar APK con reemplazo (si ya existe)
-```bash
-adb install -r build\app\outputs\flutter-apk\app-release.apk
-```
-
-### Desinstalar app
-```bash
-adb uninstall com.example.miganado
-# O desde el dispositivo: Configuración → Aplicaciones → MiGanado → Desinstalar
-```
-
-### Ver logs en tiempo real
-```bash
-flutter logs
-# o
-adb logcat
-```
-
----
-
-## 🧪 Pruebas Recomendadas
-
-### En el Dispositivo:
-
-1. **Inicio de la app**
-   - ✓ La app inicia sin crashes
-   - ✓ Se ve el dashboard
-
-2. **Navegación**
-   - ✓ Botón "+" agrega animal
-   - ✓ Botón "Lista" muestra lista
-   - ✓ Botón "Alertas" muestra alertas
-   - ✓ Taps en animales abren detalles
-
-3. **Estados de carga**
-   - ✓ Se muestra loading spinner
-   - ✓ Se muestra mensaje de carga
-
-4. **Manejo de errores**
-   - ✓ Si hay error, se muestra pantalla de error
-   - ✓ Botón "Reintentar" funciona
-
-5. **Empty State**
-   - ✓ Si no hay animales, se muestra mensaje
-   - ✓ Botón "Agregar animal" funciona
-
-6. **Datos**
-   - ✓ Se cargan animales desde DB
-   - ✓ Se muestran estadísticas
-   - ✓ Se muestran alertas
-
----
-
-## 🐛 Troubleshooting
-
-### Problema: "Dispositivo no encontrado"
-```bash
-# Solución:
-adb kill-server
-adb start-server
-flutter devices
-```
-
-### Problema: "APK corrupto"
-```bash
-# Recompilar:
 cd miganado
-flutter clean
+flutter install build/app/outputs/flutter-apk/app-release.apk
+```
+
+La app se instalará automáticamente en tu Android.
+
+## 📥 Opción 2: Compilar e Instalar Directamente
+
+```bash
+cd miganado
+flutter run --release
+```
+
+Flutter compilará y instalará automáticamente.
+
+## 📥 Opción 3: Instalación Manual
+
+### Paso 1: Crear APK
+```bash
+cd miganado
 flutter build apk --release
 ```
 
-### Problema: "Instalación rechazada"
+APK creado en: `build/app/outputs/flutter-apk/app-release.apk`
+
+### Paso 2: Transferir a Android
+- Via USB: Copiar archivo a almacenamiento del dispositivo
+- Via Email: Enviar a tu email y descargar en Android
+- Via Cloud: Google Drive, Dropbox, etc.
+
+### Paso 3: Instalar
+1. Abrir gestor de archivos en Android
+2. Localizar `app-release.apk`
+3. Tocar para instalar
+4. Confirmar cuando se pida permiso
+5. Esperar a que termine
+6. Tocar "Abrir" para ejecutar
+
+## ✅ Verificación Post-Instalación
+
+Después de instalar, verificar que:
+
+- [ ] App abre sin errores
+- [ ] Dashboard muestra animales
+- [ ] Puedes navegar entre pantallas
+- [ ] Botones funcionan
+- [ ] No hay crashes
+
+## 🐛 Problemas Comunes
+
+### "No se puede instalar, aplicación no compatible"
+- Asegúrate de usar `app-release.apk` (no `app-debug.apk`)
+- Tu Android debe ser API 21+ (Android 5.0+)
+
+### "No reconoce el dispositivo"
+- Activar USB Debugging en Android
+- Desconectar y reconectar cable USB
+- Ejecutar `flutter devices` para verificar
+
+### "Fuentes desconocidas bloqueadas"
+- Ir a Configuración → Seguridad
+- Activar "Instalar de fuentes desconocidas"
+
+### "Espacio insuficiente"
+- APK pesa ~22MB
+- Necesitas al menos 50MB libres
+- Liberar espacio en tu Android
+
+## 🔄 Desinstalar
+
 ```bash
-# Asegúrate de:
-1. Habilitar "Fuentes desconocidas"
-2. Tener espacio libre en el dispositivo (>50MB)
-3. Usar: adb install -r (reemplaza versión anterior)
+flutter uninstall
 ```
 
-### Problema: "La app no inicia"
+O manualmente en Android:
+- Configuración → Aplicaciones → MiGanado → Desinstalar
+
+## 📊 Requisitos del Dispositivo
+
+- **Android**: 5.0+ (API 21)
+- **RAM**: Mínimo 2GB (recomendado 3GB+)
+- **Espacio**: Mínimo 50MB libres
+- **Conexión**: No requiere internet para funcionar
+
+## 🔄 Actualizar Versión
+
+Cuando haya nueva versión:
+
 ```bash
-# Ver logs:
-flutter logs
-# o
-adb logcat | grep flutter
+cd miganado
+flutter build apk --release
+flutter install build/app/outputs/flutter-apk/app-release.apk
 ```
 
----
-
-## 📋 Checklist Pre-Instalación
-
-- [ ] APK compilado (21.7MB)
-- [ ] 0 errores de compilación
-- [ ] Tests pasados (15/15)
-- [ ] Dispositivo conectado
-- [ ] USB Debugging habilitado
-- [ ] Fuentes desconocidas habilitadas
-- [ ] ADB reconoce el dispositivo
+La nueva versión reemplazará la anterior.
 
 ---
 
-## 🎯 Después de Instalar
-
-### Próximos Pasos:
-1. **Prueba la app** en tu dispositivo
-2. **Reporta cualquier problema** encontrado
-3. **Haz correcciones** si es necesario
-4. **Prepárate para escalar** a PlayStore
-
-### Métricas a Verificar:
-- ✓ No hay crashes
-- ✓ UI se ve bien
-- ✓ Navegación funciona
-- ✓ Datos se cargan
-- ✓ Performance es bueno
-
----
-
-## 📊 Información de la App
-
-| Propiedad | Valor |
-|-----------|-------|
-| **Package Name** | `com.example.miganado` |
-| **Versión** | 1.0.0 |
-| **API Level Mín** | 21 (Android 5.0) |
-| **API Level Dest** | 34 (Android 14) |
-| **Tamaño APK** | 21.7MB |
-| **Arquitecturas** | arm64-v8a, armeabi-v7a |
-
----
-
-## ✅ Estado de la Compilación
-
-```
-✅ Compilación APK: Exitosa
-✅ Tamaño: 21.7MB (Óptimo)
-✅ Errores: 0
-✅ Tests: 15/15 PASS
-✅ Listo para instalar en dispositivo
-```
-
-**Documento generado**: 14 de Enero de 2026  
-**Estado**: ✅ APP LISTA PARA PRUEBAS EN DISPOSITIVO
+**Última actualización**: Enero 2026

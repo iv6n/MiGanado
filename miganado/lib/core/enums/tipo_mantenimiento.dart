@@ -1,40 +1,27 @@
-import 'package:hive/hive.dart';
-
-part 'tipo_mantenimiento.g.dart';
-
 /// Tipos de mantenimiento sanitario y productivo que se pueden registrar
-@HiveType(typeId: 14)
 enum TipoMantenimiento {
   /// Vacunación contra enfermedades
-  @HiveField(0)
   vacunacion,
 
   /// Desparasitación interna o externa
-  @HiveField(1)
   desparasitante,
 
   /// Aplicación de vitaminas
-  @HiveField(2)
   vitaminas,
 
   /// Revisión clínica o examen veterinario
-  @HiveField(3)
   revision_clinica,
 
   /// Curación de heridas o infecciones
-  @HiveField(4)
   curacion,
 
   /// Revisión y limpieza de dentadura
-  @HiveField(5)
   dentadura,
 
   /// Castración quirúrgica
-  @HiveField(6)
   castracion,
 
   /// Otro tipo de mantenimiento
-  @HiveField(7)
   otro,
 }
 

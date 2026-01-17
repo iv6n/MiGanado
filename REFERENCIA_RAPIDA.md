@@ -1,102 +1,179 @@
-# ⚡ REFERENCIA RÁPIDA - 1 MINUTO
+# ⚡ REFERENCIA RÁPIDA
 
-**¿Qué hago AHORA?**
+Guía rápida de comandos y procedimientos más comunes para MiGanado.
 
----
+## 🚀 Comandos Frecuentes
 
-## 🎯 OPCIÓN 1: Instalar APK en Android (RECOMENDADO)
+### Ejecutar la aplicación
 
-```powershell
-cd "c:\Users\Master\Desktop\Code\MiGanado\miganado"
+```bash
+cd miganado
+flutter run
+```
+
+### Instalar dependencias
+
+```bash
+flutter pub get
+```
+
+### Generar código (Isar, JSON serialization, Riverpod)
+
+```bash
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
+### Limpiar build
+
+```bash
+flutter clean
+flutter pub get
+```
+
+### Análisis de código
+
+```bash
+flutter analyze
+```
+
+### Ejecutar tests
+
+```bash
+flutter test
+```
+
+## 📦 Compilación
+
+### Build APK para Android
+
+```bash
+flutter build apk --release
+```
+
+Ubicación: `build/app/outputs/flutter-apk/app-release.apk`
+
+### Instalar APK en dispositivo conectado
+
+```bash
 flutter install build/app/outputs/flutter-apk/app-release.apk
 ```
 
-✅ La app se instala automáticamente en tu Android  
-✅ Después puedes probarla en el dispositivo
+### Build iOS
 
----
-
-## 📖 OPCIÓN 2: Leer primero (3 minutos)
-
-```
-Lee: 00_LEEME_PRIMERO.md
-
-Luego: PROXIMOS_PASOS.md
-
-Luego: Instala APK (Opción 1 arriba)
+```bash
+flutter build ios --release
 ```
 
----
+## 🔧 Desarrollo
 
-## 🐛 OPCIÓN 3: Encontré un problema
+### Debugging DevTools
 
-```
-Lee: GUIA_CORRECCION_BUGS.md
-
-Sigue los pasos para diagnosticar
-```
-
----
-
-## 🚀 OPCIÓN 4: Quiero PlayStore (después de probar)
-
-```
-Lee: FASE_5_ESCALADO_PLAYSTORE.md
-
-Sigue plan completo (9 días)
+```bash
+flutter pub global activate devtools
+devtools
 ```
 
----
+### Ver logs en tiempo real
 
-## 📊 LOS NÚMEROS
-
-| Métrica | Valor |
-|---------|-------|
-| APK | 21.7MB ✅ |
-| AAB | 21.7MB ✅ |
-| Tests | 15/15 ✅ |
-| Errores | 0 ✅ |
-| Documentos | 14 ✅ |
-| Documentación | 130+ KB ✅ |
-
----
-
-## 📚 DOCUMENTOS ESENCIALES
-
-| Documento | Para |
-|-----------|------|
-| 00_LEEME_PRIMERO.md | Conclusión final |
-| PROXIMOS_PASOS.md | 3 pasos para empezar |
-| INSTALACION_ANDROID.md | Cómo instalar APK |
-| GUIA_CORRECCION_BUGS.md | Si hay problemas |
-| FASE_5_ESCALADO_PLAYSTORE.md | Para PlayStore |
-
----
-
-## ✅ CHECKLIST RÁPIDO
-
-- [ ] ¿Ya leíste documentación? → PROXIMOS_PASOS.md
-- [ ] ¿Habilitaste Unknown Sources? → Android Settings
-- [ ] ¿Instalaste APK? → Opción 1 arriba
-- [ ] ¿Abriste app? → Home screen
-- [ ] ¿Probaste pantallas? → Todas funcionan
-- [ ] ¿Hay bugs? → GUIA_CORRECCION_BUGS.md
-- [ ] ¿Todo OK? → Listo para PlayStore
-
----
-
-## 🎬 EMPEZAR YA
-
-```powershell
-# Opción A: Instala directamente
-cd "c:\Users\Master\Desktop\Code\MiGanado\miganado"
-flutter install build/app/outputs/flutter-apk/app-release.apk
-
-# Opción B: Lee documentación primero
-# Abre: 00_LEEME_PRIMERO.md
+```bash
+flutter run -v  # Verbose mode
 ```
 
+### Hot Reload durante desarrollo
+
+Presionar `r` en la terminal durante `flutter run`
+
+### Full Restart
+
+Presionar `R` en la terminal durante `flutter run`
+
+## 📝 Editar Modelos Isar
+
+1. Modificar archivo en `lib/features/*/data/models/`
+2. Ejecutar build runner:
+   ```bash
+   flutter pub run build_runner build --delete-conflicting-outputs
+   ```
+
+## 🗂️ Estructura Base de Datos
+
+- **Animales**: `lib/features/animals/data/models/animal_entity.dart`
+- **Vacunas**: `lib/features/mantenimiento/data/models/vacuna_entity.dart`
+- **Tratamientos**: `lib/features/mantenimiento/data/models/tratamiento_entity.dart`
+- **Pesos**: `lib/features/pesos/data/models/peso_entity.dart`
+- **Costos**: `lib/features/costs/data/models/costo_entity.dart`
+- **Reproducción**: `lib/features/animals/data/models/evento_reproductivo_entity.dart`
+- **Ubicaciones**: `lib/features/locations/data/models/ubicacion_entity.dart`
+
+## 🔍 Debugging Común
+
+### Problem: "No such file or directory" en build_runner
+
+**Solución**:
+```bash
+flutter clean
+flutter pub get
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
+### Problem: Port 5037 already in use
+
+**Solución**:
+```bash
+flutter run --host 127.0.0.1 --port 5038
+```
+
+### Problem: Cambios en código no se ven
+
+**Solución**: 
+1. Presionar `R` en terminal (full restart)
+2. Si persiste: `flutter clean && flutter run`
+
+## 📊 Git Workflow
+
+```bash
+# Crear rama nueva
+git checkout -b feature/nombre-feature
+
+# Hacer cambios
+# ...
+
+# Verificar cambios
+flutter analyze
+flutter test
+
+# Commit
+git add .
+git commit -m "feat: descripción del cambio"
+
+# Push
+git push origin feature/nombre-feature
+
+# Abrir Pull Request
+```
+
+## 🗑️ Limpieza Temporal
+
+### Eliminar archivos generados
+
+```bash
+flutter clean
+```
+
+### Eliminar solo Isar
+
+```bash
+flutter pub run build_runner clean
+```
+
+## 📚 Documentación Adicional
+
+- [README.md](./README.md) - Descripción general del proyecto
+- [GUIA_CORRECCION_BUGS.md](./GUIA_CORRECCION_BUGS.md) - Guía de debugging
+- [RECOMENDACIONES_FEATURES.md](./RECOMENDACIONES_FEATURES.md) - Próximas mejoras
+- [PROXIMOS_PASOS.md](./PROXIMOS_PASOS.md) - Roadmap del proyecto
+- [INSTALACION_ANDROID.md](./INSTALACION_ANDROID.md) - Instalación en Android
+
 ---
 
-**Estado**: ✅ LISTO PARA DISPOSITIVO  
-**Próximo**: Tu decisión - instalar o leer
+**Última actualización**: Enero 2026

@@ -1,19 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:miganado/features/animals/presentation/providers/mantenimiento_providers.dart';
+// TODO: [LEGACY] mantenimiento_providers.dart no existe en la estructura actual
+// import 'package:miganado/features/animals/presentation/providers/mantenimiento_providers.dart';
 
 /// Widget que muestra el estado general de alertas sanitarias
+/// [DEPRECATED] Este widget depende de providers que no existen
 class AlertasSanitariasWidget extends ConsumerWidget {
   const AlertasSanitariasWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final nivelAlertaAsync = ref.watch(nivelAlertaGlobalProvider);
+    // TODO: Reemplazar con implementación que use providers existentes
+    // final nivelAlertaAsync = ref.watch(nivelAlertaGlobalProvider);
 
-    return nivelAlertaAsync.when(
-      loading: () => _buildLoadingCard(),
-      error: (error, stack) => _buildErrorCard(error.toString()),
-      data: (datos) => _buildAlertasCard(context, datos),
+    return _buildPlaceholder();
+  }
+
+  Widget _buildPlaceholder() {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.grey[100],
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.grey[300]!, width: 1),
+        ),
+        child: Text(
+          '📋 Widget de alertas sanitarias en desarrollo',
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.grey[700],
+          ),
+        ),
+      ),
     );
   }
 

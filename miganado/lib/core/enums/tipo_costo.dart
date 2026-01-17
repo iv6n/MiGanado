@@ -1,32 +1,21 @@
-import 'package:hive/hive.dart';
-
-part 'tipo_costo.g.dart';
-
 /// Tipos de costos asociados a los animales
-@HiveType(typeId: 15)
 enum TipoCosto {
   /// Costo de compra inicial del animal
-  @HiveField(0)
   compra_inicial,
 
   /// Costos veterinarios (consultas, tratamientos, cirugías)
-  @HiveField(1)
   veterinario,
 
   /// Costos de alimento (concentrado, sal, forraje)
-  @HiveField(2)
   alimento,
 
   /// Medicamentos y suplementos
-  @HiveField(3)
   medicamento,
 
   /// Equipo, herramientas, o infraestructura
-  @HiveField(4)
   equipo,
 
   /// Otros costos diversos
-  @HiveField(5)
   otro,
 }
 

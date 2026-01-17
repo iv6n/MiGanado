@@ -1,425 +1,215 @@
-# 🐛 GUÍA DE CORRECCIÓN RÁPIDA DE BUGS
+# 🐛 GUÍA DE CORRECCIÓN DE BUGS
 
-**Si encuentras un problema en tu dispositivo Android, sigue esta guía.**
+Guía para diagnosticar y corregir problemas en MiGanado.
 
----
+## 🚨 Recolectar Información del Bug
 
-## 🚨 ANTES DE TODO
+Cuando encuentres un problema, documenta:
 
-### Recopila información
-Cuando encuentres un bug, documenta:
+1. **Pantalla donde ocurre**: Home, Lista, Detalles, etc.
+2. **Acción que hiciste**: Presionaste qué botón, scrolleaste, etc.
+3. **Resultado esperado**: ¿Qué debería pasar?
+4. **Resultado real**: ¿Qué pasó en cambio?
+5. **Error en consola**: Si tienes acceso a logs
 
-1. **¿Qué pantalla?** (Home, Lista, Detalles, etc)
-2. **¿Qué hiciste?** (taponeaste X, scrolleaste, etc)
-3. **¿Qué esperabas?** (debería mostrar...)
-4. **¿Qué pasó en cambio?** (mostró error, se freezó, etc)
-
-**Ejemplo:**
+### Ejemplo de reporte completo:
 ```
-Pantalla: Home
-Acción: Toqié botón "+" para agregar animal
-Esperado: Abre pantalla de agregar
-Real: La app se cierra
-```
-
----
-
-## 🔧 PASOS PARA CORREGIR
-
-### 1️⃣ DIAGNOSTICAR (si es posible)
-
-**Opción A: Leer logs en tiempo real**
-```bash
-cd "c:\Users\Master\Desktop\Code\MiGanado\miganado"
-flutter logs
+Pantalla: Detalles del Animal
+Acción: Presionar botón "Editar"
+Esperado: Abre formulario de edición
+Real: Aplicación cierra sin aviso
+Error: null pointer exception en main.dart
 ```
 
-Observa qué error aparece cuando se presenta el bug.
+## 🔧 Pasos para Corregir
 
-**Opción B: Revisar código**
-```
-Abre VS Code
-Navega a pantalla problemática
-Busca el código relacionado
-Lee el error en los logs
-```
-
----
-
-### 2️⃣ UBICAR EL BUG EN CÓDIGO
-
-Dependiendo de dónde esté el problema:
-
-**Si es en una pantalla:**
-```
-lib/ui/screens/[nombre]_screen.dart
-```
-
-**Si es en un widget:**
-```
-lib/ui/widgets/[nombre]_widget.dart
-```
-
-**Si es en un provider:**
-```
-lib/providers/[nombre]_provider.dart
-```
-
-**Si es en datos:**
-```
-lib/data/repositories/[nombre]_repository.dart
-```
-
----
-
-### 3️⃣ EJEMPLOS DE BUGS COMUNES Y SOLUCIONES
-
-#### 🔴 Bug: App se cierra al abrir una pantalla
-
-**Posible causa:** Null pointer exception o widget inválido
-
-**Cómo arreglarlo:**
-1. Abre la pantalla en VS Code
-2. Busca `null` o valores sin inicializar
-3. Añade `??` o `.when()` para manejar null
-4. Recompila
-
-**Ejemplo:**
-```dart
-// ❌ MALO (causa crash si es null)
-Text(animal.nombre)
-
-// ✅ BIEN (maneja null)
-Text(animal?.nombre ?? 'Sin nombre')
-
-// ✅ MEJOR (con Riverpod)
-animal.when(
-  data: (a) => Text(a.nombre),
-  loading: () => LoadingState(),
-  error: (e, st) => ErrorState(),
-)
-```
-
----
-
-#### 🔴 Bug: Datos no se muestran
-
-**Posible causa:** Provider no está actualizando o data vacía
-
-**Cómo arreglarlo:**
-1. Verifica que el provider esté siendo usado correctamente
-2. Asegúrate de que los datos existen en la base de datos
-3. Añade logs para debuggear
-4. Recompila
-
-**Ejemplo:**
-```dart
-// ❌ MALO (puede no mostrar datos)
-final animals = ref.watch(animalsProvider);
-return ListView(children: animals);
-
-// ✅ BIEN (maneja todos los estados)
-final animals = ref.watch(animalsProvider);
-return animals.when(
-  data: (list) => list.isEmpty 
-    ? EmptyState() 
-    : ListView(children: list),
-  loading: () => LoadingState(),
-  error: (e, st) => ErrorState(),
-);
-```
-
----
-
-#### 🔴 Bug: UI se ve roto o desalineado
-
-**Posible causa:** Padding/spacing incorrecto o overflow
-
-**Cómo arreglarlo:**
-1. Abre `widget_test.dart` para ver espaciado correcto
-2. Revisa el padding de containers
-3. Ajusta SizedBox heights
-4. Recompila
-
-**Ejemplo:**
-```dart
-// ❌ MALO (puede causar overflow)
-Column(
-  children: [
-    Text('Titulo'),
-    Image.network(url), // puede ser muy grande
-  ],
-)
-
-// ✅ BIEN (limita el tamaño)
-Column(
-  children: [
-    Text('Titulo'),
-    ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: 200),
-      child: Image.network(url),
-    ),
-  ],
-)
-```
-
----
-
-#### 🔴 Bug: El formulario de agregar animal no guarda
-
-**Posible causa:** Validación fallando o repository no guardando
-
-**Cómo arreglarlo:**
-1. Verifica validaciones en `add_animal_screen.dart`
-2. Revisa que el repository esté llamándose
-3. Comprueba que Hive tenga permisos
-4. Recompila
-
-**Ejemplo:**
-```dart
-// ❌ MALO (no valida antes de guardar)
-onPressed: () {
-  repository.createAnimal(animal);
-}
-
-// ✅ BIEN (valida primero)
-onPressed: () {
-  if (formKey.currentState!.validate()) {
-    repository.createAnimal(animal);
-    Navigator.pop(context);
-  }
-}
-```
-
----
-
-### 4️⃣ RECOMPILAR DESPUÉS DE CAMBIOS
+### 1. Debugging Local
 
 ```bash
-# Opción A: Cambios pequeños (hot reload)
-# En VS Code: Ctrl+S (VS Code detecta cambios automáticamente)
-
-# Opción B: Cambios grandes (hot restart)
-# En terminal Flutter: R (presiona R en terminal donde corre flutter run)
-
-# Opción C: Recompilación completa
-flutter clean
-flutter build apk --release
-flutter install build/app/outputs/flutter-apk/app-release.apk
+cd miganado
+flutter run -v  # Verbose mode para ver logs
 ```
 
----
+En la terminal verás logs detallados. Busca mensajes de error.
 
-### 5️⃣ VERIFICAR QUE FUNCIONE
+### 2. DevTools
 
-Después de corregir:
-1. Borra y reinstala la app
-2. Prueba el escenario problemático de nuevo
-3. ¿Funciona? ✅ → Sigue probando otras cosas
-4. ¿Sigue fallando? ❌ → Revisa los logs de nuevo
+```bash
+flutter pub global activate devtools
+devtools
+```
 
----
+Abre browser en `localhost:9100` y conecta tu app.
 
-## 📝 CHECKLIST DE CORRECCIÓN
+Permite inspeccionar:
+- Performance
+- Memory
+- Network
+- Logs en tiempo real
 
-- [ ] Documenté el bug claramente
-- [ ] Revisé los logs de error
-- [ ] Identifiqué el archivo problemático
-- [ ] Hice los cambios necesarios
-- [ ] Recompilé correctamente
-- [ ] Reinstalé la app
-- [ ] Probé que el fix funciona
-- [ ] Probé que no rompí nada más
+### 3. Agregar Logs Temporales
 
----
+En el código donde creas que está el problema:
 
-## 🆘 CASOS ESPECIALES
-
-### Problema: "The method '.where' was called on null"
-
-**Significa:** Estás accediendo a un valor que es null
-
-**Solución:**
 ```dart
-// ❌ MALO
-animals.where((a) => a.tipo == 'vaca')
-
-// ✅ BIEN
-(animals ?? []).where((a) => a.tipo == 'vaca')
+print('DEBUG: Variable x = $x');
+print('DEBUG: Entrando en función calcularEtapa()');
 ```
 
----
+Ejecuta `flutter run` y busca tu mensaje en la terminal.
 
-### Problema: "Unhandled Exception: Instance of 'StateError'"
+## 🔍 Problemas Comunes y Soluciones
 
-**Significa:** El estado del widget no es válido
+### Problema: App crashea al abrir
 
-**Solución:**
-Generalmente necesitas usar `.when()` para manejar estados:
-```dart
-asyncValue.when(
-  data: (value) => /* muestra datos */,
-  loading: () => /* muestra loading */,
-  error: (error, stack) => /* muestra error */,
-)
-```
+**Posibles causas**:
+- Error al leer base de datos Isar
+- Problema en main.dart
+- Dependencia faltante
 
----
-
-### Problema: "Build failed with an exception"
-
-**Significa:** Error de compilación
-
-**Solución:**
+**Solución**:
 ```bash
 flutter clean
 flutter pub get
-flutter pub upgrade
-flutter build apk --release
+flutter pub run build_runner build --delete-conflicting-outputs
+flutter run -v
 ```
 
----
+Ver mensaje de error en la terminal.
 
-### Problema: App se cuelga/freezea
+### Problema: Pantalla no se carga / se congela
 
-**Significa:** Operación pesada en main thread
+**Posibles causas**:
+- Consulta a base de datos muy lenta
+- Bucle infinito en build
+- Problema de state management (Riverpod)
 
-**Solución:**
-```dart
-// ❌ MALO (bloquea UI)
-var resultado = operacionPesada();
+**Solución**:
+1. Abrir DevTools (Performance tab)
+2. Ver si hay UI bloqueada
+3. Revisar logs de Riverpod:
+   ```dart
+   // En main.dart, agregar:
+   logger: ConsoleLogger(),
+   ```
 
-// ✅ BIEN (en background)
-var resultado = await Future.microtask(() => operacionPesada());
+### Problema: Datos no se guardan en base de datos
 
-// ✅ MÁS SEGURO (compute)
-var resultado = await compute(operacionPesada, argumento);
-```
+**Posibles causas**:
+- Isar no está inicializado
+- Modelo no tiene @Collection
+- Build runner no ejecutado después de cambios
 
----
-
-## 🔍 DEBUGGING AVANZADO
-
-### Ver logs detallados
+**Solución**:
 ```bash
-flutter logs --verbose
+flutter pub run build_runner build --delete-conflicting-outputs
+flutter run
 ```
 
-### Profiler de performance
+### Problema: Error de compilación "Field required..."
+
+**Posible causa**:
+- Modificaste un modelo pero no ejecutaste build runner
+
+**Solución**:
 ```bash
-flutter run --profile
-# Luego abre DevTools
+flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
-### Revisar base de datos
-La base de datos Hive se guarda en:
-```
-Android: /data/data/com.example.miganado/
-```
+### Problema: Flutter analyze reporta errores
 
----
-
-## 📊 TESTING DESPUÉS DE FIX
-
-Después de cada corrección, prueba:
-
-1. **Funcionalidad específica arreglada** ✓
-2. **Navegar a/desde esa pantalla** ✓
-3. **Volver a la pantalla problemática** ✓
-4. **Cerrar y abrir app** ✓
-5. **Rotación de pantalla** ✓
-6. **Con muchos datos** ✓
-
----
-
-## 🎯 WORKFLOW TÍPICO DE BUG FIX
-
-```
-1. Encuentra bug en dispositivo
-   ↓
-2. Documenta: pantalla, acción, resultado
-   ↓
-3. Lee logs (flutter logs)
-   ↓
-4. Identifica archivo problemático
-   ↓
-5. Hace cambios en código
-   ↓
-6. Recompila (flutter build apk --release)
-   ↓
-7. Reinstala (flutter install)
-   ↓
-8. Prueba bug específico
-   ↓
-9. Prueba todo lo demás (smoke test)
-   ↓
-10. ¿OK? → Sigue probando
-    ¿Sigue fallando? → Vuelve a paso 3
+**Solución**:
+```bash
+flutter analyze --suggestions --no-pub
 ```
 
+Ver qué errores aparecen (no son críticos si solo son lints).
+
+## 🐛 Debugging por Feature
+
+### Problema en Gestión de Animales
+
+Revisar:
+- [animal_entity.dart](miganado/lib/features/animals/data/models/animal_entity.dart) - Modelo
+- [animal_repository.dart](miganado/lib/features/animals/data/repositories/) - Acceso a datos
+- [animal_providers.dart](miganado/lib/providers/) - State
+
+### Problema en Vacunación / Desparasitación
+
+Revisar:
+- [vacuna_entity.dart](miganado/lib/features/mantenimiento/data/models/vacuna_entity.dart)
+- [tratamiento_entity.dart](miganado/lib/features/mantenimiento/data/models/tratamiento_entity.dart)
+
+### Problema en Reproducción
+
+Revisar:
+- [evento_reproductivo_entity.dart](miganado/lib/features/animals/data/models/evento_reproductivo_entity.dart)
+
+### Problema en UI / Pantallas
+
+Revisar:
+- Widgets en `lib/ui/screens/`
+- Widgets reutilizables en `lib/ui/widgets/`
+- Verificar que no haya errores de layout
+
+## ✅ Checklist para Resolver Bugs
+
+- [ ] Recopilar información del bug
+- [ ] Reproducir en desarrollo
+- [ ] Ejecutar `flutter analyze`
+- [ ] Ver logs con `flutter run -v`
+- [ ] Revisar código relacionado
+- [ ] Hacer cambio
+- [ ] `flutter clean && flutter pub get`
+- [ ] `flutter pub run build_runner build --delete-conflicting-outputs`
+- [ ] Probar cambio localmente
+- [ ] Probar en dispositivo
+- [ ] Verificar que no rompiste otra cosa
+- [ ] Commit con mensaje claro
+
+## 📝 Ejemplo de Sesión de Debugging
+
+```bash
+# 1. Entrar al proyecto
+cd miganado
+
+# 2. Limpiar y obtener dependencias
+flutter clean
+flutter pub get
+
+# 3. Regenerar código
+flutter pub run build_runner build --delete-conflicting-outputs
+
+# 4. Ejecutar en modo verbose
+flutter run -v
+
+# 5. Abrir DevTools (en otra terminal)
+devtools
+# Luego conectar en localhost:9100
+
+# 6. Reproducir bug en la app
+# 7. Ver logs en terminal y DevTools
+
+# 8. Hacer cambios en código
+# 9. Hot reload (presionar 'r' en terminal)
+
+# 10. Si hot reload no funciona:
+# Presionar 'R' para full restart
+
+# 11. Cuando esté arreglado:
+flutter analyze  # Verificar no hay errores
+```
+
+## 📞 Cuando No Sabes Cómo Arreglarlo
+
+1. **Buscar en el código**: Usa Ctrl+Shift+F para buscar palabras clave
+2. **Revisar commits anteriores**: Ver qué cambió
+3. **Stack Overflow**: Buscar el error exacto
+4. **Flutter Docs**: https://flutter.dev/docs
+5. **Dart Docs**: https://dart.dev/guides
+6. **Isar Docs**: https://isar.dev/ (para problemas de BD)
+7. **Riverpod Docs**: https://riverpod.dev/ (para state)
+
 ---
 
-## 🚀 CUANDO TODO ESTÉ OK
-
-Una vez que hayas:
-- ✅ Probado todas las pantallas
-- ✅ Corregido todos los bugs
-- ✅ Verificado que no hay crashes
-- ✅ Confirmado que la data se guarda
-- ✅ Chequeado performance
-
-**Estás listo para escalar a PlayStore**
-
-Sigue: `FASE_5_ESCALADO_PLAYSTORE.md`
-
----
-
-## 📞 PREGUNTAS FRECUENTES
-
-**P: ¿Pierdo datos si corrijo un bug?**  
-R: No, los datos se guardan en la BD local. Reinstalar app no los borra.
-
-**P: ¿Tengo que hacer `flutter clean` cada vez?**  
-R: No siempre. Intenta Ctrl+S primero (hot reload), luego hot restart (R), luego clean si nada funciona.
-
-**P: ¿Y si el bug está en la base de datos?**  
-R: Abre `lib/data/database/` y revisa los métodos Hive. Usa `flutter logs` para ver qué falla.
-
-**P: ¿Debo hacer build APK nueva completa cada vez?**  
-R: No, solo durante desarrollo en emulador. Para dispositivo use `flutter install` con mismo APK.
-
----
-
-## 🛠️ COMANDOS ÚTILES
-
-| Comando | Qué hace |
-|---------|----------|
-| `flutter logs` | Ver logs en tiempo real |
-| `flutter logs --verbose` | Logs detallados |
-| `flutter devices` | Listar dispositivos conectados |
-| `flutter analyze` | Revisar código por errores |
-| `flutter test` | Ejecutar tests |
-| `flutter clean` | Limpiar build |
-| `flutter pub get` | Obtener dependencias |
-
----
-
-## ✅ CONCLUSIÓN
-
-Si encuentras un bug:
-1. **Documenta** claramente
-2. **Busca** en logs
-3. **Localiza** el código
-4. **Arregla** el problema
-5. **Prueba** el fix
-6. **Verifica** que no rompiste nada
-7. **Continúa** probando
-
-**¡Cuando todo esté listo, a escalar!**
-
----
-
-**Documento**: Guía de Corrección de Bugs  
-**Fecha**: 14 Enero 2026  
-**Estado**: Listo para usar  
-**Próximo Paso**: Detectar y corregir bugs en dispositivo
+**Última actualización**: Enero 2026
