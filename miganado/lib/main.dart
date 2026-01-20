@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/data/database/isar_database.dart';
 import 'package:miganado/features/animals/presentation/providers/animals_providers.dart';
-import 'package:miganado/services/seed_database.dart';
+import 'package:miganado/services/seed_database_full.dart';
 import 'package:miganado/features/home/presentation/screens/home_screen.dart';
 
 void main() async {
@@ -17,7 +17,7 @@ void main() async {
 
     // 2. Cargar datos de ejemplo (solo primera ejecución)
     final database = MiGanadoDatabase();
-    await SeedDatabase.seedAll(database);
+    await SeedDatabaseFull.seedAll(database);
     print('✓ Datos de ejemplo cargados');
 
     // 3. Iniciar app con Riverpod

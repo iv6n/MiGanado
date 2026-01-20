@@ -106,94 +106,104 @@ const AnimalEntitySchema = CollectionSchema(
       name: r'fechaUltimoDesparasitante',
       type: IsarType.dateTime,
     ),
-    r'fechaVitaminas': PropertySchema(
+    r'fechaUltimoPesaje': PropertySchema(
       id: 17,
+      name: r'fechaUltimoPesaje',
+      type: IsarType.dateTime,
+    ),
+    r'fechaVitaminas': PropertySchema(
+      id: 18,
       name: r'fechaVitaminas',
       type: IsarType.dateTime,
     ),
     r'hashContenido': PropertySchema(
-      id: 18,
+      id: 19,
       name: r'hashContenido',
       type: IsarType.string,
     ),
     r'idRemoto': PropertySchema(
-      id: 19,
+      id: 20,
       name: r'idRemoto',
       type: IsarType.string,
     ),
     r'nombrePersonalizado': PropertySchema(
-      id: 20,
+      id: 21,
       name: r'nombrePersonalizado',
       type: IsarType.string,
     ),
     r'notas': PropertySchema(
-      id: 21,
+      id: 22,
       name: r'notas',
       type: IsarType.string,
     ),
     r'numeroArete': PropertySchema(
-      id: 22,
+      id: 23,
       name: r'numeroArete',
       type: IsarType.string,
     ),
     r'observaciones': PropertySchema(
-      id: 23,
+      id: 24,
       name: r'observaciones',
       type: IsarType.string,
     ),
+    r'pesoActual': PropertySchema(
+      id: 25,
+      name: r'pesoActual',
+      type: IsarType.double,
+    ),
     r'precioCompra': PropertySchema(
-      id: 24,
+      id: 26,
       name: r'precioCompra',
       type: IsarType.double,
     ),
     r'precioVenta': PropertySchema(
-      id: 25,
+      id: 27,
       name: r'precioVenta',
       type: IsarType.double,
     ),
     r'raza': PropertySchema(
-      id: 26,
+      id: 28,
       name: r'raza',
       type: IsarType.string,
     ),
     r'sexo': PropertySchema(
-      id: 27,
+      id: 29,
       name: r'sexo',
       type: IsarType.byte,
       enumMap: _AnimalEntitysexoEnumValueMap,
     ),
     r'sincronizado': PropertySchema(
-      id: 28,
+      id: 30,
       name: r'sincronizado',
       type: IsarType.bool,
     ),
     r'tieneVitaminas': PropertySchema(
-      id: 29,
+      id: 31,
       name: r'tieneVitaminas',
       type: IsarType.bool,
     ),
     r'tipoDesparasitante': PropertySchema(
-      id: 30,
+      id: 32,
       name: r'tipoDesparasitante',
       type: IsarType.string,
     ),
     r'tipoVacuna': PropertySchema(
-      id: 31,
+      id: 33,
       name: r'tipoVacuna',
       type: IsarType.string,
     ),
     r'ubicacion': PropertySchema(
-      id: 32,
+      id: 34,
       name: r'ubicacion',
       type: IsarType.string,
     ),
     r'uuid': PropertySchema(
-      id: 33,
+      id: 35,
       name: r'uuid',
       type: IsarType.string,
     ),
     r'vacunado': PropertySchema(
-      id: 34,
+      id: 36,
       name: r'vacunado',
       type: IsarType.bool,
     )
@@ -326,24 +336,26 @@ void _animalEntitySerialize(
   writer.writeDateTime(offsets[14], object.fechaSincronizacion);
   writer.writeDateTime(offsets[15], object.fechaUltimaVacuna);
   writer.writeDateTime(offsets[16], object.fechaUltimoDesparasitante);
-  writer.writeDateTime(offsets[17], object.fechaVitaminas);
-  writer.writeString(offsets[18], object.hashContenido);
-  writer.writeString(offsets[19], object.idRemoto);
-  writer.writeString(offsets[20], object.nombrePersonalizado);
-  writer.writeString(offsets[21], object.notas);
-  writer.writeString(offsets[22], object.numeroArete);
-  writer.writeString(offsets[23], object.observaciones);
-  writer.writeDouble(offsets[24], object.precioCompra);
-  writer.writeDouble(offsets[25], object.precioVenta);
-  writer.writeString(offsets[26], object.raza);
-  writer.writeByte(offsets[27], object.sexo.index);
-  writer.writeBool(offsets[28], object.sincronizado);
-  writer.writeBool(offsets[29], object.tieneVitaminas);
-  writer.writeString(offsets[30], object.tipoDesparasitante);
-  writer.writeString(offsets[31], object.tipoVacuna);
-  writer.writeString(offsets[32], object.ubicacion);
-  writer.writeString(offsets[33], object.uuid);
-  writer.writeBool(offsets[34], object.vacunado);
+  writer.writeDateTime(offsets[17], object.fechaUltimoPesaje);
+  writer.writeDateTime(offsets[18], object.fechaVitaminas);
+  writer.writeString(offsets[19], object.hashContenido);
+  writer.writeString(offsets[20], object.idRemoto);
+  writer.writeString(offsets[21], object.nombrePersonalizado);
+  writer.writeString(offsets[22], object.notas);
+  writer.writeString(offsets[23], object.numeroArete);
+  writer.writeString(offsets[24], object.observaciones);
+  writer.writeDouble(offsets[25], object.pesoActual);
+  writer.writeDouble(offsets[26], object.precioCompra);
+  writer.writeDouble(offsets[27], object.precioVenta);
+  writer.writeString(offsets[28], object.raza);
+  writer.writeByte(offsets[29], object.sexo.index);
+  writer.writeBool(offsets[30], object.sincronizado);
+  writer.writeBool(offsets[31], object.tieneVitaminas);
+  writer.writeString(offsets[32], object.tipoDesparasitante);
+  writer.writeString(offsets[33], object.tipoVacuna);
+  writer.writeString(offsets[34], object.ubicacion);
+  writer.writeString(offsets[35], object.uuid);
+  writer.writeBool(offsets[36], object.vacunado);
 }
 
 AnimalEntity _animalEntityDeserialize(
@@ -368,20 +380,20 @@ AnimalEntity _animalEntityDeserialize(
     fechaNacimiento: reader.readDateTime(offsets[13]),
     fechaUltimaVacuna: reader.readDateTimeOrNull(offsets[15]),
     fechaUltimoDesparasitante: reader.readDateTimeOrNull(offsets[16]),
-    fechaVitaminas: reader.readDateTimeOrNull(offsets[17]),
-    nombrePersonalizado: reader.readStringOrNull(offsets[20]),
-    notas: reader.readStringOrNull(offsets[21]),
-    numeroArete: reader.readString(offsets[22]),
-    precioCompra: reader.readDoubleOrNull(offsets[24]),
-    precioVenta: reader.readDoubleOrNull(offsets[25]),
-    raza: reader.readString(offsets[26]),
-    sexo: _AnimalEntitysexoValueEnumMap[reader.readByteOrNull(offsets[27])] ??
+    fechaVitaminas: reader.readDateTimeOrNull(offsets[18]),
+    nombrePersonalizado: reader.readStringOrNull(offsets[21]),
+    notas: reader.readStringOrNull(offsets[22]),
+    numeroArete: reader.readString(offsets[23]),
+    precioCompra: reader.readDoubleOrNull(offsets[26]),
+    precioVenta: reader.readDoubleOrNull(offsets[27]),
+    raza: reader.readString(offsets[28]),
+    sexo: _AnimalEntitysexoValueEnumMap[reader.readByteOrNull(offsets[29])] ??
         Sexo.macho,
-    tieneVitaminas: reader.readBoolOrNull(offsets[29]) ?? false,
-    tipoDesparasitante: reader.readStringOrNull(offsets[30]),
-    tipoVacuna: reader.readStringOrNull(offsets[31]),
-    ubicacion: reader.readStringOrNull(offsets[32]),
-    vacunado: reader.readBoolOrNull(offsets[34]) ?? false,
+    tieneVitaminas: reader.readBoolOrNull(offsets[31]) ?? false,
+    tipoDesparasitante: reader.readStringOrNull(offsets[32]),
+    tipoVacuna: reader.readStringOrNull(offsets[33]),
+    ubicacion: reader.readStringOrNull(offsets[34]),
+    vacunado: reader.readBoolOrNull(offsets[36]) ?? false,
   );
   object.etapa =
       _AnimalEntityetapaValueEnumMap[reader.readByteOrNull(offsets[8])] ??
@@ -389,12 +401,14 @@ AnimalEntity _animalEntityDeserialize(
   object.fechaActualizacion = reader.readDateTime(offsets[11]);
   object.fechaCreacion = reader.readDateTime(offsets[12]);
   object.fechaSincronizacion = reader.readDateTimeOrNull(offsets[14]);
-  object.hashContenido = reader.readStringOrNull(offsets[18]);
+  object.fechaUltimoPesaje = reader.readDateTimeOrNull(offsets[17]);
+  object.hashContenido = reader.readStringOrNull(offsets[19]);
   object.id = id;
-  object.idRemoto = reader.readStringOrNull(offsets[19]);
-  object.observaciones = reader.readStringOrNull(offsets[23]);
-  object.sincronizado = reader.readBool(offsets[28]);
-  object.uuid = reader.readString(offsets[33]);
+  object.idRemoto = reader.readStringOrNull(offsets[20]);
+  object.observaciones = reader.readStringOrNull(offsets[24]);
+  object.pesoActual = reader.readDoubleOrNull(offsets[25]);
+  object.sincronizado = reader.readBool(offsets[30]);
+  object.uuid = reader.readString(offsets[35]);
   return object;
 }
 
@@ -448,7 +462,7 @@ P _animalEntityDeserializeProp<P>(
     case 17:
       return (reader.readDateTimeOrNull(offset)) as P;
     case 18:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 19:
       return (reader.readStringOrNull(offset)) as P;
     case 20:
@@ -456,31 +470,35 @@ P _animalEntityDeserializeProp<P>(
     case 21:
       return (reader.readStringOrNull(offset)) as P;
     case 22:
-      return (reader.readString(offset)) as P;
-    case 23:
       return (reader.readStringOrNull(offset)) as P;
+    case 23:
+      return (reader.readString(offset)) as P;
     case 24:
-      return (reader.readDoubleOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 25:
       return (reader.readDoubleOrNull(offset)) as P;
     case 26:
-      return (reader.readString(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 27:
+      return (reader.readDoubleOrNull(offset)) as P;
+    case 28:
+      return (reader.readString(offset)) as P;
+    case 29:
       return (_AnimalEntitysexoValueEnumMap[reader.readByteOrNull(offset)] ??
           Sexo.macho) as P;
-    case 28:
-      return (reader.readBool(offset)) as P;
-    case 29:
-      return (reader.readBoolOrNull(offset) ?? false) as P;
     case 30:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 31:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset) ?? false) as P;
     case 32:
       return (reader.readStringOrNull(offset)) as P;
     case 33:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 34:
+      return (reader.readStringOrNull(offset)) as P;
+    case 35:
+      return (reader.readString(offset)) as P;
+    case 36:
       return (reader.readBoolOrNull(offset) ?? false) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -2022,6 +2040,80 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      fechaUltimoPesajeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'fechaUltimoPesaje',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      fechaUltimoPesajeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'fechaUltimoPesaje',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      fechaUltimoPesajeEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'fechaUltimoPesaje',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      fechaUltimoPesajeGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'fechaUltimoPesaje',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      fechaUltimoPesajeLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'fechaUltimoPesaje',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      fechaUltimoPesajeBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'fechaUltimoPesaje',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
       fechaVitaminasIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -3048,6 +3140,90 @@ extension AnimalEntityQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'observaciones',
         value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      pesoActualIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'pesoActual',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      pesoActualIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'pesoActual',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      pesoActualEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'pesoActual',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      pesoActualGreaterThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'pesoActual',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      pesoActualLessThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'pesoActual',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      pesoActualBetween(
+    double? lower,
+    double? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'pesoActual',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
       ));
     });
   }
@@ -4268,6 +4444,20 @@ extension AnimalEntityQuerySortBy
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
+      sortByFechaUltimoPesaje() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'fechaUltimoPesaje', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
+      sortByFechaUltimoPesajeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'fechaUltimoPesaje', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
       sortByFechaVitaminas() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaVitaminas', Sort.asc);
@@ -4355,6 +4545,19 @@ extension AnimalEntityQuerySortBy
       sortByObservacionesDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'observaciones', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByPesoActual() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'pesoActual', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
+      sortByPesoActualDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'pesoActual', Sort.desc);
     });
   }
 
@@ -4726,6 +4929,20 @@ extension AnimalEntityQuerySortThenBy
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
+      thenByFechaUltimoPesaje() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'fechaUltimoPesaje', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
+      thenByFechaUltimoPesajeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'fechaUltimoPesaje', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
       thenByFechaVitaminas() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaVitaminas', Sort.asc);
@@ -4825,6 +5042,19 @@ extension AnimalEntityQuerySortThenBy
       thenByObservacionesDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'observaciones', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByPesoActual() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'pesoActual', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
+      thenByPesoActualDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'pesoActual', Sort.desc);
     });
   }
 
@@ -5089,6 +5319,13 @@ extension AnimalEntityQueryWhereDistinct
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
+      distinctByFechaUltimoPesaje() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'fechaUltimoPesaje');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
       distinctByFechaVitaminas() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'fechaVitaminas');
@@ -5137,6 +5374,12 @@ extension AnimalEntityQueryWhereDistinct
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'observaciones',
           caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByPesoActual() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'pesoActual');
     });
   }
 
@@ -5334,6 +5577,13 @@ extension AnimalEntityQueryProperty
   }
 
   QueryBuilder<AnimalEntity, DateTime?, QQueryOperations>
+      fechaUltimoPesajeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'fechaUltimoPesaje');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, DateTime?, QQueryOperations>
       fechaVitaminasProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'fechaVitaminas');
@@ -5376,6 +5626,12 @@ extension AnimalEntityQueryProperty
       observacionesProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'observaciones');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, double?, QQueryOperations> pesoActualProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'pesoActual');
     });
   }
 

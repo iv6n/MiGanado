@@ -16,51 +16,52 @@ class VacunasHistorialScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final vacunas = ref.watch(obtenerVacunasUseCaseProvider);
+    // Usar el provider FutureProvider que ya está configurado
+    final vacunasAsync = ref.watch(vacunasByAnimalProvider(animalUuid));
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Historial de Vacunas - $animalNombre'),
         elevation: 0,
       ),
-      body: FutureBuilder(
-        future: vacunas(animalUuid: animalUuid),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          }
-
-          if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          }
-
-          final listVacunas = snapshot.data as List<VacunaEntity>? ?? [];
-
-          if (listVacunas.isEmpty) {
+      body: vacunasAsync.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stackTrace) => Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.error_outline, size: 64, color: Colors.red),
+              const SizedBox(height: 16),
+              Text('Error: $error'),
+            ],
+          ),
+        ),
+        data: (vacunas) {
+          if (vacunas.isEmpty) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.health_and_safety, size: 64, color: Colors.grey),
-                  SizedBox(height: 16),
-                  Text('No hay vacunas registradas'),
+                  const SizedBox(height: 16),
+                  const Text('No hay vacunas registradas'),
                 ],
               ),
             );
           }
 
           // Ordenar por fecha descendente
-          final sortedVacunas = listVacunas
+          final sortedVacunas = [...vacunas]
             ..sort((a, b) => b.fecha.compareTo(a.fecha));
 
           return RefreshIndicator(
             onRefresh: () async {
-              await ref.refresh(obtenerVacunasUseCaseProvider);
+              ref.refresh(vacunasByAnimalProvider(animalUuid));
             },
             child: ListView.separated(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               itemCount: sortedVacunas.length,
-              separatorBuilder: (_, __) => Divider(),
+              separatorBuilder: (_, __) => const Divider(),
               itemBuilder: (context, index) {
                 final vacuna = sortedVacunas[index];
                 final fechaFormato =

@@ -126,7 +126,7 @@ class AnimalDetailHeader extends StatelessWidget {
 }
 
 // ============================================================================
-// CARD - Datos generales
+// CARD - Datos generales (dinámico por especie)
 // ============================================================================
 
 class DatosGeneralesCard extends StatelessWidget {
@@ -134,23 +134,59 @@ class DatosGeneralesCard extends StatelessWidget {
 
   const DatosGeneralesCard({required this.animal, super.key});
 
-  String _calcularEdad() {
-    final hoy = DateTime.now();
-    var edad = hoy.year - animal.fechaNacimiento.year;
-    final mesActual = hoy.month;
-    final mesNac = animal.fechaNacimiento.month;
+  bool get _esBovinoOEquino =>
+      animal.especie.toString().contains('bovino') ||
+      animal.especie.toString().contains('equino');
 
-    if (mesActual < mesNac ||
-        (mesActual == mesNac && hoy.day < animal.fechaNacimiento.day)) {
-      edad--;
+  bool get _esEquino => animal.especie.toString().contains('equino');
+
+  bool get _esBovinohembra => !_esEquino && animal.sexo.name == 'hembra';
+
+  bool get _esMacho => animal.sexo.name == 'macho';
+
+  /// Calcula la etapa de vida basada en edad en meses (SOLO para bovinos)
+  String _calcularEtapa() {
+    if (animal.edadMeses < 12) {
+      return animal.sexo.name == 'macho' ? 'Becerro' : 'Becerra';
+    } else if (animal.edadMeses < 24) {
+      if (animal.sexo.name == 'hembra') {
+        return 'Vaquilla';
+      }
+      return animal.esCastrado ? 'Novillo' : 'Torete';
+    } else {
+      return animal.sexo.name == 'hembra' ? 'Vaca' : 'Toro';
+    }
+  }
+
+  String _calcularEdadFormato() {
+    if (animal.edadMeses < 12) {
+      return '${animal.edadMeses} meses';
     }
 
-    if (edad == 0) {
-      final meses = hoy.month - mesNac;
-      return '$meses meses';
-    }
+    final anios = (animal.edadMeses / 12).floor();
+    final mesesResto = animal.edadMeses % 12;
 
-    return '$edad anos';
+    if (mesesResto == 0) {
+      return '$anios ${anios == 1 ? 'año' : 'años'}';
+    }
+    return '$anios ${anios == 1 ? 'año' : 'años'} $mesesResto meses';
+  }
+
+  /// Obtiene estado de castración
+  String _getEstadoCastrado() {
+    return animal.esCastrado ? 'Sí' : 'No';
+  }
+
+  /// Obtiene descripción del ciclo reproductivo
+  String _getEstadoReproductivo() {
+    final estado = animal.estadoReproductivo?.toString() ?? 'no_definido';
+
+    if (estado.contains('lactando')) return 'Lactando';
+    if (estado.contains('prenada')) return 'Preñada';
+    if (estado.contains('parida')) return 'Parida';
+    if (estado.contains('secando')) return 'Secando';
+    if (estado.contains('vacia')) return 'Vacía';
+    return 'No definido';
   }
 
   @override
@@ -171,32 +207,114 @@ class DatosGeneralesCard extends StatelessWidget {
               ),
             ),
             const Divider(height: 16),
-            _DatosRow(
-              label: 'Arete',
-              valor: animal.numeroArete,
-              icono: Icons.tag,
+
+            // Fila 1: Arete y (Etapa para bovinos / Castrado para equinos)
+            Row(
+              children: [
+                Expanded(
+                  child: _DatosField(
+                    label: 'Arete',
+                    valor: animal.numeroArete,
+                    icono: Icons.tag,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: _DatosField(
+                    label: _esEquino ? 'Castrado' : 'Etapa',
+                    valor: _esEquino ? _getEstadoCastrado() : _calcularEtapa(),
+                    icono: _esEquino
+                        ? Icons.check_circle_outline
+                        : Icons.info_outline,
+                  ),
+                ),
+              ],
             ),
-            _DatosRow(
-              label: 'Etapa',
-              valor: animal.etapaDescripcion,
-              icono: Icons.info_outline,
+            const SizedBox(height: 16),
+
+            // Fila 2: Raza
+            Row(
+              children: [
+                Expanded(
+                  child: _DatosField(
+                    label: 'Raza',
+                    valor: animal.raza,
+                    icono: Icons.pets,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                if (!_esEquino) ...[
+                  const SizedBox(height: 16),
+                  if (_esMacho) ...[
+                    Expanded(
+                      child: _DatosField(
+                        label: 'Castrado',
+                        valor: _getEstadoCastrado(),
+                        icono: Icons.check_circle_outline,
+                      ),
+                    ),
+                  ] else if (_esBovinohembra) ...[
+                    Expanded(
+                      child: _DatosField(
+                        label: 'Ciclo',
+                        valor: _getEstadoReproductivo(),
+                        icono: Icons.favorite,
+                      ),
+                    ),
+                  ],
+                ],
+              ],
             ),
-            _DatosRow(
-              label: 'Raza',
-              valor: animal.raza,
-              icono: Icons.info_outline,
+            const SizedBox(height: 16),
+
+            // Fila 3: Edad y Fecha de Nacimiento
+            Row(
+              children: [
+                Expanded(
+                  child: _DatosField(
+                    label: 'Edad',
+                    valor: _calcularEdadFormato(),
+                    icono: Icons.cake,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: _DatosField(
+                    label: 'Nac.',
+                    valor:
+                        '${animal.fechaNacimiento.day}/${animal.fechaNacimiento.month}/${animal.fechaNacimiento.year}',
+                    icono: Icons.calendar_today,
+                  ),
+                ),
+              ],
             ),
-            _DatosRow(
-              label: 'Edad',
-              valor: _calcularEdad(),
-              icono: Icons.cake,
-            ),
-            _DatosRow(
-              label: 'Fecha Nacimiento',
-              valor:
-                  '${animal.fechaNacimiento.day}/${animal.fechaNacimiento.month}/${animal.fechaNacimiento.year}',
-              icono: Icons.calendar_today,
-              esUltimo: true,
+
+            // Fila 4: Castrado (solo para machos bovinos) + Ciclo (solo para hembras bovinas)
+
+            // Fila 5: Peso y Fecha Pesaje
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: _DatosField(
+                    label: 'Peso',
+                    valor: animal.pesoActual != null
+                        ? '${animal.pesoActual} kg'
+                        : 'No registrado',
+                    icono: Icons.scale,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: _DatosField(
+                    label: 'Ult. Pesaje',
+                    valor: animal.fechaUltimoPesaje != null
+                        ? '${animal.fechaUltimoPesaje?.day}/${animal.fechaUltimoPesaje?.month}/${animal.fechaUltimoPesaje?.year}'
+                        : 'Sin datos',
+                    icono: Icons.date_range,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -206,7 +324,53 @@ class DatosGeneralesCard extends StatelessWidget {
 }
 
 // ============================================================================
-// WIDGET - Fila de datos
+// WIDGET - Campo de datos con iconos
+// ============================================================================
+
+class _DatosField extends StatelessWidget {
+  final String label;
+  final String valor;
+  final IconData icono;
+
+  const _DatosField({
+    required this.label,
+    required this.valor,
+    required this.icono,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(icono, size: 18, color: Colors.green.shade700),
+            const SizedBox(width: 8),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.grey.shade600,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        Text(
+          valor,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// WIDGET - Fila de datos (deprecated, replaced by _DatosField)
 // ============================================================================
 
 class _DatosRow extends StatelessWidget {

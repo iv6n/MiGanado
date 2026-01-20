@@ -3,9 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/features/animals/domain/entities/animal_detail.dart';
 import 'package:miganado/features/animals/presentation/providers/animal_detail_provider.dart';
 import 'package:miganado/features/animals/presentation/widgets/animal_detail_widgets.dart';
+import 'package:miganado/features/animals/presentation/widgets/acciones_historiales_card.dart';
+import 'package:miganado/features/animals/presentation/widgets/datos_generales_card_dinamico.dart';
 import 'package:miganado/features/costs/presentation/screens/costos_screen.dart';
 import 'package:miganado/features/pesos/presentation/screens/pesos_screen.dart';
+import 'package:miganado/features/photos/presentation/screens/photos_screen.dart';
 import 'package:miganado/features/mantenimiento/presentation/widgets/registro_dialogs.dart';
+import 'package:miganado/features/mantenimiento/presentation/screens/mantenimiento_historial_screen.dart';
 import 'package:miganado/features/animals/presentation/screens/vacunas_historial_screen.dart';
 import 'package:miganado/features/animals/presentation/screens/tratamientos_historial_screen.dart';
 import 'package:miganado/features/animals/presentation/screens/nutricion_historial_screen.dart';
@@ -143,8 +147,8 @@ class _TabInformacion extends ConsumerWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          // Datos Generales
-          DatosGeneralesCard(animal: animalDetail.animal),
+          // Datos Generales - Versión Dinámica por Tipo de Animal
+          DatosGeneralesCardDinamico(animal: animalDetail.animal),
 
           // Ubicación
           UbicacionCard(
@@ -172,8 +176,9 @@ class _TabInformacion extends ConsumerWidget {
             onEditingComplete: onGuardarObservaciones,
           ),
 
-          // Acciones Rápidas
-          AccionesRapidasCard(
+          // Acciones Rápidas, Historiales y Reproducción - Versión Dinámica
+          AccionesYHistorialesCard(
+            animal: animalDetail.animal,
             onPesaje: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -186,9 +191,12 @@ class _TabInformacion extends ConsumerWidget {
               );
             },
             onMantenimiento: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Registrar Mantenimiento - FASE 4'),
+              showDialog(
+                context: context,
+                builder: (context) => RegistroMantenimientoDialog(
+                  animalUuid: animalDetail.animal.uuid,
+                  registradoPor: animalDetail.animal.nombrePersonalizado ??
+                      animalDetail.animal.numeroArete,
                 ),
               );
             },
@@ -204,8 +212,14 @@ class _TabInformacion extends ConsumerWidget {
               );
             },
             onFoto: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Tomar Foto - FASE 7')),
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => AnimalPhotosScreen(
+                    animalUuid: animalDetail.animal.uuid,
+                    animalNombre: animalDetail.animal.nombrePersonalizado ??
+                        animalDetail.animal.numeroArete,
+                  ),
+                ),
               );
             },
             onVacuna: () {
@@ -275,6 +289,17 @@ class _TabInformacion extends ConsumerWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => DesparasitacionesHistorialScreen(
+                    animalUuid: animalDetail.animal.uuid,
+                    animalNombre: animalDetail.animal.nombrePersonalizado ??
+                        animalDetail.animal.numeroArete,
+                  ),
+                ),
+              );
+            },
+            onHistorialMantenimiento: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => MantenimientoHistorialScreen(
                     animalUuid: animalDetail.animal.uuid,
                     animalNombre: animalDetail.animal.nombrePersonalizado ??
                         animalDetail.animal.numeroArete,

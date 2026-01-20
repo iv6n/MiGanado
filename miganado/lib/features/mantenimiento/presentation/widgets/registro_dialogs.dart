@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/vacunas_providers.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/tratamientos_providers.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/nutricion_providers.dart';
+import 'package:miganado/features/animals/presentation/providers/reproductivo_providers.dart';
+import 'package:miganado/features/mantenimiento/presentation/providers/mantenimiento_providers.dart';
 
 class RegistroVacunaDialog extends ConsumerStatefulWidget {
   final String animalUuid;
@@ -132,7 +134,7 @@ class _RegistroVacunaDialogState extends ConsumerState<RegistroVacunaDialog> {
                 costo: costo,
               );
 
-              await ref.refresh(vacunasByAnimalProvider(widget.animalUuid));
+              ref.refresh(vacunasByAnimalProvider(widget.animalUuid));
 
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Vacuna registrada exitosamente')),
@@ -288,8 +290,7 @@ class _RegistroTratamientoDialogState
                 registradoPor: widget.registradoPor,
               );
 
-              await ref
-                  .refresh(tratamientosByAnimalProvider(widget.animalUuid));
+              ref.refresh(tratamientosByAnimalProvider(widget.animalUuid));
 
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Tratamiento registrado exitosamente')),
@@ -425,7 +426,7 @@ class _RegistroNutricionDialogState
                 suplementos: suplementos.isEmpty ? null : suplementos,
               );
 
-              await ref.refresh(nutricionByAnimalProvider(widget.animalUuid));
+              ref.refresh(nutricionByAnimalProvider(widget.animalUuid));
 
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Nutricion registrada exitosamente')),
@@ -485,6 +486,9 @@ class _RegistroEmpadreDialogState extends ConsumerState<RegistroEmpadreDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final isRegistering =
+        ref.watch(StateProvider<bool>((ref) => false)); // Placeholder
+
     return AlertDialog(
       title: Text('Registrar Empadre'),
       content: SingleChildScrollView(
@@ -541,7 +545,7 @@ class _RegistroEmpadreDialogState extends ConsumerState<RegistroEmpadreDialog> {
           child: Text('Cancelar'),
         ),
         ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             if (sementalController.text.isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Ingrese arete del semental')),
@@ -549,11 +553,55 @@ class _RegistroEmpadreDialogState extends ConsumerState<RegistroEmpadreDialog> {
               return;
             }
 
-            // Aquí iría la lógica para guardar
-            Navigator.pop(context);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Empadre registrado')),
-            );
+            try {
+              // Obtener o crear reproductivo
+              final obtenerUseCase =
+                  ref.read(obtenerReproductivoUseCaseProvider);
+              var reproductivo =
+                  await obtenerUseCase(animalUuid: widget.animalUuid);
+
+              if (reproductivo == null) {
+                // Crear si no existe
+                final crearUseCase = ref.read(crearReproductivoUseCaseProvider);
+                await crearUseCase(
+                  animalUuid: widget.animalUuid,
+                  estado: 'Gestante',
+                  registradoPor: widget.registradoPor,
+                );
+                reproductivo =
+                    await obtenerUseCase(animalUuid: widget.animalUuid);
+              }
+
+              // Guardar empadre
+              if (reproductivo != null) {
+                final registrarEmpadreUseCase =
+                    ref.read(registrarEmpadreUseCaseProvider);
+                await registrarEmpadreUseCase(
+                  reproductivo: reproductivo,
+                  fecha: fechaEmpadre,
+                  sementalUuid: sementalController.text,
+                  metodo: metodoController.text.isNotEmpty
+                      ? metodoController.text
+                      : 'No especificado',
+                  observaciones: observacionesController.text.isNotEmpty
+                      ? observacionesController.text
+                      : null,
+                );
+              }
+
+              if (mounted) {
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Empadre registrado exitosamente')),
+                );
+              }
+            } catch (e) {
+              if (mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Error al registrar: $e')),
+                );
+              }
+            }
           },
           child: Text('Guardar'),
         ),
@@ -664,7 +712,7 @@ class _RegistroPartoDialogState extends ConsumerState<RegistroPartoDialog> {
           child: Text('Cancelar'),
         ),
         ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             if (numeroCriasController.text.isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Ingrese número de crías')),
@@ -672,11 +720,58 @@ class _RegistroPartoDialogState extends ConsumerState<RegistroPartoDialog> {
               return;
             }
 
-            // Aquí iría la lógica para guardar
-            Navigator.pop(context);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Parto registrado')),
-            );
+            try {
+              // Obtener o crear reproductivo
+              final obtenerUseCase =
+                  ref.read(obtenerReproductivoUseCaseProvider);
+              var reproductivo =
+                  await obtenerUseCase(animalUuid: widget.animalUuid);
+
+              if (reproductivo == null) {
+                // Crear si no existe
+                final crearUseCase = ref.read(crearReproductivoUseCaseProvider);
+                await crearUseCase(
+                  animalUuid: widget.animalUuid,
+                  estado: 'Lactante',
+                  registradoPor: widget.registradoPor,
+                );
+                reproductivo =
+                    await obtenerUseCase(animalUuid: widget.animalUuid);
+              }
+
+              // Guardar parto
+              if (reproductivo != null) {
+                final registrarPartoUseCase =
+                    ref.read(registrarPartoUseCaseProvider);
+                await registrarPartoUseCase(
+                  reproductivo: reproductivo,
+                  fecha: fechaParto,
+                  numeroCrias: int.tryParse(numeroCriasController.text) ?? 1,
+                  tipoParto: tipoPartoController.text.isNotEmpty
+                      ? tipoPartoController.text
+                      : 'No especificado',
+                  resultado: resultadoController.text.isNotEmpty
+                      ? resultadoController.text
+                      : 'Normal',
+                  observaciones: observacionesController.text.isNotEmpty
+                      ? observacionesController.text
+                      : null,
+                );
+              }
+
+              if (mounted) {
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Parto registrado exitosamente')),
+                );
+              }
+            } catch (e) {
+              if (mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Error al registrar: $e')),
+                );
+              }
+            }
           },
           child: Text('Guardar'),
         ),
@@ -690,6 +785,239 @@ class _RegistroPartoDialogState extends ConsumerState<RegistroPartoDialog> {
     tipoPartoController.dispose();
     resultadoController.dispose();
     observacionesController.dispose();
+    super.dispose();
+  }
+}
+
+// ============================================================================
+// Registro de Mantenimiento
+// ============================================================================
+
+class RegistroMantenimientoDialog extends ConsumerStatefulWidget {
+  final String animalUuid;
+  final String registradoPor;
+
+  const RegistroMantenimientoDialog({
+    required this.animalUuid,
+    required this.registradoPor,
+  });
+
+  @override
+  ConsumerState<RegistroMantenimientoDialog> createState() =>
+      _RegistroMantenimientoDialogState();
+}
+
+class _RegistroMantenimientoDialogState
+    extends ConsumerState<RegistroMantenimientoDialog> {
+  late DateTime fechaSeleccionada;
+  final descripcionController = TextEditingController();
+  final veterinarioController = TextEditingController();
+  final medicamentoController = TextEditingController();
+  final dosisController = TextEditingController();
+  final rutaController = TextEditingController();
+  final observacionesController = TextEditingController();
+  final costController = TextEditingController();
+
+  String tipoSeleccionado = 'control_veterinario';
+
+  final tiposMantenimiento = [
+    ('vacunacion', 'Vacunación'),
+    ('desparasitacion', 'Desparasitación'),
+    ('vitaminas', 'Vitaminas'),
+    ('control_veterinario', 'Control Veterinario'),
+    ('limpieza_corrales', 'Limpieza de Corrales'),
+    ('alimentacion_especial', 'Alimentación Especial'),
+    ('otro', 'Otro'),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    fechaSeleccionada = DateTime.now();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text('Registrar Evento de Mantenimiento'),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Tipo de evento
+            DropdownButtonFormField<String>(
+              value: tipoSeleccionado,
+              items: tiposMantenimiento
+                  .map((t) => DropdownMenuItem(
+                        value: t.$1,
+                        child: Text(t.$2),
+                      ))
+                  .toList(),
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() => tipoSeleccionado = value);
+                }
+              },
+              decoration: InputDecoration(labelText: 'Tipo de Evento'),
+            ),
+            SizedBox(height: 12),
+            // Descripción
+            TextField(
+              controller: descripcionController,
+              decoration: InputDecoration(
+                labelText: 'Descripción',
+                hintText: 'Detalles del evento',
+              ),
+              maxLines: 2,
+            ),
+            SizedBox(height: 12),
+            // Veterinario
+            TextField(
+              controller: veterinarioController,
+              decoration: InputDecoration(
+                labelText: 'Veterinario (opcional)',
+                hintText: 'Nombre del veterinario',
+              ),
+            ),
+            SizedBox(height: 12),
+            // Medicamento
+            TextField(
+              controller: medicamentoController,
+              decoration: InputDecoration(
+                labelText: 'Medicamento/Producto (opcional)',
+              ),
+            ),
+            SizedBox(height: 12),
+            // Dosis
+            TextField(
+              controller: dosisController,
+              decoration: InputDecoration(
+                labelText: 'Dosis (opcional)',
+                hintText: 'ej: 2 dosis, 1 L, etc',
+              ),
+            ),
+            SizedBox(height: 12),
+            // Ruta de aplicación
+            TextField(
+              controller: rutaController,
+              decoration: InputDecoration(
+                labelText: 'Ruta de Aplicación (opcional)',
+                hintText: 'ej: IM, IV, SQ, Oral',
+              ),
+            ),
+            SizedBox(height: 12),
+            // Fecha
+            ListTile(
+              title: Text(
+                  'Fecha: ${DateFormat('dd/MM/yyyy').format(fechaSeleccionada)}'),
+              trailing: Icon(Icons.calendar_today),
+              onTap: () async {
+                final selected = await showDatePicker(
+                  context: context,
+                  initialDate: fechaSeleccionada,
+                  firstDate: DateTime(2020),
+                  lastDate: DateTime.now(),
+                );
+                if (selected != null) {
+                  setState(() => fechaSeleccionada = selected);
+                }
+              },
+            ),
+            SizedBox(height: 12),
+            // Costo
+            TextField(
+              controller: costController,
+              decoration: InputDecoration(
+                labelText: 'Costo (opcional)',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            SizedBox(height: 12),
+            // Observaciones
+            TextField(
+              controller: observacionesController,
+              decoration: InputDecoration(
+                labelText: 'Observaciones (opcional)',
+              ),
+              maxLines: 2,
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text('Cancelar'),
+        ),
+        ElevatedButton(
+          onPressed: () async {
+            if (descripcionController.text.trim().isEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('La descripción es requerida')),
+              );
+              return;
+            }
+
+            try {
+              final useCase = ref.read(registrarMantenimientoUseCaseProvider);
+
+              final costo = costController.text.isEmpty
+                  ? null
+                  : double.parse(costController.text);
+
+              await useCase(
+                animalUuid: widget.animalUuid,
+                tipo: tipoSeleccionado,
+                descripcion: descripcionController.text.trim(),
+                fecha: fechaSeleccionada,
+                veterinario: veterinarioController.text.isEmpty
+                    ? null
+                    : veterinarioController.text,
+                medicamento: medicamentoController.text.isEmpty
+                    ? null
+                    : medicamentoController.text,
+                dosisAplicada:
+                    dosisController.text.isEmpty ? null : dosisController.text,
+                rutaAplicacion:
+                    rutaController.text.isEmpty ? null : rutaController.text,
+                observaciones: observacionesController.text.isEmpty
+                    ? null
+                    : observacionesController.text,
+              );
+
+              ref.refresh(historialMantenimientoProvider(widget.animalUuid));
+
+              if (mounted) {
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                      content: Text(
+                          'Evento de mantenimiento registrado exitosamente')),
+                );
+              }
+            } catch (e) {
+              if (mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Error: $e')),
+                );
+              }
+            }
+          },
+          child: Text('Guardar'),
+        ),
+      ],
+    );
+  }
+
+  @override
+  void dispose() {
+    descripcionController.dispose();
+    veterinarioController.dispose();
+    medicamentoController.dispose();
+    dosisController.dispose();
+    rutaController.dispose();
+    observacionesController.dispose();
+    costController.dispose();
     super.dispose();
   }
 }

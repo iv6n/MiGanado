@@ -42,7 +42,7 @@ class ReproductivHistorialScreen extends ConsumerWidget {
 
           return RefreshIndicator(
             onRefresh: () async {
-              await ref.refresh(reproductivoProvider(animalUuid));
+              ref.refresh(reproductivoProvider(animalUuid));
             },
             child: ListView(
               padding: EdgeInsets.all(16),

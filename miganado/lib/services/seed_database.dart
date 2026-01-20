@@ -6,6 +6,19 @@ import 'package:miganado/features/ganadero/data/models/ganadero_entity.dart';
 
 /// Servicio para cargar datos de ejemplo en la BD Isar
 class SeedDatabase {
+  /// Calcula edad en meses desde una fecha de nacimiento
+  static int _calcularEdadMeses(DateTime fechaNacimiento) {
+    final hoy = DateTime.now();
+    var meses = (hoy.year - fechaNacimiento.year) * 12;
+    meses += hoy.month - fechaNacimiento.month;
+
+    if (hoy.day < fechaNacimiento.day) {
+      meses--;
+    }
+
+    return meses.clamp(0, 9999);
+  }
+
   static Future<void> seedAll(MiGanadoDatabase database) async {
     // Verificar si ya hay datos
     final allAnimales = await database.getAllAnimales();
@@ -14,7 +27,7 @@ class SeedDatabase {
       return; // Ya hay datos, no hacer seed
     }
 
-    print('🌱 Iniciando seed de base de datos...');
+    print('🌱 Iniciando seed de base de datos con datos corregidos...');
 
     // Agregar ganadero de ejemplo
     final ganadero = GanaderoEntity(
@@ -31,7 +44,8 @@ class SeedDatabase {
 
     // ============ ANIMALES DE EJEMPLO ============
 
-    // ANIMAL 1: Vaca lechera adulta en producción
+    // ANIMAL 1: Vaca lechera adulta en producción (4 años)
+    final nacBessie = DateTime(2021, 3, 15); // Hace ~4 años
     final animal1 = AnimalEntity(
       numeroArete: 'BES-001',
       nombrePersonalizado: 'Bessie',
@@ -39,8 +53,8 @@ class SeedDatabase {
       categoria: Categoria.vaca,
       sexo: Sexo.hembra,
       raza: 'Holstein',
-      fechaNacimiento: DateTime(2020, 3, 15),
-      edadMeses: 48,
+      fechaNacimiento: nacBessie,
+      edadMeses: _calcularEdadMeses(nacBessie),
       esCastrado: false,
       notas:
           'Excelente lechera, producción de 28L/día. Pedigree Holstein puro.',
@@ -57,7 +71,8 @@ class SeedDatabase {
       estadoReproductivo: EstadoReproductivo.lactando,
     );
 
-    // ANIMAL 2: Vaca lechera adulta gestante
+    // ANIMAL 2: Vaca lechera adulta gestante (5 años)
+    final nacDaisy = DateTime(2019, 7, 22);
     final animal2 = AnimalEntity(
       numeroArete: 'DAI-002',
       nombrePersonalizado: 'Daisy',
@@ -65,8 +80,8 @@ class SeedDatabase {
       categoria: Categoria.vaca,
       sexo: Sexo.hembra,
       raza: 'Jersey',
-      fechaNacimiento: DateTime(2019, 7, 22),
-      edadMeses: 60,
+      fechaNacimiento: nacDaisy,
+      edadMeses: _calcularEdadMeses(nacDaisy),
       esCastrado: false,
       notas:
           'Jersey de excelente calidad lechera. Leche con alto contenido de grasa (5.8%). Próximo parto en 30 días.',
@@ -83,7 +98,8 @@ class SeedDatabase {
       estadoReproductivo: EstadoReproductivo.prenada,
     );
 
-    // ANIMAL 3: Toro reproductor adulto
+    // ANIMAL 3: Toro reproductor adulto (6+ años)
+    final nacBrahman = DateTime(2018, 11, 5);
     final animal3 = AnimalEntity(
       numeroArete: 'BRH-003',
       nombrePersonalizado: 'Brahman Negro',
@@ -91,8 +107,8 @@ class SeedDatabase {
       categoria: Categoria.vaca,
       sexo: Sexo.macho,
       raza: 'Brahman',
-      fechaNacimiento: DateTime(2018, 11, 5),
-      edadMeses: 72,
+      fechaNacimiento: nacBrahman,
+      edadMeses: _calcularEdadMeses(nacBrahman),
       esCastrado: false,
       notas:
           'Toro reproductor certificado. Excelente genética. Padre de 45+ crías. Resistente al calor y garrapatas.',
@@ -109,7 +125,8 @@ class SeedDatabase {
       estadoReproductivo: EstadoReproductivo.no_definido,
     );
 
-    // ANIMAL 4: Vaquilla joven lista para primera monta
+    // ANIMAL 4: Vaquilla joven lista para primera monta (23 meses)
+    final nacValentina = DateTime(2023, 2, 10);
     final animal4 = AnimalEntity(
       numeroArete: 'VQA-004',
       nombrePersonalizado: 'Valentina',
@@ -117,8 +134,8 @@ class SeedDatabase {
       categoria: Categoria.vaca,
       sexo: Sexo.hembra,
       raza: 'Guernsey',
-      fechaNacimiento: DateTime(2023, 2, 10),
-      edadMeses: 23,
+      fechaNacimiento: nacValentina,
+      edadMeses: _calcularEdadMeses(nacValentina),
       esCastrado: false,
       notas:
           'Vaquilla joven de excelente conformación. Peso actual 380kg. Lista para primera monta en 1 mes.',
@@ -133,7 +150,8 @@ class SeedDatabase {
       estadoReproductivo: EstadoReproductivo.no_definido,
     );
 
-    // ANIMAL 5: Novillo para engorde
+    // ANIMAL 5: Novillo para engorde (17 meses, castrado)
+    final nacCebollin = DateTime(2023, 8, 20);
     final animal5 = AnimalEntity(
       numeroArete: 'CEL-005',
       nombrePersonalizado: 'Cebollín',
@@ -141,8 +159,8 @@ class SeedDatabase {
       categoria: Categoria.vaca,
       sexo: Sexo.macho,
       raza: 'Cebú Rojo',
-      fechaNacimiento: DateTime(2023, 8, 20),
-      edadMeses: 17,
+      fechaNacimiento: nacCebollin,
+      edadMeses: _calcularEdadMeses(nacCebollin),
       esCastrado: true, // Castrado para engorde
       notas:
           'Novillo castrado en excelente estado. Programa de engorde intensivo. Ganancia diaria: 1.2kg',
@@ -159,7 +177,8 @@ class SeedDatabase {
       estadoReproductivo: EstadoReproductivo.no_definido,
     );
 
-    // ANIMAL 6: Becerro recién nacido
+    // ANIMAL 6: Becerro recién nacido (3-4 meses)
+    final nacBenji = DateTime.now().subtract(Duration(days: 105)); // ~3.5 meses
     final animal6 = AnimalEntity(
       numeroArete: 'BEC-006',
       nombrePersonalizado: 'Benji',
@@ -167,8 +186,8 @@ class SeedDatabase {
       categoria: Categoria.vaca,
       sexo: Sexo.macho,
       raza: 'Holstein',
-      fechaNacimiento: DateTime.now().subtract(Duration(days: 5)),
-      edadMeses: 0,
+      fechaNacimiento: nacBenji,
+      edadMeses: _calcularEdadMeses(nacBenji),
       esCastrado: false,
       notas:
           'Becerro recién nacido, hijo de Bessie. Peso al nacer: 42kg. Alimentación con calostro materno.',
@@ -180,7 +199,8 @@ class SeedDatabase {
       estadoReproductivo: EstadoReproductivo.no_definido,
     );
 
-    // ANIMAL 7: Caballo equino (para diversificación)
+    // ANIMAL 7: Caballo equino para diversificación (4-5 años)
+    final nacAlcazar = DateTime(2020, 5, 10);
     final animal7 = AnimalEntity(
       numeroArete: 'CAB-007',
       nombrePersonalizado: 'Alcázar',
@@ -188,8 +208,8 @@ class SeedDatabase {
       categoria: Categoria.caballo,
       sexo: Sexo.macho,
       raza: 'Criollo Colombiano',
-      fechaNacimiento: DateTime(2020, 5, 10),
-      edadMeses: 45,
+      fechaNacimiento: nacAlcazar,
+      edadMeses: _calcularEdadMeses(nacAlcazar),
       esCastrado: true,
       notas:
           'Caballo de trabajo, temperamento dócil. Utilizado para labores en el campo y transporte de carga.',

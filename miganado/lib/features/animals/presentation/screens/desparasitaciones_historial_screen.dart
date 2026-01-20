@@ -25,8 +25,17 @@ class DesparasitacionesHistorialScreen extends ConsumerWidget {
         elevation: 0,
       ),
       body: desparasitacionesAsync.when(
-        loading: () => Center(child: CircularProgressIndicator()),
-        error: (error, stackTrace) => Center(child: Text('Error: $error')),
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stackTrace) => Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.error_outline, size: 64, color: Colors.red),
+              const SizedBox(height: 16),
+              Text('Error: $error'),
+            ],
+          ),
+        ),
         data: (listDesparasitaciones) {
           if (listDesparasitaciones.isEmpty) {
             return Center(
@@ -34,25 +43,25 @@ class DesparasitacionesHistorialScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.bug_report, size: 64, color: Colors.grey),
-                  SizedBox(height: 16),
-                  Text('No hay desparasitaciones registradas'),
+                  const SizedBox(height: 16),
+                  const Text('No hay desparasitaciones registradas'),
                 ],
               ),
             );
           }
 
           // Ordenar por fecha descendente
-          final sortedDesparasitaciones = listDesparasitaciones
+          final sortedDesparasitaciones = [...listDesparasitaciones]
             ..sort((a, b) => b.fecha.compareTo(a.fecha));
 
           return RefreshIndicator(
             onRefresh: () async {
-              await ref.refresh(desparasitacionesProvider(animalUuid));
+              ref.refresh(desparasitacionesProvider(animalUuid));
             },
             child: ListView.separated(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               itemCount: sortedDesparasitaciones.length,
-              separatorBuilder: (_, __) => Divider(),
+              separatorBuilder: (_, __) => const Divider(),
               itemBuilder: (context, index) {
                 final desparasitacion = sortedDesparasitaciones[index];
                 final fecha =

@@ -66,21 +66,18 @@ class HomeScreen extends ConsumerWidget {
 
           return CustomScrollView(
             slivers: [
-              // Resumen de animales
+              // Resumen de animales por etapa
               SliverToBoxAdapter(
                 child: _buildResumenCard(animals, context),
               ),
-              // Lista de animales
+              // Lista de animales + botón agregar
               SliverPadding(
                 padding: const EdgeInsets.all(16),
                 sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final animal = animals[index];
-                      return _buildAnimalCard(animal, context);
-                    },
-                    childCount: animals.length,
-                  ),
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    final animal = animals[index];
+                    return _buildAnimalCard(animal, context);
+                  }, childCount: animals.length),
                 ),
               ),
             ],
@@ -108,69 +105,214 @@ class HomeScreen extends ConsumerWidget {
   }
 
   Widget _buildResumenCard(List<AnimalEntity> animals, BuildContext context) {
-    final counts = <String, int>{};
+    // Contadores por etapa y categoría
+    final items = <Map<String, dynamic>>[];
+
+    int becerros = 0;
+    int becerras = 0;
+    int vaquillas = 0;
+    int novillos = 0;
+    int vacas = 0;
+    int toros = 0;
+    int caballos = 0;
+    int burros = 0;
+    int mulas = 0;
+
     for (final animal in animals) {
-      final especie = animal.especie.name;
-      counts[especie] = (counts[especie] ?? 0) + 1;
+      final etapa = animal.etapa;
+      final especie = animal.especie;
+
+      if (especie.name == 'bovino') {
+        if (etapa.name == 'becerro') {
+          if (animal.sexo.name == 'macho') {
+            becerros++;
+          } else {
+            becerras++;
+          }
+        } else if (etapa.name == 'vaquilla') {
+          vaquillas++;
+        } else if (etapa.name == 'novillo' ||
+            etapa.name == 'torete' ||
+            etapa.name == 'novillo_castrado') {
+          novillos++;
+        } else if (etapa.name == 'vaca') {
+          vacas++;
+        } else if (etapa.name == 'toro') {
+          toros++;
+        }
+      } else if (especie.name == 'equino') {
+        if (animal.categoria.name == 'caballo') {
+          caballos++;
+        } else if (animal.categoria.name == 'burro') {
+          burros++;
+        } else if (animal.categoria.name == 'mula') {
+          mulas++;
+        }
+      }
     }
 
-    return Card(
-      margin: const EdgeInsets.all(16),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Resumen del Rebaño',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildResumenItem(
-                  'Total',
-                  animals.length.toString(),
-                  Icons.pets,
-                  Colors.blue,
+    // Construir lista de items
+    if (becerros > 0)
+      items.add({
+        'label': 'Becerros ♂',
+        'valor': becerros,
+        'asset': 'assets/images/becerro.png'
+      });
+    if (becerras > 0)
+      items.add({
+        'label': 'Becerras ♀',
+        'valor': becerras,
+        'asset': 'assets/images/becerro.png'
+      });
+    if (vaquillas > 0)
+      items.add({
+        'label': 'Vaquillas',
+        'valor': vaquillas,
+        'asset': 'assets/images/novillo.png'
+      });
+    if (novillos > 0)
+      items.add({
+        'label': 'Novillos',
+        'valor': novillos,
+        'asset': 'assets/images/novillo.png'
+      });
+    if (vacas > 0)
+      items.add({
+        'label': 'Vacas',
+        'valor': vacas,
+        'asset': 'assets/images/vaca.png'
+      });
+    if (toros > 0)
+      items.add({
+        'label': 'Toros',
+        'valor': toros,
+        'asset': 'assets/images/toro.png'
+      });
+    if (caballos > 0)
+      items.add({
+        'label': 'Caballos',
+        'valor': caballos,
+        'asset': 'assets/images/caballo.png'
+      });
+    if (burros > 0)
+      items.add({
+        'label': 'Burros',
+        'valor': burros,
+        'asset': 'assets/images/burro.png'
+      });
+    if (mulas > 0)
+      items.add({
+        'label': 'Mulas',
+        'valor': mulas,
+        'asset': 'assets/images/mula.png'
+      });
+
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Resumen',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                ...counts.entries.map(
-                  (entry) => _buildResumenItem(
-                    entry.key,
-                    entry.value.toString(),
-                    Icons.info,
-                    Colors.orange,
+                child: Text(
+                  'Total: ${animals.length}',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
-              ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          if (items.isNotEmpty)
+            SizedBox(
+              height: 100,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final item = items[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 4),
+                    child: _buildResumenItemCard(
+                      item['label'],
+                      item['valor'].toString(),
+                      item['asset'],
+                    ),
+                  );
+                },
+              ),
+            )
+          else
+            Center(
+              child: Text(
+                'Sin animales',
+                style: TextStyle(color: Colors.grey[600]),
+              ),
             ),
-          ],
-        ),
+        ],
       ),
     );
   }
 
-  Widget _buildResumenItem(
+  Widget _buildResumenItemCard(
     String label,
     String valor,
-    IconData icono,
-    Color color,
+    String assetPath,
   ) {
-    return Column(
-      children: [
-        Icon(icono, color: color, size: 32),
-        const SizedBox(height: 8),
-        Text(
-          valor,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Container(
+        width: 70,
+        padding: const EdgeInsets.all(4),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 35,
+              height: 35,
+              child: Image.asset(
+                assetPath,
+                fit: BoxFit.contain,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              label,
+              style: const TextStyle(fontSize: 10),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 2),
+            Text(
+              valor,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 2),
+          ],
         ),
-        const SizedBox(height: 4),
-        Text(label, style: const TextStyle(fontSize: 12)),
-      ],
+      ),
     );
   }
 

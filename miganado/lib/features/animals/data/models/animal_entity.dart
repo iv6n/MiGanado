@@ -10,25 +10,26 @@ enum Especie {
   equino,
 }
 
-/// Categoría adulta (siempre representa el adulto)
+/// Categoría adulta (siempre representa el adulto - NO cambia con edad)
+/// Representa QUÉ TIPO de animal es, no su fase de desarrollo
 enum Categoria {
-  vaca, // Bovino
-  caballo,
-  burro,
-  mula,
+  vaca, // Bovino (cualquier edad/sexo)
+  caballo, // Equino - Caballo
+  burro, // Equino - Burro
+  mula, // Equino - Mula
 }
 
-/// Etapa de vida
+/// Etapa de vida (fase de desarrollo - SÍ cambia con edad)
 enum EtapaVida {
-  becerro,
-  becerra,
-  vaquilla,
-  torete,
-  novillo,
-  vaca,
-  toro,
-  potro,
-  adulto,
+  becerro, // Bovino macho < 12 meses
+  becerra, // Bovino hembra < 12 meses
+  vaquilla, // Bovino hembra 12-24 meses
+  torete, // Bovino macho 12-24 meses (no castrado)
+  novillo, // Bovino macho 12-24 meses (castrado)
+  vaca, // Bovino hembra >= 24 meses
+  toro, // Bovino macho >= 24 meses
+  potro, // Equino < 36 meses
+  adulto, // Equino >= 36 meses
 }
 
 /// Sexo del animal
@@ -67,10 +68,12 @@ class AnimalEntity {
   late Especie especie;
 
   /// Categoría adulta (no cambia por edad ni sexo)
+  /// Representa QUÉ TIPO de animal es (vaca, caballo, burro, mula)
   @enumerated
   late Categoria categoria;
 
-  /// Etapa de vida (se calcula automáticamente)
+  /// Etapa de vida (se calcula automáticamente basada en edad, sexo y castración)
+  /// Representa la FASE DE DESARROLLO del animal
   @enumerated
   late EtapaVida etapa;
 
@@ -133,6 +136,12 @@ class AnimalEntity {
   /// Observaciones personalizadas del animal
   String? observaciones;
 
+  /// Peso actual del animal (kg)
+  double? pesoActual;
+
+  /// Fecha del último pesaje
+  DateTime? fechaUltimoPesaje;
+
   /// Fecha de creación
   late DateTime fechaCreacion;
 
@@ -159,8 +168,6 @@ class AnimalEntity {
     required this.fechaNacimiento,
     required this.edadMeses,
     this.esCastrado = false,
-    // Nota: etapa se calcula automáticamente basada en especie, sexo, edad y castración
-    EtapaVida? etapaManual,
     this.notas,
     this.precioCompra,
     this.precioVenta,
@@ -178,32 +185,69 @@ class AnimalEntity {
     uuid = const Uuid().v4();
     fechaCreacion = DateTime.now();
     fechaActualizacion = DateTime.now();
+
+    // Validar compatibilidad especie-categoría
+    _validarEspecieCategoria(especie, categoria);
+
     // SIEMPRE calcular etapa automáticamente basada en los parámetros
-    // El parámetro etapaManual se ignora - la etapa siempre se deduce
     etapa = calcularEtapa();
   }
 
-  /// Lógica automática para calcular etapa
+  /// Validar que la categoría sea compatible con la especie
+  void _validarEspecieCategoria(Especie especie, Categoria categoria) {
+    if (especie == Especie.bovino && categoria != Categoria.vaca) {
+      throw ArgumentError('Para especie Bovino, la categoría debe ser "vaca". '
+          'Recibido: $categoria');
+    }
+
+    if (especie == Especie.equino && categoria == Categoria.vaca) {
+      throw ArgumentError(
+          'Para especie Equino, la categoría debe ser caballo, burro o mula. '
+          'No puede ser "vaca"');
+    }
+  }
+
+  /// Lógica automática para calcular etapa de vida
+  ///
+  /// REGLAS DE NEGOCIO:
+  ///
+  /// BOVINOS:
+  /// - < 12 meses: Becerro (macho) / Becerra (hembra)
+  /// - 12-24 meses:
+  ///   * Hembra: Vaquilla
+  ///   * Macho no castrado: Torete
+  ///   * Macho castrado: Novillo
+  /// - >= 24 meses: Vaca (hembra) / Toro (macho)
+  ///
+  /// EQUINOS:
+  /// - < 36 meses: Potro
+  /// - >= 36 meses: Adulto
   EtapaVida calcularEtapa() {
     if (especie == Especie.bovino) {
+      // Bovinos: lógica por edad, sexo y castración
       if (edadMeses < 12) {
         return sexo == Sexo.macho ? EtapaVida.becerro : EtapaVida.becerra;
       } else if (edadMeses < 24) {
-        if (sexo == Sexo.hembra) return EtapaVida.vaquilla;
-        if (sexo == Sexo.macho && !esCastrado) return EtapaVida.torete;
-        if (sexo == Sexo.macho && esCastrado) return EtapaVida.novillo;
+        if (sexo == Sexo.hembra) {
+          return EtapaVida.vaquilla;
+        }
+        // Machos entre 12-24 meses
+        if (esCastrado) {
+          return EtapaVida.novillo;
+        } else {
+          return EtapaVida.torete;
+        }
       } else {
-        if (sexo == Sexo.hembra) return EtapaVida.vaca;
-        if (sexo == Sexo.macho) return EtapaVida.toro;
+        // >= 24 meses
+        return sexo == Sexo.hembra ? EtapaVida.vaca : EtapaVida.toro;
       }
     } else if (especie == Especie.equino) {
-      if (edadMeses < 36) {
-        return EtapaVida.potro;
-      } else {
-        return EtapaVida.adulto;
-      }
+      // Equinos: lógica simple por edad
+      return edadMeses < 36 ? EtapaVida.potro : EtapaVida.adulto;
     }
-    return etapa; // fallback
+
+    // Fallback: no debería llegar aquí si las validaciones funcionan
+    throw StateError('Especie no reconocida: $especie');
   }
 
   /// Propiedades computadas para UI
@@ -214,6 +258,63 @@ class AnimalEntity {
   String get categoriaDescripcion => categoria.descripcion;
 
   String get categoriaIcon => categoria.assetIcon;
+
+  /// Validar que los datos del animal sean consistentes
+  /// Útil antes de guardar o actualizar
+  bool validarConsistencia() {
+    // Validar especie-categoría
+    if (especie == Especie.bovino && categoria != Categoria.vaca) {
+      return false;
+    }
+    if (especie == Especie.equino && categoria == Categoria.vaca) {
+      return false;
+    }
+
+    // Validar castración (solo machos bovinos)
+    if (esCastrado && (sexo != Sexo.macho || especie != Especie.bovino)) {
+      return false;
+    }
+
+    // Validar edad no negativa
+    if (edadMeses < 0) {
+      return false;
+    }
+
+    // Validar fecha de nacimiento no futura
+    if (fechaNacimiento.isAfter(DateTime.now())) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /// Recalcular edad en meses basada en fecha de nacimiento
+  /// Útil para actualizaciones periódicas
+  int recalcularEdadMeses() {
+    final ahora = DateTime.now();
+    int meses = (ahora.year - fechaNacimiento.year) * 12;
+    meses += ahora.month - fechaNacimiento.month;
+
+    // Ajustar si el día aún no ha llegado
+    if (ahora.day < fechaNacimiento.day) {
+      meses--;
+    }
+
+    return meses.clamp(0, 9999);
+  }
+
+  /// Actualizar edad y recalcular etapa
+  /// Retorna true si la etapa cambió
+  bool actualizarEdadYEtapa() {
+    final edadAnterior = edadMeses;
+    final etapaAnterior = etapa;
+
+    edadMeses = recalcularEdadMeses();
+    etapa = calcularEtapa();
+    fechaActualizacion = DateTime.now();
+
+    return etapaAnterior != etapa || edadAnterior != edadMeses;
+  }
 
   /// Crear una copia del animal
   AnimalEntity copyWith({
@@ -243,21 +344,24 @@ class AnimalEntity {
     bool? sincronizado,
     String? idRemoto,
   }) {
-    final newSexo = sexo ?? this.sexo;
-    final newEdadMeses = edadMeses ?? this.edadMeses;
-    final newEsCastrado = esCastrado ?? this.esCastrado;
-    // Nota: etapa se calcula automáticamente basada en los nuevos parámetros
+    final nuevaEspecie = especie ?? this.especie;
+    final nuevaCategoria = categoria ?? this.categoria;
+    final nuevoSexo = sexo ?? this.sexo;
+    final nuevaEdadMeses = edadMeses ?? this.edadMeses;
+    final nuevoCastrado = esCastrado ?? this.esCastrado;
+
+    // Crear nueva entidad con parámetros actualizados
+    // La etapa se recalcula automáticamente en el constructor
     return AnimalEntity(
       numeroArete: numeroArete ?? this.numeroArete,
       nombrePersonalizado: nombrePersonalizado ?? this.nombrePersonalizado,
-      especie: especie ?? this.especie,
-      categoria: categoria ?? this.categoria,
-      sexo: newSexo,
+      especie: nuevaEspecie,
+      categoria: nuevaCategoria,
+      sexo: nuevoSexo,
       raza: raza ?? this.raza,
       fechaNacimiento: fechaNacimiento ?? this.fechaNacimiento,
-      edadMeses: newEdadMeses,
-      esCastrado: newEsCastrado,
-      // etapa NO se pasa - se calcula automáticamente en el constructor
+      edadMeses: nuevaEdadMeses,
+      esCastrado: nuevoCastrado,
       notas: notas ?? this.notas,
       precioCompra: precioCompra ?? this.precioCompra,
       precioVenta: precioVenta ?? this.precioVenta,
@@ -280,6 +384,7 @@ class AnimalEntity {
       ..sincronizado = sincronizado ?? this.sincronizado
       ..idRemoto = idRemoto ?? this.idRemoto
       ..fechaSincronizacion = this.fechaSincronizacion
-      ..hashContenido = this.hashContenido;
+      ..hashContenido = this.hashContenido
+      ..observaciones = this.observaciones;
   }
 }

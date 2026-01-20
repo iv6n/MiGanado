@@ -99,9 +99,9 @@ extension EtapaVidaHelper on EtapaVida {
       case EtapaVida.becerra:
         return 'assets/images/becerro.png';
       case EtapaVida.vaquilla:
-        return 'assets/images/vaquilla.png';
+        return 'assets/images/novillo.png';
       case EtapaVida.torete:
-        return 'assets/images/torete.png';
+        return 'assets/images/novillo.png';
       case EtapaVida.novillo:
         return 'assets/images/novillo.png';
       case EtapaVida.vaca:
@@ -109,9 +109,9 @@ extension EtapaVidaHelper on EtapaVida {
       case EtapaVida.toro:
         return 'assets/images/toro.png';
       case EtapaVida.potro:
-        return 'assets/images/potro.png';
+        return 'assets/images/caballo.png';
       case EtapaVida.adulto:
-        return 'assets/images/adulto.png';
+        return 'assets/images/caballo.png';
     }
   }
 

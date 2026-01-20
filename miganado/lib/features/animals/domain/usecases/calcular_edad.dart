@@ -1,4 +1,5 @@
 import 'package:miganado/core/enums/metodo_edad.dart';
+import 'package:miganado/features/animals/domain/usecases/tabla_edad_peso.dart';
 
 /// Use Case: Calcular la edad de un animal según el método seleccionado
 ///
@@ -13,6 +14,8 @@ class CalcularEdad {
   /// - [metodo]: Qué método usar (exacta, simulada, estimada)
   /// - [fechaNacimiento]: Fecha de nacimiento (obligatoria si método es exacta)
   /// - [fechaInicioEtapa]: Fecha de inicio de etapa (obligatoria si método es simulada)
+  /// - [peso]: Peso actual en kg (necesario si método es estimada_por_peso)
+  /// - [tipoAnimal]: Tipo de animal para tablas de referencia (defecto: 'bovino')
   ///
   /// Retorna: Edad en meses (0 mínimo)
   ///
@@ -35,11 +38,22 @@ class CalcularEdad {
   ///   fechaNacimiento: null,
   ///   fechaInicioEtapa: inicio,
   /// );
+  ///
+  /// // Estimada: por peso
+  /// final edadEst = useCase.call(
+  ///   metodo: MetodoEdad.estimada_por_peso,
+  ///   fechaNacimiento: null,
+  ///   fechaInicioEtapa: DateTime.now(),
+  ///   peso: 450,
+  ///   tipoAnimal: 'bovino',
+  /// );
   /// ```
   int call({
     required MetodoEdad metodo,
     DateTime? fechaNacimiento,
     required DateTime fechaInicioEtapa,
+    double? peso,
+    String tipoAnimal = 'bovino',
   }) {
     switch (metodo) {
       case MetodoEdad.exacta_por_fecha_nacimiento:
@@ -54,11 +68,11 @@ class CalcularEdad {
         return _calcularDiferenciaMeses(fechaInicioEtapa, DateTime.now());
 
       case MetodoEdad.estimada_por_peso:
-        // Futuro: implementar mediante tablas de peso
-        throw UnimplementedError(
-          'Método estimada_por_peso aún en desarrollo. '
-          'Requiere tablas de peso por edad.',
-        );
+        // Usar la tabla de referencia para estimar edad
+        // Nota: Se asume bovino macho por defecto
+        // En una implementación completa, se pasaría el tipo de animal
+        final tabla = TablaEdadPeso.obtenerTabla('bovino');
+        return TablaEdadPeso.estimarEdadPorPeso(peso ?? 0, tabla);
     }
   }
 
