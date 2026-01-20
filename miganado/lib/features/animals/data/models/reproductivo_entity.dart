@@ -61,6 +61,7 @@ class ReproductivEntity {
   }) {
     uuid = const Uuid().v4();
     fechaRegistro = DateTime.now();
+    fechaActualizacion = DateTime.now();
     _actualizarEstadisticas();
   }
 

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/data/database/isar_database.dart';
 import 'package:miganado/features/animals/presentation/providers/animals_providers.dart';
 import 'package:miganado/services/seed_database_full.dart';
-import 'package:miganado/features/home/presentation/screens/home_screen.dart';
+import 'package:miganado/core/routing/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,13 +41,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'MiGanado',
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
       ),
-      home: const HomeScreen(),
+      routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
     );
   }
