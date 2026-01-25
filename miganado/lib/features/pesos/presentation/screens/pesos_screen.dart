@@ -207,6 +207,7 @@ class AnimalPesosScreen extends ConsumerWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'pesos_fab',
         onPressed: () {
           showDialog(
             context: context,

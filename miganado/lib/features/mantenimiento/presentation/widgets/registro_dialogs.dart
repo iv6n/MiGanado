@@ -134,7 +134,8 @@ class _RegistroVacunaDialogState extends ConsumerState<RegistroVacunaDialog> {
                 costo: costo,
               );
 
-              ref.refresh(vacunasByAnimalProvider(widget.animalUuid));
+              await ref
+                  .refresh(vacunasByAnimalProvider(widget.animalUuid).future);
 
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Vacuna registrada exitosamente')),
@@ -290,7 +291,8 @@ class _RegistroTratamientoDialogState
                 registradoPor: widget.registradoPor,
               );
 
-              ref.refresh(tratamientosByAnimalProvider(widget.animalUuid));
+              await ref.refresh(
+                  tratamientosByAnimalProvider(widget.animalUuid).future);
 
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Tratamiento registrado exitosamente')),
@@ -426,7 +428,8 @@ class _RegistroNutricionDialogState
                 suplementos: suplementos.isEmpty ? null : suplementos,
               );
 
-              ref.refresh(nutricionByAnimalProvider(widget.animalUuid));
+              await ref
+                  .refresh(nutricionByAnimalProvider(widget.animalUuid).future);
 
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Nutricion registrada exitosamente')),
@@ -486,8 +489,8 @@ class _RegistroEmpadreDialogState extends ConsumerState<RegistroEmpadreDialog> {
 
   @override
   Widget build(BuildContext context) {
-    final isRegistering =
-        ref.watch(StateProvider<bool>((ref) => false)); // Placeholder
+    // ...existing code...
+    ref.watch(StateProvider<bool>((ref) => false)); // Placeholder
 
     return AlertDialog(
       title: Text('Registrar Empadre'),
@@ -985,7 +988,8 @@ class _RegistroMantenimientoDialogState
                     : observacionesController.text,
               );
 
-              ref.refresh(historialMantenimientoProvider(widget.animalUuid));
+              await ref.refresh(
+                  historialMantenimientoProvider(widget.animalUuid).future);
 
               if (mounted) {
                 Navigator.pop(context);

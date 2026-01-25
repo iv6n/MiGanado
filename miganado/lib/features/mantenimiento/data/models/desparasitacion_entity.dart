@@ -60,6 +60,7 @@ class DesparasitacionEntity {
   }) {
     uuid = const Uuid().v4();
     fechaRegistro = DateTime.now();
+    fechaActualizacion = null;
   }
 
   DesparasitacionEntity copyWith({

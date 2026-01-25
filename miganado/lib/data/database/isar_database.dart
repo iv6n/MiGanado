@@ -11,6 +11,8 @@ import 'package:miganado/features/mantenimiento/data/models/nutricion_entity.dar
 import 'package:miganado/features/ganadero/data/models/ganadero_entity.dart';
 import 'package:miganado/features/costs/data/models/costo_entity.dart';
 import 'package:miganado/features/locations/data/models/ubicacion_entity.dart';
+import 'package:miganado/features/calendar/data/models/evento_ganadero_entity.dart';
+import 'package:miganado/features/calendar/data/models/lote_ganadero_entity.dart';
 
 /// Base de datos Isar - Reemplazo seguro de Hive para Android
 /// Optimizado para sincronización con la nube
@@ -44,6 +46,8 @@ class MiGanadoDatabase {
           GanaderoEntitySchema,
           CostoEntitySchema,
           UbicacionEntitySchema,
+          EventoGanaderoEntitySchema,
+          LoteGanaderoEntitySchema,
         ],
         directory: dir.path,
         name: dbName,

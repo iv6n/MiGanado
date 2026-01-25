@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:miganado/core/config/animal_type_config.dart';
 import 'package:miganado/features/animals/domain/entities/animal.dart';
-import 'package:miganado/features/animals/domain/entities/etapa_vida.dart';
+// ...existing code...
 
 /// Widget mejorado que muestra acciones, historiales y reproducción de forma dinámica
 /// basado en el tipo de animal (bovino hembra, macho, caballo)

@@ -38,13 +38,13 @@ class NutricionHistorialScreen extends ConsumerWidget {
         ),
         data: (nutricion) {
           if (nutricion.isEmpty) {
-            return Center(
+            return const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.restaurant, size: 64, color: Colors.grey),
-                  const SizedBox(height: 16),
-                  const Text('No hay registros de nutrición'),
+                  SizedBox(height: 16),
+                  Text('No hay registros de nutrición'),
                 ],
               ),
             );
@@ -60,21 +60,21 @@ class NutricionHistorialScreen extends ConsumerWidget {
 
           return RefreshIndicator(
             onRefresh: () async {
-              ref.refresh(nutricionByAnimalProvider(animalUuid));
+              await ref.refresh(nutricionByAnimalProvider(animalUuid).future);
             },
             child: ListView(
               padding: const EdgeInsets.all(16),
               children: [
                 if (activos.isNotEmpty) ...[
-                  _SectionHeader('Nutrición Actual'),
+                  const _SectionHeader('Nutrición Actual'),
                   const SizedBox(height: 12),
                   ...activos
                       .map((n) => _NutricionCard(nutricion: n, activo: true)),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                 ],
                 if (historicos.isNotEmpty) ...[
-                  _SectionHeader('Historial'),
-                  SizedBox(height: 12),
+                  const _SectionHeader('Historial'),
+                  const SizedBox(height: 12),
                   ...historicos
                       .map((n) => _NutricionCard(nutricion: n, activo: false)),
                 ],
@@ -123,9 +123,9 @@ class _NutricionCard extends StatelessWidget {
         : 'En curso';
 
     return Card(
-      margin: EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 12),
       child: Padding(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -138,21 +138,22 @@ class _NutricionCard extends StatelessWidget {
                     children: [
                       Text(
                         nutricion.tipoAlimentacion,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         'Principal: ${nutricion.alimentoPrincipal}',
-                        style: TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: activo
                         ? Colors.blue.withOpacity(0.2)
@@ -170,12 +171,12 @@ class _NutricionCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             if (nutricion.suplementos.isNotEmpty) ...[
               _InfoRow(
                   label: 'Suplementos',
                   value: nutricion.suplementos.join(', ')),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
             ],
             _InfoRow(
                 label: 'Cantidad Diaria', value: '${nutricion.cantidadDiaria}'),
@@ -211,7 +212,7 @@ class _InfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -226,7 +227,7 @@ class _InfoRow extends StatelessWidget {
             child: Text(
               value,
               textAlign: TextAlign.right,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 13,
               ),

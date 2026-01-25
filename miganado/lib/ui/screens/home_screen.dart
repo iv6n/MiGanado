@@ -81,6 +81,7 @@ class HomeScreen extends ConsumerWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'ui_home_fab',
         backgroundColor: Colors.green,
         onPressed: () {
           Navigator.of(context).push(

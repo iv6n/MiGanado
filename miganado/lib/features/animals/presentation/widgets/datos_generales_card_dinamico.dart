@@ -57,7 +57,7 @@ class DatosGeneralesCardDinamico extends StatelessWidget {
             ),
             _DatoGeneralItem(
               label: 'Raza',
-              valor: animal.raza ?? 'No especificada',
+              valor: animal.raza,
               icono: Icons.info,
             ),
             _DatoGeneralItem(

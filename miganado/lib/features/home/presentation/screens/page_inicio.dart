@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/features/home/presentation/providers/home_providers.dart';
+// ...existing code...
+import 'package:miganado/ui/widgets/animal_image_card.dart';
 
 class PageInicio extends ConsumerWidget {
   const PageInicio({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final statsAsync = ref.watch(animalStatsProvider);
+    // ...existing code...
     final animalsAsync = ref.watch(animalsStreamProvider);
 
     return Scaffold(
@@ -24,9 +26,40 @@ class PageInicio extends ConsumerWidget {
           padding: const EdgeInsets.all(16),
           children: [
             // RESUMEN RÁPIDO - Horizontal scroll
-            const Text(
-              'Resumen Rápido',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                  'Resumen Rápido',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                animalsAsync.when(
+                  data: (animals) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(0.1),
+                        border: Border.all(color: Colors.green, width: 1.5),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        'Total: ${animals.length}',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.green.shade700,
+                        ),
+                      ),
+                    );
+                  },
+                  loading: () => SizedBox.shrink(),
+                  error: (_, __) => SizedBox.shrink(),
+                ),
+              ],
             ),
             const SizedBox(height: 12),
             animalsAsync.when(
@@ -38,16 +71,40 @@ class PageInicio extends ConsumerWidget {
                   etapaMap[etapa] = (etapaMap[etapa] ?? 0) + 1;
                 }
 
+                // Orden específico de etapas
+                const etapaOrder = [
+                  'becerro',
+                  'vaquilla',
+                  'torete',
+                  'vaca',
+                  'toro',
+                  'caballo',
+                  'burro',
+                  'mula',
+                ];
+
+                // Ordenar etapas según el orden especificado
+                final sortedEtapas = etapaOrder
+                    .where((etapa) => etapaMap.containsKey(etapa))
+                    .toList();
+
+                // Agregar etapas que no están en el orden especificado
+                for (final etapa in etapaMap.keys) {
+                  if (!sortedEtapas.contains(etapa)) {
+                    sortedEtapas.add(etapa);
+                  }
+                }
+
                 return SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      for (final entry in etapaMap.entries)
+                      for (final etapa in sortedEtapas)
                         Padding(
-                          padding: const EdgeInsets.only(right: 12),
+                          padding: const EdgeInsets.only(right: 10),
                           child: _EtapaCard(
-                            etapa: entry.key,
-                            count: entry.value,
+                            etapa: etapa,
+                            count: etapaMap[etapa] ?? 0,
                           ),
                         ),
                     ],
@@ -55,7 +112,7 @@ class PageInicio extends ConsumerWidget {
                 );
               },
               loading: () => const SizedBox(
-                height: 80,
+                height: 100,
                 child: Center(child: CircularProgressIndicator()),
               ),
               error: (err, _) => Text('Error: $err'),
@@ -265,42 +322,11 @@ class _EtapaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = _getEtapaColor(etapa);
-    final icon = _getEtapaIcon(etapa);
 
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        border: Border.all(color: color, width: 1.5),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: color, size: 28),
-          const SizedBox(height: 6),
-          Text(
-            etapa,
-            style: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w600,
-              color: color,
-            ),
-            textAlign: TextAlign.center,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const SizedBox(height: 4),
-          Text(
-            '$count',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
-          ),
-        ],
-      ),
+    return AnimalImageCard.fromEtapa(
+      etapa: etapa,
+      count: count,
+      color: color,
     );
   }
 }

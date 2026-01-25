@@ -56,17 +56,17 @@ class _GenerarReportScreenState extends ConsumerState<GenerarReportScreen> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Reporte Generado'),
+          title: const Text('Reporte Generado'),
           content: SizedBox(
             height: 300,
             child: SingleChildScrollView(
-              child: Text(contenido, style: TextStyle(fontSize: 11)),
+              child: Text(contenido, style: const TextStyle(fontSize: 11)),
             ),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cerrar'),
+              child: const Text('Cerrar'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -74,10 +74,11 @@ class _GenerarReportScreenState extends ConsumerState<GenerarReportScreen> {
                 // Para simplificar, solo mostramos el mensaje
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Reporte preparado para compartir')),
+                  const SnackBar(
+                      content: Text('Reporte preparado para compartir')),
                 );
               },
-              child: Text('Aceptar'),
+              child: const Text('Aceptar'),
             ),
           ],
         ),
@@ -109,26 +110,26 @@ class _GenerarReportScreenState extends ConsumerState<GenerarReportScreen> {
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Card(
               child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.description, size: 48, color: Colors.blue),
-                    SizedBox(height: 16),
-                    Text(
+                    const Icon(Icons.description, size: 48, color: Colors.blue),
+                    const SizedBox(height: 16),
+                    const Text(
                       'Generar Reporte de Salud',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       'Descarga un reporte completo con el historial de vacunas, tratamientos, nutrición y datos reproductivos.',
                       style: TextStyle(color: Colors.grey[600]),
@@ -137,12 +138,12 @@ class _GenerarReportScreenState extends ConsumerState<GenerarReportScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 24),
-            Text(
+            const SizedBox(height: 24),
+            const Text(
               'Selecciona el formato:',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _ReporteTile(
               titulo: 'Reporte Completo (Texto)',
               descripcion: 'Formato legible con toda la información',
@@ -150,7 +151,7 @@ class _GenerarReportScreenState extends ConsumerState<GenerarReportScreen> {
               color: Colors.blue,
               onTap: isLoading ? null : () => _generarReporte('txt'),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _ReporteTile(
               titulo: 'Reporte CSV',
               descripcion: 'Para importar a hojas de cálculo',
@@ -158,7 +159,7 @@ class _GenerarReportScreenState extends ConsumerState<GenerarReportScreen> {
               color: Colors.green,
               onTap: isLoading ? null : () => _generarReporte('csv'),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _ReporteTile(
               titulo: 'Resumen de Costos',
               descripcion: 'Resumen financiero del animal',
@@ -166,9 +167,9 @@ class _GenerarReportScreenState extends ConsumerState<GenerarReportScreen> {
               color: Colors.orange,
               onTap: isLoading ? null : () => _generarReporte('resumen'),
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             if (isLoading)
-              Center(
+              const Center(
                 child: CircularProgressIndicator(),
               ),
           ],
@@ -199,9 +200,10 @@ class _ReporteTile extends StatelessWidget {
     return Card(
       child: ListTile(
         leading: Icon(icono, color: color, size: 32),
-        title: Text(titulo, style: TextStyle(fontWeight: FontWeight.bold)),
+        title:
+            Text(titulo, style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text(descripcion),
-        trailing: Icon(Icons.arrow_forward_ios, size: 16),
+        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
         onTap: onTap,
         enabled: onTap != null,
       ),

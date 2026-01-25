@@ -38,13 +38,13 @@ class DesparasitacionesHistorialScreen extends ConsumerWidget {
         ),
         data: (listDesparasitaciones) {
           if (listDesparasitaciones.isEmpty) {
-            return Center(
+            return const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.bug_report, size: 64, color: Colors.grey),
-                  const SizedBox(height: 16),
-                  const Text('No hay desparasitaciones registradas'),
+                  SizedBox(height: 16),
+                  Text('No hay desparasitaciones registradas'),
                 ],
               ),
             );
@@ -56,7 +56,7 @@ class DesparasitacionesHistorialScreen extends ConsumerWidget {
 
           return RefreshIndicator(
             onRefresh: () async {
-              ref.refresh(desparasitacionesProvider(animalUuid));
+              await ref.refresh(desparasitacionesProvider(animalUuid).future);
             },
             child: ListView.separated(
               padding: const EdgeInsets.all(16),
@@ -104,7 +104,7 @@ class _DesparasitacionCard extends StatelessWidget {
 
     return Card(
       child: Padding(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -117,21 +117,22 @@ class _DesparasitacionCard extends StatelessWidget {
                     children: [
                       Text(
                         desparasitacion.producto,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         'Tipo: ${desparasitacion.tipo}',
-                        style: TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: tipoColor.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(20),
@@ -147,7 +148,7 @@ class _DesparasitacionCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _InfoRow(label: 'Marca', value: desparasitacion.marca ?? 'N/A'),
             _InfoRow(label: 'Lote', value: desparasitacion.lote ?? 'N/A'),
             _InfoRow(label: 'Dosis', value: desparasitacion.dosis),
@@ -187,7 +188,7 @@ class _InfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -202,7 +203,7 @@ class _InfoRow extends StatelessWidget {
             child: Text(
               value,
               textAlign: TextAlign.right,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 13,
               ),

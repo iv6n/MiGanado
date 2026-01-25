@@ -57,6 +57,7 @@ class NutricionEntity {
   }) {
     uuid = const Uuid().v4();
     fechaRegistro = DateTime.now();
+    fechaActualizacion = null;
     activo = fechaFin == null;
   }
 

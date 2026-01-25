@@ -178,7 +178,7 @@ class SearchStatsCard extends ConsumerWidget {
     final searchQuery = ref.watch(searchQueryProvider);
     final typeFilter = ref.watch(animalTypeFilterProvider);
     final statusFilter = ref.watch(animalStatusFilterProvider);
-    final animalCounts = ref.watch(animalCountByTypeProvider);
+    // ...existing code...
 
     // Si no hay filtros activos, no mostrar
     if (searchQuery.isEmpty && typeFilter == null && statusFilter == null) {

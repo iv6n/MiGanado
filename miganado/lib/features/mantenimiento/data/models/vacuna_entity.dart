@@ -60,6 +60,7 @@ class VacunaEntity {
   }) {
     uuid = const Uuid().v4();
     fechaRegistro = DateTime.now();
+    fechaActualizacion = null;
   }
 
   VacunaEntity copyWith({

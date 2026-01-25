@@ -1,22 +1,3 @@
-# MiGanado - Gestión Integral de Ganado
-
-Aplicación móvil desarrollada en **Flutter** para la gestión completa de explotaciones ganaderas.
-
-## 🚀 Descripción General
-
-MiGanado es un sistema de información ganadera que permite a los ganaderos:
-
-- 📋 **Registro de Animales**: Gestionar bovinos y equinos con datos detallados
-- 📊 **Seguimiento Reproductivo**: Control de ciclos reproductivos y pariciones
-- 💉 **Vacunación y Desparasitación**: Programación y registro de tratamientos
-- ⚖️ **Registro de Pesos**: Seguimiento del crecimiento de los animales
-- 💰 **Gestión de Costos**: Control de gastos y rentabilidad
-- 📍 **Ubicaciones**: Organización de corrales y espacios
-- 📈 **Reportes**: Generación de análisis y reportes
-
-## 📁 Estructura del Proyecto
-
-```
 miganado/
 ├── lib/
 │   ├── main.dart                 # Punto de entrada
@@ -37,7 +18,14 @@ miganado/
 │   └── services/                 # Servicios auxiliares
 ├── test/                         # Pruebas unitarias
 └── pubspec.yaml                  # Dependencias
-```
+
+# MiGanado
+
+Sistema de gestión ganadera multiplataforma. Permite registrar animales, eventos sanitarios, productivos y reproductivos, así como consultar historiales y reportes.
+
+- Flutter + Riverpod + Isar
+- Registro y consulta de animales
+- Gestión de eventos y mantenimientos
 
 ## 🛠️ Stack Tecnológico
 

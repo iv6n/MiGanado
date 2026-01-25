@@ -56,7 +56,7 @@ class VacunasHistorialScreen extends ConsumerWidget {
 
           return RefreshIndicator(
             onRefresh: () async {
-              ref.refresh(vacunasByAnimalProvider(animalUuid));
+              await ref.refresh(vacunasByAnimalProvider(animalUuid).future);
             },
             child: ListView.separated(
               padding: const EdgeInsets.all(16),

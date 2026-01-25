@@ -57,7 +57,8 @@ class TratamientosHistorialScreen extends ConsumerWidget {
 
           return RefreshIndicator(
             onRefresh: () async {
-              ref.refresh(tratamientosByAnimalProvider(animalUuid));
+              await ref
+                  .refresh(tratamientosByAnimalProvider(animalUuid).future);
             },
             child: ListView.separated(
               padding: const EdgeInsets.all(16),

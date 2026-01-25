@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/features/home/presentation/providers/home_providers.dart';
 import 'package:miganado/features/animals/presentation/screens/animal_detail_screen.dart';
+import 'package:miganado/ui/screens/register_animal_screen.dart';
 
 class PageAnimales extends ConsumerStatefulWidget {
   const PageAnimales({super.key});
@@ -23,6 +24,16 @@ class _PageAnimalesState extends ConsumerState<PageAnimales> {
         title: const Text('Directorio de Animales'),
         centerTitle: true,
         elevation: 0,
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.add),
+        label: const Text('Nuevo Animal'),
+        onPressed: () async {
+          await showDialog(
+            context: context,
+            builder: (context) => const RegisterAnimalScreen(),
+          );
+        },
       ),
       body: animalsAsync.when(
         data: (animals) {

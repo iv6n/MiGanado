@@ -1,8 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:miganado/features/mantenimiento/data/models/vacuna_entity.dart';
-import 'package:miganado/features/mantenimiento/data/models/tratamiento_entity.dart';
-import 'package:miganado/features/mantenimiento/data/models/nutricion_entity.dart';
-import 'package:miganado/features/mantenimiento/data/models/desparasitacion_entity.dart';
+// ...existing code...
 import 'package:miganado/features/mantenimiento/presentation/providers/vacunas_providers.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/tratamientos_providers.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/nutricion_providers.dart';

@@ -10,6 +10,7 @@ class MantenimientoHistorialScreen extends ConsumerWidget {
   final String animalNombre;
 
   const MantenimientoHistorialScreen({
+    super.key,
     required this.animalUuid,
     required this.animalNombre,
   });
@@ -25,7 +26,7 @@ class MantenimientoHistorialScreen extends ConsumerWidget {
         elevation: 0,
       ),
       body: historialAsync.when(
-        loading: () => Center(
+        loading: () => const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -39,17 +40,18 @@ class MantenimientoHistorialScreen extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.error_outline, size: 64, color: Colors.red),
-              SizedBox(height: 16),
-              Text('Error al cargar el historial'),
-              SizedBox(height: 8),
-              Text(error.toString(), style: TextStyle(color: Colors.grey)),
+              const Icon(Icons.error_outline, size: 64, color: Colors.red),
+              const SizedBox(height: 16),
+              const Text('Error al cargar el historial'),
+              const SizedBox(height: 8),
+              Text(error.toString(),
+                  style: const TextStyle(color: Colors.grey)),
             ],
           ),
         ),
         data: (eventos) {
           if (eventos.isEmpty) {
-            return Center(
+            return const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -67,7 +69,7 @@ class MantenimientoHistorialScreen extends ConsumerWidget {
           }
 
           return ListView.builder(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             itemCount: eventos.length,
             itemBuilder: (context, index) {
               final evento = eventos[index];
@@ -92,23 +94,23 @@ class _EventoMantenimientoCard extends StatelessWidget {
     final fechaFormato = DateFormat('dd/MM/yyyy').format(evento.fecha);
 
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       child: ExpansionTile(
         leading: Text(
           tipoEmoji,
-          style: TextStyle(fontSize: 28),
+          style: const TextStyle(fontSize: 28),
         ),
         title: Text(
           tipoNombre,
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
           fechaFormato,
-          style: TextStyle(color: Colors.grey, fontSize: 12),
+          style: const TextStyle(color: Colors.grey, fontSize: 12),
         ),
         children: [
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -130,11 +132,11 @@ class _EventoMantenimientoCard extends StatelessWidget {
                     evento.observaciones!.isNotEmpty)
                   _ItemDetalle('Observaciones', evento.observaciones),
                 // Fecha de creación
-                SizedBox(height: 8),
-                Divider(),
+                const SizedBox(height: 8),
+                const Divider(),
                 Text(
                   'Registrado: ${DateFormat('dd/MM/yyyy HH:mm').format(evento.fechaCreacion)}',
-                  style: TextStyle(color: Colors.grey, fontSize: 11),
+                  style: const TextStyle(color: Colors.grey, fontSize: 11),
                 ),
               ],
             ),
@@ -191,21 +193,21 @@ class _ItemDetalle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (valor == null || valor!.isEmpty) return SizedBox.shrink();
+    if (valor == null || valor!.isEmpty) return const SizedBox.shrink();
 
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             '$etiqueta: ',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
           ),
           Expanded(
             child: Text(
               valor ?? '',
-              style: TextStyle(fontSize: 12),
+              style: const TextStyle(fontSize: 12),
               softWrap: true,
             ),
           ),

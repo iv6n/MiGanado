@@ -44,7 +44,7 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.background,
 
       // Color Scheme
-      colorScheme: ColorScheme.light(
+      colorScheme: const ColorScheme.light(
         primary: AppColors.primary,
         secondary: AppColors.secondary,
         surface: Colors.white,

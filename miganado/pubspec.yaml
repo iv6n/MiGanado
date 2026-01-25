@@ -48,9 +48,12 @@ dependencies:
   connectivity_plus: ^5.0.0
   http: ^1.1.0
 
+  # Calendar Dependencies
+  # table_calendar: ^3.0.8  # Eliminado, no usado
+  # syncfusion_flutter_calendar: ^20.2.49  # Eliminado, no usado
   # Image Handling
   image_picker: ^1.0.0
-  image_picker_web: ^3.0.0
+  # image_picker_web: ^3.0.0  # Eliminado, no usado
 
   # Utilities
   uuid: ^4.0.0

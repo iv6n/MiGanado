@@ -138,7 +138,7 @@ class CustomDropdown<T> extends StatelessWidget {
                     ))
                 .toList(),
             onChanged: onChanged,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Selecciona una opción',
             ),
           ),

@@ -126,7 +126,7 @@ class GaleriaFotosWidget extends ConsumerWidget {
         );
 
         // Refrescar fotos
-        ref.refresh(fotosByAnimalProvider(animalUuid));
+        await ref.refresh(fotosByAnimalProvider(animalUuid));
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Foto capturada exitosamente')),
@@ -170,7 +170,7 @@ class GaleriaFotosWidget extends ConsumerWidget {
         await useCase(fotoUuid: foto.uuid);
 
         // Refrescar fotos
-        ref.refresh(fotosByAnimalProvider(animalUuid));
+        await ref.refresh(fotosByAnimalProvider(animalUuid).future);
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Foto eliminada')),
@@ -224,7 +224,7 @@ class GaleriaFotosWidget extends ConsumerWidget {
                 );
 
                 // Refrescar fotos
-                ref.refresh(fotosByAnimalProvider(animalUuid));
+                await ref.refresh(fotosByAnimalProvider(animalUuid).future);
 
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(

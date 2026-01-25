@@ -51,7 +51,7 @@ class _ValidatedTextFieldState extends State<ValidatedTextField> {
     // Custom validator first
     if (widget.customValidator != null) {
       final error = widget.customValidator!(value);
-      if (error != null) return error;
+      return error;
     }
 
     // Tipo de validación específica

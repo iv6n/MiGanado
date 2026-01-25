@@ -74,6 +74,7 @@ class TratamientoEntity {
   }) {
     uuid = const Uuid().v4();
     fechaRegistro = DateTime.now();
+    fechaActualizacion = null;
   }
 
   TratamientoEntity copyWith({
