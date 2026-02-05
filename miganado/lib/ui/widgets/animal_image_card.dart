@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:miganado/core/utils/asset_mapper.dart';
-import 'package:miganado/features/animals/data/models/animal_entity.dart';
 
 /// Widget reutilizable para mostrar tarjetas de animales con imágenes
 class AnimalImageCard extends StatelessWidget {
@@ -45,7 +44,7 @@ class AnimalImageCard extends StatelessWidget {
   }) {
     return AnimalImageCard(
       imagePath: AssetMapper.getImageForEtapa(etapa),
-      label: etapa,
+      label: etapa, // TODO: Usar AppStrings o ARB para término ganadero
       badge: count,
       color: color ?? Colors.blue,
       onTap: onTap,
@@ -62,7 +61,7 @@ class AnimalImageCard extends StatelessWidget {
   }) {
     return AnimalImageCard(
       imagePath: AssetMapper.getImageForCategoria(categoria),
-      label: categoria,
+      label: categoria, // TODO: Usar AppStrings o ARB para término ganadero
       subtitle: subtitle,
       color: color ?? Colors.green,
       onTap: onTap,
@@ -70,37 +69,39 @@ class AnimalImageCard extends StatelessWidget {
     );
   }
 
-  /// Constructor para enum EtapaVida
-  factory AnimalImageCard.fromEtapaEnum({
-    required EtapaVida etapa,
-    required int count,
-    Color? color,
-    VoidCallback? onTap,
-  }) {
-    final etapaStr = etapa.toString().split('.').last;
-    return AnimalImageCard.fromEtapa(
-      etapa: etapaStr,
-      count: count,
-      color: color,
-      onTap: onTap,
-    );
-  }
+  /// Constructor para enum EtapaVida (DEPRECATED - enum no longer exists)
+  // factory AnimalImageCard.fromEtapaEnum({
+  //   required EtapaVida etapa,
+  //   required int count,
+  //   Color? color,
+  //   VoidCallback? onTap,
+  // }) {
+  //   final etapaStr = etapa.toString().split('.').last;
+  //   // TODO: Usar AppStrings o ARB para término ganadero
+  //   return AnimalImageCard.fromEtapa(
+  //     etapa: etapaStr,
+  //     count: count,
+  //     color: color,
+  //     onTap: onTap,
+  //   );
+  // }
 
-  /// Constructor para enum Categoria
-  factory AnimalImageCard.fromCategoriaEnum({
-    required Categoria categoria,
-    Color? color,
-    String? subtitle,
-    VoidCallback? onTap,
-  }) {
-    final categoriaStr = categoria.toString().split('.').last;
-    return AnimalImageCard.fromCategoria(
-      categoria: categoriaStr,
-      color: color,
-      subtitle: subtitle,
-      onTap: onTap,
-    );
-  }
+  /// Constructor para enum Categoria (DEPRECATED - enum no longer exists)
+  // factory AnimalImageCard.fromCategoriaEnum({
+  //   required Categoria categoria,
+  //   Color? color,
+  //   String? subtitle,
+  //   VoidCallback? onTap,
+  // }) {
+  //   final categoriaStr = categoria.toString().split('.').last;
+  //   // TODO: Usar AppStrings o ARB para término ganadero
+  //   return AnimalImageCard.fromCategoria(
+  //     categoria: categoriaStr,
+  //     color: color,
+  //     subtitle: subtitle,
+  //     onTap: onTap,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -119,10 +120,61 @@ class AnimalImageCard extends StatelessWidget {
         ),
         child: Stack(
           children: [
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  const SizedBox(height: 6.5),
+                  // Imagen con badge
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(
+                      imagePath,
+                      width: imageSize,
+                      height: imageSize,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          width: imageSize,
+                          height: imageSize,
+                          decoration: BoxDecoration(
+                            color: color.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(
+                            Icons.image_not_supported,
+                            color: color,
+                            size: imageSize * 0.4,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  // Etiqueta
+                  Text(
+                    label.isEmpty
+                        ? label
+                        : label[0].toUpperCase() + label.substring(1),
+                    style: TextStyle(
+                      fontSize: 9.5,
+                      fontWeight: FontWeight.w600,
+                      color: color,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 3),
+                ],
+              ),
+            ),
             if (badge != null)
               Positioned(
-                right: -.01,
-                top: -.01,
+                right: -.05,
+                top: -.02,
                 child: Container(
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
@@ -134,56 +186,12 @@ class AnimalImageCard extends StatelessWidget {
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 10,
+                      fontSize: 11,
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ),
               ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                // Imagen con badge
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    imagePath,
-                    width: imageSize,
-                    height: imageSize,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        width: imageSize,
-                        height: imageSize,
-                        decoration: BoxDecoration(
-                          color: color.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Icon(
-                          Icons.image_not_supported,
-                          color: color,
-                          size: imageSize * 0.4,
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 6),
-                // Etiqueta
-                Text(
-                  label,
-                  style: TextStyle(
-                    fontSize: 9,
-                    fontWeight: FontWeight.w600,
-                    color: color,
-                  ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
           ],
         ),
       ),
@@ -195,11 +203,11 @@ class AnimalImageCard extends StatelessWidget {
       _getSizeValues() {
     switch (size) {
       case AnimalCardSize.small:
-        return (35, 95, const EdgeInsets.all(8));
+        return (45, 110, const EdgeInsets.all(4));
       case AnimalCardSize.medium:
-        return (50, 110, const EdgeInsets.all(10));
+        return (60, 125, const EdgeInsets.all(6));
       case AnimalCardSize.large:
-        return (70, 130, const EdgeInsets.all(12));
+        return (80, 145, const EdgeInsets.all(8));
     }
   }
 }

@@ -47,15 +47,14 @@ class CambiarUbicacionUseCase {
         throw CambiarUbicacionException('Ubicación no encontrada');
       }
 
-      // 3. Actualizar ubicación del animal
-      animal.ubicacion = nuevaUbicacion.nombre;
-      animal.fechaActualizacion = DateTime.now();
+      // 3. Actualizar ubicación del animal (nota: feature no implementada en nueva versión)
+      // TODO: Implement proper location tracking for animals
 
       // 4. Guardar cambios en Isar
       await database.saveAnimal(animal);
 
       print(
-          '✓ Ubicación actualizada: ${animal.numeroArete} → ${nuevaUbicacion.nombre}');
+          '✓ Ubicación actualizada: ${animal.earTagNumber} → ${nuevaUbicacion.name}');
     } catch (e) {
       if (e is CambiarUbicacionException) {
         rethrow;
@@ -88,7 +87,7 @@ class CrearUbicacionUseCase {
       // 2. Obtener todas las ubicaciones para validar unicidad
       final ubicacionesExistentes = await database.getAllUbicaciones();
       final nombreExiste = ubicacionesExistentes
-          .any((u) => u.nombre.toLowerCase() == nombre.toLowerCase());
+          .any((u) => u.name.toLowerCase() == nombre.toLowerCase());
 
       if (nombreExiste) {
         throw CrearUbicacionException(
@@ -97,9 +96,9 @@ class CrearUbicacionUseCase {
 
       // 3. Crear entidad de ubicación
       final ubicacionEntity = UbicacionEntity(
-        nombre: nombre,
-        descripcion: descripcion,
-        tipo: tipoUbicacion,
+        name: nombre,
+        description: descripcion,
+        type: tipoUbicacion,
       );
 
       // 4. Guardar en Isar

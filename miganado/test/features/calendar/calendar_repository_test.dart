@@ -7,7 +7,7 @@ void main() {
   group('RepositorioCalendarioGanadero - Lógica de Negocio', () {
     // Tests sin dependencia de Isar - solo lógica de negocio
     late List<EventoGanaderoEntity> eventosMemoria;
-    late List<LoteGanaderoEntity> lotesMemoria;
+    late List<LivestockLotEntity> lotesMemoria;
 
     setUp(() {
       eventosMemoria = [];
@@ -136,39 +136,35 @@ void main() {
 
     test('Crear múltiples lotes con diferentes especies', () {
       lotesMemoria.addAll([
-        LoteGanaderoEntity(
-          nombre: 'Lote Bovino 1',
-          especie: EspecieLote.bovino,
-          tipoProduccion: TipoProduccion.leche,
-          cantidadAnimales: 50,
-        ),
-        LoteGanaderoEntity(
-          nombre: 'Lote Equino 1',
-          especie: EspecieLote.equino,
-          tipoProduccion: TipoProduccion.reproduccion,
-          cantidadAnimales: 10,
-        ),
-        LoteGanaderoEntity(
-          nombre: 'Lote Ovino 1',
-          especie: EspecieLote.ovino,
-          tipoProduccion: TipoProduccion.levante,
-          cantidadAnimales: 100,
-        ),
+        LivestockLotEntity()
+          ..name = 'Lote Bovino 1'
+          ..species = LotSpecies.cattle
+          ..productionType = ProductionType.milk
+          ..animalCount = 50,
+        LivestockLotEntity()
+          ..name = 'Lote Equino 1'
+          ..species = LotSpecies.equine
+          ..productionType = ProductionType.breeding
+          ..animalCount = 10,
+        LivestockLotEntity()
+          ..name = 'Lote Ovino 1'
+          ..species = LotSpecies.ovine
+          ..productionType = ProductionType.raising
+          ..animalCount = 100,
       ]);
 
       expect(lotesMemoria.length, equals(3));
-      expect(lotesMemoria[0].especie, equals(EspecieLote.bovino));
-      expect(lotesMemoria[1].especie, equals(EspecieLote.equino));
-      expect(lotesMemoria[2].especie, equals(EspecieLote.ovino));
+      expect(lotesMemoria[0].species, equals(LotSpecies.cattle));
+      expect(lotesMemoria[1].species, equals(LotSpecies.equine));
+      expect(lotesMemoria[2].species, equals(LotSpecies.ovine));
     });
 
     test('Agregar múltiples animales a un lote', () {
-      final lote = LoteGanaderoEntity(
-        nombre: 'Lote Test',
-        especie: EspecieLote.bovino,
-        tipoProduccion: TipoProduccion.leche,
-        cantidadAnimales: 3,
-      );
+      final lote = LivestockLotEntity()
+        ..name = 'Lote Test'
+        ..species = LotSpecies.cattle
+        ..productionType = ProductionType.milk
+        ..animalCount = 3;
 
       lote.agregarAnimal('animal-001');
       lote.agregarAnimal('animal-002');

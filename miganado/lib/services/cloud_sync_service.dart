@@ -14,7 +14,7 @@ import 'package:isar/isar.dart';
 import 'package:miganado/data/database/isar_database.dart';
 import 'package:miganado/features/animals/data/models/animal_entity.dart';
 import 'package:miganado/features/animals/data/models/pesaje_entity.dart';
-import 'package:miganado/features/mantenimiento/data/models/evento_mantenimiento_entity.dart';
+import 'package:miganado/features/mantenimiento/data/models/event_maintenance_entity.dart';
 import 'package:miganado/features/ganadero/data/models/ganadero_entity.dart';
 import 'package:miganado/features/costs/data/models/costo_entity.dart';
 import 'package:miganado/features/locations/data/models/ubicacion_entity.dart';

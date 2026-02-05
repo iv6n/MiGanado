@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/vacunas_providers.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/tratamientos_providers.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/nutricion_providers.dart';
-import 'package:miganado/features/animals/presentation/providers/reproductivo_providers.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/mantenimiento_providers.dart';
 
 class RegistroVacunaDialog extends ConsumerStatefulWidget {
@@ -12,6 +12,7 @@ class RegistroVacunaDialog extends ConsumerStatefulWidget {
   final String registradoPor;
 
   const RegistroVacunaDialog({
+    super.key,
     required this.animalUuid,
     required this.registradoPor,
   });
@@ -39,36 +40,36 @@ class _RegistroVacunaDialogState extends ConsumerState<RegistroVacunaDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Registrar Vacuna'),
+      title: const Text(AppStrings.registerVaccineTitle),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: tipoController,
-              decoration: InputDecoration(labelText: 'Tipo (ej: Triple)'),
+              decoration: const InputDecoration(labelText: 'Tipo (ej: Triple)'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: enfermedadController,
-              decoration:
-                  InputDecoration(labelText: 'Enfermedad (ej: Fiebre aftosa)'),
+              decoration: const InputDecoration(
+                  labelText: 'Enfermedad (ej: Fiebre aftosa)'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: productoController,
-              decoration: InputDecoration(labelText: 'Producto'),
+              decoration: const InputDecoration(labelText: 'Producto'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: dosisController,
-              decoration: InputDecoration(labelText: 'Dosis'),
+              decoration: const InputDecoration(labelText: 'Dosis'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             ListTile(
               title: Text(
                   'Fecha: ${DateFormat('dd/MM/yyyy').format(fechaSeleccionada)}'),
-              trailing: Icon(Icons.calendar_today),
+              trailing: const Icon(Icons.calendar_today),
               onTap: () async {
                 final selected = await showDatePicker(
                   context: context,
@@ -81,25 +82,25 @@ class _RegistroVacunaDialogState extends ConsumerState<RegistroVacunaDialog> {
                 }
               },
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: costController,
-              decoration: InputDecoration(labelText: 'Costo (opcional)'),
+              decoration: const InputDecoration(labelText: 'Costo (opcional)'),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             DropdownButtonFormField<int>(
               value: diasIntervalo,
-              items: [
-                DropdownMenuItem(child: Text('Anual'), value: 365),
-                DropdownMenuItem(child: Text('Semestral'), value: 180),
-                DropdownMenuItem(child: Text('Trimestral'), value: 90),
-                DropdownMenuItem(child: Text('Mensual'), value: 30),
+              items: const [
+                DropdownMenuItem(value: 365, child: Text('Anual')),
+                DropdownMenuItem(value: 180, child: Text('Semestral')),
+                DropdownMenuItem(value: 90, child: Text('Trimestral')),
+                DropdownMenuItem(value: 30, child: Text('Mensual')),
               ],
               onChanged: (value) {
                 setState(() => diasIntervalo = value ?? 365);
               },
-              decoration: InputDecoration(labelText: 'Próxima dosis en'),
+              decoration: const InputDecoration(labelText: 'Próxima dosis en'),
             ),
           ],
         ),
@@ -107,12 +108,12 @@ class _RegistroVacunaDialogState extends ConsumerState<RegistroVacunaDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancelar'),
+          child: const Text('Cancelar'),
         ),
         ElevatedButton(
           onPressed: () async {
             try {
-              final useCase = ref.read(registrarVacunaUseCaseProvider);
+              final useCase = ref.read(registerVaccineUseCaseProvider);
 
               final costo = costController.text.isEmpty
                   ? null
@@ -120,25 +121,25 @@ class _RegistroVacunaDialogState extends ConsumerState<RegistroVacunaDialog> {
 
               await useCase(
                 animalUuid: widget.animalUuid,
-                tipo: tipoController.text,
-                enfermedad: enfermedadController.text,
-                fecha: fechaSeleccionada,
-                diasIntervalo: diasIntervalo,
-                aplicadoPor: widget.registradoPor,
-                registradoPor: widget.registradoPor,
-                producto: productoController.text.isEmpty
+                type: tipoController.text,
+                disease: enfermedadController.text,
+                date: fechaSeleccionada,
+                intervalDays: diasIntervalo,
+                appliedBy: widget.registradoPor,
+                recordedBy: widget.registradoPor,
+                product: productoController.text.isEmpty
                     ? null
                     : productoController.text,
-                dosis:
+                dosage:
                     dosisController.text.isEmpty ? null : dosisController.text,
-                costo: costo,
+                cost: costo,
               );
 
-              await ref
-                  .refresh(vacunasByAnimalProvider(widget.animalUuid).future);
+              // ignore: unused_result
+              ref.refresh(vaccinesByAnimalProvider(widget.animalUuid).future);
 
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Vacuna registrada exitosamente')),
+                const SnackBar(content: Text(AppStrings.vaccineSavedSuccess)),
               );
 
               Navigator.pop(context);
@@ -148,7 +149,7 @@ class _RegistroVacunaDialogState extends ConsumerState<RegistroVacunaDialog> {
               );
             }
           },
-          child: Text('Guardar'),
+          child: const Text('Guardar'),
         ),
       ],
     );
@@ -170,6 +171,7 @@ class RegistroTratamientoDialog extends ConsumerStatefulWidget {
   final String registradoPor;
 
   const RegistroTratamientoDialog({
+    super.key,
     required this.animalUuid,
     required this.registradoPor,
   });
@@ -197,40 +199,41 @@ class _RegistroTratamientoDialogState
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Registrar Tratamiento'),
+      title: const Text(AppStrings.registerTreatmentTitle),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: motivoController,
-              decoration: InputDecoration(labelText: 'Motivo (ej: Mastitis)'),
+              decoration:
+                  const InputDecoration(labelText: 'Motivo (ej: Mastitis)'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: medicamentoController,
-              decoration: InputDecoration(labelText: 'Medicamento'),
+              decoration: const InputDecoration(labelText: 'Medicamento'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: dosisController,
-              decoration: InputDecoration(labelText: 'Dosis'),
+              decoration: const InputDecoration(labelText: 'Dosis'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: frecuenciaController,
               decoration:
-                  InputDecoration(labelText: 'Frecuencia (ej: Cada 12h)'),
+                  const InputDecoration(labelText: 'Frecuencia (ej: Cada 12h)'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             ListTile(
               title: Text('Duracion: $duracionDias dias'),
-              trailing: Icon(Icons.edit),
+              trailing: const Icon(Icons.edit),
               onTap: () async {
                 await showDialog<int>(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: Text('Duracion en dias'),
+                    title: const Text('Duracion en dias'),
                     content: TextField(
                       keyboardType: TextInputType.number,
                       controller:
@@ -242,18 +245,18 @@ class _RegistroTratamientoDialogState
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context),
-                        child: Text('OK'),
+                        child: const Text('OK'),
                       ),
                     ],
                   ),
                 );
               },
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             ListTile(
               title: Text(
                   'Fecha: ${DateFormat('dd/MM/yyyy').format(fechaInicio)}'),
-              trailing: Icon(Icons.calendar_today),
+              trailing: const Icon(Icons.calendar_today),
               onTap: () async {
                 final selected = await showDatePicker(
                   context: context,
@@ -272,30 +275,31 @@ class _RegistroTratamientoDialogState
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancelar'),
+          child: const Text('Cancelar'),
         ),
         ElevatedButton(
           onPressed: () async {
             try {
-              final useCase = ref.read(registrarTratamientoUseCaseProvider);
+              final useCase = ref.read(registerTreatmentUseCaseProvider);
 
               await useCase(
                 animalUuid: widget.animalUuid,
-                motivo: motivoController.text,
-                medicamento: medicamentoController.text,
-                fechaInicio: fechaInicio,
-                dosis: dosisController.text,
-                viaAplicacion: 'Oral',
-                duracionDias: duracionDias,
-                frecuencia: frecuenciaController.text,
-                registradoPor: widget.registradoPor,
+                reason: motivoController.text,
+                medicament: medicamentoController.text,
+                startDate: fechaInicio,
+                dosage: dosisController.text,
+                administrationRoute: 'Oral',
+                durationDays: duracionDias,
+                frequency: frecuenciaController.text,
+                recordedBy: widget.registradoPor,
               );
 
-              await ref.refresh(
-                  tratamientosByAnimalProvider(widget.animalUuid).future);
+              // ignore: unused_result
+              ref.refresh(treatmentsByAnimalProvider(widget.animalUuid).future);
 
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Tratamiento registrado exitosamente')),
+                const SnackBar(
+                    content: Text('Tratamiento registrado exitosamente')),
               );
 
               Navigator.pop(context);
@@ -305,7 +309,7 @@ class _RegistroTratamientoDialogState
               );
             }
           },
-          child: Text('Guardar'),
+          child: const Text('Guardar'),
         ),
       ],
     );
@@ -326,6 +330,7 @@ class RegistroNutricionDialog extends ConsumerStatefulWidget {
   final String registradoPor;
 
   const RegistroNutricionDialog({
+    super.key,
     required this.animalUuid,
     required this.registradoPor,
   });
@@ -351,41 +356,42 @@ class _RegistroNutricionDialogState
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Registrar Nutricion'),
+      title: const Text(AppStrings.registerNutritionTitle),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             DropdownButtonFormField<String>(
               value: 'Pastoreo',
-              items: [
-                DropdownMenuItem(child: Text('Pastoreo'), value: 'Pastoreo'),
-                DropdownMenuItem(child: Text('Confinado'), value: 'Confinado'),
-                DropdownMenuItem(child: Text('Mixto'), value: 'Mixto'),
+              items: const [
+                DropdownMenuItem(value: 'Pastoreo', child: Text('Pastoreo')),
+                DropdownMenuItem(value: 'Confinado', child: Text('Confinado')),
+                DropdownMenuItem(value: 'Mixto', child: Text('Mixto')),
               ],
               onChanged: (value) {
                 tipoAlimentacionController.text = value ?? 'Pastoreo';
               },
-              decoration: InputDecoration(labelText: 'Tipo de alimentacion'),
+              decoration:
+                  const InputDecoration(labelText: 'Tipo de alimentacion'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: alimentoPrincipalController,
-              decoration:
-                  InputDecoration(labelText: 'Alimento principal (ej: Pasto)'),
+              decoration: const InputDecoration(
+                  labelText: 'Alimento principal (ej: Pasto)'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: suplementosController,
-              decoration:
-                  InputDecoration(labelText: 'Suplementos (separar con coma)'),
+              decoration: const InputDecoration(
+                  labelText: 'Suplementos (separar con coma)'),
               maxLines: 2,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             ListTile(
               title: Text(
                   'Fecha: ${DateFormat('dd/MM/yyyy').format(fechaInicio)}'),
-              trailing: Icon(Icons.calendar_today),
+              trailing: const Icon(Icons.calendar_today),
               onTap: () async {
                 final selected = await showDatePicker(
                   context: context,
@@ -404,12 +410,12 @@ class _RegistroNutricionDialogState
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancelar'),
+          child: const Text('Cancelar'),
         ),
         ElevatedButton(
           onPressed: () async {
             try {
-              final useCase = ref.read(registrarNutricionUseCaseProvider);
+              final useCase = ref.read(registerNutritionUseCaseProvider);
 
               final suplementos = suplementosController.text
                   .split(',')
@@ -419,20 +425,21 @@ class _RegistroNutricionDialogState
 
               await useCase(
                 animalUuid: widget.animalUuid,
-                tipoAlimentacion: tipoAlimentacionController.text,
-                fechaInicio: fechaInicio,
-                registradoPor: widget.registradoPor,
-                alimentoPrincipal: alimentoPrincipalController.text.isEmpty
+                feedingType: tipoAlimentacionController.text,
+                startDate: fechaInicio,
+                recordedBy: widget.registradoPor,
+                mainFeed: alimentoPrincipalController.text.isEmpty
                     ? null
                     : alimentoPrincipalController.text,
-                suplementos: suplementos.isEmpty ? null : suplementos,
+                supplements: suplementos.isEmpty ? null : suplementos,
               );
 
-              await ref
-                  .refresh(nutricionByAnimalProvider(widget.animalUuid).future);
+              // ignore: unused_result
+              ref.refresh(nutritionByAnimalProvider(widget.animalUuid).future);
 
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Nutricion registrada exitosamente')),
+                const SnackBar(
+                    content: Text('Nutricion registrada exitosamente')),
               );
 
               Navigator.pop(context);
@@ -442,7 +449,7 @@ class _RegistroNutricionDialogState
               );
             }
           },
-          child: Text('Guardar'),
+          child: const Text('Guardar'),
         ),
       ],
     );
@@ -466,6 +473,7 @@ class RegistroEmpadreDialog extends ConsumerStatefulWidget {
   final String registradoPor;
 
   const RegistroEmpadreDialog({
+    super.key,
     required this.animalUuid,
     required this.registradoPor,
   });
@@ -493,7 +501,7 @@ class _RegistroEmpadreDialogState extends ConsumerState<RegistroEmpadreDialog> {
     ref.watch(StateProvider<bool>((ref) => false)); // Placeholder
 
     return AlertDialog(
-      title: Text('Registrar Empadre'),
+      title: const Text(AppStrings.registerBreedingTitle),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -501,7 +509,7 @@ class _RegistroEmpadreDialogState extends ConsumerState<RegistroEmpadreDialog> {
             ListTile(
               title: Text(
                   'Fecha: ${DateFormat('dd/MM/yyyy').format(fechaEmpadre)}'),
-              trailing: Icon(Icons.calendar_today),
+              trailing: const Icon(Icons.calendar_today),
               onTap: () async {
                 final picked = await showDatePicker(
                   context: context,
@@ -514,26 +522,26 @@ class _RegistroEmpadreDialogState extends ConsumerState<RegistroEmpadreDialog> {
                 }
               },
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             TextField(
               controller: sementalController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Arete del Semental',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             TextField(
               controller: metodoController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Método (Natural/IA)',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             TextField(
               controller: observacionesController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Observaciones',
                 border: OutlineInputBorder(),
               ),
@@ -545,68 +553,36 @@ class _RegistroEmpadreDialogState extends ConsumerState<RegistroEmpadreDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancelar'),
+          child: const Text('Cancelar'),
         ),
         ElevatedButton(
           onPressed: () async {
             if (sementalController.text.isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Ingrese arete del semental')),
+                const SnackBar(content: Text('Ingrese arete del semental')),
               );
               return;
             }
 
             try {
-              // Obtener o crear reproductivo
-              final obtenerUseCase =
-                  ref.read(obtenerReproductivoUseCaseProvider);
-              var reproductivo =
-                  await obtenerUseCase(animalUuid: widget.animalUuid);
-
-              if (reproductivo == null) {
-                // Crear si no existe
-                final crearUseCase = ref.read(crearReproductivoUseCaseProvider);
-                await crearUseCase(
-                  animalUuid: widget.animalUuid,
-                  estado: 'Gestante',
-                  registradoPor: widget.registradoPor,
-                );
-                reproductivo =
-                    await obtenerUseCase(animalUuid: widget.animalUuid);
-              }
-
-              // Guardar empadre
-              if (reproductivo != null) {
-                final registrarEmpadreUseCase =
-                    ref.read(registrarEmpadreUseCaseProvider);
-                await registrarEmpadreUseCase(
-                  reproductivo: reproductivo,
-                  fecha: fechaEmpadre,
-                  sementalUuid: sementalController.text,
-                  metodo: metodoController.text.isNotEmpty
-                      ? metodoController.text
-                      : 'No especificado',
-                  observaciones: observacionesController.text.isNotEmpty
-                      ? observacionesController.text
-                      : null,
-                );
-              }
-
+              // DEPRECATED: Reproductivo functionality is disabled
               if (mounted) {
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Empadre registrado exitosamente')),
+                  const SnackBar(
+                      content:
+                          Text('Funcionalidad Reproductiva Deshabilitada')),
                 );
               }
             } catch (e) {
               if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Error al registrar: $e')),
+                  SnackBar(content: Text('Error: $e')),
                 );
               }
             }
           },
-          child: Text('Guardar'),
+          child: const Text('Guardar'),
         ),
       ],
     );
@@ -626,6 +602,7 @@ class RegistroPartoDialog extends ConsumerStatefulWidget {
   final String registradoPor;
 
   const RegistroPartoDialog({
+    super.key,
     required this.animalUuid,
     required this.registradoPor,
   });
@@ -651,7 +628,7 @@ class _RegistroPartoDialogState extends ConsumerState<RegistroPartoDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Registrar Parto'),
+      title: const Text(AppStrings.registerBirthTitle),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -659,7 +636,7 @@ class _RegistroPartoDialogState extends ConsumerState<RegistroPartoDialog> {
             ListTile(
               title:
                   Text('Fecha: ${DateFormat('dd/MM/yyyy').format(fechaParto)}'),
-              trailing: Icon(Icons.calendar_today),
+              trailing: const Icon(Icons.calendar_today),
               onTap: () async {
                 final picked = await showDatePicker(
                   context: context,
@@ -672,35 +649,35 @@ class _RegistroPartoDialogState extends ConsumerState<RegistroPartoDialog> {
                 }
               },
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             TextField(
               controller: numeroCriasController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Número de Crías',
                 border: OutlineInputBorder(),
               ),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             TextField(
               controller: tipoPartoController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Tipo (Simple/Múltiple)',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             TextField(
               controller: resultadoController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Resultado (Normal/Complicado)',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             TextField(
               controller: observacionesController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Observaciones',
                 border: OutlineInputBorder(),
               ),
@@ -712,71 +689,36 @@ class _RegistroPartoDialogState extends ConsumerState<RegistroPartoDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancelar'),
+          child: const Text('Cancelar'),
         ),
         ElevatedButton(
           onPressed: () async {
             if (numeroCriasController.text.isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Ingrese número de crías')),
+                const SnackBar(content: Text('Ingrese número de crías')),
               );
               return;
             }
 
             try {
-              // Obtener o crear reproductivo
-              final obtenerUseCase =
-                  ref.read(obtenerReproductivoUseCaseProvider);
-              var reproductivo =
-                  await obtenerUseCase(animalUuid: widget.animalUuid);
-
-              if (reproductivo == null) {
-                // Crear si no existe
-                final crearUseCase = ref.read(crearReproductivoUseCaseProvider);
-                await crearUseCase(
-                  animalUuid: widget.animalUuid,
-                  estado: 'Lactante',
-                  registradoPor: widget.registradoPor,
-                );
-                reproductivo =
-                    await obtenerUseCase(animalUuid: widget.animalUuid);
-              }
-
-              // Guardar parto
-              if (reproductivo != null) {
-                final registrarPartoUseCase =
-                    ref.read(registrarPartoUseCaseProvider);
-                await registrarPartoUseCase(
-                  reproductivo: reproductivo,
-                  fecha: fechaParto,
-                  numeroCrias: int.tryParse(numeroCriasController.text) ?? 1,
-                  tipoParto: tipoPartoController.text.isNotEmpty
-                      ? tipoPartoController.text
-                      : 'No especificado',
-                  resultado: resultadoController.text.isNotEmpty
-                      ? resultadoController.text
-                      : 'Normal',
-                  observaciones: observacionesController.text.isNotEmpty
-                      ? observacionesController.text
-                      : null,
-                );
-              }
-
+              // DEPRECATED: Reproductivo functionality is disabled
               if (mounted) {
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Parto registrado exitosamente')),
+                  const SnackBar(
+                      content:
+                          Text('Funcionalidad Reproductiva Deshabilitada')),
                 );
               }
             } catch (e) {
               if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Error al registrar: $e')),
+                  SnackBar(content: Text('Error: $e')),
                 );
               }
             }
           },
-          child: Text('Guardar'),
+          child: const Text('Guardar'),
         ),
       ],
     );
@@ -801,6 +743,7 @@ class RegistroMantenimientoDialog extends ConsumerStatefulWidget {
   final String registradoPor;
 
   const RegistroMantenimientoDialog({
+    super.key,
     required this.animalUuid,
     required this.registradoPor,
   });
@@ -842,7 +785,7 @@ class _RegistroMantenimientoDialogState
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Registrar Evento de Mantenimiento'),
+      title: const Text(AppStrings.registerMaintenanceTitle),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -861,59 +804,59 @@ class _RegistroMantenimientoDialogState
                   setState(() => tipoSeleccionado = value);
                 }
               },
-              decoration: InputDecoration(labelText: 'Tipo de Evento'),
+              decoration: const InputDecoration(labelText: 'Tipo de Evento'),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             // Descripción
             TextField(
               controller: descripcionController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Descripción',
                 hintText: 'Detalles del evento',
               ),
               maxLines: 2,
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             // Veterinario
             TextField(
               controller: veterinarioController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Veterinario (opcional)',
                 hintText: 'Nombre del veterinario',
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             // Medicamento
             TextField(
               controller: medicamentoController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Medicamento/Producto (opcional)',
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             // Dosis
             TextField(
               controller: dosisController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Dosis (opcional)',
                 hintText: 'ej: 2 dosis, 1 L, etc',
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             // Ruta de aplicación
             TextField(
               controller: rutaController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Ruta de Aplicación (opcional)',
                 hintText: 'ej: IM, IV, SQ, Oral',
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             // Fecha
             ListTile(
               title: Text(
                   'Fecha: ${DateFormat('dd/MM/yyyy').format(fechaSeleccionada)}'),
-              trailing: Icon(Icons.calendar_today),
+              trailing: const Icon(Icons.calendar_today),
               onTap: () async {
                 final selected = await showDatePicker(
                   context: context,
@@ -926,20 +869,20 @@ class _RegistroMantenimientoDialogState
                 }
               },
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             // Costo
             TextField(
               controller: costController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Costo (opcional)',
               ),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             // Observaciones
             TextField(
               controller: observacionesController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Observaciones (opcional)',
               ),
               maxLines: 2,
@@ -950,51 +893,48 @@ class _RegistroMantenimientoDialogState
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancelar'),
+          child: const Text('Cancelar'),
         ),
         ElevatedButton(
           onPressed: () async {
             if (descripcionController.text.trim().isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('La descripción es requerida')),
+                const SnackBar(content: Text('La descripción es requerida')),
               );
               return;
             }
 
             try {
-              final useCase = ref.read(registrarMantenimientoUseCaseProvider);
-
-              final costo = costController.text.isEmpty
-                  ? null
-                  : double.parse(costController.text);
+              final useCase = ref.read(registerMaintenanceEventUseCaseProvider);
 
               await useCase(
                 animalUuid: widget.animalUuid,
-                tipo: tipoSeleccionado,
-                descripcion: descripcionController.text.trim(),
-                fecha: fechaSeleccionada,
-                veterinario: veterinarioController.text.isEmpty
+                type: tipoSeleccionado,
+                description: descripcionController.text.trim(),
+                date: fechaSeleccionada,
+                veterinarian: veterinarioController.text.isEmpty
                     ? null
                     : veterinarioController.text,
-                medicamento: medicamentoController.text.isEmpty
+                medicament: medicamentoController.text.isEmpty
                     ? null
                     : medicamentoController.text,
-                dosisAplicada:
+                appliedDosage:
                     dosisController.text.isEmpty ? null : dosisController.text,
-                rutaAplicacion:
+                applicationRoute:
                     rutaController.text.isEmpty ? null : rutaController.text,
-                observaciones: observacionesController.text.isEmpty
+                observations: observacionesController.text.isEmpty
                     ? null
                     : observacionesController.text,
               );
 
-              await ref.refresh(
+              // ignore: unused_result
+              ref.refresh(
                   historialMantenimientoProvider(widget.animalUuid).future);
 
               if (mounted) {
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
+                  const SnackBar(
                       content: Text(
                           'Evento de mantenimiento registrado exitosamente')),
                 );
@@ -1007,7 +947,7 @@ class _RegistroMantenimientoDialogState
               }
             }
           },
-          child: Text('Guardar'),
+          child: const Text('Guardar'),
         ),
       ],
     );

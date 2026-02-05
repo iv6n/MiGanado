@@ -1,4 +1,4 @@
-import 'package:miganado/features/animals/data/models/animal_entity.dart';
+import 'package:miganado/features/animals/domain/entities/etapa_vida.dart';
 
 /// Mapeo centralizado de etapas de vida y categorías a sus imágenes correspondientes
 class AssetMapper {
@@ -6,13 +6,18 @@ class AssetMapper {
   static const Map<String, String> etapaImageMap = {
     'becerro': 'assets/images/becerro.png',
     'becerra': 'assets/images/becerro.png', // Usa imagen de becerro
-    'vaquilla': 'assets/images/vaca.png',
-    'torete': 'assets/images/toro.png',
+    'vaquilla': 'assets/images/vaquilla.png',
+    'torete': 'assets/images/novillo.png',
     'novillo': 'assets/images/novillo.png',
     'vaca': 'assets/images/vaca.png',
     'toro': 'assets/images/toro.png',
     'potro': 'assets/images/caballo.png',
-    'adulto': 'assets/images/caballo.png',
+    'potranca': 'assets/images/caballo.png',
+    'caballo': 'assets/images/caballo.png',
+    'yegua': 'assets/images/caballo.png',
+    'burro': 'assets/images/burro.png',
+    'burra': 'assets/images/burro.png',
+    'mula': 'assets/images/mula.png',
   };
 
   /// Mapeo de categorías a rutas de imágenes
@@ -36,13 +41,13 @@ class AssetMapper {
     return categoriaImageMap[categoriaLower] ?? 'assets/images/vaca.png';
   }
 
-  /// Obtener imagen basada en el enum EtapaVida
-  static String getImageFromEtapaEnum(EtapaVida etapa) {
+  /// Obtener imagen basada en el enum LifeStage
+  static String getImageFromEtapaEnum(LifeStage etapa) {
     return getImageForEtapa(etapa.toString().split('.').last);
   }
 
-  /// Obtener imagen basada en el enum Categoria
-  static String getImageFromCategoriaEnum(Categoria categoria) {
+  /// Obtener imagen basada en el enum Category
+  static String getImageFromCategoriaEnum(Category categoria) {
     return getImageForCategoria(categoria.toString().split('.').last);
   }
 

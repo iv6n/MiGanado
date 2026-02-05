@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 import 'package:intl/intl.dart';
 import 'package:miganado/features/mantenimiento/data/models/nutricion_entity.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/nutricion_providers.dart';
@@ -17,7 +18,7 @@ class NutricionHistorialScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Usar el provider FutureProvider que ya está configurado
-    final nutricionAsync = ref.watch(nutricionByAnimalProvider(animalUuid));
+    final nutricionAsync = ref.watch(nutritionByAnimalProvider(animalUuid));
 
     return Scaffold(
       appBar: AppBar(
@@ -32,7 +33,7 @@ class NutricionHistorialScreen extends ConsumerWidget {
             children: [
               const Icon(Icons.error_outline, size: 64, color: Colors.red),
               const SizedBox(height: 16),
-              Text('Error: $error'),
+              Text('${AppStrings.errorOccurred}: $error'),
             ],
           ),
         ),
@@ -60,7 +61,8 @@ class NutricionHistorialScreen extends ConsumerWidget {
 
           return RefreshIndicator(
             onRefresh: () async {
-              await ref.refresh(nutricionByAnimalProvider(animalUuid).future);
+              // ignore: unused_result
+              ref.refresh(nutritionByAnimalProvider(animalUuid).future);
             },
             child: ListView(
               padding: const EdgeInsets.all(16),

@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/features/animals/domain/usecases/register_animal_usecase.dart';
 import 'package:miganado/features/animals/domain/entities/animal.dart';
 import 'package:miganado/features/animals/domain/entities/etapa_vida.dart';
-import 'package:miganado/features/animals/data/models/animal_entity.dart';
 import 'package:miganado/features/animals/presentation/providers/animals_providers.dart';
 
 // ============ REGISTER ANIMAL STATE ============
@@ -10,26 +9,26 @@ import 'package:miganado/features/animals/presentation/providers/animals_provide
 /// Estado del formulario de registro de animal
 class RegisterAnimalState {
   // Datos básicos
-  final String numeroArete;
-  final String? nombrePersonalizado;
-  final Especie? especie;
-  final Categoria? categoria;
-  final EtapaVida? etapa;
-  final Sexo? sexo;
-  final bool esCastrado;
+  final String earTagNumber;
+  final String? customName;
+  final Species? species;
+  final Category? category;
+  final LifeStage? lifeStage;
+  final Sex? sex;
+  final bool isCastrated;
 
   // Datos adicionales
-  final String raza;
-  final DateTime? fechaNacimiento;
-  final int? edadAproximadaMeses;
+  final String breed;
+  final DateTime? birthDate;
+  final int? approximateAgeMonths;
   final bool usarEdadAproximada;
-  final String? ubicacion;
+  final String? location;
 
   // Información adicional
-  final bool vacunada;
-  final String? tipoVacuna;
-  final double? peso;
-  final String? observaciones;
+  final bool isVaccinated;
+  final String? vaccineType;
+  final double? weight;
+  final String? notes;
 
   // Errores de validación
   final Map<String, String> errors;
@@ -42,24 +41,24 @@ class RegisterAnimalState {
 
   RegisterAnimalState({
     // Datos básicos
-    this.numeroArete = '',
-    this.nombrePersonalizado,
-    this.especie,
-    this.categoria,
-    this.etapa,
-    this.sexo,
-    this.esCastrado = false,
+    this.earTagNumber = '',
+    this.customName,
+    this.species,
+    this.category,
+    this.lifeStage,
+    this.sex,
+    this.isCastrated = false,
     // Datos adicionales
-    this.raza = '',
-    this.fechaNacimiento,
-    this.edadAproximadaMeses,
+    this.breed = '',
+    this.birthDate,
+    this.approximateAgeMonths,
     this.usarEdadAproximada = false,
-    this.ubicacion,
+    this.location,
     // Información adicional
-    this.vacunada = false,
-    this.tipoVacuna,
-    this.peso,
-    this.observaciones,
+    this.isVaccinated = false,
+    this.vaccineType,
+    this.weight,
+    this.notes,
     // Errores
     this.errors = const {},
     this.mostrarAlertaArete = false,
@@ -70,12 +69,12 @@ class RegisterAnimalState {
   });
 
   /// Obtener edad en meses para registro
-  int get edadMesesFinal {
-    if (usarEdadAproximada && edadAproximadaMeses != null) {
-      return edadAproximadaMeses!;
+  int get ageMonths {
+    if (usarEdadAproximada && approximateAgeMonths != null) {
+      return approximateAgeMonths!;
     }
-    if (fechaNacimiento != null) {
-      final diferencia = DateTime.now().difference(fechaNacimiento!);
+    if (birthDate != null) {
+      final diferencia = DateTime.now().difference(birthDate!);
       return (diferencia.inDays / 30.44).round();
     }
     return 0;
@@ -83,22 +82,22 @@ class RegisterAnimalState {
 
   /// Copiar estado con cambios
   RegisterAnimalState copyWith({
-    String? numeroArete,
-    String? nombrePersonalizado,
-    Especie? especie,
-    Categoria? categoria,
-    EtapaVida? etapa,
-    Sexo? sexo,
-    bool? esCastrado,
-    String? raza,
-    DateTime? fechaNacimiento,
-    int? edadAproximadaMeses,
+    String? earTagNumber,
+    String? customName,
+    Species? species,
+    Category? category,
+    LifeStage? lifeStage,
+    Sex? sex,
+    bool? isCastrated,
+    String? breed,
+    DateTime? birthDate,
+    int? approximateAgeMonths,
     bool? usarEdadAproximada,
-    String? ubicacion,
-    bool? vacunada,
-    String? tipoVacuna,
-    double? peso,
-    String? observaciones,
+    String? location,
+    bool? isVaccinated,
+    String? vaccineType,
+    double? weight,
+    String? notes,
     Map<String, String>? errors,
     bool? mostrarAlertaArete,
     bool? isLoading,
@@ -106,22 +105,22 @@ class RegisterAnimalState {
     String? errorMessage,
   }) {
     return RegisterAnimalState(
-      numeroArete: numeroArete ?? this.numeroArete,
-      nombrePersonalizado: nombrePersonalizado ?? this.nombrePersonalizado,
-      especie: especie ?? this.especie,
-      categoria: categoria ?? this.categoria,
-      etapa: etapa ?? this.etapa,
-      sexo: sexo ?? this.sexo,
-      esCastrado: esCastrado ?? this.esCastrado,
-      raza: raza ?? this.raza,
-      fechaNacimiento: fechaNacimiento ?? this.fechaNacimiento,
-      edadAproximadaMeses: edadAproximadaMeses ?? this.edadAproximadaMeses,
+      earTagNumber: earTagNumber ?? this.earTagNumber,
+      customName: customName ?? this.customName,
+      species: species ?? this.species,
+      category: category ?? this.category,
+      lifeStage: lifeStage ?? this.lifeStage,
+      sex: sex ?? this.sex,
+      isCastrated: isCastrated ?? this.isCastrated,
+      breed: breed ?? this.breed,
+      birthDate: birthDate ?? this.birthDate,
+      approximateAgeMonths: approximateAgeMonths ?? this.approximateAgeMonths,
       usarEdadAproximada: usarEdadAproximada ?? this.usarEdadAproximada,
-      ubicacion: ubicacion ?? this.ubicacion,
-      vacunada: vacunada ?? this.vacunada,
-      tipoVacuna: tipoVacuna ?? this.tipoVacuna,
-      peso: peso ?? this.peso,
-      observaciones: observaciones ?? this.observaciones,
+      location: location ?? this.location,
+      isVaccinated: isVaccinated ?? this.isVaccinated,
+      vaccineType: vaccineType ?? this.vaccineType,
+      weight: weight ?? this.weight,
+      notes: notes ?? this.notes,
       errors: errors ?? this.errors,
       mostrarAlertaArete: mostrarAlertaArete ?? this.mostrarAlertaArete,
       isLoading: isLoading ?? this.isLoading,
@@ -132,10 +131,10 @@ class RegisterAnimalState {
 
   /// Verificar si el formulario es válido (mínimo: categoría + sexo)
   bool get isValid {
-    return especie != null &&
-        categoria != null &&
-        sexo != null &&
-        (fechaNacimiento != null || usarEdadAproximada) &&
+    return species != null &&
+        category != null &&
+        sex != null &&
+        (birthDate != null || usarEdadAproximada) &&
         errors.isEmpty;
   }
 }
@@ -149,88 +148,88 @@ class RegisterAnimalNotifier extends StateNotifier<RegisterAnimalState> {
   RegisterAnimalNotifier(this.registerUseCase) : super(RegisterAnimalState());
 
   /// Mapeo de categoría a sexo automático
-  static const Map<EtapaVida, Sexo> _sexoPorEtapa = {
-    EtapaVida.becerro: Sexo.macho,
-    EtapaVida.becerra: Sexo.hembra,
-    EtapaVida.vaquilla: Sexo.hembra,
-    EtapaVida.torete: Sexo.macho,
-    EtapaVida.novillo: Sexo.macho,
-    EtapaVida.vaca: Sexo.hembra,
-    EtapaVida.toro: Sexo.macho,
+  static const Map<LifeStage, Sex> _sexoPorEtapa = {
+    LifeStage.calfMale: Sex.male,
+    LifeStage.calfFemale: Sex.female,
+    LifeStage.heifer: Sex.female,
+    LifeStage.youngBull: Sex.male,
+    LifeStage.steer: Sex.male,
+    LifeStage.cow: Sex.female,
+    LifeStage.bull: Sex.male,
   };
 
   /// Obtener sexo automático según la etapa
-  Sexo? _getSexoAutomatico(EtapaVida? etapa) {
+  Sex? _getSexoAutomatico(LifeStage? etapa) {
     if (etapa == null) return null;
     return _sexoPorEtapa[etapa];
   }
 
   /// Actualizar número de arete
   void updateArete(String value) {
-    state = state.copyWith(numeroArete: value, mostrarAlertaArete: false);
+    state = state.copyWith(earTagNumber: value, mostrarAlertaArete: false);
   }
 
   /// Actualizar nombre personalizado
   void updateNombrePersonalizado(String? value) {
-    state = state.copyWith(nombrePersonalizado: value);
+    state = state.copyWith(customName: value);
   }
 
   /// Actualizar especie
-  void updateEspecie(Especie? value) {
-    Categoria? categoria;
+  void updateEspecie(Species? value) {
+    Category? categoria;
     if (value != null) {
       categoria = value.categoriasValidas.first;
     }
-    state = state.copyWith(especie: value, categoria: categoria, sexo: null);
+    state = state.copyWith(species: value, category: categoria, sex: null);
   }
 
   /// Actualizar categoría (con lógica de sexo automático)
-  void updateCategoria(Categoria? value) {
-    Sexo? sexoAutomatico;
+  void updateCategoria(Category? value) {
+    Sex? sexoAutomatico;
 
     // Para bovinos, seleccionar etapa automáticamente
-    if (value == Categoria.vaca) {
+    if (value == Category.cow) {
       // Los becerros no tienen sexo automático (permitir selección)
-      if (state.etapa != EtapaVida.becerro &&
-          state.etapa != EtapaVida.becerra) {
-        sexoAutomatico = _getSexoAutomatico(state.etapa);
+      if (state.lifeStage != LifeStage.calfMale &&
+          state.lifeStage != LifeStage.calfFemale) {
+        sexoAutomatico = _getSexoAutomatico(state.lifeStage);
       }
     }
 
     state = state.copyWith(
-      categoria: value,
-      sexo: sexoAutomatico ?? state.sexo,
+      category: value,
+      sex: sexoAutomatico ?? state.sex,
     );
   }
 
   /// Actualizar etapa (con cambio automático de nombre y sexo)
-  void updateEtapa(EtapaVida? value) {
+  void updateEtapa(LifeStage? value) {
     // Si es becerro, permitir selección manual de sexo
     final sexoAutomatico =
-        (value == EtapaVida.becerro || value == EtapaVida.becerra)
+        (value == LifeStage.calfMale || value == LifeStage.calfFemale)
             ? null
             : _getSexoAutomatico(value);
 
     state = state.copyWith(
-      etapa: value,
-      sexo: sexoAutomatico ?? state.sexo,
+      lifeStage: value,
+      sex: sexoAutomatico ?? state.sex,
     );
   }
 
   /// Actualizar sexo (manual)
-  void updateSexo(Sexo? value) {
-    state = state.copyWith(sexo: value);
+  void updateSexo(Sex? value) {
+    state = state.copyWith(sex: value);
   }
 
   /// Actualizar raza
   void updateRaza(String value) {
-    state = state.copyWith(raza: value);
+    state = state.copyWith(breed: value);
   }
 
   /// Actualizar fecha de nacimiento
   void updateFechaNacimiento(DateTime? value) {
     state = state.copyWith(
-      fechaNacimiento: value,
+      birthDate: value,
       usarEdadAproximada: false,
     );
   }
@@ -238,9 +237,9 @@ class RegisterAnimalNotifier extends StateNotifier<RegisterAnimalState> {
   /// Actualizar edad aproximada en meses
   void updateEdadAproximada(int? value) {
     state = state.copyWith(
-      edadAproximadaMeses: value,
+      approximateAgeMonths: value,
       usarEdadAproximada: true,
-      fechaNacimiento: null,
+      birthDate: null,
     );
   }
 
@@ -248,39 +247,39 @@ class RegisterAnimalNotifier extends StateNotifier<RegisterAnimalState> {
   void toggleUsarEdadAproximada(bool value) {
     state = state.copyWith(
       usarEdadAproximada: value,
-      fechaNacimiento: value ? null : state.fechaNacimiento,
-      edadAproximadaMeses: value ? state.edadAproximadaMeses : null,
+      birthDate: value ? null : state.birthDate,
+      approximateAgeMonths: value ? state.approximateAgeMonths : null,
     );
   }
 
   /// Actualizar castración
   void updateEsCastrado(bool value) {
-    state = state.copyWith(esCastrado: value);
+    state = state.copyWith(isCastrated: value);
   }
 
   /// Actualizar ubicación
   void updateUbicacion(String? value) {
-    state = state.copyWith(ubicacion: value);
+    state = state.copyWith(location: value);
   }
 
   /// Actualizar vacunación
   void updateVacunada(bool value) {
-    state = state.copyWith(vacunada: value);
+    state = state.copyWith(isVaccinated: value);
   }
 
   /// Actualizar tipo de vacuna
   void updateTipoVacuna(String? value) {
-    state = state.copyWith(tipoVacuna: value);
+    state = state.copyWith(vaccineType: value);
   }
 
   /// Actualizar peso
   void updatePeso(double? value) {
-    state = state.copyWith(peso: value);
+    state = state.copyWith(weight: value);
   }
 
   /// Actualizar observaciones
   void updateObservaciones(String? value) {
-    state = state.copyWith(observaciones: value);
+    state = state.copyWith(notes: value);
   }
 
   /// Mostrar alerta de arete faltante
@@ -297,9 +296,7 @@ class RegisterAnimalNotifier extends StateNotifier<RegisterAnimalState> {
   /// Retorna el Animal creado o null si hay error
   Future<Animal?> registrar() async {
     // Validar datos mínimos requeridos
-    if (state.especie == null ||
-        state.categoria == null ||
-        state.sexo == null) {
+    if (state.species == null || state.category == null || state.sex == null) {
       state = state.copyWith(
         errorMessage: 'Por favor completa categoría y sexo del animal',
       );
@@ -307,13 +304,13 @@ class RegisterAnimalNotifier extends StateNotifier<RegisterAnimalState> {
     }
 
     // Advertencia si no hay arete
-    if (state.numeroArete.isEmpty) {
+    if (state.earTagNumber.isEmpty) {
       mostrarAlertaArete();
       // Continuar de todas formas
     }
 
     // Validar que tenga fecha de nacimiento o edad aproximada
-    if (!state.usarEdadAproximada && state.fechaNacimiento == null) {
+    if (!state.usarEdadAproximada && state.birthDate == null) {
       state = state.copyWith(
         errorMessage: 'Por favor ingresa fecha de nacimiento o edad aproximada',
       );
@@ -330,30 +327,30 @@ class RegisterAnimalNotifier extends StateNotifier<RegisterAnimalState> {
 
     try {
       // Generar arete por defecto si no existe
-      final arete = state.numeroArete.isNotEmpty
-          ? state.numeroArete
+      final arete = state.earTagNumber.isNotEmpty
+          ? state.earTagNumber
           : 'AR-${DateTime.now().millisecondsSinceEpoch}';
 
       // Usar fecha de nacimiento o calcular desde edad aproximada
       late DateTime fechaCalculada;
-      if (state.usarEdadAproximada && state.edadAproximadaMeses != null) {
-        final diasAtras = (state.edadAproximadaMeses! * 30.44).toInt();
+      if (state.usarEdadAproximada && state.approximateAgeMonths != null) {
+        final diasAtras = (state.approximateAgeMonths! * 30.44).toInt();
         fechaCalculada = DateTime.now().subtract(Duration(days: diasAtras));
       } else {
-        fechaCalculada = state.fechaNacimiento!;
+        fechaCalculada = state.birthDate!;
       }
 
       // Ejecutar caso de uso
       final animal = await registerUseCase(
         numeroArete: arete,
-        especie: state.especie!,
-        categoria: state.categoria!,
-        sexo: state.sexo!,
-        raza: state.raza.isNotEmpty ? state.raza : 'Desconocida',
+        especie: state.species!,
+        categoria: state.category!,
+        sexo: state.sex!,
+        raza: state.breed.isNotEmpty ? state.breed : 'Desconocida',
         fechaNacimiento: fechaCalculada,
-        edadMeses: state.edadMesesFinal,
-        esCastrado: state.esCastrado,
-        nombrePersonalizado: state.nombrePersonalizado,
+        edadMeses: state.ageMonths,
+        esCastrado: state.isCastrated,
+        nombrePersonalizado: state.customName,
       );
 
       // Éxito

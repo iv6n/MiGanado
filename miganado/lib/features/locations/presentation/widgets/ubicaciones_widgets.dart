@@ -114,7 +114,7 @@ class _CambiarUbicacionDialogState extends State<CambiarUbicacionDialog> {
                   isExpanded: true,
                   underline: const SizedBox(),
                   items: widget.ubicacionesDisponibles
-                      .where((u) => u.nombre != widget.ubicacionActual)
+                      .where((u) => u.name != widget.ubicacionActual)
                       .map((ubicacion) {
                     return DropdownMenuItem(
                       value: ubicacion.uuid,
@@ -124,10 +124,10 @@ class _CambiarUbicacionDialogState extends State<CambiarUbicacionDialog> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(ubicacion.nombre),
-                            if (ubicacion.tipo != null)
+                            Text(ubicacion.name),
+                            if (ubicacion.type != null)
                               Text(
-                                ubicacion.tipo!,
+                                ubicacion.type!,
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.grey.shade600,
@@ -391,9 +391,9 @@ class UbicacionListItem extends StatelessWidget {
             ),
           ),
         ),
-        title: Text(ubicacion.nombre),
+        title: Text(ubicacion.name),
         subtitle: Text(
-          ubicacion.tipo ?? 'Sin especificar',
+          ubicacion.type ?? 'Sin especificar',
           style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
         ),
         onTap: onTap,

@@ -2,40 +2,55 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/data/database/isar_database.dart';
 import 'package:miganado/features/mantenimiento/data/models/tratamiento_entity.dart';
 import 'package:miganado/features/mantenimiento/domain/usecases/tratamientos_usecases.dart';
+import 'package:miganado/core/exceptions/app_exception.dart';
+import 'package:miganado/core/services/logger_service.dart';
 
 final miganadoDatabaseProvider = Provider<MiGanadoDatabase>((ref) {
   return MiGanadoDatabase();
 });
 
-final registrarTratamientoUseCaseProvider =
-    Provider<RegistrarTratamientoUseCase>((ref) {
+final registerTreatmentUseCaseProvider =
+    Provider<RegisterTreatmentUseCase>((ref) {
   final database = ref.watch(miganadoDatabaseProvider);
-  return RegistrarTratamientoUseCase(database: database);
+  return RegisterTreatmentUseCase(database: database);
 });
 
-final obtenerTratamientosUseCaseProvider =
-    Provider<ObtenerTratamientosUseCase>((ref) {
+final getTreatmentsUseCaseProvider = Provider<GetTreatmentsUseCase>((ref) {
   final database = ref.watch(miganadoDatabaseProvider);
-  return ObtenerTratamientosUseCase(database: database);
+  return GetTreatmentsUseCase(database: database);
 });
 
-final actualizarTratamientoUseCaseProvider =
-    Provider<ActualizarTratamientoUseCase>((ref) {
+final updateTreatmentUseCaseProvider = Provider<UpdateTreatmentUseCase>((ref) {
   final database = ref.watch(miganadoDatabaseProvider);
-  return ActualizarTratamientoUseCase(database: database);
+  return UpdateTreatmentUseCase(database: database);
 });
 
-final finalizarTratamientoUseCaseProvider =
-    Provider<FinalizarTratamientoUseCase>((ref) {
+final finishTreatmentUseCaseProvider = Provider<FinishTreatmentUseCase>((ref) {
   final database = ref.watch(miganadoDatabaseProvider);
-  return FinalizarTratamientoUseCase(database: database);
+  return FinishTreatmentUseCase(database: database);
 });
 
-final tratamientosByAnimalProvider =
+final treatmentsByAnimalProvider =
     FutureProvider.family<List<TratamientoEntity>, String>(
         (ref, animalUuid) async {
-  final useCase = ref.watch(obtenerTratamientosUseCaseProvider);
-  return useCase(animalUuid: animalUuid);
+  try {
+    LoggerService.startOperation(
+        'treatmentsByAnimal', 'tratamientos_providers');
+    final useCase = ref.watch(getTreatmentsUseCaseProvider);
+    final tratamientos = await useCase(animalUuid: animalUuid);
+    LoggerService.operationCompleted(
+        'treatmentsByAnimal', 'tratamientos_providers');
+    return tratamientos;
+  } catch (e, st) {
+    final appEx = toAppException(e, st);
+    LoggerService.error(
+        'Error obteniendo tratamientos', appEx, st, 'tratamientos_providers');
+    throw DatabaseException(
+      message: 'No se pudieron cargar los tratamientos: ${appEx.message}',
+      originalError: e,
+      stackTrace: st,
+    );
+  }
 });
 
-final registrandoTratamientoProvider = StateProvider<bool>((ref) => false);
+final registeringTreatmentProvider = StateProvider<bool>((ref) => false);

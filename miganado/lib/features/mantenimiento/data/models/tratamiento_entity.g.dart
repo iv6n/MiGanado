@@ -17,128 +17,243 @@ const TratamientoEntitySchema = CollectionSchema(
   name: r'TratamientoEntity',
   id: 3131384977625114446,
   properties: {
-    r'animalUuid': PropertySchema(
+    r'administrationRoute': PropertySchema(
       id: 0,
+      name: r'administrationRoute',
+      type: IsarType.string,
+    ),
+    r'animalUuid': PropertySchema(
+      id: 1,
       name: r'animalUuid',
       type: IsarType.string,
     ),
-    r'costoMedicamento': PropertySchema(
-      id: 1,
-      name: r'costoMedicamento',
+    r'brand': PropertySchema(
+      id: 2,
+      name: r'brand',
+      type: IsarType.string,
+    ),
+    r'costoMedicina': PropertySchema(
+      id: 3,
+      name: r'costoMedicina',
       type: IsarType.double,
     ),
     r'costoTotal': PropertySchema(
-      id: 2,
+      id: 4,
       name: r'costoTotal',
       type: IsarType.double,
     ),
     r'costoVeterinario': PropertySchema(
-      id: 3,
+      id: 5,
       name: r'costoVeterinario',
       type: IsarType.double,
     ),
+    r'diagnosedBy': PropertySchema(
+      id: 6,
+      name: r'diagnosedBy',
+      type: IsarType.string,
+    ),
     r'diagnosticadoPor': PropertySchema(
-      id: 4,
+      id: 7,
       name: r'diagnosticadoPor',
       type: IsarType.string,
     ),
     r'diagnosticoFinal': PropertySchema(
-      id: 5,
+      id: 8,
       name: r'diagnosticoFinal',
       type: IsarType.string,
     ),
     r'diagnosticoPrevio': PropertySchema(
-      id: 6,
+      id: 9,
       name: r'diagnosticoPrevio',
       type: IsarType.string,
     ),
+    r'dose': PropertySchema(
+      id: 10,
+      name: r'dose',
+      type: IsarType.string,
+    ),
     r'dosis': PropertySchema(
-      id: 7,
+      id: 11,
       name: r'dosis',
       type: IsarType.string,
     ),
     r'duracionDias': PropertySchema(
-      id: 8,
+      id: 12,
       name: r'duracionDias',
       type: IsarType.long,
     ),
+    r'durationDays': PropertySchema(
+      id: 13,
+      name: r'durationDays',
+      type: IsarType.long,
+    ),
     r'efectosSecundarios': PropertySchema(
-      id: 9,
+      id: 14,
       name: r'efectosSecundarios',
       type: IsarType.string,
     ),
+    r'endDate': PropertySchema(
+      id: 15,
+      name: r'endDate',
+      type: IsarType.dateTime,
+    ),
     r'fechaActualizacion': PropertySchema(
-      id: 10,
+      id: 16,
       name: r'fechaActualizacion',
       type: IsarType.dateTime,
     ),
     r'fechaFin': PropertySchema(
-      id: 11,
+      id: 17,
       name: r'fechaFin',
       type: IsarType.dateTime,
     ),
     r'fechaInicio': PropertySchema(
-      id: 12,
+      id: 18,
       name: r'fechaInicio',
       type: IsarType.dateTime,
     ),
     r'fechaRegistro': PropertySchema(
-      id: 13,
+      id: 19,
       name: r'fechaRegistro',
       type: IsarType.dateTime,
     ),
+    r'finalDiagnosis': PropertySchema(
+      id: 20,
+      name: r'finalDiagnosis',
+      type: IsarType.string,
+    ),
     r'frecuencia': PropertySchema(
-      id: 14,
+      id: 21,
       name: r'frecuencia',
       type: IsarType.string,
     ),
+    r'frequency': PropertySchema(
+      id: 22,
+      name: r'frequency',
+      type: IsarType.string,
+    ),
+    r'lot': PropertySchema(
+      id: 23,
+      name: r'lot',
+      type: IsarType.string,
+    ),
     r'lote': PropertySchema(
-      id: 15,
+      id: 24,
       name: r'lote',
       type: IsarType.string,
     ),
     r'marca': PropertySchema(
-      id: 16,
+      id: 25,
       name: r'marca',
       type: IsarType.string,
     ),
     r'medicamento': PropertySchema(
-      id: 17,
+      id: 26,
       name: r'medicamento',
       type: IsarType.string,
     ),
+    r'medicine': PropertySchema(
+      id: 27,
+      name: r'medicine',
+      type: IsarType.string,
+    ),
+    r'medicineCost': PropertySchema(
+      id: 28,
+      name: r'medicineCost',
+      type: IsarType.double,
+    ),
     r'motivo': PropertySchema(
-      id: 18,
+      id: 29,
       name: r'motivo',
       type: IsarType.string,
     ),
     r'notas': PropertySchema(
-      id: 19,
+      id: 30,
       name: r'notas',
       type: IsarType.string,
     ),
+    r'notes': PropertySchema(
+      id: 31,
+      name: r'notes',
+      type: IsarType.string,
+    ),
     r'observaciones': PropertySchema(
-      id: 20,
+      id: 32,
       name: r'observaciones',
       type: IsarType.string,
     ),
+    r'observations': PropertySchema(
+      id: 33,
+      name: r'observations',
+      type: IsarType.string,
+    ),
+    r'previousDiagnosis': PropertySchema(
+      id: 34,
+      name: r'previousDiagnosis',
+      type: IsarType.string,
+    ),
+    r'reason': PropertySchema(
+      id: 35,
+      name: r'reason',
+      type: IsarType.string,
+    ),
+    r'registeredBy': PropertySchema(
+      id: 36,
+      name: r'registeredBy',
+      type: IsarType.string,
+    ),
     r'registradoPor': PropertySchema(
-      id: 21,
+      id: 37,
       name: r'registradoPor',
       type: IsarType.string,
     ),
+    r'registrationDate': PropertySchema(
+      id: 38,
+      name: r'registrationDate',
+      type: IsarType.dateTime,
+    ),
+    r'result': PropertySchema(
+      id: 39,
+      name: r'result',
+      type: IsarType.string,
+    ),
     r'resultado': PropertySchema(
-      id: 22,
+      id: 40,
       name: r'resultado',
       type: IsarType.string,
     ),
+    r'sideEffects': PropertySchema(
+      id: 41,
+      name: r'sideEffects',
+      type: IsarType.string,
+    ),
+    r'startDate': PropertySchema(
+      id: 42,
+      name: r'startDate',
+      type: IsarType.dateTime,
+    ),
+    r'totalCost': PropertySchema(
+      id: 43,
+      name: r'totalCost',
+      type: IsarType.double,
+    ),
+    r'updateDate': PropertySchema(
+      id: 44,
+      name: r'updateDate',
+      type: IsarType.dateTime,
+    ),
     r'uuid': PropertySchema(
-      id: 23,
+      id: 45,
       name: r'uuid',
       type: IsarType.string,
     ),
+    r'veterinaryCost': PropertySchema(
+      id: 46,
+      name: r'veterinaryCost',
+      type: IsarType.double,
+    ),
     r'viaAplicacion': PropertySchema(
-      id: 24,
+      id: 47,
       name: r'viaAplicacion',
       type: IsarType.string,
     )
@@ -190,7 +305,20 @@ int _tratamientoEntityEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  bytesCount += 3 + object.administrationRoute.length * 3;
   bytesCount += 3 + object.animalUuid.length * 3;
+  {
+    final value = object.brand;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.diagnosedBy;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   {
     final value = object.diagnosticadoPor;
     if (value != null) {
@@ -209,6 +337,7 @@ int _tratamientoEntityEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  bytesCount += 3 + object.dose.length * 3;
   bytesCount += 3 + object.dosis.length * 3;
   {
     final value = object.efectosSecundarios;
@@ -216,7 +345,25 @@ int _tratamientoEntityEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
-  bytesCount += 3 + object.frecuencia.length * 3;
+  {
+    final value = object.finalDiagnosis;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.frecuencia;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  bytesCount += 3 + object.frequency.length * 3;
+  {
+    final value = object.lot;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   {
     final value = object.lote;
     if (value != null) {
@@ -230,9 +377,16 @@ int _tratamientoEntityEstimateSize(
     }
   }
   bytesCount += 3 + object.medicamento.length * 3;
+  bytesCount += 3 + object.medicine.length * 3;
   bytesCount += 3 + object.motivo.length * 3;
   {
     final value = object.notas;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.notes;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -243,9 +397,35 @@ int _tratamientoEntityEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  {
+    final value = object.observations;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.previousDiagnosis;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  bytesCount += 3 + object.reason.length * 3;
+  bytesCount += 3 + object.registeredBy.length * 3;
   bytesCount += 3 + object.registradoPor.length * 3;
   {
+    final value = object.result;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.resultado;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.sideEffects;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -261,31 +441,54 @@ void _tratamientoEntitySerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.animalUuid);
-  writer.writeDouble(offsets[1], object.costoMedicamento);
-  writer.writeDouble(offsets[2], object.costoTotal);
-  writer.writeDouble(offsets[3], object.costoVeterinario);
-  writer.writeString(offsets[4], object.diagnosticadoPor);
-  writer.writeString(offsets[5], object.diagnosticoFinal);
-  writer.writeString(offsets[6], object.diagnosticoPrevio);
-  writer.writeString(offsets[7], object.dosis);
-  writer.writeLong(offsets[8], object.duracionDias);
-  writer.writeString(offsets[9], object.efectosSecundarios);
-  writer.writeDateTime(offsets[10], object.fechaActualizacion);
-  writer.writeDateTime(offsets[11], object.fechaFin);
-  writer.writeDateTime(offsets[12], object.fechaInicio);
-  writer.writeDateTime(offsets[13], object.fechaRegistro);
-  writer.writeString(offsets[14], object.frecuencia);
-  writer.writeString(offsets[15], object.lote);
-  writer.writeString(offsets[16], object.marca);
-  writer.writeString(offsets[17], object.medicamento);
-  writer.writeString(offsets[18], object.motivo);
-  writer.writeString(offsets[19], object.notas);
-  writer.writeString(offsets[20], object.observaciones);
-  writer.writeString(offsets[21], object.registradoPor);
-  writer.writeString(offsets[22], object.resultado);
-  writer.writeString(offsets[23], object.uuid);
-  writer.writeString(offsets[24], object.viaAplicacion);
+  writer.writeString(offsets[0], object.administrationRoute);
+  writer.writeString(offsets[1], object.animalUuid);
+  writer.writeString(offsets[2], object.brand);
+  writer.writeDouble(offsets[3], object.costoMedicina);
+  writer.writeDouble(offsets[4], object.costoTotal);
+  writer.writeDouble(offsets[5], object.costoVeterinario);
+  writer.writeString(offsets[6], object.diagnosedBy);
+  writer.writeString(offsets[7], object.diagnosticadoPor);
+  writer.writeString(offsets[8], object.diagnosticoFinal);
+  writer.writeString(offsets[9], object.diagnosticoPrevio);
+  writer.writeString(offsets[10], object.dose);
+  writer.writeString(offsets[11], object.dosis);
+  writer.writeLong(offsets[12], object.duracionDias);
+  writer.writeLong(offsets[13], object.durationDays);
+  writer.writeString(offsets[14], object.efectosSecundarios);
+  writer.writeDateTime(offsets[15], object.endDate);
+  writer.writeDateTime(offsets[16], object.fechaActualizacion);
+  writer.writeDateTime(offsets[17], object.fechaFin);
+  writer.writeDateTime(offsets[18], object.fechaInicio);
+  writer.writeDateTime(offsets[19], object.fechaRegistro);
+  writer.writeString(offsets[20], object.finalDiagnosis);
+  writer.writeString(offsets[21], object.frecuencia);
+  writer.writeString(offsets[22], object.frequency);
+  writer.writeString(offsets[23], object.lot);
+  writer.writeString(offsets[24], object.lote);
+  writer.writeString(offsets[25], object.marca);
+  writer.writeString(offsets[26], object.medicamento);
+  writer.writeString(offsets[27], object.medicine);
+  writer.writeDouble(offsets[28], object.medicineCost);
+  writer.writeString(offsets[29], object.motivo);
+  writer.writeString(offsets[30], object.notas);
+  writer.writeString(offsets[31], object.notes);
+  writer.writeString(offsets[32], object.observaciones);
+  writer.writeString(offsets[33], object.observations);
+  writer.writeString(offsets[34], object.previousDiagnosis);
+  writer.writeString(offsets[35], object.reason);
+  writer.writeString(offsets[36], object.registeredBy);
+  writer.writeString(offsets[37], object.registradoPor);
+  writer.writeDateTime(offsets[38], object.registrationDate);
+  writer.writeString(offsets[39], object.result);
+  writer.writeString(offsets[40], object.resultado);
+  writer.writeString(offsets[41], object.sideEffects);
+  writer.writeDateTime(offsets[42], object.startDate);
+  writer.writeDouble(offsets[43], object.totalCost);
+  writer.writeDateTime(offsets[44], object.updateDate);
+  writer.writeString(offsets[45], object.uuid);
+  writer.writeDouble(offsets[46], object.veterinaryCost);
+  writer.writeString(offsets[47], object.viaAplicacion);
 }
 
 TratamientoEntity _tratamientoEntityDeserialize(
@@ -295,33 +498,54 @@ TratamientoEntity _tratamientoEntityDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = TratamientoEntity(
-    animalUuid: reader.readString(offsets[0]),
-    costoMedicamento: reader.readDoubleOrNull(offsets[1]),
-    costoTotal: reader.readDoubleOrNull(offsets[2]),
-    costoVeterinario: reader.readDoubleOrNull(offsets[3]),
-    diagnosticadoPor: reader.readStringOrNull(offsets[4]),
-    diagnosticoFinal: reader.readStringOrNull(offsets[5]),
-    diagnosticoPrevio: reader.readStringOrNull(offsets[6]),
-    dosis: reader.readString(offsets[7]),
-    duracionDias: reader.readLong(offsets[8]),
-    efectosSecundarios: reader.readStringOrNull(offsets[9]),
-    fechaFin: reader.readDateTimeOrNull(offsets[11]),
-    fechaInicio: reader.readDateTime(offsets[12]),
-    frecuencia: reader.readString(offsets[14]),
-    lote: reader.readStringOrNull(offsets[15]),
-    marca: reader.readStringOrNull(offsets[16]),
-    medicamento: reader.readString(offsets[17]),
-    motivo: reader.readString(offsets[18]),
-    notas: reader.readStringOrNull(offsets[19]),
-    observaciones: reader.readStringOrNull(offsets[20]),
-    registradoPor: reader.readString(offsets[21]),
-    resultado: reader.readStringOrNull(offsets[22]),
-    viaAplicacion: reader.readString(offsets[24]),
+    animalUuid: reader.readString(offsets[1]),
+    costoMedicina: reader.readDoubleOrNull(offsets[3]),
+    costoTotal: reader.readDoubleOrNull(offsets[4]),
+    costoVeterinario: reader.readDoubleOrNull(offsets[5]),
+    diagnosticadoPor: reader.readStringOrNull(offsets[7]),
+    diagnosticoFinal: reader.readStringOrNull(offsets[8]),
+    diagnosticoPrevio: reader.readStringOrNull(offsets[9]),
+    dosis: reader.readString(offsets[11]),
+    duracionDias: reader.readLong(offsets[12]),
+    efectosSecundarios: reader.readStringOrNull(offsets[14]),
+    fechaFin: reader.readDateTimeOrNull(offsets[17]),
+    fechaInicio: reader.readDateTime(offsets[18]),
+    frecuencia: reader.readStringOrNull(offsets[21]),
+    lote: reader.readStringOrNull(offsets[24]),
+    marca: reader.readStringOrNull(offsets[25]),
+    medicamento: reader.readString(offsets[26]),
+    motivo: reader.readString(offsets[29]),
+    notas: reader.readStringOrNull(offsets[30]),
+    observaciones: reader.readStringOrNull(offsets[32]),
+    registradoPor: reader.readString(offsets[37]),
+    resultado: reader.readStringOrNull(offsets[40]),
+    viaAplicacion: reader.readString(offsets[47]),
   );
-  object.fechaActualizacion = reader.readDateTimeOrNull(offsets[10]);
-  object.fechaRegistro = reader.readDateTime(offsets[13]);
+  object.administrationRoute = reader.readString(offsets[0]);
+  object.brand = reader.readStringOrNull(offsets[2]);
+  object.diagnosedBy = reader.readStringOrNull(offsets[6]);
+  object.dose = reader.readString(offsets[10]);
+  object.durationDays = reader.readLong(offsets[13]);
+  object.endDate = reader.readDateTimeOrNull(offsets[15]);
+  object.finalDiagnosis = reader.readStringOrNull(offsets[20]);
+  object.frequency = reader.readString(offsets[22]);
   object.id = id;
-  object.uuid = reader.readString(offsets[23]);
+  object.lot = reader.readStringOrNull(offsets[23]);
+  object.medicine = reader.readString(offsets[27]);
+  object.medicineCost = reader.readDoubleOrNull(offsets[28]);
+  object.notes = reader.readStringOrNull(offsets[31]);
+  object.observations = reader.readStringOrNull(offsets[33]);
+  object.previousDiagnosis = reader.readStringOrNull(offsets[34]);
+  object.reason = reader.readString(offsets[35]);
+  object.registeredBy = reader.readString(offsets[36]);
+  object.registrationDate = reader.readDateTime(offsets[38]);
+  object.result = reader.readStringOrNull(offsets[39]);
+  object.sideEffects = reader.readStringOrNull(offsets[41]);
+  object.startDate = reader.readDateTime(offsets[42]);
+  object.totalCost = reader.readDoubleOrNull(offsets[43]);
+  object.updateDate = reader.readDateTimeOrNull(offsets[44]);
+  object.uuid = reader.readString(offsets[45]);
+  object.veterinaryCost = reader.readDoubleOrNull(offsets[46]);
   return object;
 }
 
@@ -335,52 +559,98 @@ P _tratamientoEntityDeserializeProp<P>(
     case 0:
       return (reader.readString(offset)) as P;
     case 1:
-      return (reader.readDoubleOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 2:
-      return (reader.readDoubleOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 3:
       return (reader.readDoubleOrNull(offset)) as P;
     case 4:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 5:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 6:
       return (reader.readStringOrNull(offset)) as P;
     case 7:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 8:
-      return (reader.readLong(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 9:
       return (reader.readStringOrNull(offset)) as P;
     case 10:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 11:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 12:
-      return (reader.readDateTime(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 13:
-      return (reader.readDateTime(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 14:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 15:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 16:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 17:
-      return (reader.readString(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 18:
-      return (reader.readString(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 19:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 20:
       return (reader.readStringOrNull(offset)) as P;
     case 21:
-      return (reader.readString(offset)) as P;
-    case 22:
       return (reader.readStringOrNull(offset)) as P;
-    case 23:
+    case 22:
       return (reader.readString(offset)) as P;
+    case 23:
+      return (reader.readStringOrNull(offset)) as P;
     case 24:
+      return (reader.readStringOrNull(offset)) as P;
+    case 25:
+      return (reader.readStringOrNull(offset)) as P;
+    case 26:
+      return (reader.readString(offset)) as P;
+    case 27:
+      return (reader.readString(offset)) as P;
+    case 28:
+      return (reader.readDoubleOrNull(offset)) as P;
+    case 29:
+      return (reader.readString(offset)) as P;
+    case 30:
+      return (reader.readStringOrNull(offset)) as P;
+    case 31:
+      return (reader.readStringOrNull(offset)) as P;
+    case 32:
+      return (reader.readStringOrNull(offset)) as P;
+    case 33:
+      return (reader.readStringOrNull(offset)) as P;
+    case 34:
+      return (reader.readStringOrNull(offset)) as P;
+    case 35:
+      return (reader.readString(offset)) as P;
+    case 36:
+      return (reader.readString(offset)) as P;
+    case 37:
+      return (reader.readString(offset)) as P;
+    case 38:
+      return (reader.readDateTime(offset)) as P;
+    case 39:
+      return (reader.readStringOrNull(offset)) as P;
+    case 40:
+      return (reader.readStringOrNull(offset)) as P;
+    case 41:
+      return (reader.readStringOrNull(offset)) as P;
+    case 42:
+      return (reader.readDateTime(offset)) as P;
+    case 43:
+      return (reader.readDoubleOrNull(offset)) as P;
+    case 44:
+      return (reader.readDateTimeOrNull(offset)) as P;
+    case 45:
+      return (reader.readString(offset)) as P;
+    case 46:
+      return (reader.readDoubleOrNull(offset)) as P;
+    case 47:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -629,6 +899,142 @@ extension TratamientoEntityQueryWhere
 extension TratamientoEntityQueryFilter
     on QueryBuilder<TratamientoEntity, TratamientoEntity, QFilterCondition> {
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      administrationRouteEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'administrationRoute',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      administrationRouteGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'administrationRoute',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      administrationRouteLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'administrationRoute',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      administrationRouteBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'administrationRoute',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      administrationRouteStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'administrationRoute',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      administrationRouteEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'administrationRoute',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      administrationRouteContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'administrationRoute',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      administrationRouteMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'administrationRoute',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      administrationRouteIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'administrationRoute',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      administrationRouteIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'administrationRoute',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
       animalUuidEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -765,31 +1171,185 @@ extension TratamientoEntityQueryFilter
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
-      costoMedicamentoIsNull() {
+      brandIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'costoMedicamento',
+        property: r'brand',
       ));
     });
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
-      costoMedicamentoIsNotNull() {
+      brandIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'costoMedicamento',
+        property: r'brand',
       ));
     });
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
-      costoMedicamentoEqualTo(
+      brandEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'brand',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      brandGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'brand',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      brandLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'brand',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      brandBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'brand',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      brandStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'brand',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      brandEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'brand',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      brandContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'brand',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      brandMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'brand',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      brandIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'brand',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      brandIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'brand',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      costoMedicinaIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'costoMedicina',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      costoMedicinaIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'costoMedicina',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      costoMedicinaEqualTo(
     double? value, {
     double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'costoMedicamento',
+        property: r'costoMedicina',
         value: value,
         epsilon: epsilon,
       ));
@@ -797,7 +1357,7 @@ extension TratamientoEntityQueryFilter
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
-      costoMedicamentoGreaterThan(
+      costoMedicinaGreaterThan(
     double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -805,7 +1365,7 @@ extension TratamientoEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'costoMedicamento',
+        property: r'costoMedicina',
         value: value,
         epsilon: epsilon,
       ));
@@ -813,7 +1373,7 @@ extension TratamientoEntityQueryFilter
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
-      costoMedicamentoLessThan(
+      costoMedicinaLessThan(
     double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -821,7 +1381,7 @@ extension TratamientoEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'costoMedicamento',
+        property: r'costoMedicina',
         value: value,
         epsilon: epsilon,
       ));
@@ -829,7 +1389,7 @@ extension TratamientoEntityQueryFilter
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
-      costoMedicamentoBetween(
+      costoMedicinaBetween(
     double? lower,
     double? upper, {
     bool includeLower = true,
@@ -838,7 +1398,7 @@ extension TratamientoEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'costoMedicamento',
+        property: r'costoMedicina',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1012,6 +1572,160 @@ extension TratamientoEntityQueryFilter
         upper: upper,
         includeUpper: includeUpper,
         epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      diagnosedByIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'diagnosedBy',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      diagnosedByIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'diagnosedBy',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      diagnosedByEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'diagnosedBy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      diagnosedByGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'diagnosedBy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      diagnosedByLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'diagnosedBy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      diagnosedByBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'diagnosedBy',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      diagnosedByStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'diagnosedBy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      diagnosedByEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'diagnosedBy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      diagnosedByContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'diagnosedBy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      diagnosedByMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'diagnosedBy',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      diagnosedByIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'diagnosedBy',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      diagnosedByIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'diagnosedBy',
+        value: '',
       ));
     });
   }
@@ -1479,6 +2193,142 @@ extension TratamientoEntityQueryFilter
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      doseEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'dose',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      doseGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'dose',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      doseLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'dose',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      doseBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'dose',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      doseStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'dose',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      doseEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'dose',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      doseContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'dose',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      doseMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'dose',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      doseIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'dose',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      doseIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'dose',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
       dosisEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -1671,6 +2521,62 @@ extension TratamientoEntityQueryFilter
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      durationDaysEqualTo(int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'durationDays',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      durationDaysGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'durationDays',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      durationDaysLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'durationDays',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      durationDaysBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'durationDays',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
       efectosSecundariosIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1820,6 +2726,80 @@ extension TratamientoEntityQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'efectosSecundarios',
         value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      endDateIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'endDate',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      endDateIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'endDate',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      endDateEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'endDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      endDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'endDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      endDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'endDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      endDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'endDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
       ));
     });
   }
@@ -2085,8 +3065,180 @@ extension TratamientoEntityQueryFilter
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
-      frecuenciaEqualTo(
+      finalDiagnosisIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'finalDiagnosis',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      finalDiagnosisIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'finalDiagnosis',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      finalDiagnosisEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'finalDiagnosis',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      finalDiagnosisGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'finalDiagnosis',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      finalDiagnosisLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'finalDiagnosis',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      finalDiagnosisBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'finalDiagnosis',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      finalDiagnosisStartsWith(
     String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'finalDiagnosis',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      finalDiagnosisEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'finalDiagnosis',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      finalDiagnosisContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'finalDiagnosis',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      finalDiagnosisMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'finalDiagnosis',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      finalDiagnosisIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'finalDiagnosis',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      finalDiagnosisIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'finalDiagnosis',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      frecuenciaIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'frecuencia',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      frecuenciaIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'frecuencia',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      frecuenciaEqualTo(
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -2100,7 +3252,7 @@ extension TratamientoEntityQueryFilter
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
       frecuenciaGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -2116,7 +3268,7 @@ extension TratamientoEntityQueryFilter
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
       frecuenciaLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -2132,8 +3284,8 @@ extension TratamientoEntityQueryFilter
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
       frecuenciaBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -2221,6 +3373,142 @@ extension TratamientoEntityQueryFilter
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      frequencyEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'frequency',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      frequencyGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'frequency',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      frequencyLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'frequency',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      frequencyBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'frequency',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      frequencyStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'frequency',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      frequencyEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'frequency',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      frequencyContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'frequency',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      frequencyMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'frequency',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      frequencyIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'frequency',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      frequencyIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'frequency',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
       idIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -2290,6 +3578,160 @@ extension TratamientoEntityQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      lotIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'lot',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      lotIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'lot',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      lotEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lot',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      lotGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'lot',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      lotLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'lot',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      lotBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'lot',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      lotStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'lot',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      lotEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'lot',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      lotContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'lot',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      lotMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'lot',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      lotIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lot',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      lotIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'lot',
+        value: '',
       ));
     });
   }
@@ -2739,6 +4181,226 @@ extension TratamientoEntityQueryFilter
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'medicine',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'medicine',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'medicine',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'medicine',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'medicine',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'medicine',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'medicine',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'medicine',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'medicine',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'medicine',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineCostIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'medicineCost',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineCostIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'medicineCost',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineCostEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'medicineCost',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineCostGreaterThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'medicineCost',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineCostLessThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'medicineCost',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      medicineCostBetween(
+    double? lower,
+    double? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'medicineCost',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
       motivoEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -3029,6 +4691,160 @@ extension TratamientoEntityQueryFilter
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      notesIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'notes',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      notesIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'notes',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      notesEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'notes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      notesGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'notes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      notesLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'notes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      notesBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'notes',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      notesStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'notes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      notesEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'notes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      notesContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'notes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      notesMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'notes',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      notesIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'notes',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      notesIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'notes',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
       observacionesIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -3183,6 +4999,586 @@ extension TratamientoEntityQueryFilter
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      observationsIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'observations',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      observationsIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'observations',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      observationsEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'observations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      observationsGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'observations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      observationsLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'observations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      observationsBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'observations',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      observationsStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'observations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      observationsEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'observations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      observationsContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'observations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      observationsMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'observations',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      observationsIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'observations',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      observationsIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'observations',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      previousDiagnosisIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'previousDiagnosis',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      previousDiagnosisIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'previousDiagnosis',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      previousDiagnosisEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'previousDiagnosis',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      previousDiagnosisGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'previousDiagnosis',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      previousDiagnosisLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'previousDiagnosis',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      previousDiagnosisBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'previousDiagnosis',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      previousDiagnosisStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'previousDiagnosis',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      previousDiagnosisEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'previousDiagnosis',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      previousDiagnosisContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'previousDiagnosis',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      previousDiagnosisMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'previousDiagnosis',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      previousDiagnosisIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'previousDiagnosis',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      previousDiagnosisIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'previousDiagnosis',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      reasonEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'reason',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      reasonGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'reason',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      reasonLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'reason',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      reasonBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'reason',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      reasonStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'reason',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      reasonEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'reason',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      reasonContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'reason',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      reasonMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'reason',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      reasonIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'reason',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      reasonIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'reason',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      registeredByEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'registeredBy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      registeredByGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'registeredBy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      registeredByLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'registeredBy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      registeredByBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'registeredBy',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      registeredByStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'registeredBy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      registeredByEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'registeredBy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      registeredByContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'registeredBy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      registeredByMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'registeredBy',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      registeredByIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'registeredBy',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      registeredByIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'registeredBy',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
       registradoPorEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -3313,6 +5709,216 @@ extension TratamientoEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'registradoPor',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      registrationDateEqualTo(DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'registrationDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      registrationDateGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'registrationDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      registrationDateLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'registrationDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      registrationDateBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'registrationDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      resultIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'result',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      resultIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'result',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      resultEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'result',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      resultGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'result',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      resultLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'result',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      resultBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'result',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      resultStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'result',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      resultEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'result',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      resultContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'result',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      resultMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'result',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      resultIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'result',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      resultIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'result',
         value: '',
       ));
     });
@@ -3473,6 +6079,374 @@ extension TratamientoEntityQueryFilter
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      sideEffectsIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'sideEffects',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      sideEffectsIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'sideEffects',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      sideEffectsEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'sideEffects',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      sideEffectsGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'sideEffects',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      sideEffectsLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'sideEffects',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      sideEffectsBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'sideEffects',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      sideEffectsStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'sideEffects',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      sideEffectsEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'sideEffects',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      sideEffectsContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'sideEffects',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      sideEffectsMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'sideEffects',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      sideEffectsIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'sideEffects',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      sideEffectsIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'sideEffects',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      startDateEqualTo(DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'startDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      startDateGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'startDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      startDateLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'startDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      startDateBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'startDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      totalCostIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'totalCost',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      totalCostIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'totalCost',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      totalCostEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'totalCost',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      totalCostGreaterThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'totalCost',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      totalCostLessThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'totalCost',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      totalCostBetween(
+    double? lower,
+    double? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'totalCost',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      updateDateIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'updateDate',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      updateDateIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'updateDate',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      updateDateEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'updateDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      updateDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'updateDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      updateDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'updateDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      updateDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'updateDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
       uuidEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -3604,6 +6578,90 @@ extension TratamientoEntityQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'uuid',
         value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      veterinaryCostIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'veterinaryCost',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      veterinaryCostIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'veterinaryCost',
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      veterinaryCostEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'veterinaryCost',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      veterinaryCostGreaterThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'veterinaryCost',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      veterinaryCostLessThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'veterinaryCost',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterFilterCondition>
+      veterinaryCostBetween(
+    double? lower,
+    double? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'veterinaryCost',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
       ));
     });
   }
@@ -3754,6 +6812,20 @@ extension TratamientoEntityQueryLinks
 extension TratamientoEntityQuerySortBy
     on QueryBuilder<TratamientoEntity, TratamientoEntity, QSortBy> {
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByAdministrationRoute() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'administrationRoute', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByAdministrationRouteDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'administrationRoute', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       sortByAnimalUuid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'animalUuid', Sort.asc);
@@ -3768,16 +6840,30 @@ extension TratamientoEntityQuerySortBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
-      sortByCostoMedicamento() {
+      sortByBrand() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'costoMedicamento', Sort.asc);
+      return query.addSortBy(r'brand', Sort.asc);
     });
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
-      sortByCostoMedicamentoDesc() {
+      sortByBrandDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'costoMedicamento', Sort.desc);
+      return query.addSortBy(r'brand', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByCostoMedicina() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'costoMedicina', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByCostoMedicinaDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'costoMedicina', Sort.desc);
     });
   }
 
@@ -3806,6 +6892,20 @@ extension TratamientoEntityQuerySortBy
       sortByCostoVeterinarioDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'costoVeterinario', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByDiagnosedBy() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'diagnosedBy', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByDiagnosedByDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'diagnosedBy', Sort.desc);
     });
   }
 
@@ -3852,6 +6952,20 @@ extension TratamientoEntityQuerySortBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByDose() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'dose', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByDoseDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'dose', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       sortByDosis() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'dosis', Sort.asc);
@@ -3880,6 +6994,20 @@ extension TratamientoEntityQuerySortBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByDurationDays() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'durationDays', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByDurationDaysDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'durationDays', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       sortByEfectosSecundarios() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'efectosSecundarios', Sort.asc);
@@ -3890,6 +7018,20 @@ extension TratamientoEntityQuerySortBy
       sortByEfectosSecundariosDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'efectosSecundarios', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByEndDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'endDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByEndDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'endDate', Sort.desc);
     });
   }
 
@@ -3950,6 +7092,20 @@ extension TratamientoEntityQuerySortBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByFinalDiagnosis() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'finalDiagnosis', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByFinalDiagnosisDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'finalDiagnosis', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       sortByFrecuencia() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'frecuencia', Sort.asc);
@@ -3960,6 +7116,33 @@ extension TratamientoEntityQuerySortBy
       sortByFrecuenciaDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'frecuencia', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByFrequency() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'frequency', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByFrequencyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'frequency', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy> sortByLot() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lot', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByLotDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lot', Sort.desc);
     });
   }
 
@@ -4006,6 +7189,34 @@ extension TratamientoEntityQuerySortBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByMedicine() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'medicine', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByMedicineDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'medicine', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByMedicineCost() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'medicineCost', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByMedicineCostDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'medicineCost', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       sortByMotivo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'motivo', Sort.asc);
@@ -4034,6 +7245,20 @@ extension TratamientoEntityQuerySortBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByNotes() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'notes', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByNotesDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'notes', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       sortByObservaciones() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'observaciones', Sort.asc);
@@ -4044,6 +7269,62 @@ extension TratamientoEntityQuerySortBy
       sortByObservacionesDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'observaciones', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByObservations() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'observations', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByObservationsDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'observations', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByPreviousDiagnosis() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'previousDiagnosis', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByPreviousDiagnosisDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'previousDiagnosis', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByReason() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'reason', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByReasonDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'reason', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByRegisteredBy() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'registeredBy', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByRegisteredByDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'registeredBy', Sort.desc);
     });
   }
 
@@ -4062,6 +7343,34 @@ extension TratamientoEntityQuerySortBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByRegistrationDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'registrationDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByRegistrationDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'registrationDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByResult() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'result', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByResultDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'result', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       sortByResultado() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'resultado', Sort.asc);
@@ -4076,6 +7385,62 @@ extension TratamientoEntityQuerySortBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortBySideEffects() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sideEffects', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortBySideEffectsDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sideEffects', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByStartDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'startDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByStartDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'startDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByTotalCost() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'totalCost', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByTotalCostDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'totalCost', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByUpdateDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updateDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByUpdateDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updateDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       sortByUuid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uuid', Sort.asc);
@@ -4086,6 +7451,20 @@ extension TratamientoEntityQuerySortBy
       sortByUuidDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uuid', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByVeterinaryCost() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'veterinaryCost', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      sortByVeterinaryCostDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'veterinaryCost', Sort.desc);
     });
   }
 
@@ -4107,6 +7486,20 @@ extension TratamientoEntityQuerySortBy
 extension TratamientoEntityQuerySortThenBy
     on QueryBuilder<TratamientoEntity, TratamientoEntity, QSortThenBy> {
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByAdministrationRoute() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'administrationRoute', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByAdministrationRouteDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'administrationRoute', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       thenByAnimalUuid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'animalUuid', Sort.asc);
@@ -4121,16 +7514,30 @@ extension TratamientoEntityQuerySortThenBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
-      thenByCostoMedicamento() {
+      thenByBrand() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'costoMedicamento', Sort.asc);
+      return query.addSortBy(r'brand', Sort.asc);
     });
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
-      thenByCostoMedicamentoDesc() {
+      thenByBrandDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'costoMedicamento', Sort.desc);
+      return query.addSortBy(r'brand', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByCostoMedicina() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'costoMedicina', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByCostoMedicinaDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'costoMedicina', Sort.desc);
     });
   }
 
@@ -4159,6 +7566,20 @@ extension TratamientoEntityQuerySortThenBy
       thenByCostoVeterinarioDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'costoVeterinario', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByDiagnosedBy() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'diagnosedBy', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByDiagnosedByDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'diagnosedBy', Sort.desc);
     });
   }
 
@@ -4205,6 +7626,20 @@ extension TratamientoEntityQuerySortThenBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByDose() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'dose', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByDoseDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'dose', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       thenByDosis() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'dosis', Sort.asc);
@@ -4233,6 +7668,20 @@ extension TratamientoEntityQuerySortThenBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByDurationDays() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'durationDays', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByDurationDaysDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'durationDays', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       thenByEfectosSecundarios() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'efectosSecundarios', Sort.asc);
@@ -4243,6 +7692,20 @@ extension TratamientoEntityQuerySortThenBy
       thenByEfectosSecundariosDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'efectosSecundarios', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByEndDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'endDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByEndDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'endDate', Sort.desc);
     });
   }
 
@@ -4303,6 +7766,20 @@ extension TratamientoEntityQuerySortThenBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByFinalDiagnosis() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'finalDiagnosis', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByFinalDiagnosisDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'finalDiagnosis', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       thenByFrecuencia() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'frecuencia', Sort.asc);
@@ -4316,6 +7793,20 @@ extension TratamientoEntityQuerySortThenBy
     });
   }
 
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByFrequency() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'frequency', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByFrequencyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'frequency', Sort.desc);
+    });
+  }
+
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -4326,6 +7817,19 @@ extension TratamientoEntityQuerySortThenBy
       thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy> thenByLot() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lot', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByLotDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lot', Sort.desc);
     });
   }
 
@@ -4372,6 +7876,34 @@ extension TratamientoEntityQuerySortThenBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByMedicine() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'medicine', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByMedicineDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'medicine', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByMedicineCost() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'medicineCost', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByMedicineCostDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'medicineCost', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       thenByMotivo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'motivo', Sort.asc);
@@ -4400,6 +7932,20 @@ extension TratamientoEntityQuerySortThenBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByNotes() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'notes', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByNotesDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'notes', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       thenByObservaciones() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'observaciones', Sort.asc);
@@ -4410,6 +7956,62 @@ extension TratamientoEntityQuerySortThenBy
       thenByObservacionesDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'observaciones', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByObservations() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'observations', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByObservationsDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'observations', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByPreviousDiagnosis() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'previousDiagnosis', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByPreviousDiagnosisDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'previousDiagnosis', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByReason() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'reason', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByReasonDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'reason', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByRegisteredBy() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'registeredBy', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByRegisteredByDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'registeredBy', Sort.desc);
     });
   }
 
@@ -4428,6 +8030,34 @@ extension TratamientoEntityQuerySortThenBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByRegistrationDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'registrationDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByRegistrationDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'registrationDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByResult() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'result', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByResultDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'result', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       thenByResultado() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'resultado', Sort.asc);
@@ -4442,6 +8072,62 @@ extension TratamientoEntityQuerySortThenBy
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenBySideEffects() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sideEffects', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenBySideEffectsDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sideEffects', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByStartDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'startDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByStartDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'startDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByTotalCost() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'totalCost', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByTotalCostDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'totalCost', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByUpdateDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updateDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByUpdateDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updateDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
       thenByUuid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uuid', Sort.asc);
@@ -4452,6 +8138,20 @@ extension TratamientoEntityQuerySortThenBy
       thenByUuidDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uuid', Sort.desc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByVeterinaryCost() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'veterinaryCost', Sort.asc);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QAfterSortBy>
+      thenByVeterinaryCostDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'veterinaryCost', Sort.desc);
     });
   }
 
@@ -4473,16 +8173,31 @@ extension TratamientoEntityQuerySortThenBy
 extension TratamientoEntityQueryWhereDistinct
     on QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct> {
   QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByAdministrationRoute({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'administrationRoute',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
       distinctByAnimalUuid({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'animalUuid', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
-      distinctByCostoMedicamento() {
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct> distinctByBrand(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'costoMedicamento');
+      return query.addDistinctBy(r'brand', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByCostoMedicina() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'costoMedicina');
     });
   }
 
@@ -4497,6 +8212,13 @@ extension TratamientoEntityQueryWhereDistinct
       distinctByCostoVeterinario() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'costoVeterinario');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByDiagnosedBy({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'diagnosedBy', caseSensitive: caseSensitive);
     });
   }
 
@@ -4524,6 +8246,13 @@ extension TratamientoEntityQueryWhereDistinct
     });
   }
 
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct> distinctByDose(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'dose', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct> distinctByDosis(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -4539,10 +8268,24 @@ extension TratamientoEntityQueryWhereDistinct
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByDurationDays() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'durationDays');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
       distinctByEfectosSecundarios({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'efectosSecundarios',
           caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByEndDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'endDate');
     });
   }
 
@@ -4575,9 +8318,31 @@ extension TratamientoEntityQueryWhereDistinct
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByFinalDiagnosis({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'finalDiagnosis',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
       distinctByFrecuencia({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'frecuencia', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByFrequency({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'frequency', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct> distinctByLot(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'lot', caseSensitive: caseSensitive);
     });
   }
 
@@ -4603,6 +8368,20 @@ extension TratamientoEntityQueryWhereDistinct
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByMedicine({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'medicine', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByMedicineCost() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'medicineCost');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
       distinctByMotivo({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'motivo', caseSensitive: caseSensitive);
@@ -4616,11 +8395,47 @@ extension TratamientoEntityQueryWhereDistinct
     });
   }
 
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct> distinctByNotes(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'notes', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
       distinctByObservaciones({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'observaciones',
           caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByObservations({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'observations', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByPreviousDiagnosis({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'previousDiagnosis',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByReason({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'reason', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByRegisteredBy({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'registeredBy', caseSensitive: caseSensitive);
     });
   }
 
@@ -4633,9 +8448,51 @@ extension TratamientoEntityQueryWhereDistinct
   }
 
   QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByRegistrationDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'registrationDate');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByResult({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'result', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
       distinctByResultado({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'resultado', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctBySideEffects({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'sideEffects', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByStartDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'startDate');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByTotalCost() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'totalCost');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByUpdateDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'updateDate');
     });
   }
 
@@ -4643,6 +8500,13 @@ extension TratamientoEntityQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'uuid', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, TratamientoEntity, QDistinct>
+      distinctByVeterinaryCost() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'veterinaryCost');
     });
   }
 
@@ -4664,16 +8528,29 @@ extension TratamientoEntityQueryProperty
   }
 
   QueryBuilder<TratamientoEntity, String, QQueryOperations>
+      administrationRouteProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'administrationRoute');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, String, QQueryOperations>
       animalUuidProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'animalUuid');
     });
   }
 
-  QueryBuilder<TratamientoEntity, double?, QQueryOperations>
-      costoMedicamentoProperty() {
+  QueryBuilder<TratamientoEntity, String?, QQueryOperations> brandProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'costoMedicamento');
+      return query.addPropertyName(r'brand');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, double?, QQueryOperations>
+      costoMedicinaProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'costoMedicina');
     });
   }
 
@@ -4688,6 +8565,13 @@ extension TratamientoEntityQueryProperty
       costoVeterinarioProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'costoVeterinario');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, String?, QQueryOperations>
+      diagnosedByProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'diagnosedBy');
     });
   }
 
@@ -4712,6 +8596,12 @@ extension TratamientoEntityQueryProperty
     });
   }
 
+  QueryBuilder<TratamientoEntity, String, QQueryOperations> doseProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'dose');
+    });
+  }
+
   QueryBuilder<TratamientoEntity, String, QQueryOperations> dosisProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'dosis');
@@ -4725,10 +8615,24 @@ extension TratamientoEntityQueryProperty
     });
   }
 
+  QueryBuilder<TratamientoEntity, int, QQueryOperations>
+      durationDaysProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'durationDays');
+    });
+  }
+
   QueryBuilder<TratamientoEntity, String?, QQueryOperations>
       efectosSecundariosProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'efectosSecundarios');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, DateTime?, QQueryOperations>
+      endDateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'endDate');
     });
   }
 
@@ -4760,10 +8664,30 @@ extension TratamientoEntityQueryProperty
     });
   }
 
-  QueryBuilder<TratamientoEntity, String, QQueryOperations>
+  QueryBuilder<TratamientoEntity, String?, QQueryOperations>
+      finalDiagnosisProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'finalDiagnosis');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, String?, QQueryOperations>
       frecuenciaProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'frecuencia');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, String, QQueryOperations>
+      frequencyProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'frequency');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, String?, QQueryOperations> lotProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'lot');
     });
   }
 
@@ -4786,6 +8710,19 @@ extension TratamientoEntityQueryProperty
     });
   }
 
+  QueryBuilder<TratamientoEntity, String, QQueryOperations> medicineProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'medicine');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, double?, QQueryOperations>
+      medicineCostProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'medicineCost');
+    });
+  }
+
   QueryBuilder<TratamientoEntity, String, QQueryOperations> motivoProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'motivo');
@@ -4798,10 +8735,43 @@ extension TratamientoEntityQueryProperty
     });
   }
 
+  QueryBuilder<TratamientoEntity, String?, QQueryOperations> notesProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'notes');
+    });
+  }
+
   QueryBuilder<TratamientoEntity, String?, QQueryOperations>
       observacionesProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'observaciones');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, String?, QQueryOperations>
+      observationsProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'observations');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, String?, QQueryOperations>
+      previousDiagnosisProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'previousDiagnosis');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, String, QQueryOperations> reasonProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'reason');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, String, QQueryOperations>
+      registeredByProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'registeredBy');
     });
   }
 
@@ -4812,6 +8782,19 @@ extension TratamientoEntityQueryProperty
     });
   }
 
+  QueryBuilder<TratamientoEntity, DateTime, QQueryOperations>
+      registrationDateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'registrationDate');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, String?, QQueryOperations> resultProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'result');
+    });
+  }
+
   QueryBuilder<TratamientoEntity, String?, QQueryOperations>
       resultadoProperty() {
     return QueryBuilder.apply(this, (query) {
@@ -4819,9 +8802,44 @@ extension TratamientoEntityQueryProperty
     });
   }
 
+  QueryBuilder<TratamientoEntity, String?, QQueryOperations>
+      sideEffectsProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'sideEffects');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, DateTime, QQueryOperations>
+      startDateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'startDate');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, double?, QQueryOperations>
+      totalCostProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'totalCost');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, DateTime?, QQueryOperations>
+      updateDateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'updateDate');
+    });
+  }
+
   QueryBuilder<TratamientoEntity, String, QQueryOperations> uuidProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'uuid');
+    });
+  }
+
+  QueryBuilder<TratamientoEntity, double?, QQueryOperations>
+      veterinaryCostProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'veterinaryCost');
     });
   }
 

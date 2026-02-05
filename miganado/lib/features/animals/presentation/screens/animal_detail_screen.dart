@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 import 'package:miganado/features/animals/domain/entities/animal_detail.dart';
 import 'package:miganado/features/animals/presentation/providers/animal_detail_provider.dart';
 import 'package:miganado/features/animals/presentation/widgets/animal_detail_widgets.dart';
@@ -52,7 +53,8 @@ class _AnimalDetailScreenState extends ConsumerState<AnimalDetailScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detalles del Animal'),
+        title:
+            const Text('Detalles del Animal'), // TODO: Mover a AppStrings y ARB
         backgroundColor: Colors.green.shade700,
         elevation: 0,
         leading: IconButton(
@@ -70,11 +72,11 @@ class _AnimalDetailScreenState extends ConsumerState<AnimalDetailScreen>
             children: [
               const Icon(Icons.error_outline, size: 64, color: Colors.red),
               const SizedBox(height: 16),
-              Text('Error: $error'),
+              Text('${AppStrings.errorDatabase}: $error'),
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Volver'),
+                child: const Text('Volver'), // TODO: Mover a AppStrings y ARB
               ),
             ],
           ),
@@ -93,8 +95,8 @@ class _AnimalDetailScreenState extends ConsumerState<AnimalDetailScreen>
                 unselectedLabelColor: Colors.grey,
                 indicatorColor: Colors.green.shade700,
                 tabs: const [
-                  Tab(text: 'Información'),
-                  Tab(text: 'Historial'),
+                  Tab(text: 'Información'), // TODO: Mover a AppStrings y ARB
+                  Tab(text: 'Historial'), // TODO: Mover a AppStrings y ARB
                 ],
               ),
               Expanded(

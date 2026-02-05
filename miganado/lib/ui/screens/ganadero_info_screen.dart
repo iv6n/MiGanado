@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 
 /// Legacy Ganadero Info Screen - Awaiting migration to new model
 /// TODO: Implement ganadero_providers.dart with GanaderoModel provider
@@ -15,7 +16,7 @@ class _GanaderoInfoScreenState extends ConsumerState<GanaderoInfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Información Personal del Ganadero'),
+        title: const Text(AppStrings.profileTitle),
         elevation: 0,
       ),
       body: Center(
@@ -29,12 +30,12 @@ class _GanaderoInfoScreenState extends ConsumerState<GanaderoInfoScreen> {
             ),
             const SizedBox(height: 16),
             const Text(
-              'Esta pantalla está en transición',
+              'Esta pantalla está en transición', // TODO: Mover a AppStrings y ARB
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 8),
             const Text(
-              'Se migrará a los nuevos modelos TypeSafe',
+              'Se migrará a los nuevos modelos TypeSafe', // TODO: Mover a AppStrings y ARB
               style: TextStyle(fontSize: 12, color: Colors.grey),
             ),
           ],

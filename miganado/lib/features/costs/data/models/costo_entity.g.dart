@@ -17,79 +17,124 @@ const CostoEntitySchema = CollectionSchema(
   name: r'CostoEntity',
   id: -8556770688735200852,
   properties: {
-    r'animalUuid': PropertySchema(
+    r'amount': PropertySchema(
       id: 0,
+      name: r'amount',
+      type: IsarType.double,
+    ),
+    r'animalUuid': PropertySchema(
+      id: 1,
       name: r'animalUuid',
       type: IsarType.string,
     ),
     r'comprobante': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'comprobante',
       type: IsarType.string,
     ),
+    r'contentHash': PropertySchema(
+      id: 3,
+      name: r'contentHash',
+      type: IsarType.string,
+    ),
+    r'creationDate': PropertySchema(
+      id: 4,
+      name: r'creationDate',
+      type: IsarType.dateTime,
+    ),
+    r'date': PropertySchema(
+      id: 5,
+      name: r'date',
+      type: IsarType.dateTime,
+    ),
     r'descripcion': PropertySchema(
-      id: 2,
+      id: 6,
       name: r'descripcion',
       type: IsarType.string,
     ),
+    r'description': PropertySchema(
+      id: 7,
+      name: r'description',
+      type: IsarType.string,
+    ),
+    r'details': PropertySchema(
+      id: 8,
+      name: r'details',
+      type: IsarType.string,
+    ),
     r'detalles': PropertySchema(
-      id: 3,
+      id: 9,
       name: r'detalles',
       type: IsarType.string,
     ),
     r'fecha': PropertySchema(
-      id: 4,
+      id: 10,
       name: r'fecha',
       type: IsarType.dateTime,
     ),
     r'fechaActualizacion': PropertySchema(
-      id: 5,
+      id: 11,
       name: r'fechaActualizacion',
       type: IsarType.dateTime,
     ),
     r'fechaCreacion': PropertySchema(
-      id: 6,
+      id: 12,
       name: r'fechaCreacion',
       type: IsarType.dateTime,
     ),
-    r'fechaSincronizacion': PropertySchema(
-      id: 7,
-      name: r'fechaSincronizacion',
-      type: IsarType.dateTime,
-    ),
-    r'hashContenido': PropertySchema(
-      id: 8,
-      name: r'hashContenido',
-      type: IsarType.string,
-    ),
-    r'idRemoto': PropertySchema(
-      id: 9,
-      name: r'idRemoto',
-      type: IsarType.string,
-    ),
     r'monto': PropertySchema(
-      id: 10,
+      id: 13,
       name: r'monto',
       type: IsarType.double,
     ),
+    r'receipt': PropertySchema(
+      id: 14,
+      name: r'receipt',
+      type: IsarType.string,
+    ),
+    r'remoteId': PropertySchema(
+      id: 15,
+      name: r'remoteId',
+      type: IsarType.string,
+    ),
     r'responsable': PropertySchema(
-      id: 11,
+      id: 16,
       name: r'responsable',
       type: IsarType.string,
     ),
-    r'sincronizado': PropertySchema(
-      id: 12,
-      name: r'sincronizado',
+    r'responsible': PropertySchema(
+      id: 17,
+      name: r'responsible',
+      type: IsarType.string,
+    ),
+    r'syncDate': PropertySchema(
+      id: 18,
+      name: r'syncDate',
+      type: IsarType.dateTime,
+    ),
+    r'synced': PropertySchema(
+      id: 19,
+      name: r'synced',
       type: IsarType.bool,
     ),
     r'tipo': PropertySchema(
-      id: 13,
+      id: 20,
       name: r'tipo',
+      type: IsarType.string,
+    ),
+    r'type': PropertySchema(
+      id: 21,
+      name: r'type',
       type: IsarType.byte,
-      enumMap: _CostoEntitytipoEnumValueMap,
+      enumMap: _CostoEntitytypeEnumValueMap,
+    ),
+    r'updateDate': PropertySchema(
+      id: 22,
+      name: r'updateDate',
+      type: IsarType.dateTime,
     ),
     r'uuid': PropertySchema(
-      id: 14,
+      id: 23,
       name: r'uuid',
       type: IsarType.string,
     )
@@ -126,14 +171,14 @@ const CostoEntitySchema = CollectionSchema(
         )
       ],
     ),
-    r'fecha': IndexSchema(
-      id: -5395179286312083551,
-      name: r'fecha',
+    r'date': IndexSchema(
+      id: -7552997827385218417,
+      name: r'date',
       unique: false,
       replace: false,
       properties: [
         IndexPropertySchema(
-          name: r'fecha',
+          name: r'date',
           type: IndexType.value,
           caseSensitive: false,
         )
@@ -166,7 +211,20 @@ int _costoEntityEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  {
+    final value = object.contentHash;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.descripcion.length * 3;
+  bytesCount += 3 + object.description.length * 3;
+  {
+    final value = object.details;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   {
     final value = object.detalles;
     if (value != null) {
@@ -174,13 +232,13 @@ int _costoEntityEstimateSize(
     }
   }
   {
-    final value = object.hashContenido;
+    final value = object.receipt;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
   {
-    final value = object.idRemoto;
+    final value = object.remoteId;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -191,6 +249,13 @@ int _costoEntityEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  {
+    final value = object.responsible;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  bytesCount += 3 + object.tipo.length * 3;
   bytesCount += 3 + object.uuid.length * 3;
   return bytesCount;
 }
@@ -201,21 +266,30 @@ void _costoEntitySerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.animalUuid);
-  writer.writeString(offsets[1], object.comprobante);
-  writer.writeString(offsets[2], object.descripcion);
-  writer.writeString(offsets[3], object.detalles);
-  writer.writeDateTime(offsets[4], object.fecha);
-  writer.writeDateTime(offsets[5], object.fechaActualizacion);
-  writer.writeDateTime(offsets[6], object.fechaCreacion);
-  writer.writeDateTime(offsets[7], object.fechaSincronizacion);
-  writer.writeString(offsets[8], object.hashContenido);
-  writer.writeString(offsets[9], object.idRemoto);
-  writer.writeDouble(offsets[10], object.monto);
-  writer.writeString(offsets[11], object.responsable);
-  writer.writeBool(offsets[12], object.sincronizado);
-  writer.writeByte(offsets[13], object.tipo.index);
-  writer.writeString(offsets[14], object.uuid);
+  writer.writeDouble(offsets[0], object.amount);
+  writer.writeString(offsets[1], object.animalUuid);
+  writer.writeString(offsets[2], object.comprobante);
+  writer.writeString(offsets[3], object.contentHash);
+  writer.writeDateTime(offsets[4], object.creationDate);
+  writer.writeDateTime(offsets[5], object.date);
+  writer.writeString(offsets[6], object.descripcion);
+  writer.writeString(offsets[7], object.description);
+  writer.writeString(offsets[8], object.details);
+  writer.writeString(offsets[9], object.detalles);
+  writer.writeDateTime(offsets[10], object.fecha);
+  writer.writeDateTime(offsets[11], object.fechaActualizacion);
+  writer.writeDateTime(offsets[12], object.fechaCreacion);
+  writer.writeDouble(offsets[13], object.monto);
+  writer.writeString(offsets[14], object.receipt);
+  writer.writeString(offsets[15], object.remoteId);
+  writer.writeString(offsets[16], object.responsable);
+  writer.writeString(offsets[17], object.responsible);
+  writer.writeDateTime(offsets[18], object.syncDate);
+  writer.writeBool(offsets[19], object.synced);
+  writer.writeString(offsets[20], object.tipo);
+  writer.writeByte(offsets[21], object.type.index);
+  writer.writeDateTime(offsets[22], object.updateDate);
+  writer.writeString(offsets[23], object.uuid);
 }
 
 CostoEntity _costoEntityDeserialize(
@@ -225,24 +299,24 @@ CostoEntity _costoEntityDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = CostoEntity(
-    animalUuid: reader.readStringOrNull(offsets[0]),
-    comprobante: reader.readStringOrNull(offsets[1]),
-    descripcion: reader.readString(offsets[2]),
-    detalles: reader.readStringOrNull(offsets[3]),
-    fecha: reader.readDateTime(offsets[4]),
-    monto: reader.readDouble(offsets[10]),
-    responsable: reader.readStringOrNull(offsets[11]),
-    tipo: _CostoEntitytipoValueEnumMap[reader.readByteOrNull(offsets[13])] ??
-        TipoCosto.alimentacion,
+    amount: reader.readDouble(offsets[0]),
+    animalUuid: reader.readStringOrNull(offsets[1]),
+    date: reader.readDateTime(offsets[5]),
+    description: reader.readString(offsets[7]),
+    details: reader.readStringOrNull(offsets[8]),
+    receipt: reader.readStringOrNull(offsets[14]),
+    responsible: reader.readStringOrNull(offsets[17]),
+    type: _CostoEntitytypeValueEnumMap[reader.readByteOrNull(offsets[21])] ??
+        CostType.feed,
   );
-  object.fechaActualizacion = reader.readDateTime(offsets[5]);
-  object.fechaCreacion = reader.readDateTime(offsets[6]);
-  object.fechaSincronizacion = reader.readDateTimeOrNull(offsets[7]);
-  object.hashContenido = reader.readStringOrNull(offsets[8]);
+  object.contentHash = reader.readStringOrNull(offsets[3]);
+  object.creationDate = reader.readDateTime(offsets[4]);
   object.id = id;
-  object.idRemoto = reader.readStringOrNull(offsets[9]);
-  object.sincronizado = reader.readBool(offsets[12]);
-  object.uuid = reader.readString(offsets[14]);
+  object.remoteId = reader.readStringOrNull(offsets[15]);
+  object.syncDate = reader.readDateTimeOrNull(offsets[18]);
+  object.synced = reader.readBool(offsets[19]);
+  object.updateDate = reader.readDateTime(offsets[22]);
+  object.uuid = reader.readString(offsets[23]);
   return object;
 }
 
@@ -254,11 +328,11 @@ P _costoEntityDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDouble(offset)) as P;
     case 1:
       return (reader.readStringOrNull(offset)) as P;
     case 2:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 3:
       return (reader.readStringOrNull(offset)) as P;
     case 4:
@@ -266,50 +340,68 @@ P _costoEntityDeserializeProp<P>(
     case 5:
       return (reader.readDateTime(offset)) as P;
     case 6:
-      return (reader.readDateTime(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 7:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 8:
       return (reader.readStringOrNull(offset)) as P;
     case 9:
       return (reader.readStringOrNull(offset)) as P;
     case 10:
-      return (reader.readDouble(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 11:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 12:
-      return (reader.readBool(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 13:
-      return (_CostoEntitytipoValueEnumMap[reader.readByteOrNull(offset)] ??
-          TipoCosto.alimentacion) as P;
+      return (reader.readDouble(offset)) as P;
     case 14:
+      return (reader.readStringOrNull(offset)) as P;
+    case 15:
+      return (reader.readStringOrNull(offset)) as P;
+    case 16:
+      return (reader.readStringOrNull(offset)) as P;
+    case 17:
+      return (reader.readStringOrNull(offset)) as P;
+    case 18:
+      return (reader.readDateTimeOrNull(offset)) as P;
+    case 19:
+      return (reader.readBool(offset)) as P;
+    case 20:
+      return (reader.readString(offset)) as P;
+    case 21:
+      return (_CostoEntitytypeValueEnumMap[reader.readByteOrNull(offset)] ??
+          CostType.feed) as P;
+    case 22:
+      return (reader.readDateTime(offset)) as P;
+    case 23:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
 
-const _CostoEntitytipoEnumValueMap = {
-  'alimentacion': 0,
-  'medicinas': 1,
-  'vacunas': 2,
-  'veterinario': 3,
-  'mantenimiento': 4,
-  'energetico': 5,
-  'agua': 6,
-  'transporte': 7,
-  'otro': 8,
+const _CostoEntitytypeEnumValueMap = {
+  'feed': 0,
+  'medicines': 1,
+  'vaccines': 2,
+  'veterinary': 3,
+  'maintenance': 4,
+  'energy': 5,
+  'water': 6,
+  'transport': 7,
+  'other': 8,
 };
-const _CostoEntitytipoValueEnumMap = {
-  0: TipoCosto.alimentacion,
-  1: TipoCosto.medicinas,
-  2: TipoCosto.vacunas,
-  3: TipoCosto.veterinario,
-  4: TipoCosto.mantenimiento,
-  5: TipoCosto.energetico,
-  6: TipoCosto.agua,
-  7: TipoCosto.transporte,
-  8: TipoCosto.otro,
+const _CostoEntitytypeValueEnumMap = {
+  0: CostType.feed,
+  1: CostType.medicines,
+  2: CostType.vaccines,
+  3: CostType.veterinary,
+  4: CostType.maintenance,
+  5: CostType.energy,
+  6: CostType.water,
+  7: CostType.transport,
+  8: CostType.other,
 };
 
 Id _costoEntityGetId(CostoEntity object) {
@@ -388,10 +480,10 @@ extension CostoEntityQueryWhereSort
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QAfterWhere> anyFecha() {
+  QueryBuilder<CostoEntity, CostoEntity, QAfterWhere> anyDate() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
-        const IndexWhereClause.any(indexName: r'fecha'),
+        const IndexWhereClause.any(indexName: r'date'),
       );
     });
   }
@@ -576,91 +668,91 @@ extension CostoEntityQueryWhere
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QAfterWhereClause> fechaEqualTo(
-      DateTime fecha) {
+  QueryBuilder<CostoEntity, CostoEntity, QAfterWhereClause> dateEqualTo(
+      DateTime date) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
-        indexName: r'fecha',
-        value: [fecha],
+        indexName: r'date',
+        value: [date],
       ));
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QAfterWhereClause> fechaNotEqualTo(
-      DateTime fecha) {
+  QueryBuilder<CostoEntity, CostoEntity, QAfterWhereClause> dateNotEqualTo(
+      DateTime date) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'fecha',
+              indexName: r'date',
               lower: [],
-              upper: [fecha],
+              upper: [date],
               includeUpper: false,
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'fecha',
-              lower: [fecha],
+              indexName: r'date',
+              lower: [date],
               includeLower: false,
               upper: [],
             ));
       } else {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'fecha',
-              lower: [fecha],
+              indexName: r'date',
+              lower: [date],
               includeLower: false,
               upper: [],
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'fecha',
+              indexName: r'date',
               lower: [],
-              upper: [fecha],
+              upper: [date],
               includeUpper: false,
             ));
       }
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QAfterWhereClause> fechaGreaterThan(
-    DateTime fecha, {
+  QueryBuilder<CostoEntity, CostoEntity, QAfterWhereClause> dateGreaterThan(
+    DateTime date, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'fecha',
-        lower: [fecha],
+        indexName: r'date',
+        lower: [date],
         includeLower: include,
         upper: [],
       ));
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QAfterWhereClause> fechaLessThan(
-    DateTime fecha, {
+  QueryBuilder<CostoEntity, CostoEntity, QAfterWhereClause> dateLessThan(
+    DateTime date, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'fecha',
+        indexName: r'date',
         lower: [],
-        upper: [fecha],
+        upper: [date],
         includeUpper: include,
       ));
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QAfterWhereClause> fechaBetween(
-    DateTime lowerFecha,
-    DateTime upperFecha, {
+  QueryBuilder<CostoEntity, CostoEntity, QAfterWhereClause> dateBetween(
+    DateTime lowerDate,
+    DateTime upperDate, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'fecha',
-        lower: [lowerFecha],
+        indexName: r'date',
+        lower: [lowerDate],
         includeLower: includeLower,
-        upper: [upperFecha],
+        upper: [upperDate],
         includeUpper: includeUpper,
       ));
     });
@@ -669,6 +761,69 @@ extension CostoEntityQueryWhere
 
 extension CostoEntityQueryFilter
     on QueryBuilder<CostoEntity, CostoEntity, QFilterCondition> {
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> amountEqualTo(
+    double value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'amount',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      amountGreaterThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'amount',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> amountLessThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'amount',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> amountBetween(
+    double lower,
+    double upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'amount',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
   QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
       animalUuidIsNull() {
     return QueryBuilder.apply(this, (query) {
@@ -978,6 +1133,269 @@ extension CostoEntityQueryFilter
   }
 
   QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      contentHashIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'contentHash',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      contentHashIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'contentHash',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      contentHashEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'contentHash',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      contentHashGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'contentHash',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      contentHashLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'contentHash',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      contentHashBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'contentHash',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      contentHashStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'contentHash',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      contentHashEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'contentHash',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      contentHashContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'contentHash',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      contentHashMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'contentHash',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      contentHashIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'contentHash',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      contentHashIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'contentHash',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      creationDateEqualTo(DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'creationDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      creationDateGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'creationDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      creationDateLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'creationDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      creationDateBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'creationDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> dateEqualTo(
+      DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'date',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> dateGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'date',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> dateLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'date',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> dateBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'date',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
       descripcionEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -1108,6 +1526,294 @@ extension CostoEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'descripcion',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      descriptionEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'description',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      descriptionGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'description',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      descriptionLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'description',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      descriptionBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'description',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      descriptionStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'description',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      descriptionEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'description',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      descriptionContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'description',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      descriptionMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'description',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      descriptionIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'description',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      descriptionIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'description',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      detailsIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'details',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      detailsIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'details',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> detailsEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'details',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      detailsGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'details',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> detailsLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'details',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> detailsBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'details',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      detailsStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'details',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> detailsEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'details',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> detailsContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'details',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> detailsMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'details',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      detailsIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'details',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      detailsIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'details',
         value: '',
       ));
     });
@@ -1432,234 +2138,6 @@ extension CostoEntityQueryFilter
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      fechaSincronizacionIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'fechaSincronizacion',
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      fechaSincronizacionIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'fechaSincronizacion',
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      fechaSincronizacionEqualTo(DateTime? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fechaSincronizacion',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      fechaSincronizacionGreaterThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'fechaSincronizacion',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      fechaSincronizacionLessThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'fechaSincronizacion',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      fechaSincronizacionBetween(
-    DateTime? lower,
-    DateTime? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'fechaSincronizacion',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      hashContenidoIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'hashContenido',
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      hashContenidoIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'hashContenido',
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      hashContenidoEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'hashContenido',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      hashContenidoGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'hashContenido',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      hashContenidoLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'hashContenido',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      hashContenidoBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'hashContenido',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      hashContenidoStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'hashContenido',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      hashContenidoEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'hashContenido',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      hashContenidoContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'hashContenido',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      hashContenidoMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'hashContenido',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      hashContenidoIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'hashContenido',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      hashContenidoIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'hashContenido',
-        value: '',
-      ));
-    });
-  }
-
   QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> idEqualTo(
       Id value) {
     return QueryBuilder.apply(this, (query) {
@@ -1709,159 +2187,6 @@ extension CostoEntityQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      idRemotoIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'idRemoto',
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      idRemotoIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'idRemoto',
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> idRemotoEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'idRemoto',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      idRemotoGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'idRemoto',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      idRemotoLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'idRemoto',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> idRemotoBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'idRemoto',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      idRemotoStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'idRemoto',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      idRemotoEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'idRemoto',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      idRemotoContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'idRemoto',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> idRemotoMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'idRemoto',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      idRemotoIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'idRemoto',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      idRemotoIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'idRemoto',
-        value: '',
       ));
     });
   }
@@ -1925,6 +2250,311 @@ extension CostoEntityQueryFilter
         upper: upper,
         includeUpper: includeUpper,
         epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      receiptIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'receipt',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      receiptIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'receipt',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> receiptEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'receipt',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      receiptGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'receipt',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> receiptLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'receipt',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> receiptBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'receipt',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      receiptStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'receipt',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> receiptEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'receipt',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> receiptContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'receipt',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> receiptMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'receipt',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      receiptIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'receipt',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      receiptIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'receipt',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      remoteIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'remoteId',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      remoteIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'remoteId',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> remoteIdEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'remoteId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      remoteIdGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'remoteId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      remoteIdLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'remoteId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> remoteIdBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'remoteId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      remoteIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'remoteId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      remoteIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'remoteId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      remoteIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'remoteId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> remoteIdMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'remoteId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      remoteIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'remoteId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      remoteIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'remoteId',
+        value: '',
       ));
     });
   }
@@ -2084,60 +2714,474 @@ extension CostoEntityQueryFilter
   }
 
   QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
-      sincronizadoEqualTo(bool value) {
+      responsibleIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'responsible',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      responsibleIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'responsible',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      responsibleEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'sincronizado',
+        property: r'responsible',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      responsibleGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'responsible',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      responsibleLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'responsible',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      responsibleBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'responsible',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      responsibleStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'responsible',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      responsibleEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'responsible',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      responsibleContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'responsible',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      responsibleMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'responsible',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      responsibleIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'responsible',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      responsibleIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'responsible',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      syncDateIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'syncDate',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      syncDateIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'syncDate',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> syncDateEqualTo(
+      DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'syncDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      syncDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'syncDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      syncDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'syncDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> syncDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'syncDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> syncedEqualTo(
+      bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'synced',
         value: value,
       ));
     });
   }
 
   QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> tipoEqualTo(
-      TipoCosto value) {
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'tipo',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> tipoGreaterThan(
-    TipoCosto value, {
+    String value, {
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'tipo',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> tipoLessThan(
-    TipoCosto value, {
+    String value, {
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'tipo',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> tipoBetween(
-    TipoCosto lower,
-    TipoCosto upper, {
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'tipo',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> tipoStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'tipo',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> tipoEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'tipo',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> tipoContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'tipo',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> tipoMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'tipo',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> tipoIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'tipo',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      tipoIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'tipo',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> typeEqualTo(
+      CostType value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'type',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> typeGreaterThan(
+    CostType value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'type',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> typeLessThan(
+    CostType value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'type',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition> typeBetween(
+    CostType lower,
+    CostType upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'tipo',
+        property: r'type',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      updateDateEqualTo(DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'updateDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      updateDateGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'updateDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      updateDateLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'updateDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterFilterCondition>
+      updateDateBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'updateDate',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -2286,6 +3330,18 @@ extension CostoEntityQueryLinks
 
 extension CostoEntityQuerySortBy
     on QueryBuilder<CostoEntity, CostoEntity, QSortBy> {
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByAmount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'amount', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByAmountDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'amount', Sort.desc);
+    });
+  }
+
   QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByAnimalUuid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'animalUuid', Sort.asc);
@@ -2310,6 +3366,43 @@ extension CostoEntityQuerySortBy
     });
   }
 
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByContentHash() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'contentHash', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByContentHashDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'contentHash', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByCreationDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'creationDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy>
+      sortByCreationDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'creationDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'date', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'date', Sort.desc);
+    });
+  }
+
   QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByDescripcion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'descripcion', Sort.asc);
@@ -2319,6 +3412,30 @@ extension CostoEntityQuerySortBy
   QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByDescripcionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'descripcion', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByDescription() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'description', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByDescriptionDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'description', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByDetails() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'details', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByDetailsDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'details', Sort.desc);
     });
   }
 
@@ -2373,45 +3490,6 @@ extension CostoEntityQuerySortBy
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy>
-      sortByFechaSincronizacion() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaSincronizacion', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy>
-      sortByFechaSincronizacionDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaSincronizacion', Sort.desc);
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByHashContenido() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'hashContenido', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy>
-      sortByHashContenidoDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'hashContenido', Sort.desc);
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByIdRemoto() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'idRemoto', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByIdRemotoDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'idRemoto', Sort.desc);
-    });
-  }
-
   QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByMonto() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'monto', Sort.asc);
@@ -2421,6 +3499,30 @@ extension CostoEntityQuerySortBy
   QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByMontoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'monto', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByReceipt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'receipt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByReceiptDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'receipt', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByRemoteId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByRemoteIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteId', Sort.desc);
     });
   }
 
@@ -2436,16 +3538,39 @@ extension CostoEntityQuerySortBy
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortBySincronizado() {
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByResponsible() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sincronizado', Sort.asc);
+      return query.addSortBy(r'responsible', Sort.asc);
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy>
-      sortBySincronizadoDesc() {
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByResponsibleDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sincronizado', Sort.desc);
+      return query.addSortBy(r'responsible', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortBySyncDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'syncDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortBySyncDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'syncDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortBySynced() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'synced', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortBySyncedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'synced', Sort.desc);
     });
   }
 
@@ -2458,6 +3583,30 @@ extension CostoEntityQuerySortBy
   QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByTipoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'tipo', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'type', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'type', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByUpdateDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updateDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> sortByUpdateDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updateDate', Sort.desc);
     });
   }
 
@@ -2476,6 +3625,18 @@ extension CostoEntityQuerySortBy
 
 extension CostoEntityQuerySortThenBy
     on QueryBuilder<CostoEntity, CostoEntity, QSortThenBy> {
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByAmount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'amount', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByAmountDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'amount', Sort.desc);
+    });
+  }
+
   QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByAnimalUuid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'animalUuid', Sort.asc);
@@ -2500,6 +3661,43 @@ extension CostoEntityQuerySortThenBy
     });
   }
 
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByContentHash() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'contentHash', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByContentHashDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'contentHash', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByCreationDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'creationDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy>
+      thenByCreationDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'creationDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'date', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'date', Sort.desc);
+    });
+  }
+
   QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByDescripcion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'descripcion', Sort.asc);
@@ -2509,6 +3707,30 @@ extension CostoEntityQuerySortThenBy
   QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByDescripcionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'descripcion', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByDescription() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'description', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByDescriptionDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'description', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByDetails() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'details', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByDetailsDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'details', Sort.desc);
     });
   }
 
@@ -2563,33 +3785,6 @@ extension CostoEntityQuerySortThenBy
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy>
-      thenByFechaSincronizacion() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaSincronizacion', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy>
-      thenByFechaSincronizacionDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaSincronizacion', Sort.desc);
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByHashContenido() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'hashContenido', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy>
-      thenByHashContenidoDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'hashContenido', Sort.desc);
-    });
-  }
-
   QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -2599,18 +3794,6 @@ extension CostoEntityQuerySortThenBy
   QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByIdRemoto() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'idRemoto', Sort.asc);
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByIdRemotoDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'idRemoto', Sort.desc);
     });
   }
 
@@ -2626,6 +3809,30 @@ extension CostoEntityQuerySortThenBy
     });
   }
 
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByReceipt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'receipt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByReceiptDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'receipt', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByRemoteId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByRemoteIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteId', Sort.desc);
+    });
+  }
+
   QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByResponsable() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'responsable', Sort.asc);
@@ -2638,16 +3845,39 @@ extension CostoEntityQuerySortThenBy
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenBySincronizado() {
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByResponsible() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sincronizado', Sort.asc);
+      return query.addSortBy(r'responsible', Sort.asc);
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy>
-      thenBySincronizadoDesc() {
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByResponsibleDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sincronizado', Sort.desc);
+      return query.addSortBy(r'responsible', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenBySyncDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'syncDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenBySyncDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'syncDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenBySynced() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'synced', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenBySyncedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'synced', Sort.desc);
     });
   }
 
@@ -2660,6 +3890,30 @@ extension CostoEntityQuerySortThenBy
   QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByTipoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'tipo', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'type', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'type', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByUpdateDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updateDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QAfterSortBy> thenByUpdateDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'updateDate', Sort.desc);
     });
   }
 
@@ -2678,6 +3932,12 @@ extension CostoEntityQuerySortThenBy
 
 extension CostoEntityQueryWhereDistinct
     on QueryBuilder<CostoEntity, CostoEntity, QDistinct> {
+  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByAmount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'amount');
+    });
+  }
+
   QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByAnimalUuid(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -2692,10 +3952,43 @@ extension CostoEntityQueryWhereDistinct
     });
   }
 
+  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByContentHash(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'contentHash', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByCreationDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'creationDate');
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'date');
+    });
+  }
+
   QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByDescripcion(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'descripcion', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByDescription(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'description', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByDetails(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'details', caseSensitive: caseSensitive);
     });
   }
 
@@ -2725,31 +4018,23 @@ extension CostoEntityQueryWhereDistinct
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QDistinct>
-      distinctByFechaSincronizacion() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fechaSincronizacion');
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByHashContenido(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'hashContenido',
-          caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByIdRemoto(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'idRemoto', caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByMonto() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'monto');
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByReceipt(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'receipt', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByRemoteId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'remoteId', caseSensitive: caseSensitive);
     });
   }
 
@@ -2760,15 +4045,41 @@ extension CostoEntityQueryWhereDistinct
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctBySincronizado() {
+  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByResponsible(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'sincronizado');
+      return query.addDistinctBy(r'responsible', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByTipo() {
+  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctBySyncDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'tipo');
+      return query.addDistinctBy(r'syncDate');
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctBySynced() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'synced');
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByTipo(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'tipo', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'type');
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostoEntity, QDistinct> distinctByUpdateDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'updateDate');
     });
   }
 
@@ -2788,6 +4099,12 @@ extension CostoEntityQueryProperty
     });
   }
 
+  QueryBuilder<CostoEntity, double, QQueryOperations> amountProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'amount');
+    });
+  }
+
   QueryBuilder<CostoEntity, String?, QQueryOperations> animalUuidProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'animalUuid');
@@ -2800,9 +4117,39 @@ extension CostoEntityQueryProperty
     });
   }
 
+  QueryBuilder<CostoEntity, String?, QQueryOperations> contentHashProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'contentHash');
+    });
+  }
+
+  QueryBuilder<CostoEntity, DateTime, QQueryOperations> creationDateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'creationDate');
+    });
+  }
+
+  QueryBuilder<CostoEntity, DateTime, QQueryOperations> dateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'date');
+    });
+  }
+
   QueryBuilder<CostoEntity, String, QQueryOperations> descripcionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'descripcion');
+    });
+  }
+
+  QueryBuilder<CostoEntity, String, QQueryOperations> descriptionProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'description');
+    });
+  }
+
+  QueryBuilder<CostoEntity, String?, QQueryOperations> detailsProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'details');
     });
   }
 
@@ -2832,28 +4179,21 @@ extension CostoEntityQueryProperty
     });
   }
 
-  QueryBuilder<CostoEntity, DateTime?, QQueryOperations>
-      fechaSincronizacionProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fechaSincronizacion');
-    });
-  }
-
-  QueryBuilder<CostoEntity, String?, QQueryOperations> hashContenidoProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'hashContenido');
-    });
-  }
-
-  QueryBuilder<CostoEntity, String?, QQueryOperations> idRemotoProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'idRemoto');
-    });
-  }
-
   QueryBuilder<CostoEntity, double, QQueryOperations> montoProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'monto');
+    });
+  }
+
+  QueryBuilder<CostoEntity, String?, QQueryOperations> receiptProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'receipt');
+    });
+  }
+
+  QueryBuilder<CostoEntity, String?, QQueryOperations> remoteIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'remoteId');
     });
   }
 
@@ -2863,15 +4203,39 @@ extension CostoEntityQueryProperty
     });
   }
 
-  QueryBuilder<CostoEntity, bool, QQueryOperations> sincronizadoProperty() {
+  QueryBuilder<CostoEntity, String?, QQueryOperations> responsibleProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'sincronizado');
+      return query.addPropertyName(r'responsible');
     });
   }
 
-  QueryBuilder<CostoEntity, TipoCosto, QQueryOperations> tipoProperty() {
+  QueryBuilder<CostoEntity, DateTime?, QQueryOperations> syncDateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'syncDate');
+    });
+  }
+
+  QueryBuilder<CostoEntity, bool, QQueryOperations> syncedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'synced');
+    });
+  }
+
+  QueryBuilder<CostoEntity, String, QQueryOperations> tipoProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'tipo');
+    });
+  }
+
+  QueryBuilder<CostoEntity, CostType, QQueryOperations> typeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'type');
+    });
+  }
+
+  QueryBuilder<CostoEntity, DateTime, QQueryOperations> updateDateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'updateDate');
     });
   }
 

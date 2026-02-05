@@ -3,78 +3,84 @@ import 'package:miganado/features/locations/data/models/ubicacion_entity.dart';
 /// Modelo de dominio para una ubicación en el establo
 class Ubicacion {
   final String uuid;
-  final String nombre;
-  final String? descripcion;
-  final String? tipo; // Potrero, Establo, Corral, etc.
-  final int? capacidad;
-  final List<String>? animalesPresentesUuids;
-  final String? notas;
-  final DateTime fechaCreacion;
-  final DateTime fechaActualizacion;
+  final String name;
+  final String? description;
+  final String? type; // Potrero, Establo, Corral, etc.
+  final int? capacity;
+  final List<String>? presentAnimalUuids;
+  final String? notes;
+  final DateTime creationDate;
+  final DateTime lastUpdateDate;
 
   Ubicacion({
     required this.uuid,
-    required this.nombre,
-    this.descripcion,
-    this.tipo,
-    this.capacidad,
-    this.animalesPresentesUuids,
-    this.notas,
-    required this.fechaCreacion,
-    required this.fechaActualizacion,
+    required this.name,
+    this.description,
+    this.type,
+    this.capacity,
+    this.presentAnimalUuids,
+    this.notes,
+    required this.creationDate,
+    required this.lastUpdateDate,
   });
 
   /// Convertir desde UbicacionEntity (capa de datos)
   factory Ubicacion.fromEntity(UbicacionEntity entity) {
     return Ubicacion(
       uuid: entity.uuid,
-      nombre: entity.nombre,
-      descripcion: entity.descripcion,
-      tipo: entity.tipo,
-      capacidad: entity.capacidad,
-      animalesPresentesUuids: entity.animalesPresentesUuids,
-      notas: entity.notas,
-      fechaCreacion: entity.fechaCreacion,
-      fechaActualizacion: entity.fechaActualizacion,
+      name: entity.name,
+      description: entity.description,
+      type: entity.type,
+      capacity: entity.capacity,
+      presentAnimalUuids: entity.presentAnimalUuids,
+      notes: entity.notes,
+      creationDate: entity.creationDate,
+      lastUpdateDate: entity.lastUpdateDate,
     );
   }
 
   /// Convertir a UbicacionEntity (capa de datos)
   UbicacionEntity toEntity() {
     return UbicacionEntity(
-      nombre: nombre,
-      descripcion: descripcion,
-      tipo: tipo,
-      capacidad: capacidad,
-      animalesPresentesUuids: animalesPresentesUuids,
-      notas: notas,
+      name: name,
+      description: description,
+      type: type,
+      capacity: capacity,
+      presentAnimalUuids: presentAnimalUuids,
+      notes: notes,
     )
       ..uuid = uuid
-      ..fechaCreacion = fechaCreacion
-      ..fechaActualizacion = fechaActualizacion;
+      ..creationDate = creationDate
+      ..lastUpdateDate = lastUpdateDate;
   }
 
   /// Crear una copia modificada
   Ubicacion copyWith({
     String? uuid,
-    String? nombre,
-    String? descripcion,
-    String? tipo,
-    DateTime? fechaCreacion,
-    DateTime? fechaActualizacion,
+    String? name,
+    String? description,
+    String? type,
+    int? capacity,
+    List<String>? presentAnimalUuids,
+    String? notes,
+    DateTime? creationDate,
+    DateTime? lastUpdateDate,
   }) {
     return Ubicacion(
       uuid: uuid ?? this.uuid,
-      nombre: nombre ?? this.nombre,
-      descripcion: descripcion ?? this.descripcion,
-      tipo: tipo ?? this.tipo,
-      fechaCreacion: fechaCreacion ?? this.fechaCreacion,
-      fechaActualizacion: fechaActualizacion ?? this.fechaActualizacion,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      type: type ?? this.type,
+      capacity: capacity ?? this.capacity,
+      presentAnimalUuids: presentAnimalUuids ?? this.presentAnimalUuids,
+      notes: notes ?? this.notes,
+      creationDate: creationDate ?? this.creationDate,
+      lastUpdateDate: lastUpdateDate ?? this.lastUpdateDate,
     );
   }
 
   @override
-  String toString() => 'Ubicacion(uuid: $uuid, nombre: $nombre, tipo: $tipo)';
+  String toString() => 'Ubicacion(uuid: $uuid, name: $name, type: $type)';
 
   @override
   bool operator ==(Object other) =>
@@ -82,13 +88,13 @@ class Ubicacion {
       other is Ubicacion &&
           runtimeType == other.runtimeType &&
           uuid == other.uuid &&
-          nombre == other.nombre &&
-          descripcion == other.descripcion &&
-          tipo == other.tipo;
+          name == other.name &&
+          description == other.description &&
+          type == other.type;
 
   @override
   int get hashCode =>
-      uuid.hashCode ^ nombre.hashCode ^ descripcion.hashCode ^ tipo.hashCode;
+      uuid.hashCode ^ name.hashCode ^ description.hashCode ^ type.hashCode;
 }
 
 /// Modelo para el histórico de cambio de ubicación de un animal

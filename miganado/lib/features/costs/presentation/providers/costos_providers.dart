@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/features/costs/domain/entities/costo.dart';
 import 'package:miganado/features/costs/domain/usecases/costos_usecases.dart';
 import 'package:miganado/providers/database_providers.dart';
+import 'package:miganado/core/exceptions/app_exception.dart';
+import 'package:miganado/core/services/logger_service.dart';
 
 // ============================================================================
 // USE CASE PROVIDERS
@@ -35,16 +37,44 @@ final obtenerResumenFinancieroUseCaseProvider =
 /// Usage: ref.watch(historialCostosProvider(animalUuid))
 final historialCostosProvider =
     FutureProvider.family<List<Costo>, String>((ref, animalUuid) async {
-  final useCase = ref.watch(obtenerHistorialCostosUseCaseProvider);
-  return useCase(animalUuid);
+  try {
+    LoggerService.startOperation('historialCostos', 'costos_providers');
+    final useCase = ref.watch(obtenerHistorialCostosUseCaseProvider);
+    final costos = await useCase(animalUuid);
+    LoggerService.operationCompleted('historialCostos', 'costos_providers');
+    return costos;
+  } catch (e, st) {
+    final appEx = toAppException(e, st);
+    LoggerService.error(
+        'Error obteniendo historial de costos', appEx, st, 'costos_providers');
+    throw DatabaseException(
+      message: 'No se pudo cargar el historial de costos: ${appEx.message}',
+      originalError: e,
+      stackTrace: st,
+    );
+  }
 });
 
 /// Provider para obtener resumen financiero por animal
 /// Usage: ref.watch(resumenFinancieroProvider(animalUuid))
 final resumenFinancieroProvider =
     FutureProvider.family<ResumenFinanciero, String>((ref, animalUuid) async {
-  final useCase = ref.watch(obtenerResumenFinancieroUseCaseProvider);
-  return useCase(animalUuid);
+  try {
+    LoggerService.startOperation('resumenFinanciero', 'costos_providers');
+    final useCase = ref.watch(obtenerResumenFinancieroUseCaseProvider);
+    final resumen = await useCase(animalUuid);
+    LoggerService.operationCompleted('resumenFinanciero', 'costos_providers');
+    return resumen;
+  } catch (e, st) {
+    final appEx = toAppException(e, st);
+    LoggerService.error(
+        'Error obteniendo resumen financiero', appEx, st, 'costos_providers');
+    throw DatabaseException(
+      message: 'No se pudo cargar el resumen financiero: ${appEx.message}',
+      originalError: e,
+      stackTrace: st,
+    );
+  }
 });
 
 // ============================================================================

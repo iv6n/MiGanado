@@ -130,13 +130,13 @@ class EventoMantenimientoEntity {
       rutaAplicacion: rutaAplicacion ?? this.rutaAplicacion,
       costo: costo ?? this.costo,
     )
-      ..id = this.id
+      ..id = id
       ..uuid = uuid ?? this.uuid
-      ..fechaCreacion = this.fechaCreacion
+      ..fechaCreacion = fechaCreacion
       ..fechaActualizacion = DateTime.now()
       ..sincronizado = sincronizado ?? this.sincronizado
       ..idRemoto = idRemoto ?? this.idRemoto
-      ..fechaSincronizacion = this.fechaSincronizacion
-      ..hashContenido = this.hashContenido;
+      ..fechaSincronizacion = fechaSincronizacion
+      ..hashContenido = hashContenido;
   }
 }

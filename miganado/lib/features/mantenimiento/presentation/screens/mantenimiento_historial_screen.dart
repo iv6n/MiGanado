@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/mantenimiento_providers.dart';
-import 'package:miganado/features/mantenimiento/domain/entities/evento_mantenimiento.dart'
-    as evento_domain;
+import 'package:miganado/features/mantenimiento/domain/entities/evento_mantenimiento.dart';
 
 class MantenimientoHistorialScreen extends ConsumerWidget {
   final String animalUuid;
@@ -22,7 +22,7 @@ class MantenimientoHistorialScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Historial de Mantenimiento - $animalNombre'),
+        title: Text('${AppStrings.maintenanceHistoryTitle} - $animalNombre'),
         elevation: 0,
       ),
       body: historialAsync.when(
@@ -32,7 +32,7 @@ class MantenimientoHistorialScreen extends ConsumerWidget {
             children: [
               CircularProgressIndicator(),
               SizedBox(height: 16),
-              Text('Cargando historial...'),
+              Text(AppStrings.loading),
             ],
           ),
         ),
@@ -42,7 +42,7 @@ class MantenimientoHistorialScreen extends ConsumerWidget {
             children: [
               const Icon(Icons.error_outline, size: 64, color: Colors.red),
               const SizedBox(height: 16),
-              const Text('Error al cargar el historial'),
+              const Text(AppStrings.errorLoadingHistory),
               const SizedBox(height: 8),
               Text(error.toString(),
                   style: const TextStyle(color: Colors.grey)),
@@ -57,10 +57,10 @@ class MantenimientoHistorialScreen extends ConsumerWidget {
                 children: [
                   Icon(Icons.history, size: 64, color: Colors.grey),
                   SizedBox(height: 16),
-                  Text('Sin eventos de mantenimiento registrados'),
+                  Text(AppStrings.maintenanceHistoryEmptyMessage),
                   SizedBox(height: 8),
                   Text(
-                    'Los eventos de mantenimiento aparecerán aquí',
+                    'Los eventos de mantenimiento aparecerán aquí', // TODO: Mover a AppStrings y ARB
                     style: TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ],
@@ -83,7 +83,7 @@ class MantenimientoHistorialScreen extends ConsumerWidget {
 }
 
 class _EventoMantenimientoCard extends StatelessWidget {
-  final evento_domain.EventoMantenimiento evento;
+  final EventoMantenimiento evento;
 
   const _EventoMantenimientoCard({required this.evento});
 

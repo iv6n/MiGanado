@@ -7,24 +7,24 @@ import 'package:miganado/features/animals/presentation/providers/animals_provide
 // PROVIDERS - Use Cases
 // ============================================================================
 
-final registrarMantenimientoUseCaseProvider = Provider(
+final registerMaintenanceEventUseCaseProvider = Provider(
   (ref) {
     final database = ref.watch(databaseProvider);
-    return RegistrarMantenimientoUseCase(database: database);
+    return RegisterMaintenanceEventUseCase(database: database);
   },
 );
 
-final obtenerHistorialUseCaseProvider = Provider(
+final getMaintenanceHistoryUseCaseProvider = Provider(
   (ref) {
     final database = ref.watch(databaseProvider);
-    return ObtenerHistorialMantenimientoUseCase(database: database);
+    return GetMaintenanceHistoryUseCase(database: database);
   },
 );
 
-final obtenerProximasDosisUseCaseProvider = Provider(
+final getUpcomingDosagesUseCaseProvider = Provider(
   (ref) {
     final database = ref.watch(databaseProvider);
-    return ObtenerProximasDosisUseCase(database: database);
+    return GetUpcomingDosagesUseCase(database: database);
   },
 );
 
@@ -36,15 +36,15 @@ final obtenerProximasDosisUseCaseProvider = Provider(
 final historialMantenimientoProvider =
     FutureProvider.family<List<EventoMantenimiento>, String>(
         (ref, animalUuid) async {
-  final useCase = ref.watch(obtenerHistorialUseCaseProvider);
+  final useCase = ref.watch(getMaintenanceHistoryUseCaseProvider);
   return useCase.call(animalUuid);
 });
 
 /// Obtener próximas dosis pendientes
-final proximasDosisProvider =
+final upcomingDosagesProvider =
     FutureProvider.family<List<EventoMantenimiento>, String>(
         (ref, animalUuid) async {
-  final useCase = ref.watch(obtenerProximasDosisUseCaseProvider);
+  final useCase = ref.watch(getUpcomingDosagesUseCaseProvider);
   return useCase.call(animalUuid);
 });
 
@@ -52,135 +52,135 @@ final proximasDosisProvider =
 // STATE - Para registrar mantenimiento
 // ============================================================================
 
-class RegistrarMantenimientoState {
+class RegisterMaintenanceEventState {
   final String animalUuid;
-  final String tipo;
-  final String descripcion;
-  final DateTime fecha;
-  final String? veterinario;
-  final String? medicamento;
-  final String? dosisAplicada;
-  final String? rutaAplicacion;
-  final DateTime? proximaDosis;
-  final String? observaciones;
+  final String type;
+  final String description;
+  final DateTime date;
+  final String? veterinarian;
+  final String? medicament;
+  final String? appliedDosage;
+  final String? applicationRoute;
+  final DateTime? nextDosage;
+  final String? observations;
   final bool isLoading;
   final String? error;
-  final bool exitoso;
+  final bool successful;
 
-  RegistrarMantenimientoState({
+  RegisterMaintenanceEventState({
     required this.animalUuid,
-    this.tipo = 'Vacunacion',
-    this.descripcion = '',
-    required this.fecha,
-    this.veterinario,
-    this.medicamento,
-    this.dosisAplicada,
-    this.rutaAplicacion,
-    this.proximaDosis,
-    this.observaciones,
+    this.type = 'Vaccination',
+    this.description = '',
+    required this.date,
+    this.veterinarian,
+    this.medicament,
+    this.appliedDosage,
+    this.applicationRoute,
+    this.nextDosage,
+    this.observations,
     this.isLoading = false,
     this.error,
-    this.exitoso = false,
+    this.successful = false,
   });
 
-  RegistrarMantenimientoState copyWith({
+  RegisterMaintenanceEventState copyWith({
     String? animalUuid,
-    String? tipo,
-    String? descripcion,
-    DateTime? fecha,
-    String? veterinario,
-    String? medicamento,
-    String? dosisAplicada,
-    String? rutaAplicacion,
-    DateTime? proximaDosis,
-    String? observaciones,
+    String? type,
+    String? description,
+    DateTime? date,
+    String? veterinarian,
+    String? medicament,
+    String? appliedDosage,
+    String? applicationRoute,
+    DateTime? nextDosage,
+    String? observations,
     bool? isLoading,
     String? error,
-    bool? exitoso,
+    bool? successful,
   }) {
-    return RegistrarMantenimientoState(
+    return RegisterMaintenanceEventState(
       animalUuid: animalUuid ?? this.animalUuid,
-      tipo: tipo ?? this.tipo,
-      descripcion: descripcion ?? this.descripcion,
-      fecha: fecha ?? this.fecha,
-      veterinario: veterinario ?? this.veterinario,
-      medicamento: medicamento ?? this.medicamento,
-      dosisAplicada: dosisAplicada ?? this.dosisAplicada,
-      rutaAplicacion: rutaAplicacion ?? this.rutaAplicacion,
-      proximaDosis: proximaDosis ?? this.proximaDosis,
-      observaciones: observaciones ?? this.observaciones,
+      type: type ?? this.type,
+      description: description ?? this.description,
+      date: date ?? this.date,
+      veterinarian: veterinarian ?? this.veterinarian,
+      medicament: medicament ?? this.medicament,
+      appliedDosage: appliedDosage ?? this.appliedDosage,
+      applicationRoute: applicationRoute ?? this.applicationRoute,
+      nextDosage: nextDosage ?? this.nextDosage,
+      observations: observations ?? this.observations,
       isLoading: isLoading ?? this.isLoading,
       error: error,
-      exitoso: exitoso ?? this.exitoso,
+      successful: successful ?? this.successful,
     );
   }
 
   @override
   String toString() =>
-      'RegistrarMantenimientoState(animal: $animalUuid, tipo: $tipo, loading: $isLoading)';
+      'RegisterMaintenanceEventState(animal: $animalUuid, type: $type, loading: $isLoading)';
 }
 
 // ============================================================================
 // NOTIFIER - Para registrar mantenimiento
 // ============================================================================
 
-class RegistrarMantenimientoNotifier
-    extends StateNotifier<RegistrarMantenimientoState> {
-  final RegistrarMantenimientoUseCase useCase;
+class RegisterMaintenanceEventNotifier
+    extends StateNotifier<RegisterMaintenanceEventState> {
+  final RegisterMaintenanceEventUseCase useCase;
   final Ref ref;
 
-  RegistrarMantenimientoNotifier({
+  RegisterMaintenanceEventNotifier({
     required this.useCase,
     required this.ref,
     required String animalUuid,
-  }) : super(RegistrarMantenimientoState(
+  }) : super(RegisterMaintenanceEventState(
           animalUuid: animalUuid,
-          fecha: DateTime.now(),
+          date: DateTime.now(),
         ));
 
-  void updateTipo(String tipo) {
-    state = state.copyWith(tipo: tipo);
+  void updateType(String type) {
+    state = state.copyWith(type: type);
   }
 
-  void updateDescripcion(String descripcion) {
-    state = state.copyWith(descripcion: descripcion);
+  void updateDescription(String description) {
+    state = state.copyWith(description: description);
   }
 
-  void updateFecha(DateTime fecha) {
-    state = state.copyWith(fecha: fecha);
+  void updateDate(DateTime date) {
+    state = state.copyWith(date: date);
   }
 
-  void updateVeterinario(String veterinario) {
-    state = state.copyWith(veterinario: veterinario);
+  void updateVeterinarian(String veterinarian) {
+    state = state.copyWith(veterinarian: veterinarian);
   }
 
-  void updateMedicamento(String medicamento) {
-    state = state.copyWith(medicamento: medicamento);
+  void updateMedicament(String medicament) {
+    state = state.copyWith(medicament: medicament);
   }
 
-  void updateDosisAplicada(String dosisAplicada) {
-    state = state.copyWith(dosisAplicada: dosisAplicada);
+  void updateAppliedDosage(String appliedDosage) {
+    state = state.copyWith(appliedDosage: appliedDosage);
   }
 
-  void updateRutaAplicacion(String rutaAplicacion) {
-    state = state.copyWith(rutaAplicacion: rutaAplicacion);
+  void updateApplicationRoute(String applicationRoute) {
+    state = state.copyWith(applicationRoute: applicationRoute);
   }
 
-  void updateProximaDosis(DateTime proximaDosis) {
-    state = state.copyWith(proximaDosis: proximaDosis);
+  void updateNextDosage(DateTime nextDosage) {
+    state = state.copyWith(nextDosage: nextDosage);
   }
 
-  void updateObservaciones(String observaciones) {
-    state = state.copyWith(observaciones: observaciones);
+  void updateObservations(String observations) {
+    state = state.copyWith(observations: observations);
   }
 
-  Future<void> registrar() async {
-    if (state.tipo.isEmpty) {
+  Future<void> register() async {
+    if (state.type.isEmpty) {
       state = state.copyWith(error: 'Selecciona un tipo de mantenimiento');
       return;
     }
 
-    if (state.descripcion.isEmpty) {
+    if (state.description.isEmpty) {
       state = state.copyWith(error: 'La descripción es requerida');
       return;
     }
@@ -190,34 +190,34 @@ class RegistrarMantenimientoNotifier
     try {
       await useCase.call(
         animalUuid: state.animalUuid,
-        tipo: state.tipo,
-        descripcion: state.descripcion,
-        fecha: state.fecha,
-        veterinario: state.veterinario,
-        medicamento: state.medicamento,
-        dosisAplicada: state.dosisAplicada,
-        rutaAplicacion: state.rutaAplicacion,
-        proximaDosis: state.proximaDosis,
-        observaciones: state.observaciones,
+        type: state.type,
+        description: state.description,
+        date: state.date,
+        veterinarian: state.veterinarian,
+        medicament: state.medicament,
+        appliedDosage: state.appliedDosage,
+        applicationRoute: state.applicationRoute,
+        nextDosage: state.nextDosage,
+        observations: state.observations,
       );
 
       // Invalidar historial para refrescar
       ref.invalidate(historialMantenimientoProvider(state.animalUuid));
 
-      state = state.copyWith(isLoading: false, exitoso: true);
+      state = state.copyWith(isLoading: false, successful: true);
     } catch (e) {
       state = state.copyWith(
         isLoading: false,
         error: e.toString(),
-        exitoso: false,
+        successful: false,
       );
     }
   }
 
   void reset() {
-    state = RegistrarMantenimientoState(
+    state = RegisterMaintenanceEventState(
       animalUuid: state.animalUuid,
-      fecha: DateTime.now(),
+      date: DateTime.now(),
     );
   }
 
@@ -230,12 +230,12 @@ class RegistrarMantenimientoNotifier
 // PROVIDER - Notifier para registrar mantenimiento
 // ============================================================================
 
-final registrarMantenimientoProvider = StateNotifierProvider.family<
-    RegistrarMantenimientoNotifier,
-    RegistrarMantenimientoState,
+final registerMaintenanceEventProvider = StateNotifierProvider.family<
+    RegisterMaintenanceEventNotifier,
+    RegisterMaintenanceEventState,
     String>((ref, animalUuid) {
-  final useCase = ref.watch(registrarMantenimientoUseCaseProvider);
-  return RegistrarMantenimientoNotifier(
+  final useCase = ref.watch(registerMaintenanceEventUseCaseProvider);
+  return RegisterMaintenanceEventNotifier(
     useCase: useCase,
     ref: ref,
     animalUuid: animalUuid,

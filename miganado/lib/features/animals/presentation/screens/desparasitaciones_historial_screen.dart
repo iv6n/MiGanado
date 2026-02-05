@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 import 'package:intl/intl.dart';
 import 'package:miganado/features/mantenimiento/data/models/desparasitacion_entity.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/desparasitaciones_providers.dart';
@@ -32,7 +33,7 @@ class DesparasitacionesHistorialScreen extends ConsumerWidget {
             children: [
               const Icon(Icons.error_outline, size: 64, color: Colors.red),
               const SizedBox(height: 16),
-              Text('Error: $error'),
+              Text('${AppStrings.errorOccurred}: $error'),
             ],
           ),
         ),
@@ -56,7 +57,8 @@ class DesparasitacionesHistorialScreen extends ConsumerWidget {
 
           return RefreshIndicator(
             onRefresh: () async {
-              await ref.refresh(desparasitacionesProvider(animalUuid).future);
+              // ignore: unused_result
+              ref.refresh(desparasitacionesProvider(animalUuid).future);
             },
             child: ListView.separated(
               padding: const EdgeInsets.all(16),

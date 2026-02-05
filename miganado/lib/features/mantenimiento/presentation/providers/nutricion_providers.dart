@@ -2,46 +2,76 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/data/database/isar_database.dart';
 import 'package:miganado/features/mantenimiento/data/models/nutricion_entity.dart';
 import 'package:miganado/features/mantenimiento/domain/usecases/nutricion_usecases.dart';
+import 'package:miganado/core/exceptions/app_exception.dart';
+import 'package:miganado/core/services/logger_service.dart';
 
 final miganadoDatabaseProvider = Provider<MiGanadoDatabase>((ref) {
   return MiGanadoDatabase();
 });
 
-final registrarNutricionUseCaseProvider =
-    Provider<RegistrarNutricionUseCase>((ref) {
+final registerNutritionUseCaseProvider =
+    Provider<RegisterNutritionUseCase>((ref) {
   final database = ref.watch(miganadoDatabaseProvider);
-  return RegistrarNutricionUseCase(database: database);
+  return RegisterNutritionUseCase(database: database);
 });
 
-final obtenerNutricionUseCaseProvider =
-    Provider<ObtenerNutricionUseCase>((ref) {
+final getNutritionHistoryUseCaseProvider =
+    Provider<GetNutritionHistoryUseCase>((ref) {
   final database = ref.watch(miganadoDatabaseProvider);
-  return ObtenerNutricionUseCase(database: database);
+  return GetNutritionHistoryUseCase(database: database);
 });
 
-final obtenerNutricionActualUseCaseProvider =
-    Provider<ObtenerNutricionActualUseCase>((ref) {
+final getCurrentNutritionUseCaseProvider =
+    Provider<GetCurrentNutritionUseCase>((ref) {
   final database = ref.watch(miganadoDatabaseProvider);
-  return ObtenerNutricionActualUseCase(database: database);
+  return GetCurrentNutritionUseCase(database: database);
 });
 
-final finalizarNutricionUseCaseProvider =
-    Provider<FinalizarNutricionUseCase>((ref) {
+final finishNutritionUseCaseProvider = Provider<FinishNutritionUseCase>((ref) {
   final database = ref.watch(miganadoDatabaseProvider);
-  return FinalizarNutricionUseCase(database: database);
+  return FinishNutritionUseCase(database: database);
 });
 
-final nutricionByAnimalProvider =
+final nutritionByAnimalProvider =
     FutureProvider.family<List<NutricionEntity>, String>(
         (ref, animalUuid) async {
-  final useCase = ref.watch(obtenerNutricionUseCaseProvider);
-  return useCase(animalUuid: animalUuid);
+  try {
+    LoggerService.startOperation('nutritionByAnimal', 'nutricion_providers');
+    final useCase = ref.watch(getNutritionHistoryUseCaseProvider);
+    final nutrition = await useCase(animalUuid: animalUuid);
+    LoggerService.operationCompleted(
+        'nutritionByAnimal', 'nutricion_providers');
+    return nutrition;
+  } catch (e, st) {
+    final appEx = toAppException(e, st);
+    LoggerService.error(
+        'Error obteniendo nutrición', appEx, st, 'nutricion_providers');
+    throw DatabaseException(
+      message: 'No se pudo cargar el historial de nutrición: ${appEx.message}',
+      originalError: e,
+      stackTrace: st,
+    );
+  }
 });
 
-final nutricionActualProvider =
+final currentNutritionProvider =
     FutureProvider.family<NutricionEntity?, String>((ref, animalUuid) async {
-  final useCase = ref.watch(obtenerNutricionActualUseCaseProvider);
-  return useCase(animalUuid: animalUuid);
+  try {
+    LoggerService.startOperation('currentNutrition', 'nutricion_providers');
+    final useCase = ref.watch(getCurrentNutritionUseCaseProvider);
+    final nutrition = await useCase(animalUuid: animalUuid);
+    LoggerService.operationCompleted('currentNutrition', 'nutricion_providers');
+    return nutrition;
+  } catch (e, st) {
+    final appEx = toAppException(e, st);
+    LoggerService.error(
+        'Error obteniendo nutrición actual', appEx, st, 'nutricion_providers');
+    throw DatabaseException(
+      message: 'No se pudo cargar la nutrición actual: ${appEx.message}',
+      originalError: e,
+      stackTrace: st,
+    );
+  }
 });
 
-final registrandoNutricionProvider = StateProvider<bool>((ref) => false);
+final registeringNutritionProvider = StateProvider<bool>((ref) => false);

@@ -1,50 +1,50 @@
 import 'package:uuid/uuid.dart';
 
-/// Modelo de Pesaje - Registro del peso de un animal en una fecha específica
-class Pesaje {
-  /// Identificador único (UUID)
+/// Weighing model - Animal weight record on a specific date
+class Weighing {
+  /// Unique identifier (UUID)
   final String id;
 
-  /// ID del animal al que pertenece este pesaje
+  /// ID of the animal this weighing belongs to
   final String animalId;
 
-  /// Peso en kilogramos
-  final double pesoKg;
+  /// Weight in kilograms
+  final double weightKg;
 
-  /// Fecha y hora del pesaje
-  final DateTime fecha;
+  /// Date and time of weighing
+  final DateTime date;
 
-  /// Notas opcionales sobre el pesaje
-  final String? notas;
+  /// Optional notes about the weighing
+  final String? notes;
 
   /// Constructor
-  Pesaje({
+  Weighing({
     String? id,
     required this.animalId,
-    required this.pesoKg,
-    DateTime? fecha,
-    this.notas,
+    required this.weightKg,
+    DateTime? date,
+    this.notes,
   })  : id = id ?? const Uuid().v4(),
-        fecha = fecha ?? DateTime.now();
+        date = date ?? DateTime.now();
 
-  /// Copia el objeto con campos opcionales actualizados
-  Pesaje copyWith({
+  /// Copy the object with updated optional fields
+  Weighing copyWith({
     String? id,
     String? animalId,
-    double? pesoKg,
-    DateTime? fecha,
-    String? notas,
+    double? weightKg,
+    DateTime? date,
+    String? notes,
   }) {
-    return Pesaje(
+    return Weighing(
       id: id ?? this.id,
       animalId: animalId ?? this.animalId,
-      pesoKg: pesoKg ?? this.pesoKg,
-      fecha: fecha ?? this.fecha,
-      notas: notas ?? this.notas,
+      weightKg: weightKg ?? this.weightKg,
+      date: date ?? this.date,
+      notes: notes ?? this.notes,
     );
   }
 
   @override
   String toString() =>
-      'Pesaje(id: $id, animalId: $animalId, pesoKg: $pesoKg, fecha: $fecha)';
+      'Weighing(id: $id, animalId: $animalId, weightKg: $weightKg, date: $date)';
 }

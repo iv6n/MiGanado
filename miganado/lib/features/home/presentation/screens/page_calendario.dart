@@ -1,37 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 import 'package:miganado/providers/calendar_providers.dart';
 import 'package:miganado/features/calendar/ui/screens/crear_evento_screen.dart';
+import 'package:table_calendar/table_calendar.dart';
 
-class PageCalendario extends ConsumerWidget {
+class PageCalendario extends ConsumerStatefulWidget {
   const PageCalendario({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PageCalendario> createState() => _PageCalendarioState();
+}
+
+class _PageCalendarioState extends ConsumerState<PageCalendario> {
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
+  CalendarFormat _calendarFormat = CalendarFormat.twoWeeks;
+
+  @override
+  Widget build(BuildContext context) {
+    final todosLosEventosAsync = ref.watch(todosLosEventosProvider);
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('📅 Calendario Ganadero'),
-          centerTitle: true,
-          elevation: 0,
-          bottom: const TabBar(
-            tabs: [
-              Tab(icon: Icon(Icons.pending_actions), text: 'Pendientes'),
-              Tab(icon: Icon(Icons.check_circle), text: 'Realizados'),
-              Tab(icon: Icon(Icons.calendar_month), text: 'Próximos'),
-            ],
-          ),
-        ),
-        body: const TabBarView(
-          children: [
-            _EventosPendientesTab(),
-            _EventosRealizadosTab(),
-            _EventosProximosTab(),
-          ],
-        ),
         floatingActionButton: FloatingActionButton(
-          heroTag: 'page_calendario_fab',
+          heroTag: 'calendario_fab_create',
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -42,6 +36,93 @@ class PageCalendario extends ConsumerWidget {
           tooltip: 'Crear evento',
           child: const Icon(Icons.add),
         ),
+        body: CustomScrollView(
+          slivers: [
+            const SliverAppBar(
+              pinned: false,
+              floating: true,
+              snap: false,
+              expandedHeight: 0,
+              centerTitle: true,
+              title: Text(AppStrings.calendarTitle2),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding:
+                    const EdgeInsets.only(top: 0, left: 8, right: 8, bottom: 8),
+                child: todosLosEventosAsync.when(
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  error: (err, stack) => Center(child: Text('Error: $err')),
+                  data: (eventos) {
+                    final Map<DateTime, List<dynamic>> eventosPorDia = {};
+                    for (final evento in eventos) {
+                      final fecha = DateTime(
+                          evento.fechaProgramada.year,
+                          evento.fechaProgramada.month,
+                          evento.fechaProgramada.day);
+                      eventosPorDia.putIfAbsent(fecha, () => []).add(evento);
+                    }
+                    return TableCalendar(
+                      firstDay: DateTime.utc(2020, 1, 1),
+                      lastDay: DateTime.utc(2100, 12, 31),
+                      focusedDay: _focusedDay,
+                      calendarFormat: _calendarFormat,
+                      onFormatChanged: (format) {
+                        setState(() {
+                          _calendarFormat = format;
+                        });
+                      },
+                      availableCalendarFormats: const {
+                        CalendarFormat.twoWeeks: ' + ',
+                        CalendarFormat.month: ' - ',
+                      },
+                      selectedDayPredicate: (day) =>
+                          isSameDay(_selectedDay, day),
+                      eventLoader: (day) {
+                        final key = DateTime(day.year, day.month, day.day);
+                        return eventosPorDia[key] ?? [];
+                      },
+                      onDaySelected: (selectedDay, focusedDay) {
+                        setState(() {
+                          _selectedDay = selectedDay;
+                          _focusedDay = focusedDay;
+                        });
+                      },
+                      calendarStyle: const CalendarStyle(
+                        markerDecoration: BoxDecoration(
+                          color: Colors.orange,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      headerStyle: const HeaderStyle(
+                          formatButtonVisible: true,
+                          formatButtonShowsNext: false,
+                          titleCentered: true,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                          ),
+                          formatButtonPadding:
+                              EdgeInsets.symmetric(horizontal: 10)),
+                    );
+                  },
+                ),
+              ),
+            ),
+            const SliverToBoxAdapter(
+              child: Divider(height: 1),
+            ),
+            SliverFillRemaining(
+              child: TabBarView(
+                children: [
+                  _EventosPendientesTab(selectedDay: _selectedDay),
+                  _EventosRealizadosTab(selectedDay: _selectedDay),
+                  _EventosProximosTab(selectedDay: _selectedDay),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -49,7 +130,8 @@ class PageCalendario extends ConsumerWidget {
 
 /// Tab de eventos pendientes
 class _EventosPendientesTab extends ConsumerWidget {
-  const _EventosPendientesTab();
+  final DateTime? selectedDay;
+  const _EventosPendientesTab({this.selectedDay});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -60,6 +142,16 @@ class _EventosPendientesTab extends ConsumerWidget {
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (err, stack) => Center(child: Text('Error: $err')),
       data: (eventos) {
+        // Filtrar por día si hay uno seleccionado
+        final eventosFiltrados = selectedDay == null
+            ? eventos
+            : eventos.where((evento) {
+                final fecha = DateTime(evento.fechaProgramada.year,
+                    evento.fechaProgramada.month, evento.fechaProgramada.day);
+                return fecha ==
+                    DateTime(selectedDay!.year, selectedDay!.month,
+                        selectedDay!.day);
+              }).toList();
         return SingleChildScrollView(
           child: Column(
             children: [
@@ -78,7 +170,7 @@ class _EventosPendientesTab extends ConsumerWidget {
                   },
                 ),
               ),
-              if (eventos.isEmpty)
+              if (eventosFiltrados.isEmpty)
                 Padding(
                   padding: const EdgeInsets.all(32),
                   child: Column(
@@ -100,9 +192,9 @@ class _EventosPendientesTab extends ConsumerWidget {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: eventos.length,
+                  itemCount: eventosFiltrados.length,
                   itemBuilder: (context, index) {
-                    final evento = eventos[index];
+                    final evento = eventosFiltrados[index];
                     return _EventoListItem(evento: evento);
                   },
                 ),
@@ -116,7 +208,8 @@ class _EventosPendientesTab extends ConsumerWidget {
 
 /// Tab de eventos realizados
 class _EventosRealizadosTab extends ConsumerWidget {
-  const _EventosRealizadosTab();
+  final DateTime? selectedDay;
+  const _EventosRealizadosTab({this.selectedDay});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -127,6 +220,15 @@ class _EventosRealizadosTab extends ConsumerWidget {
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (err, stack) => Center(child: Text('Error: $err')),
       data: (eventos) {
+        final eventosFiltrados = selectedDay == null
+            ? eventos
+            : eventos.where((evento) {
+                final fecha = DateTime(evento.fechaProgramada.year,
+                    evento.fechaProgramada.month, evento.fechaProgramada.day);
+                return fecha ==
+                    DateTime(selectedDay!.year, selectedDay!.month,
+                        selectedDay!.day);
+              }).toList();
         return SingleChildScrollView(
           child: Column(
             children: [
@@ -145,7 +247,7 @@ class _EventosRealizadosTab extends ConsumerWidget {
                   },
                 ),
               ),
-              if (eventos.isEmpty)
+              if (eventosFiltrados.isEmpty)
                 Padding(
                   padding: const EdgeInsets.all(32),
                   child: Column(
@@ -167,9 +269,9 @@ class _EventosRealizadosTab extends ConsumerWidget {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: eventos.length,
+                  itemCount: eventosFiltrados.length,
                   itemBuilder: (context, index) {
-                    final evento = eventos[index];
+                    final evento = eventosFiltrados[index];
                     return _EventoListItem(evento: evento);
                   },
                 ),
@@ -183,7 +285,8 @@ class _EventosRealizadosTab extends ConsumerWidget {
 
 /// Tab de eventos próximos
 class _EventosProximosTab extends ConsumerWidget {
-  const _EventosProximosTab();
+  final DateTime? selectedDay;
+  const _EventosProximosTab({this.selectedDay});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -194,6 +297,15 @@ class _EventosProximosTab extends ConsumerWidget {
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (err, stack) => Center(child: Text('Error: $err')),
       data: (eventos) {
+        final eventosFiltrados = selectedDay == null
+            ? eventos
+            : eventos.where((evento) {
+                final fecha = DateTime(evento.fechaProgramada.year,
+                    evento.fechaProgramada.month, evento.fechaProgramada.day);
+                return fecha ==
+                    DateTime(selectedDay!.year, selectedDay!.month,
+                        selectedDay!.day);
+              }).toList();
         return SingleChildScrollView(
           child: Column(
             children: [
@@ -201,7 +313,7 @@ class _EventosProximosTab extends ConsumerWidget {
                 padding: const EdgeInsets.all(16),
                 child: _ResumenCard(
                   titulo: 'Próximos Eventos (7 días)',
-                  cantidad: eventos.length,
+                  cantidad: eventosFiltrados.length,
                   color: Colors.blue,
                   icono: Icons.calendar_month,
                 ),
@@ -243,7 +355,7 @@ class _EventosProximosTab extends ConsumerWidget {
                   return const SizedBox.shrink();
                 },
               ),
-              if (eventos.isEmpty)
+              if (eventosFiltrados.isEmpty)
                 Padding(
                   padding: const EdgeInsets.all(32),
                   child: Column(
@@ -266,9 +378,9 @@ class _EventosProximosTab extends ConsumerWidget {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: eventos.length,
+                  itemCount: eventosFiltrados.length,
                   itemBuilder: (context, index) {
-                    final evento = eventos[index];
+                    final evento = eventosFiltrados[index];
                     return _EventoListItem(evento: evento);
                   },
                 ),
@@ -341,7 +453,7 @@ class _ResumenCard extends StatelessWidget {
 }
 
 /// Widget para mostrar un evento en lista
-class _EventoListItem extends StatelessWidget {
+class _EventoListItem extends ConsumerWidget {
   final dynamic evento;
 
   const _EventoListItem({required this.evento});
@@ -384,59 +496,142 @@ class _EventoListItem extends StatelessWidget {
     return 'Media';
   }
 
+  String _getEstadoIcon(dynamic estado) {
+    final estadoStr = estado.toString();
+    if (estadoStr.contains('pendiente')) return '⏳';
+    if (estadoStr.contains('realizado')) return '✅';
+    if (estadoStr.contains('vencido')) return '❌';
+    if (estadoStr.contains('cancelado')) return '🚫';
+    if (estadoStr.contains('pospuesto')) return '⏸️';
+    return '📌';
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final esPendiente = evento.estado.toString().contains('pendiente');
+
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: ListTile(
-        leading: Text(
-          _getIconoCategoria(evento.categoria),
-          style: const TextStyle(fontSize: 24),
-        ),
-        title: Text(
-          evento.titulo ?? 'Sin título',
-          style: const TextStyle(fontWeight: FontWeight.w600),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 4),
-            Text(
-              _formatearFecha(evento.fechaProgramada),
-              style: const TextStyle(fontSize: 12),
+      child: Column(
+        children: [
+          ListTile(
+            leading: Text(
+              _getIconoCategoria(evento.categoria),
+              style: const TextStyle(fontSize: 24),
             ),
-            if (evento.descripcion != null && evento.descripcion!.isNotEmpty)
-              Text(
-                evento.descripcion!,
-                style: const TextStyle(fontSize: 11, color: Colors.grey),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+            title: Text(
+              evento.titulo ?? 'Sin título',
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Text(
+                      _getEstadoIcon(evento.estado),
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      _formatearFecha(evento.fechaProgramada),
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
+                if (evento.descripcion != null &&
+                    evento.descripcion!.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Text(
+                      evento.descripcion!,
+                      style: const TextStyle(fontSize: 11, color: Colors.grey),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+              ],
+            ),
+            trailing: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: _getColorPrioridad(evento.prioridad).withOpacity(0.2),
+                borderRadius: BorderRadius.circular(4),
               ),
-          ],
-        ),
-        trailing: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          decoration: BoxDecoration(
-            color: _getColorPrioridad(evento.prioridad).withOpacity(0.2),
-            borderRadius: BorderRadius.circular(4),
-          ),
-          child: Text(
-            _getNombrePrioridad(evento.prioridad),
-            style: TextStyle(
-              color: _getColorPrioridad(evento.prioridad),
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
+              child: Text(
+                _getNombrePrioridad(evento.prioridad),
+                style: TextStyle(
+                  color: _getColorPrioridad(evento.prioridad),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                ),
+              ),
             ),
           ),
-        ),
-        onTap: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Evento: ${evento.titulo}'),
-              duration: const Duration(seconds: 2),
+          // Botones de acción para eventos pendientes
+          if (esPendiente)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  OutlinedButton.icon(
+                    onPressed: () {
+                      // Mostrar diálogo para completar
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text(AppStrings.buttonMarkComplete),
+                          content:
+                              Text('¿Completar evento "${evento.titulo}"?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('Cancelar'),
+                            ),
+                            FilledButton(
+                              onPressed: () async {
+                                try {
+                                  await ref.read(
+                                      completarEventoProvider(evento.id)
+                                          .future);
+                                  if (context.mounted) {
+                                    Navigator.pop(context);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                            '✓ Evento marcado como realizado'),
+                                        backgroundColor: Colors.green,
+                                        duration: Duration(seconds: 2),
+                                      ),
+                                    );
+                                  }
+                                } catch (e) {
+                                  if (context.mounted) {
+                                    Navigator.pop(context);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Error: $e'),
+                                        backgroundColor: Colors.red,
+                                      ),
+                                    );
+                                  }
+                                }
+                              },
+                              child: const Text('Completar'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.check_circle),
+                    label: const Text('Completar'),
+                  ),
+                ],
+              ),
             ),
-          );
-        },
+        ],
       ),
     );
   }

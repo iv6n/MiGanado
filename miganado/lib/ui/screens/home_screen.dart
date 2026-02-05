@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 import 'package:miganado/features/animals/presentation/providers/animals_providers.dart';
 import 'package:miganado/features/animals/data/models/animal_entity.dart';
 import 'package:miganado/ui/screens/register_animal_screen.dart';
@@ -15,7 +16,7 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('MiGanado'),
+        title: const Text(AppStrings.appName),
         backgroundColor: Colors.green.shade700,
         elevation: 0,
       ),
@@ -35,23 +36,23 @@ class HomeScreen extends ConsumerWidget {
                 children: [
                   const Icon(Icons.error_outline, size: 64, color: Colors.red),
                   const SizedBox(height: 16),
-                  Text('Error: ${snapshot.error}'),
+                  Text('${AppStrings.errorTitle}: ${snapshot.error}'),
                 ],
               ),
             );
           }
 
-          final animales = snapshot.data ?? [];
+          final animals = snapshot.data ?? [];
 
-          if (animales.isEmpty) {
+          if (animals.isEmpty) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.pets_outlined, size: 64, color: Colors.grey),
+                  const Icon(Icons.pets_outlined, size: 64, color: Colors.grey),
                   const SizedBox(height: 16),
                   const Text(
-                    'No hay animales registrados',
+                    'No hay animales registrados', // TODO: Mover a AppStrings y ARB
                     style: TextStyle(fontSize: 18, color: Colors.grey),
                   ),
                   const SizedBox(height: 32),
@@ -72,16 +73,16 @@ class HomeScreen extends ConsumerWidget {
           }
 
           return ListView.builder(
-            itemCount: animales.length,
+            itemCount: animals.length,
             itemBuilder: (context, index) {
-              final animal = animales[index];
+              final animal = animals[index];
               return AnimalCard(animal: animal);
             },
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        heroTag: 'ui_home_fab',
+        heroTag: 'home_screen_fab_add',
         backgroundColor: Colors.green,
         onPressed: () {
           Navigator.of(context).push(
@@ -122,10 +123,10 @@ class AnimalCard extends StatelessWidget {
           ),
         ),
         title: Text(
-          animal.nombrePersonalizado ?? 'Animal ${animal.numeroArete}',
+          animal.customName ?? 'Animal ${animal.earTagNumber}',
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        subtitle: Text('Arete: ${animal.numeroArete}'),
+        subtitle: Text('Arete: ${animal.earTagNumber}'),
         trailing: Icon(Icons.arrow_forward, color: Colors.grey.shade400),
         onTap: () {
           Navigator.of(context).push(

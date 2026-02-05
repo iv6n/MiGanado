@@ -4,7 +4,7 @@ import 'package:uuid/uuid.dart';
 part 'reproductivo_entity.g.dart';
 
 @collection
-class ReproductivEntity {
+class ReproductiveEntity {
   Id? id;
 
   @Index(unique: true)
@@ -13,101 +13,74 @@ class ReproductivEntity {
   @Index()
   late String animalUuid;
 
-  // Estado reproductivo
-  late String
-      estado; // "Virgen", "Gestante", "Lactante", "En pausa", "Descartada"
-  late DateTime? fechaUltimoEstro;
+  // Reproductive status
+  late String status; // "virgin", "pregnant", "lactating", "empty", "blocked"
+  DateTime? lastEstrusDate;
 
-  // Empadres / Servicios
-  @ignore
-  late List<EmpadreData> empadres;
+  // Matings / Services
+  DateTime? currentMatingDate;
+  DateTime? estimatedBirthDate;
+  String? sireUuid; // UUID of the sire used
+  String? matingObservations;
 
-  // Partos
-  @ignore
-  late List<PartoData> partos;
+  // Reproductive history
+  int totalBirths = 0;
+  int totalOffspring = 0;
+  DateTime? firstBirth;
+  DateTime? lastBirth;
 
-  // Información de preñez actual (si aplica)
-  DateTime? fechaEmpadreActual;
-  DateTime? fechaPartoEstimada;
-  String? sementalUuid; // UUID del semental usado
-  String? observacionesEmpadre;
+  // Notes
+  String? observations;
 
-  // Historial reproductivo
-  int totalPartos = 0;
-  int totalCrias = 0;
-  DateTime? primerParto;
-  DateTime? ultimoParto;
+  // Audit
+  late DateTime registrationDate;
+  late DateTime? lastUpdateDate;
+  late String registeredBy;
 
-  // Notas
-  String? observaciones;
-
-  // Auditoría
-  late DateTime fechaRegistro;
-  late DateTime? fechaActualizacion;
-  late String registradoPor;
-
-  ReproductivEntity({
+  ReproductiveEntity({
     required this.animalUuid,
-    required this.estado,
-    required this.registradoPor,
-    this.fechaUltimoEstro,
-    this.empadres = const [],
-    this.partos = const [],
-    this.fechaEmpadreActual,
-    this.fechaPartoEstimada,
-    this.sementalUuid,
-    this.observacionesEmpadre,
-    this.observaciones,
+    required this.status,
+    required this.registeredBy,
+    this.lastEstrusDate,
+    this.currentMatingDate,
+    this.estimatedBirthDate,
+    this.sireUuid,
+    this.matingObservations,
+    this.observations,
   }) {
     uuid = const Uuid().v4();
-    fechaRegistro = DateTime.now();
-    fechaActualizacion = DateTime.now();
-    _actualizarEstadisticas();
+    registrationDate = DateTime.now();
+    lastUpdateDate = DateTime.now();
   }
 
-  void _actualizarEstadisticas() {
-    totalPartos = partos.length;
-    totalCrias = partos.fold(0, (sum, parto) => sum + (parto.numeroCrias ?? 0));
-    primerParto = partos.isNotEmpty
-        ? partos.map((p) => p.fecha).reduce((a, b) => a.isBefore(b) ? a : b)
-        : null;
-    ultimoParto = partos.isNotEmpty
-        ? partos.map((p) => p.fecha).reduce((a, b) => a.isAfter(b) ? a : b)
-        : null;
-  }
-
-  ReproductivEntity copyWith({
-    String? estado,
-    DateTime? fechaUltimoEstro,
-    List<EmpadreData>? empadres,
-    List<PartoData>? partos,
-    DateTime? fechaEmpadreActual,
-    DateTime? fechaPartoEstimada,
-    String? sementalUuid,
-    String? observacionesEmpadre,
-    String? observaciones,
+  ReproductiveEntity copyWith({
+    String? status,
+    DateTime? lastEstrusDate,
+    DateTime? currentMatingDate,
+    DateTime? estimatedBirthDate,
+    String? sireUuid,
+    String? matingObservations,
+    String? observations,
   }) {
-    return ReproductivEntity(
+    return ReproductiveEntity(
       animalUuid: animalUuid,
-      estado: estado ?? this.estado,
-      registradoPor: registradoPor,
-      fechaUltimoEstro: fechaUltimoEstro ?? this.fechaUltimoEstro,
-      empadres: empadres ?? this.empadres,
-      partos: partos ?? this.partos,
-      fechaEmpadreActual: fechaEmpadreActual ?? this.fechaEmpadreActual,
-      fechaPartoEstimada: fechaPartoEstimada ?? this.fechaPartoEstimada,
-      sementalUuid: sementalUuid ?? this.sementalUuid,
-      observacionesEmpadre: observacionesEmpadre ?? this.observacionesEmpadre,
-      observaciones: observaciones ?? this.observaciones,
+      status: status ?? this.status,
+      registeredBy: registeredBy,
+      lastEstrusDate: lastEstrusDate ?? this.lastEstrusDate,
+      currentMatingDate: currentMatingDate ?? this.currentMatingDate,
+      estimatedBirthDate: estimatedBirthDate ?? this.estimatedBirthDate,
+      sireUuid: sireUuid ?? this.sireUuid,
+      matingObservations: matingObservations ?? this.matingObservations,
+      observations: observations ?? this.observations,
     )
-      ..id = this.id
+      ..id = id
       ..uuid = uuid
-      ..fechaRegistro = this.fechaRegistro
-      ..fechaActualizacion = DateTime.now()
-      ..totalPartos = this.totalPartos
-      ..totalCrias = this.totalCrias
-      ..primerParto = this.primerParto
-      ..ultimoParto = this.ultimoParto;
+      ..registrationDate = this.registrationDate
+      ..lastUpdateDate = DateTime.now()
+      ..totalBirths = this.totalBirths
+      ..totalOffspring = this.totalOffspring
+      ..firstBirth = this.firstBirth
+      ..lastBirth = this.lastBirth;
   }
 }
 

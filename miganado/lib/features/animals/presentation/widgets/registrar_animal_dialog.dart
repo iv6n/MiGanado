@@ -19,21 +19,21 @@ class RegistrarAnimalDialog extends ConsumerWidget {
           children: [
             FormTextField(
               label: 'Arete',
-              initialValue: state.numeroArete,
+              initialValue: state.earTagNumber,
               onChanged: notifier.updateArete,
               required: false,
             ),
             const SizedBox(height: 8),
             FormTextField(
               label: 'Nombre',
-              initialValue: state.nombrePersonalizado,
+              initialValue: state.customName,
               onChanged: notifier.updateNombrePersonalizado,
               required: false,
             ),
             const SizedBox(height: 8),
             FormTextField(
               label: 'Raza',
-              initialValue: state.raza,
+              initialValue: state.breed,
               onChanged: notifier.updateRaza,
               required: false,
             ),
@@ -63,7 +63,7 @@ class RegistrarAnimalDialog extends ConsumerWidget {
                   if (animal != null && context.mounted) {
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Animal registrado')),
+                      const SnackBar(content: Text('Animal registrado')),
                     );
                   }
                 },

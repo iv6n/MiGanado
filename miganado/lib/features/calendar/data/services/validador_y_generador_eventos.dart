@@ -185,7 +185,7 @@ class GeneradorEventosAutomaticos {
           prioridad: PrioridadEvento.baja,
           esAutomatico: true,
           esRecurrente: true,
-          patronRecurrencia: 'cada ${frecuenciaDias} días',
+          patronRecurrencia: 'cada $frecuenciaDias días',
           fechaProgramada: fechaInicio.add(Duration(days: frecuenciaDias * i)),
           animalId: animalId,
         ),

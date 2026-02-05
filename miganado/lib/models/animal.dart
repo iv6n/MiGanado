@@ -1,63 +1,87 @@
 import 'package:uuid/uuid.dart';
 
-/// Tipos de ganado disponibles
-enum TipoGanado {
-  vaca,
-  becerro,
-  toro,
-  novillo,
-  caballo,
-  mula,
-  burro,
+/// Livestock types available
+enum LivestockType {
+  cow,
+  calf,
+  bull,
+  steer,
+  horse,
+  mule,
+  donkey,
 }
 
-/// Sexo del animal
+/// Sex of the animal (legacy, use Sex from etapa_vida.dart)
 enum Sexo {
   macho,
   hembra,
 }
 
-/// Estado reproductivo de la hembra
+/// Type of livestock (legacy, use Category from etapa_vida.dart)
+enum TipoGanado {
+  vaca,
+  ternera,
+  ternero,
+  toro,
+  novillo,
+}
+
+/// Reproductive status (legacy, use ReproductiveStatus from etapa_vida.dart)
 enum EstadoReproductivo {
+  virgen,
   prenada,
   lactando,
   seca,
   no_definido,
 }
 
-/// Extensión para validar si el tipo de ganado requiere arete
-extension TipoGanadoValidation on TipoGanado {
+/// Sex of the animal
+enum Sex {
+  male,
+  female,
+}
+
+/// Reproductive status of the female
+enum ReproductiveStatus {
+  pregnant,
+  lactating,
+  dry,
+  undefined,
+}
+
+/// Extension to validate if livestock type requires ear tag
+extension LivestockTypeValidation on LivestockType {
   /// Valida si este tipo de ganado requiere arete por regulaciones locales
-  bool get requiereArete {
-    // Según regulaciones locales, solo bovinos (vacas, becerros, toros, novillos) requieren arete
+  bool get requiresEarTag {
+    // Según regulaciones locales, solo bovinos (cow, calf, bull, steer) requieren arete
     switch (this) {
-      case TipoGanado.vaca:
-      case TipoGanado.becerro:
-      case TipoGanado.toro:
-      case TipoGanado.novillo:
+      case LivestockType.cow:
+      case LivestockType.calf:
+      case LivestockType.bull:
+      case LivestockType.steer:
         return true;
-      case TipoGanado.caballo:
-      case TipoGanado.mula:
-      case TipoGanado.burro:
+      case LivestockType.horse:
+      case LivestockType.mule:
+      case LivestockType.donkey:
         return false;
     }
   }
 
   /// Obtiene el mensaje sobre la obligatoriedad del arete
-  String get mensajeArete {
-    return requiereArete
+  String get earTagMessage {
+    return requiresEarTag
         ? 'El arete es obligatorio para bovinos según regulaciones sanitarias'
         : 'El arete es opcional para esta especie';
   }
 }
 
-/// Modelo de Animal - Entidad principal de la aplicación
+/// Animal model - Main entity of the app
 class Animal {
   /// Identificador único (UUID)
   final String id;
 
   /// Número de arete (único, requerido para identificar en el campo)
-  final String numeroArete;
+  final String earTagNumber;
 
   /// Nombre personalizado del animal (opcional, ej: "Blanquita", "Lucero")
   final String? nombrePersonalizado;
@@ -140,7 +164,7 @@ class Animal {
   /// Constructor
   Animal({
     String? id,
-    required this.numeroArete,
+    required String earTagNumber,
     this.nombrePersonalizado,
     required this.tipo,
     required this.sexo,
@@ -168,6 +192,7 @@ class Animal {
     DateTime? fechaRegistro,
     DateTime? ultimaActualizacion,
   })  : id = id ?? const Uuid().v4(),
+        earTagNumber = earTagNumber,
         costosExtra = costosExtra ?? {},
         fechaRegistro = fechaRegistro ?? DateTime.now(),
         ultimaActualizacion = ultimaActualizacion ?? DateTime.now();
@@ -175,7 +200,7 @@ class Animal {
   /// Copia el objeto con campos opcionales actualizados
   Animal copyWith({
     String? id,
-    String? numeroArete,
+    String? earTagNumber,
     String? nombrePersonalizado,
     TipoGanado? tipo,
     Sexo? sexo,
@@ -205,7 +230,7 @@ class Animal {
   }) {
     return Animal(
       id: id ?? this.id,
-      numeroArete: numeroArete ?? this.numeroArete,
+      earTagNumber: earTagNumber ?? this.earTagNumber,
       nombrePersonalizado: nombrePersonalizado ?? this.nombrePersonalizado,
       tipo: tipo ?? this.tipo,
       sexo: sexo ?? this.sexo,
@@ -256,5 +281,5 @@ class Animal {
 
   @override
   String toString() =>
-      'Animal(id: $id, numeroArete: $numeroArete, tipo: $tipo)';
+      'Animal(id: $id, earTagNumber: $earTagNumber, tipo: $tipo)';
 }

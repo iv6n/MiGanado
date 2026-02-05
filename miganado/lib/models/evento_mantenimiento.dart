@@ -1,86 +1,86 @@
 import 'package:uuid/uuid.dart';
 
-/// Tipos de eventos de mantenimiento
-enum TipoMantenimiento {
-  vacuna,
-  banio,
-  desparasitacion,
-  ubicacion,
-  otro,
+/// Maintenance event types
+enum MaintenanceType {
+  vaccine,
+  bath,
+  deworming,
+  location,
+  other,
 }
 
-/// Modelo para eventos de mantenimiento del animal
-class EventoMantenimiento {
-  /// Identificador único
+/// Model for animal maintenance events
+class MaintenanceEvent {
+  /// Unique identifier
   final String id;
 
-  /// ID del animal asociado
+  /// Associated animal ID
   final String animalId;
 
-  /// Tipo de evento
-  final TipoMantenimiento tipo;
+  /// Event type
+  final MaintenanceType type;
 
-  /// Fecha del evento
-  final DateTime fecha;
+  /// Event date
+  final DateTime date;
 
-  /// Descripción del producto usado (vacuna, desparasitante, etc.)
-  final String producto;
+  /// Product description (vaccine, dewormer, etc.)
+  final String product;
 
-  /// Dosis aplicada (opcional)
-  final String? dosis;
+  /// Applied dose (optional)
+  final String? dose;
 
-  /// Lote del producto
-  final String? lote;
+  /// Product batch
+  final String? batch;
 
-  /// Observaciones adicionales
-  final String observaciones;
+  /// Additional observations
+  final String observations;
 
-  EventoMantenimiento({
+  MaintenanceEvent({
     String? id,
     required this.animalId,
-    required this.tipo,
-    required this.fecha,
-    required this.producto,
-    this.dosis,
-    this.lote,
-    this.observaciones = '',
+    required this.type,
+    required this.date,
+    required this.product,
+    this.dose,
+    this.batch,
+    this.observations = '',
   }) : id = id ?? const Uuid().v4();
 
-  /// Crear una copia con valores modificados
-  EventoMantenimiento copyWith({
+  /// Create a copy with modified values
+  MaintenanceEvent copyWith({
     String? id,
     String? animalId,
-    TipoMantenimiento? tipo,
-    DateTime? fecha,
-    String? producto,
-    String? dosis,
-    String? lote,
-    String? observaciones,
+    MaintenanceType? type,
+    DateTime? date,
+    String? product,
+    String? dose,
+    String? batch,
+    String? observations,
   }) {
-    return EventoMantenimiento(
+    return MaintenanceEvent(
       id: id ?? this.id,
       animalId: animalId ?? this.animalId,
-      tipo: tipo ?? this.tipo,
-      fecha: fecha ?? this.fecha,
-      producto: producto ?? this.producto,
-      dosis: dosis ?? this.dosis,
-      lote: lote ?? this.lote,
-      observaciones: observaciones ?? this.observaciones,
+      type: type ?? this.type,
+      date: date ?? this.date,
+      product: product ?? this.product,
+      dose: dose ?? this.dose,
+      batch: batch ?? this.batch,
+      observations: observations ?? this.observations,
     );
   }
 
   /// Obtener nombre legible del tipo de mantenimiento
   String get nombreTipo {
-    switch (tipo) {
-      case TipoMantenimiento.vacuna:
+    switch (type) {
+      case MaintenanceType.vaccine:
         return 'Vacuna';
-      case TipoMantenimiento.banio:
-        return 'Banio Sanitario';
-      case TipoMantenimiento.desparasitacion:
-        return 'Desparasitacion';
-      case TipoMantenimiento.ubicacion:
-        return 'Cambio de Ubicacion';
-      case TipoMantenimiento.otro:
+      case MaintenanceType.bath:
+        return 'Baño Sanitario';
+      case MaintenanceType.deworming:
+        return 'Desparasitación';
+      case MaintenanceType.location:
+        return 'Cambio de Ubicación';
+      case MaintenanceType.other:
         return 'Otro';
     }
   }

@@ -4,387 +4,369 @@ import 'package:miganado/features/animals/domain/entities/etapa_vida.dart';
 
 part 'animal_entity.g.dart';
 
-/// Especies disponibles
-enum Especie {
-  bovino,
-  equino,
-}
-
-/// Categoría adulta (siempre representa el adulto - NO cambia con edad)
-/// Representa QUÉ TIPO de animal es, no su fase de desarrollo
-enum Categoria {
-  vaca, // Bovino (cualquier edad/sexo)
-  caballo, // Equino - Caballo
-  burro, // Equino - Burro
-  mula, // Equino - Mula
-}
-
-/// Etapa de vida (fase de desarrollo - SÍ cambia con edad)
-enum EtapaVida {
-  becerro, // Bovino macho < 12 meses
-  becerra, // Bovino hembra < 12 meses
-  vaquilla, // Bovino hembra 12-24 meses
-  torete, // Bovino macho 12-24 meses (no castrado)
-  novillo, // Bovino macho 12-24 meses (castrado)
-  vaca, // Bovino hembra >= 24 meses
-  toro, // Bovino macho >= 24 meses
-  potro, // Equino < 36 meses
-  adulto, // Equino >= 36 meses
-}
-
-/// Sexo del animal
-enum Sexo {
-  macho,
-  hembra,
-}
-
-/// Estado reproductivo de la hembra
-enum EstadoReproductivo {
-  prenada,
-  lactando,
-  seca,
-  no_definido,
-}
-
-/// Entidad de Animal para Isar
+/// Animal entity for Isar
 @collection
 class AnimalEntity {
   /// Identificador único (UUID) - Clave primaria
   Id id = Isar.autoIncrement;
 
-  /// UUID del animal para sincronización
+  /// UUID for animal sync
   @Index(unique: true)
   late String uuid;
 
-  /// Número de arete
+  /// Ear tag number
   @Index()
-  late String numeroArete;
+  late String earTagNumber;
 
-  /// Nombre personalizado del animal
-  String? nombrePersonalizado;
+  /// Custom animal name
+  String? customName;
 
-  /// Especie del animal
+  /// Animal species
   @enumerated
-  late Especie especie;
+  late Species species;
 
-  /// Categoría adulta (no cambia por edad ni sexo)
-  /// Representa QUÉ TIPO de animal es (vaca, caballo, burro, mula)
+  /// Adult category (does not change by age or sex)
+  /// Represents WHAT TYPE of animal it is (cow, horse, donkey, mule)
   @enumerated
-  late Categoria categoria;
+  late Category category;
 
-  /// Etapa de vida (se calcula automáticamente basada en edad, sexo y castración)
-  /// Representa la FASE DE DESARROLLO del animal
+  /// Life stage (automatically calculated based on age, sex, and castration)
+  /// Represents the DEVELOPMENT PHASE of the animal
   @enumerated
-  late EtapaVida etapa;
+  late LifeStage lifeStage;
 
-  /// Sexo
+  /// Sex
   @enumerated
-  late Sexo sexo;
+  late Sex sex;
 
-  /// Edad en meses
-  late int edadMeses;
+  /// Age in months
+  late int ageMonths;
 
-  /// Es castrado (solo aplica a machos bovinos)
-  bool esCastrado = false;
+  /// Is castrated (only applies to male cattle)
+  bool isCastrated = false;
 
-  /// Raza del animal
-  late String raza;
+  /// Breed
+  late String breed;
 
-  /// Fecha de nacimiento
-  late DateTime fechaNacimiento;
+  /// Birth date
+  late DateTime birthDate;
 
-  /// Notas generales del animal
-  String? notas;
+  /// General notes
+  String? notes;
 
-  /// Precio de compra
-  double? precioCompra;
+  /// Purchase price
+  double? purchasePrice;
 
-  /// Precio de venta
-  double? precioVenta;
+  /// Sale price
+  double? salePrice;
 
-  /// Vacunado
-  bool vacunado = false;
+  /// Vaccinated
+  bool vaccinated = false;
 
-  /// Fecha de última vacunación
-  DateTime? fechaUltimaVacuna;
+  /// Last vaccination date
+  DateTime? lastVaccinationDate;
 
-  /// Tipo de vacuna
-  String? tipoVacuna;
+  /// Vaccine type
+  String? vaccineType;
 
-  /// Desparasitado
-  bool desparasitado = false;
+  /// Dewormed
+  bool dewormed = false;
 
-  /// Fecha del último desparasitante
-  DateTime? fechaUltimoDesparasitante;
+  /// Last deworming date
+  DateTime? lastDewormingDate;
 
-  /// Tipo de desparasitante
-  String? tipoDesparasitante;
+  /// Dewormer type
+  String? dewormerType;
 
-  /// Tiene vitaminas
-  bool tieneVitaminas = false;
+  /// Has vitamins
+  bool hasVitamins = false;
 
-  /// Fecha de última aplicación de vitaminas
-  DateTime? fechaVitaminas;
+  /// Last vitamin application date
+  DateTime? lastVitaminDate;
 
-  /// Estado reproductivo
+  /// Reproductive status
   @enumerated
-  EstadoReproductivo estadoReproductivo = EstadoReproductivo.no_definido;
+  ReproductiveStatus reproductiveStatus = ReproductiveStatus.undefined;
 
-  /// Ubicación actual del animal
-  String? ubicacion;
+  /// Current location
+  String? location;
 
-  /// Observaciones personalizadas del animal
-  String? observaciones;
+  /// Custom observations
+  String? observations;
 
-  /// Peso actual del animal (kg)
-  double? pesoActual;
+  /// Under observation (marks if the animal is being observed for any reason)
+  bool underObservation = false;
 
-  /// Fecha del último pesaje
-  DateTime? fechaUltimoPesaje;
+  /// Current weight (kg)
+  double? currentWeight;
 
-  /// Fecha de creación
-  late DateTime fechaCreacion;
+  /// Last weighing date
+  DateTime? lastWeighingDate;
 
-  /// Fecha de última actualización
-  late DateTime fechaActualizacion;
+  /// Creation date
+  late DateTime creationDate;
 
-  /// Sincronizado con servidor
-  bool sincronizado = false;
+  /// Last update date
+  late DateTime lastUpdateDate;
 
-  /// ID remoto (para sincronización)
-  String? idRemoto;
+  /// Synced with server
+  bool synced = false;
 
-  /// Campos de auditoría para sincronización
-  DateTime? fechaSincronizacion;
-  String? hashContenido;
+  /// Remote ID (for sync)
+  String? remoteId;
+
+  /// Audit fields for sync
+  DateTime? syncDate;
+  String? contentHash;
 
   AnimalEntity({
-    required this.numeroArete,
-    this.nombrePersonalizado,
-    required this.especie,
-    required this.categoria,
-    required this.sexo,
-    required this.raza,
-    required this.fechaNacimiento,
-    required this.edadMeses,
-    this.esCastrado = false,
-    this.notas,
-    this.precioCompra,
-    this.precioVenta,
-    this.vacunado = false,
-    this.fechaUltimaVacuna,
-    this.tipoVacuna,
-    this.desparasitado = false,
-    this.fechaUltimoDesparasitante,
-    this.tipoDesparasitante,
-    this.tieneVitaminas = false,
-    this.fechaVitaminas,
-    this.estadoReproductivo = EstadoReproductivo.no_definido,
-    this.ubicacion,
+    required this.earTagNumber,
+    this.customName,
+    required this.species,
+    required this.category,
+    required this.sex,
+    required this.breed,
+    required this.birthDate,
+    required this.ageMonths,
+    this.isCastrated = false,
+    this.notes,
+    this.purchasePrice,
+    this.salePrice,
+    this.vaccinated = false,
+    this.lastVaccinationDate,
+    this.vaccineType,
+    this.dewormed = false,
+    this.lastDewormingDate,
+    this.dewormerType,
+    this.hasVitamins = false,
+    this.lastVitaminDate,
+    this.reproductiveStatus = ReproductiveStatus.undefined,
+    this.location,
   }) {
     uuid = const Uuid().v4();
-    fechaCreacion = DateTime.now();
-    fechaActualizacion = DateTime.now();
+    creationDate = DateTime.now();
+    lastUpdateDate = DateTime.now();
 
     // Validar compatibilidad especie-categoría
-    _validarEspecieCategoria(especie, categoria);
+    _validateSpeciesCategory(species, category);
 
     // SIEMPRE calcular etapa automáticamente basada en los parámetros
-    etapa = calcularEtapa();
+    lifeStage = calculateLifeStage();
   }
 
   /// Validar que la categoría sea compatible con la especie
-  void _validarEspecieCategoria(Especie especie, Categoria categoria) {
-    if (especie == Especie.bovino && categoria != Categoria.vaca) {
-      throw ArgumentError('Para especie Bovino, la categoría debe ser "vaca". '
-          'Recibido: $categoria');
+  void _validateSpeciesCategory(Species species, Category category) {
+    if (species == Species.cattle &&
+        ![Category.cow, Category.bull].contains(category)) {
+      throw ArgumentError(
+          'Para especie Bovino, la categoría debe ser "cow" o "bull". '
+          'Recibido: $category');
     }
 
-    if (especie == Especie.equino && categoria == Categoria.vaca) {
+    if (species == Species.equine &&
+        [Category.cow, Category.bull].contains(category)) {
       throw ArgumentError(
-          'Para especie Equino, la categoría debe ser caballo, burro o mula. '
-          'No puede ser "vaca"');
+          'Para especie Equino, la categoría debe ser horse, mare, donkey, jenny o mule. '
+          'No puede ser "cow" ni "bull"');
     }
   }
 
-  /// Lógica automática para calcular etapa de vida
+  /// Calculate life stage automatically
   ///
-  /// REGLAS DE NEGOCIO:
+  /// BUSINESS RULES:
   ///
-  /// BOVINOS:
-  /// - < 12 meses: Becerro (macho) / Becerra (hembra)
-  /// - 12-24 meses:
-  ///   * Hembra: Vaquilla
-  ///   * Macho no castrado: Torete
-  ///   * Macho castrado: Novillo
-  /// - >= 24 meses: Vaca (hembra) / Toro (macho)
+  /// CATTLE:
+  /// - < 12 months: Calf (male/female)
+  /// - 12-24 months:
+  ///   * Female: Heifer
+  ///   * Male not castrated: Young bull
+  ///   * Male castrated: Steer
+  /// - >= 24 months: Cow (female) / Bull (male)
   ///
-  /// EQUINOS:
-  /// - < 36 meses: Potro
-  /// - >= 36 meses: Adulto
-  EtapaVida calcularEtapa() {
-    if (especie == Especie.bovino) {
-      // Bovinos: lógica por edad, sexo y castración
-      if (edadMeses < 12) {
-        return sexo == Sexo.macho ? EtapaVida.becerro : EtapaVida.becerra;
-      } else if (edadMeses < 24) {
-        if (sexo == Sexo.hembra) {
-          return EtapaVida.vaquilla;
+  /// EQUINE:
+  /// - Horse:
+  ///   * < 36 months: Colt (male) / Filly (female)
+  ///   * >= 36 months: Horse (male) / Mare (female)
+  /// - Donkey:
+  ///   * Donkey (male) / Jenny (female)
+  /// - Mule: Mule (always female)
+  LifeStage calculateLifeStage() {
+    if (species == Species.cattle) {
+      // Cattle: logic by age, sex and castration
+      if (ageMonths < 12) {
+        return sex == Sex.male ? LifeStage.calfMale : LifeStage.calfFemale;
+      } else if (ageMonths < 24) {
+        if (sex == Sex.female) {
+          return LifeStage.heifer;
         }
-        // Machos entre 12-24 meses
-        if (esCastrado) {
-          return EtapaVida.novillo;
+        // Males between 12-24 months
+        if (isCastrated) {
+          return LifeStage.steer;
         } else {
-          return EtapaVida.torete;
+          return LifeStage.youngBull;
         }
       } else {
-        // >= 24 meses
-        return sexo == Sexo.hembra ? EtapaVida.vaca : EtapaVida.toro;
+        // >= 24 months
+        return sex == Sex.female ? LifeStage.cow : LifeStage.bull;
       }
-    } else if (especie == Especie.equino) {
-      // Equinos: lógica simple por edad
-      return edadMeses < 36 ? EtapaVida.potro : EtapaVida.adulto;
+    } else if (species == Species.equine) {
+      // Equine: logic by category, age and sex
+      switch (category) {
+        case Category.horse:
+          if (ageMonths < 36) {
+            return sex == Sex.male ? LifeStage.colt : LifeStage.filly;
+          } else {
+            return sex == Sex.male ? LifeStage.horse : LifeStage.mare;
+          }
+        case Category.mare:
+          // Mare is always female, show stage by age
+          if (ageMonths < 36) {
+            return LifeStage.filly;
+          } else {
+            return LifeStage.mare;
+          }
+        case Category.donkey:
+          return LifeStage.donkey; // Donkey male
+        case Category.jenny:
+          return LifeStage.donkeyFemale; // Female donkey
+        case Category.mule:
+          return LifeStage.mule; // Mule always female
+        default:
+          throw StateError('Invalid category for equine: $category');
+      }
     }
 
-    // Fallback: no debería llegar aquí si las validaciones funcionan
-    throw StateError('Especie no reconocida: $especie');
+    // Fallback: should not reach here if validations work
+    throw StateError('Unrecognized species: $species');
   }
 
-  /// Propiedades computadas para UI
-  String get etapaDescripcion => etapa.descripcion;
-
-  String get etapaIcon => etapa.assetIcon;
-
-  String get categoriaDescripcion => categoria.descripcion;
-
-  String get categoriaIcon => categoria.assetIcon;
-
-  /// Validar que los datos del animal sean consistentes
-  /// Útil antes de guardar o actualizar
-  bool validarConsistencia() {
-    // Validar especie-categoría
-    if (especie == Especie.bovino && categoria != Categoria.vaca) {
+  /// Validate that animal data is consistent
+  /// Useful before saving or updating
+  bool validateConsistency() {
+    // Validate species-category
+    if (species == Species.cattle &&
+        ![Category.cow, Category.bull].contains(category)) {
       return false;
     }
-    if (especie == Especie.equino && categoria == Categoria.vaca) {
+    if (species == Species.equine &&
+        [Category.cow, Category.bull].contains(category)) {
       return false;
     }
 
-    // Validar castración (solo machos bovinos)
-    if (esCastrado && (sexo != Sexo.macho || especie != Especie.bovino)) {
+    // Validate castration (only male cattle)
+    if (isCastrated && (sex != Sex.male || species != Species.cattle)) {
       return false;
     }
 
-    // Validar edad no negativa
-    if (edadMeses < 0) {
+    // Validate age not negative
+    if (ageMonths < 0) {
       return false;
     }
 
-    // Validar fecha de nacimiento no futura
-    if (fechaNacimiento.isAfter(DateTime.now())) {
+    // Validate birth date not in future
+    if (birthDate.isAfter(DateTime.now())) {
       return false;
     }
 
     return true;
   }
 
-  /// Recalcular edad en meses basada en fecha de nacimiento
-  /// Útil para actualizaciones periódicas
-  int recalcularEdadMeses() {
-    final ahora = DateTime.now();
-    int meses = (ahora.year - fechaNacimiento.year) * 12;
-    meses += ahora.month - fechaNacimiento.month;
+  /// Recalculate age in months based on birth date
+  /// Useful for periodic updates
+  int recalculateAgeMonths() {
+    final now = DateTime.now();
+    int months = (now.year - birthDate.year) * 12;
+    months += now.month - birthDate.month;
 
-    // Ajustar si el día aún no ha llegado
-    if (ahora.day < fechaNacimiento.day) {
-      meses--;
+    // Adjust if day hasn't arrived yet
+    if (now.day < birthDate.day) {
+      months--;
     }
 
-    return meses.clamp(0, 9999);
+    return months.clamp(0, 9999);
   }
 
-  /// Actualizar edad y recalcular etapa
-  /// Retorna true si la etapa cambió
-  bool actualizarEdadYEtapa() {
-    final edadAnterior = edadMeses;
-    final etapaAnterior = etapa;
+  /// Update age and recalculate stage
+  /// Returns true if stage changed
+  bool updateAgeAndLifeStage() {
+    final previousAge = ageMonths;
+    final previousStage = lifeStage;
 
-    edadMeses = recalcularEdadMeses();
-    etapa = calcularEtapa();
-    fechaActualizacion = DateTime.now();
+    ageMonths = recalculateAgeMonths();
+    lifeStage = calculateLifeStage();
+    lastUpdateDate = DateTime.now();
 
-    return etapaAnterior != etapa || edadAnterior != edadMeses;
+    return previousStage != lifeStage || previousAge != ageMonths;
   }
 
-  /// Crear una copia del animal
+  /// Create a copy of the animal
   AnimalEntity copyWith({
     String? uuid,
-    String? numeroArete,
-    Especie? especie,
-    Categoria? categoria,
-    Sexo? sexo,
-    String? raza,
-    DateTime? fechaNacimiento,
-    int? edadMeses,
-    bool? esCastrado,
-    String? nombrePersonalizado,
-    String? notas,
-    double? precioCompra,
-    double? precioVenta,
-    bool? vacunado,
-    DateTime? fechaUltimaVacuna,
-    String? tipoVacuna,
-    bool? desparasitado,
-    DateTime? fechaUltimoDesparasitante,
-    String? tipoDesparasitante,
-    bool? tieneVitaminas,
-    DateTime? fechaVitaminas,
-    EstadoReproductivo? estadoReproductivo,
-    String? ubicacion,
-    bool? sincronizado,
-    String? idRemoto,
+    String? earTagNumber,
+    Species? species,
+    Category? category,
+    Sex? sex,
+    String? breed,
+    DateTime? birthDate,
+    int? ageMonths,
+    bool? isCastrated,
+    String? customName,
+    String? notes,
+    double? purchasePrice,
+    double? salePrice,
+    bool? vaccinated,
+    DateTime? lastVaccinationDate,
+    String? vaccineType,
+    bool? dewormed,
+    DateTime? lastDewormingDate,
+    String? dewormerType,
+    bool? hasVitamins,
+    DateTime? lastVitaminDate,
+    ReproductiveStatus? reproductiveStatus,
+    String? location,
+    bool? synced,
+    String? remoteId,
   }) {
-    final nuevaEspecie = especie ?? this.especie;
-    final nuevaCategoria = categoria ?? this.categoria;
-    final nuevoSexo = sexo ?? this.sexo;
-    final nuevaEdadMeses = edadMeses ?? this.edadMeses;
-    final nuevoCastrado = esCastrado ?? this.esCastrado;
+    final newSpecies = species ?? this.species;
+    final newCategory = category ?? this.category;
+    final newSex = sex ?? this.sex;
+    final newAgeMonths = ageMonths ?? this.ageMonths;
+    final newCastrated = isCastrated ?? this.isCastrated;
 
-    // Crear nueva entidad con parámetros actualizados
-    // La etapa se recalcula automáticamente en el constructor
+    // Create new entity with updated parameters
+    // Stage is recalculated automatically in constructor
     return AnimalEntity(
-      numeroArete: numeroArete ?? this.numeroArete,
-      nombrePersonalizado: nombrePersonalizado ?? this.nombrePersonalizado,
-      especie: nuevaEspecie,
-      categoria: nuevaCategoria,
-      sexo: nuevoSexo,
-      raza: raza ?? this.raza,
-      fechaNacimiento: fechaNacimiento ?? this.fechaNacimiento,
-      edadMeses: nuevaEdadMeses,
-      esCastrado: nuevoCastrado,
-      notas: notas ?? this.notas,
-      precioCompra: precioCompra ?? this.precioCompra,
-      precioVenta: precioVenta ?? this.precioVenta,
-      vacunado: vacunado ?? this.vacunado,
-      fechaUltimaVacuna: fechaUltimaVacuna ?? this.fechaUltimaVacuna,
-      tipoVacuna: tipoVacuna ?? this.tipoVacuna,
-      desparasitado: desparasitado ?? this.desparasitado,
-      fechaUltimoDesparasitante:
-          fechaUltimoDesparasitante ?? this.fechaUltimoDesparasitante,
-      tipoDesparasitante: tipoDesparasitante ?? this.tipoDesparasitante,
-      tieneVitaminas: tieneVitaminas ?? this.tieneVitaminas,
-      fechaVitaminas: fechaVitaminas ?? this.fechaVitaminas,
-      estadoReproductivo: estadoReproductivo ?? this.estadoReproductivo,
-      ubicacion: ubicacion ?? this.ubicacion,
+      earTagNumber: earTagNumber ?? this.earTagNumber,
+      customName: customName ?? this.customName,
+      species: newSpecies,
+      category: newCategory,
+      sex: newSex,
+      breed: breed ?? this.breed,
+      birthDate: birthDate ?? this.birthDate,
+      ageMonths: newAgeMonths,
+      isCastrated: newCastrated,
+      notes: notes ?? this.notes,
+      purchasePrice: purchasePrice ?? this.purchasePrice,
+      salePrice: salePrice ?? this.salePrice,
+      vaccinated: vaccinated ?? this.vaccinated,
+      lastVaccinationDate: lastVaccinationDate ?? this.lastVaccinationDate,
+      vaccineType: vaccineType ?? this.vaccineType,
+      dewormed: dewormed ?? this.dewormed,
+      lastDewormingDate: lastDewormingDate ?? this.lastDewormingDate,
+      dewormerType: dewormerType ?? this.dewormerType,
+      hasVitamins: hasVitamins ?? this.hasVitamins,
+      lastVitaminDate: lastVitaminDate ?? this.lastVitaminDate,
+      reproductiveStatus: reproductiveStatus ?? this.reproductiveStatus,
+      location: location ?? this.location,
     )
-      ..id = this.id
+      ..id = id
       ..uuid = uuid ?? this.uuid
-      ..fechaCreacion = this.fechaCreacion
-      ..fechaActualizacion = DateTime.now()
-      ..sincronizado = sincronizado ?? this.sincronizado
-      ..idRemoto = idRemoto ?? this.idRemoto
-      ..fechaSincronizacion = this.fechaSincronizacion
-      ..hashContenido = this.hashContenido
-      ..observaciones = this.observaciones;
+      ..creationDate = creationDate
+      ..lastUpdateDate = DateTime.now()
+      ..synced = synced ?? this.synced
+      ..remoteId = remoteId ?? this.remoteId
+      ..syncDate = syncDate
+      ..contentHash = contentHash
+      ..observations = observations;
   }
 }

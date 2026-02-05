@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/features/calendar/domain/entities/event_types.dart';
 import 'package:miganado/features/calendar/data/models/evento_ganadero_entity.dart';
+import 'package:miganado/providers/calendar_providers.dart';
 
 /// Screen para crear un evento
 class CrearEventoScreen extends ConsumerStatefulWidget {
@@ -90,7 +91,7 @@ class _CrearEventoScreenState extends ConsumerState<CrearEventoScreen> {
       _horaSeleccionada?.minute ?? 0,
     );
 
-    // TODO: Conectar con provider para guardar
+    // Crear el evento
     final evento = EventoGanaderoEntity(
       titulo: _titleController.text,
       descripcion: _descripcionController.text,
@@ -104,13 +105,48 @@ class _CrearEventoScreenState extends ConsumerState<CrearEventoScreen> {
       fechaProgramada: fechaEvento,
     )
       ..esRecurrente = _esRecurrente
-      ..patronRecurrencia = _patronRecurrencia;
+      ..patronRecurrencia = _patronRecurrencia
+      ..fechaCreacion = DateTime.now()
+      ..fechaActualizacion = DateTime.now();
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Evento "${evento.titulo}" creado correctamente')),
-    );
+    // Mostrar indicador de carga
+    if (mounted) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
 
-    Navigator.of(context).pop();
+    // Guardar el evento
+    try {
+      await ref.read(crearEventoProvider(evento).future);
+
+      if (mounted) {
+        Navigator.of(context).pop(); // Cerrar diálogo de carga
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('✓ Evento "${evento.titulo}" creado correctamente'),
+            backgroundColor: Colors.green,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+        Navigator.of(context).pop(); // Cerrar pantalla de crear evento
+      }
+    } catch (e) {
+      if (mounted) {
+        Navigator.of(context).pop(); // Cerrar diálogo de carga
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('✗ Error al crear evento: $e'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+    }
   }
 
   @override

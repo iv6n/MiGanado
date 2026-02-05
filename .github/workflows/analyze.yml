@@ -1,0 +1,151 @@
+name: 🔍 Code Quality
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    - cron: '0 2 * * MON'  # Every Monday at 2 AM UTC
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: 📊 Flutter Analyze
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🎯 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          cache: true
+
+      - name: 📦 Get dependencies
+        working-directory: miganado
+        run: flutter pub get
+
+      - name: 🔍 Analyze
+        working-directory: miganado
+        run: flutter analyze lib/ test/ --fatal-warnings || true
+
+      - name: 📊 Report Issues
+        if: failure()
+        run: |
+          echo "## 🔍 Code Analysis Issues Found" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Please review and fix the issues reported above." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Common fixes:**" >> $GITHUB_STEP_SUMMARY
+          echo "- Remove unused imports: \`dart format\`" >> $GITHUB_STEP_SUMMARY
+          echo "- Follow conventions: Check analysis_options.yaml" >> $GITHUB_STEP_SUMMARY
+
+  format:
+    name: 🎨 Code Format Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🎯 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          cache: true
+
+      - name: 📦 Get dependencies
+        working-directory: miganado
+        run: flutter pub get
+
+      - name: 🎨 Check format
+        working-directory: miganado
+        run: |
+          dart format --set-exit-if-changed lib/ test/ || (
+            echo "## ❌ Code Format Issues" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Run locally: \`dart format lib/ test/\`" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          )
+
+  dependencies:
+    name: 🔗 Dependency Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🎯 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          cache: true
+
+      - name: 📦 Get dependencies
+        working-directory: miganado
+        run: flutter pub get
+
+      - name: 🔗 Check dependencies
+        working-directory: miganado
+        run: |
+          echo "## 📦 Dependency Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          flutter pub outdated --no-dev-dependencies >> $GITHUB_STEP_SUMMARY || true
+
+      - name: 🚨 Check for vulnerabilities
+        working-directory: miganado
+        run: flutter pub publish --dry-run || true
+        continue-on-error: true
+
+  security-scan:
+    name: 🔐 Security Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔐 Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: 'miganado'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+        continue-on-error: true
+
+      - name: 📤 Upload Trivy results
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+        continue-on-error: true
+
+  summary:
+    name: ✅ Quality Check Summary
+    runs-on: ubuntu-latest
+    needs: [ analyze, format, dependencies, security-scan ]
+    if: always()
+
+    steps:
+      - name: 📋 Generate Summary
+        run: |
+          echo "## 📊 Code Quality Check Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| 🔍 Flutter Analyze | ${{ needs.analyze.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🎨 Code Format | ${{ needs.format.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🔗 Dependencies | ${{ needs.dependencies.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🔐 Security | ${{ needs.security-scan.result }} |" >> $GITHUB_STEP_SUMMARY

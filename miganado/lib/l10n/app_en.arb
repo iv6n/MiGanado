@@ -1,0 +1,13 @@
+{
+  "appTitle": "MiGanado",
+  "homeTitle": "Home",
+  "animalsTitle": "Animals",
+  "calendarTitle": "Calendar",
+  "locationsTitle": "Locations",
+  "profileTitle": "Profile",
+  "loading": "Loading...",
+  "error": "Error",
+  "success": "Success",
+  "confirm": "Confirm",
+  "cancel": "Cancel"
+}

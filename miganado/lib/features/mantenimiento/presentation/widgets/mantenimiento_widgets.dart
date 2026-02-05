@@ -78,7 +78,7 @@ class _RegistrarMantenimientoDialogState
   void _selectProximaDosis() async {
     final picked = await showDatePicker(
       context: context,
-      initialDate: _proximaDosis ?? DateTime.now().add(Duration(days: 365)),
+      initialDate: _proximaDosis ?? DateTime.now().add(const Duration(days: 365)),
       firstDate: DateTime.now(),
       lastDate: DateTime(2100),
     );

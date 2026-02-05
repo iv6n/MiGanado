@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/features/locations/domain/entities/ubicacion.dart';
 import 'package:miganado/features/locations/domain/usecases/ubicaciones_usecases.dart';
 import 'package:miganado/features/animals/presentation/providers/animals_providers.dart';
+import 'package:miganado/core/exceptions/app_exception.dart';
+import 'package:miganado/core/services/logger_service.dart';
 
 // ============================================================================
 // PROVIDERS - Use Cases
@@ -34,8 +36,23 @@ final crearUbicacionUseCaseProvider = Provider(
 
 /// Obtener todas las ubicaciones disponibles
 final ubicacionesProvider = FutureProvider<List<Ubicacion>>((ref) async {
-  final useCase = ref.watch(getAllUbicacionesUseCaseProvider);
-  return useCase.call();
+  try {
+    LoggerService.startOperation('getAllUbicaciones', 'ubicaciones_providers');
+    final useCase = ref.watch(getAllUbicacionesUseCaseProvider);
+    final ubicaciones = await useCase.call();
+    LoggerService.operationCompleted(
+        'getAllUbicaciones', 'ubicaciones_providers');
+    return ubicaciones;
+  } catch (e, st) {
+    final appEx = toAppException(e, st);
+    LoggerService.error(
+        'Error cargando ubicaciones', appEx, st, 'ubicaciones_providers');
+    throw DatabaseException(
+      message: 'No se pudieron cargar las ubicaciones: ${appEx.message}',
+      originalError: e,
+      stackTrace: st,
+    );
+  }
 });
 
 // ============================================================================

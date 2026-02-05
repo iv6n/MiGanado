@@ -161,7 +161,7 @@ class _RegistrarCostoDialogState extends ConsumerState<RegistrarCostoDialog> {
                   final fecha = await showDatePicker(
                     context: context,
                     initialDate: state.fecha ??
-                        DateTime.now().subtract(Duration(days: 1)),
+                        DateTime.now().subtract(const Duration(days: 1)),
                     firstDate: DateTime(2020),
                     lastDate: DateTime.now(),
                   );
@@ -505,7 +505,7 @@ class ResumenFinancieroWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final moneda = 'COP';
+    const moneda = 'COP';
 
     return Card(
       margin: const EdgeInsets.all(16),
@@ -606,7 +606,7 @@ class ResumenFinancieroWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '${resumen.totalEventos > 0 ? "${(resumen.hasta.difference(resumen.desde).inDays)} días" : "N/A"}',
+                      resumen.totalEventos > 0 ? "${(resumen.hasta.difference(resumen.desde).inDays)} días" : "N/A",
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall

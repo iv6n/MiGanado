@@ -13,7 +13,7 @@ void main() {
     testWidgets('LoadingState renderiza CircularProgressIndicator',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: LoadingState(message: 'Cargando...'),
           ),
@@ -27,7 +27,7 @@ void main() {
     testWidgets('ErrorState renderiza título y mensaje',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: ErrorState(
               title: 'Error',
@@ -43,7 +43,7 @@ void main() {
 
     testWidgets('EmptyState renderiza sin datos', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: EmptyState(
               title: 'Sin datos',
@@ -58,7 +58,7 @@ void main() {
     testWidgets('Widgets tienen padding y espaciado',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: LoadingState(),
           ),

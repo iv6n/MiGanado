@@ -49,8 +49,8 @@ void main() {
     });
 
     test('Dynamic route generation produces valid paths', () {
-      final animalId1 = '123abc';
-      final animalId2 = 'uuid-long-string-12345';
+      const animalId1 = '123abc';
+      const animalId2 = 'uuid-long-string-12345';
 
       final detailePath1 = AppRoutes.detalleAnimalPath(animalId1);
       final detailePath2 = AppRoutes.detalleAnimalPath(animalId2);

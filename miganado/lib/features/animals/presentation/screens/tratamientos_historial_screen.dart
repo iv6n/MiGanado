@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 import 'package:intl/intl.dart';
 import 'package:miganado/features/mantenimiento/data/models/tratamiento_entity.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/tratamientos_providers.dart';
@@ -17,8 +18,7 @@ class TratamientosHistorialScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Usar el provider FutureProvider que ya está configurado
-    final tratamientosAsync =
-        ref.watch(tratamientosByAnimalProvider(animalUuid));
+    final tratamientosAsync = ref.watch(treatmentsByAnimalProvider(animalUuid));
 
     return Scaffold(
       appBar: AppBar(
@@ -33,19 +33,19 @@ class TratamientosHistorialScreen extends ConsumerWidget {
             children: [
               const Icon(Icons.error_outline, size: 64, color: Colors.red),
               const SizedBox(height: 16),
-              Text('Error: $error'),
+              Text('${AppStrings.errorTitle}: $error'),
             ],
           ),
         ),
         data: (tratamientos) {
           if (tratamientos.isEmpty) {
-            return Center(
+            return const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.medical_services, size: 64, color: Colors.grey),
-                  const SizedBox(height: 16),
-                  const Text('No hay tratamientos registrados'),
+                  SizedBox(height: 16),
+                  Text('No hay tratamientos registrados'),
                 ],
               ),
             );
@@ -57,8 +57,8 @@ class TratamientosHistorialScreen extends ConsumerWidget {
 
           return RefreshIndicator(
             onRefresh: () async {
-              await ref
-                  .refresh(tratamientosByAnimalProvider(animalUuid).future);
+              // ignore: unused_result
+              ref.refresh(treatmentsByAnimalProvider(animalUuid).future);
             },
             child: ListView.separated(
               padding: const EdgeInsets.all(16),
@@ -106,7 +106,7 @@ class _TratamientoCard extends StatelessWidget {
 
     return Card(
       child: Padding(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -119,21 +119,22 @@ class _TratamientoCard extends StatelessWidget {
                     children: [
                       Text(
                         tratamiento.motivo,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         'Medicamento: ${tratamiento.medicamento}',
-                        style: TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: statusColor.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(20),
@@ -149,12 +150,13 @@ class _TratamientoCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             if (tratamiento.diagnosticoPrevio != null)
               _InfoRow(
                   label: 'Diagnóstico', value: tratamiento.diagnosticoPrevio!),
             _InfoRow(label: 'Dosis', value: tratamiento.dosis),
-            _InfoRow(label: 'Frecuencia', value: tratamiento.frecuencia),
+            if (tratamiento.frecuencia != null)
+              _InfoRow(label: 'Frecuencia', value: tratamiento.frecuencia!),
             _InfoRow(
                 label: 'Duración', value: '${tratamiento.duracionDias} días'),
             _InfoRow(label: 'Inicio', value: fechaInicio),
@@ -190,7 +192,7 @@ class _InfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -205,7 +207,7 @@ class _InfoRow extends StatelessWidget {
             child: Text(
               value,
               textAlign: TextAlign.right,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 13,
               ),

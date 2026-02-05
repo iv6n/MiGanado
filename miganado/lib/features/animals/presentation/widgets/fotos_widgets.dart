@@ -10,7 +10,7 @@ class GaleriaFotosWidget extends ConsumerWidget {
   final String animalUuid;
   final String registradoPor;
 
-  const GaleriaFotosWidget({
+  const GaleriaFotosWidget({super.key, 
     required this.animalUuid,
     required this.registradoPor,
   });
@@ -32,8 +32,8 @@ class GaleriaFotosWidget extends ConsumerWidget {
               ),
               ElevatedButton.icon(
                 onPressed: () => _capturarFoto(context, ref),
-                icon: Icon(Icons.camera_alt),
-                label: Text('Capturar'),
+                icon: const Icon(Icons.camera_alt),
+                label: const Text('Capturar'),
               ),
             ],
           ),
@@ -41,7 +41,7 @@ class GaleriaFotosWidget extends ConsumerWidget {
         Expanded(
           child: fotosAsync.when(
             data: (fotos) => fotos.isEmpty
-                ? Center(
+                ? const Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -52,8 +52,8 @@ class GaleriaFotosWidget extends ConsumerWidget {
                     ),
                   )
                 : GridView.builder(
-                    padding: EdgeInsets.all(8),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    padding: const EdgeInsets.all(8),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 1,
                       crossAxisSpacing: 8,
@@ -69,7 +69,7 @@ class GaleriaFotosWidget extends ConsumerWidget {
                       );
                     },
                   ),
-            loading: () => Center(child: CircularProgressIndicator()),
+            loading: () => const Center(child: CircularProgressIndicator()),
             error: (err, st) => Center(child: Text('Error: $err')),
           ),
         ),
@@ -84,16 +84,16 @@ class GaleriaFotosWidget extends ConsumerWidget {
         child: Wrap(
           children: [
             ListTile(
-              leading: Icon(Icons.camera),
-              title: Text('Cámara'),
+              leading: const Icon(Icons.camera),
+              title: const Text('Cámara'),
               onTap: () {
                 Navigator.pop(context);
                 _pickFoto(context, ref, ImageSource.camera);
               },
             ),
             ListTile(
-              leading: Icon(Icons.image),
-              title: Text('Galería'),
+              leading: const Icon(Icons.image),
+              title: const Text('Galería'),
               onTap: () {
                 Navigator.pop(context);
                 _pickFoto(context, ref, ImageSource.gallery);
@@ -126,10 +126,11 @@ class GaleriaFotosWidget extends ConsumerWidget {
         );
 
         // Refrescar fotos
-        await ref.refresh(fotosByAnimalProvider(animalUuid));
+        // ignore: unused_result
+        ref.refresh(fotosByAnimalProvider(animalUuid));
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Foto capturada exitosamente')),
+          const SnackBar(content: Text('Foto capturada exitosamente')),
         );
       }
     } catch (e) {
@@ -149,16 +150,16 @@ class GaleriaFotosWidget extends ConsumerWidget {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Eliminar Foto'),
-        content: Text('¿Está seguro de que desea eliminar esta foto?'),
+        title: const Text('Eliminar Foto'),
+        content: const Text('¿Está seguro de que desea eliminar esta foto?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text('Cancelar'),
+            child: const Text('Cancelar'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text('Eliminar', style: TextStyle(color: Colors.red)),
+            child: const Text('Eliminar', style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -170,10 +171,11 @@ class GaleriaFotosWidget extends ConsumerWidget {
         await useCase(fotoUuid: foto.uuid);
 
         // Refrescar fotos
-        await ref.refresh(fotosByAnimalProvider(animalUuid).future);
+        // ignore: unused_result
+        ref.refresh(fotosByAnimalProvider(animalUuid).future);
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Foto eliminada')),
+          const SnackBar(content: Text('Foto eliminada')),
         );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -190,19 +192,19 @@ class GaleriaFotosWidget extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Editar Foto'),
+        title: const Text('Editar Foto'),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: titleController,
-                decoration: InputDecoration(labelText: 'Título'),
+                decoration: const InputDecoration(labelText: 'Título'),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextField(
                 controller: descController,
-                decoration: InputDecoration(labelText: 'Descripción'),
+                decoration: const InputDecoration(labelText: 'Descripción'),
                 maxLines: 3,
               ),
             ],
@@ -211,7 +213,7 @@ class GaleriaFotosWidget extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancelar'),
+            child: const Text('Cancelar'),
           ),
           TextButton(
             onPressed: () async {
@@ -224,11 +226,12 @@ class GaleriaFotosWidget extends ConsumerWidget {
                 );
 
                 // Refrescar fotos
-                await ref.refresh(fotosByAnimalProvider(animalUuid).future);
+                // ignore: unused_result
+                ref.refresh(fotosByAnimalProvider(animalUuid).future);
 
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Foto actualizada')),
+                  const SnackBar(content: Text('Foto actualizada')),
                 );
               } catch (e) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -236,7 +239,7 @@ class GaleriaFotosWidget extends ConsumerWidget {
                 );
               }
             },
-            child: Text('Guardar'),
+            child: const Text('Guardar'),
           ),
         ],
       ),
@@ -249,7 +252,7 @@ class FotoCardWidget extends StatelessWidget {
   final VoidCallback onDelete;
   final VoidCallback onEdit;
 
-  const FotoCardWidget({
+  const FotoCardWidget({super.key, 
     required this.foto,
     required this.onDelete,
     required this.onEdit,
@@ -270,7 +273,7 @@ class FotoCardWidget extends StatelessWidget {
             errorBuilder: (context, error, stackTrace) {
               return Container(
                 color: Colors.grey[300],
-                child: Icon(Icons.broken_image),
+                child: const Icon(Icons.broken_image),
               );
             },
           ),
@@ -303,7 +306,7 @@ class FotoCardWidget extends StatelessWidget {
                 if (foto.tituloFoto != null)
                   Text(
                     foto.tituloFoto!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
@@ -311,10 +314,10 @@ class FotoCardWidget extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   dateFormat.format(foto.fechaCaptura),
-                  style: TextStyle(color: Colors.white70, fontSize: 10),
+                  style: const TextStyle(color: Colors.white70, fontSize: 10),
                 ),
               ],
             ),
@@ -327,27 +330,27 @@ class FotoCardWidget extends StatelessWidget {
             child: PopupMenuButton(
               itemBuilder: (context) => [
                 PopupMenuItem(
-                  child: Row(
+                  onTap: onEdit,
+                  child: const Row(
                     children: [
                       Icon(Icons.edit, size: 18),
                       SizedBox(width: 8),
                       Text('Editar')
                     ],
                   ),
-                  onTap: onEdit,
                 ),
                 PopupMenuItem(
-                  child: Row(
+                  onTap: onDelete,
+                  child: const Row(
                     children: [
                       Icon(Icons.delete, size: 18, color: Colors.red),
                       SizedBox(width: 8),
                       Text('Eliminar', style: TextStyle(color: Colors.red))
                     ],
                   ),
-                  onTap: onDelete,
                 ),
               ],
-              icon: Icon(Icons.more_vert, color: Colors.white),
+              icon: const Icon(Icons.more_vert, color: Colors.white),
               color: Colors.white,
             ),
           ),

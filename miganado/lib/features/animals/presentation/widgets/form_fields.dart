@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:miganado/features/animals/data/models/animal_entity.dart';
 import 'package:miganado/features/animals/domain/entities/etapa_vida.dart';
 
 /// Field de texto personalizado para el formulario
@@ -296,8 +295,8 @@ class FormCheckbox extends StatelessWidget {
 }
 
 /// Helper para mostrar lista de especies
-List<DropdownMenuItem<Especie>> getEspecieItems() {
-  return Especie.values.map((especie) {
+List<DropdownMenuItem<Species>> getEspecieItems() {
+  return Species.values.map((especie) {
     return DropdownMenuItem(
       value: especie,
       child: Text(especie.descripcion),
@@ -306,7 +305,7 @@ List<DropdownMenuItem<Especie>> getEspecieItems() {
 }
 
 /// Helper para mostrar lista de categorías para una especie
-List<DropdownMenuItem<Categoria>> getCategoriaItems(Especie? especie) {
+List<DropdownMenuItem<Category>> getCategoriaItems(Species? especie) {
   if (especie == null) return [];
   return especie.categoriasValidas.map((categoria) {
     return DropdownMenuItem(
@@ -317,20 +316,28 @@ List<DropdownMenuItem<Categoria>> getCategoriaItems(Especie? especie) {
 }
 
 /// Helper para mostrar lista de etapas para una especie
-List<DropdownMenuItem<EtapaVida>> getEtapaItems(Especie? especie) {
+List<DropdownMenuItem<LifeStage>> getEtapaItems(Species? especie) {
   if (especie == null) return [];
 
-  final etapas = especie == Especie.bovino
+  final etapas = especie == Species.cattle
       ? [
-          EtapaVida.becerro,
-          EtapaVida.becerra,
-          EtapaVida.vaquilla,
-          EtapaVida.torete,
-          EtapaVida.novillo,
-          EtapaVida.vaca,
-          EtapaVida.toro,
+          LifeStage.calfMale,
+          LifeStage.calfFemale,
+          LifeStage.heifer,
+          LifeStage.youngBull,
+          LifeStage.steer,
+          LifeStage.cow,
+          LifeStage.bull,
         ]
-      : [EtapaVida.potro, EtapaVida.adulto];
+      : [
+          LifeStage.colt,
+          LifeStage.filly,
+          LifeStage.horse,
+          LifeStage.mare,
+          LifeStage.donkey,
+          LifeStage.donkeyFemale,
+          LifeStage.mule,
+        ];
 
   return etapas.map((etapa) {
     return DropdownMenuItem(
@@ -341,9 +348,9 @@ List<DropdownMenuItem<EtapaVida>> getEtapaItems(Especie? especie) {
 }
 
 /// Helper para mostrar lista de sexos
-List<DropdownMenuItem<Sexo>> getSexoItems() {
-  return Sexo.values.map((sexo) {
-    final label = sexo == Sexo.macho ? 'Macho' : 'Hembra';
+List<DropdownMenuItem<Sex>> getSexoItems() {
+  return Sex.values.map((sexo) {
+    final label = sexo == Sex.male ? 'Macho' : 'Hembra';
     return DropdownMenuItem(
       value: sexo,
       child: Text(label),
@@ -352,11 +359,11 @@ List<DropdownMenuItem<Sexo>> getSexoItems() {
 }
 
 /// Labels para Sexo
-String _getSexoLabel(Sexo sexo) {
+String _getSexoLabel(Sex sexo) {
   switch (sexo) {
-    case Sexo.macho:
+    case Sex.male:
       return 'Macho';
-    case Sexo.hembra:
+    case Sex.female:
       return 'Hembra';
   }
 }

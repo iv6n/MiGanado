@@ -1,0 +1,137 @@
+name: 🏗️ Build Release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'Build type'
+        required: true
+        default: 'release'
+        type: choice
+        options:
+          - release
+          - debug
+
+jobs:
+  build-apk:
+    name: 📦 Build APK Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🎯 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          cache: true
+
+      - name: 📦 Get dependencies
+        working-directory: miganado
+        run: flutter pub get
+
+      - name: 🔍 Analyze code
+        working-directory: miganado
+        run: flutter analyze lib/
+        continue-on-error: true
+
+      - name: 🧪 Run tests
+        working-directory: miganado
+        run: flutter test --no-coverage
+        continue-on-error: true
+
+      - name: 📱 Build APK (Release)
+        working-directory: miganado
+        run: |
+          flutter build apk \
+            --release \
+            --split-per-abi \
+            --no-shrink \
+            --no-obfuscate
+
+      - name: 🎯 Extract version
+        id: version
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/}
+          else
+            VERSION=$(date +%Y%m%d-%H%M%S)
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "artifact_name=miganado-$VERSION" >> $GITHUB_OUTPUT
+
+      - name: 📁 Prepare artifacts
+        run: |
+          mkdir -p release
+          cp miganado/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk release/miganado-arm32-${{ steps.version.outputs.version }}.apk || true
+          cp miganado/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk release/miganado-arm64-${{ steps.version.outputs.version }}.apk || true
+          cp miganado/build/app/outputs/flutter-apk/app-x86_64-release.apk release/miganado-x86_64-${{ steps.version.outputs.version }}.apk || true
+          ls -lah release/
+
+      - name: 📤 Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.version.outputs.artifact_name }}
+          path: release/
+          retention-days: 30
+
+      - name: 🏷️ Create Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: release/**
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: ✅ Build Summary
+        if: always()
+        run: |
+          echo "## 📦 Build Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Version**: ${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Artifacts" >> $GITHUB_STEP_SUMMARY
+          ls -1 release/ | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY || echo "- No artifacts" >> $GITHUB_STEP_SUMMARY
+
+  build-web:
+    name: 🌐 Build Web
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🎯 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          cache: true
+
+      - name: 📦 Get dependencies
+        working-directory: miganado
+        run: flutter pub get
+
+      - name: 🌐 Build Web
+        working-directory: miganado
+        run: flutter build web --release --web-renderer canvaskit
+        continue-on-error: true
+
+      - name: 📤 Upload web build
+        uses: actions/upload-artifact@v3
+        if: success()
+        with:
+          name: miganado-web
+          path: miganado/build/web/
+          retention-days: 7

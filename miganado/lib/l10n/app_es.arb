@@ -1,0 +1,13 @@
+{
+  "appTitle": "MiGanado",
+  "homeTitle": "Inicio",
+  "animalsTitle": "Animales",
+  "calendarTitle": "Calendario",
+  "locationsTitle": "Ubicaciones",
+  "profileTitle": "Perfil Ganadero",
+  "loading": "Cargando...",
+  "error": "Error",
+  "success": "Éxito",
+  "confirm": "Confirmar",
+  "cancel": "Cancelar"
+}

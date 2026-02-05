@@ -1,80 +1,89 @@
 import 'package:miganado/features/mantenimiento/data/models/vacuna_entity.dart';
 import 'package:miganado/data/database/isar_database.dart';
 
-class RegistrarVacunaUseCase {
+/// Caso de uso para registrar una nueva vacuna en el sistema
+class RegisterVaccineUseCase {
   final MiGanadoDatabase database;
 
-  RegistrarVacunaUseCase({required this.database});
+  RegisterVaccineUseCase({required this.database});
 
+  /// Registra una nueva vacuna para un animal
+  /// Calcula automáticamente la próxima fecha de aplicación
   Future<void> call({
     required String animalUuid,
-    required String tipo,
-    required String enfermedad,
-    required DateTime fecha,
-    required int diasIntervalo,
-    required String aplicadoPor,
-    required String registradoPor,
-    String? producto,
-    String? lote,
-    String? dosis,
-    String? viaAplicacion,
-    double? costo,
-    String? observaciones,
+    required String type,
+    required String disease,
+    required DateTime date,
+    required int intervalDays,
+    required String appliedBy,
+    required String recordedBy,
+    String? product,
+    String? lot,
+    String? dosage,
+    String? administrationRoute,
+    double? cost,
+    String? observations,
   }) async {
-    DateTime? proximaFecha;
-    if (diasIntervalo > 0) {
-      proximaFecha = fecha.add(Duration(days: diasIntervalo));
+    DateTime? nextDate;
+    if (intervalDays > 0) {
+      nextDate = date.add(Duration(days: intervalDays));
     }
 
-    final vacuna = VacunaEntity(
+    final vaccine = VacunaEntity.crear(
       animalUuid: animalUuid,
-      tipo: tipo,
-      enfermedad: enfermedad,
-      fecha: fecha,
-      diasIntervalo: diasIntervalo,
-      aplicadoPor: aplicadoPor,
-      registradoPor: registradoPor,
-      producto: producto,
-      lote: lote,
-      dosis: dosis,
-      viaAplicacion: viaAplicacion,
-      proximaFecha: proximaFecha,
-      costo: costo,
-      observaciones: observaciones,
+      tipo: type,
+      enfermedad: disease,
+      fecha: date,
+      diasIntervalo: intervalDays,
+      aplicadoPor: appliedBy,
+      registradoPor: recordedBy,
+      producto: product,
+      lote: lot,
+      dosis: dosage,
+      viaAplicacion: administrationRoute,
+      proximaFecha: nextDate,
+      costo: cost,
+      observaciones: observations,
     );
 
-    await database.saveVacuna(vacuna);
+    await database.saveVacuna(vaccine);
   }
 }
 
-class ObtenerVacunasUseCase {
+/// Caso de uso para obtener todas las vacunas de un animal
+class GetVaccinesUseCase {
   final MiGanadoDatabase database;
 
-  ObtenerVacunasUseCase({required this.database});
+  GetVaccinesUseCase({required this.database});
 
+  /// Obtiene todas las vacunas registradas para un animal específico
   Future<List<VacunaEntity>> call({required String animalUuid}) async {
     return database.getVacunasByAnimal(animalUuid);
   }
 }
 
-class ActualizarVacunaUseCase {
+/// Caso de uso para actualizar informaci ón de una vacuna existente
+class UpdateVaccineUseCase {
   final MiGanadoDatabase database;
 
-  ActualizarVacunaUseCase({required this.database});
+  UpdateVaccineUseCase({required this.database});
 
+  /// Actualiza los datos de una vacuna ya registrada
   Future<void> call({
-    required VacunaEntity vacuna,
+    required VacunaEntity vaccine,
   }) async {
-    await database.updateVacuna(vacuna);
+    await database.updateVacuna(vaccine);
   }
 }
 
-class EliminarVacunaUseCase {
+/// Caso de uso para eliminar una vacuna del registro
+class DeleteVaccineUseCase {
   final MiGanadoDatabase database;
 
-  EliminarVacunaUseCase({required this.database});
+  DeleteVaccineUseCase({required this.database});
 
-  Future<void> call({required String vacunaUuid}) async {
-    await database.deleteVacuna(vacunaUuid);
+  /// Elimina una vacuna del sistema por su UUID
+  Future<void> call({required String vaccineUuid}) async {
+    await database.deleteVacuna(vaccineUuid);
   }
 }

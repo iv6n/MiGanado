@@ -1,66 +1,46 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/data/database/isar_database.dart';
-import 'package:miganado/features/animals/domain/usecases/reproductivo_usecases.dart';
-import 'package:miganado/features/animals/data/models/reproductivo_entity.dart';
 
 // Database provider
 final miganadoDatabaseProvider = Provider<MiGanadoDatabase>((ref) {
   return MiGanadoDatabase();
 });
 
-// Use cases
-final crearReproductivoUseCaseProvider =
-    Provider<CrearReproductivoUseCase>((ref) {
-  final database = ref.watch(miganadoDatabaseProvider);
-  return CrearReproductivoUseCase(database: database);
+// DEPRECATED: Reproductivo functionality is disabled
+// These providers have been disabled as the reproductivo feature is no longer supported
+// Keeping this file to avoid breaking imports, but all providers are stubs
+
+@Deprecated('Reproductivo functionality is disabled')
+final crearReproductivoUseCaseProvider = Provider((ref) {
+  throw UnsupportedError('Reproductivo functionality is disabled');
 });
 
-final obtenerReproductivoUseCaseProvider =
-    Provider<ObtenerReproductivoUseCase>((ref) {
-  final database = ref.watch(miganadoDatabaseProvider);
-  return ObtenerReproductivoUseCase(database: database);
+@Deprecated('Reproductivo functionality is disabled')
+final obtenerReproductivoUseCaseProvider = Provider((ref) {
+  throw UnsupportedError('Reproductivo functionality is disabled');
 });
 
-final actualizarEstadoReproductivoUseCaseProvider =
-    Provider<ActualizarEstadoReproductivoUseCase>((ref) {
-  final database = ref.watch(miganadoDatabaseProvider);
-  return ActualizarEstadoReproductivoUseCase(database: database);
+@Deprecated('Reproductivo functionality is disabled')
+final actualizarEstadoReproductivoUseCaseProvider = Provider((ref) {
+  throw UnsupportedError('Reproductivo functionality is disabled');
 });
 
-final registrarEmpadreUseCaseProvider =
-    Provider<RegistrarEmpadreUseCase>((ref) {
-  final database = ref.watch(miganadoDatabaseProvider);
-  return RegistrarEmpadreUseCase(database: database);
+@Deprecated('Reproductivo functionality is disabled')
+final registrarEmpadreUseCaseProvider = Provider((ref) {
+  throw UnsupportedError('Reproductivo functionality is disabled');
 });
 
-final registrarPartoUseCaseProvider = Provider<RegistrarPartoUseCase>((ref) {
-  final database = ref.watch(miganadoDatabaseProvider);
-  return RegistrarPartoUseCase(database: database);
+@Deprecated('Reproductivo functionality is disabled')
+final registrarPartoUseCaseProvider = Provider((ref) {
+  throw UnsupportedError('Reproductivo functionality is disabled');
 });
 
-final finalizarLactanciaUseCaseProvider =
-    Provider<FinalizarLactanciaUseCase>((ref) {
-  final database = ref.watch(miganadoDatabaseProvider);
-  return FinalizarLactanciaUseCase(database: database);
+@Deprecated('Reproductivo functionality is disabled')
+final finalizarLactanciaUseCaseProvider = Provider((ref) {
+  throw UnsupportedError('Reproductivo functionality is disabled');
 });
 
-// Provider para obtener el reproductivo de un animal
-final reproductivoProvider =
-    FutureProvider.family<ReproductivEntity?, String>((ref, animalUuid) async {
-  final useCase = ref.watch(obtenerReproductivoUseCaseProvider);
-  return useCase(animalUuid: animalUuid);
+@Deprecated('Reproductivo functionality is disabled')
+final reproductivoProvider = Provider((ref) {
+  throw UnsupportedError('Reproductivo functionality is disabled');
 });
-
-// Provider para refrescar reproductivo
-final reproductivoRefreshProvider =
-    StateNotifierProvider<ReproductivoRefreshNotifier, bool>((ref) {
-  return ReproductivoRefreshNotifier();
-});
-
-class ReproductivoRefreshNotifier extends StateNotifier<bool> {
-  ReproductivoRefreshNotifier() : super(false);
-
-  void refresh() {
-    state = !state;
-  }
-}

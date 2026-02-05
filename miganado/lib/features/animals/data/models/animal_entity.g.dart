@@ -17,195 +17,180 @@ const AnimalEntitySchema = CollectionSchema(
   name: r'AnimalEntity',
   id: 2638646966126597338,
   properties: {
-    r'categoria': PropertySchema(
+    r'ageMonths': PropertySchema(
       id: 0,
-      name: r'categoria',
-      type: IsarType.byte,
-      enumMap: _AnimalEntitycategoriaEnumValueMap,
-    ),
-    r'categoriaDescripcion': PropertySchema(
-      id: 1,
-      name: r'categoriaDescripcion',
-      type: IsarType.string,
-    ),
-    r'categoriaIcon': PropertySchema(
-      id: 2,
-      name: r'categoriaIcon',
-      type: IsarType.string,
-    ),
-    r'desparasitado': PropertySchema(
-      id: 3,
-      name: r'desparasitado',
-      type: IsarType.bool,
-    ),
-    r'edadMeses': PropertySchema(
-      id: 4,
-      name: r'edadMeses',
+      name: r'ageMonths',
       type: IsarType.long,
     ),
-    r'esCastrado': PropertySchema(
+    r'birthDate': PropertySchema(
+      id: 1,
+      name: r'birthDate',
+      type: IsarType.dateTime,
+    ),
+    r'breed': PropertySchema(
+      id: 2,
+      name: r'breed',
+      type: IsarType.string,
+    ),
+    r'category': PropertySchema(
+      id: 3,
+      name: r'category',
+      type: IsarType.byte,
+      enumMap: _AnimalEntitycategoryEnumValueMap,
+    ),
+    r'contentHash': PropertySchema(
+      id: 4,
+      name: r'contentHash',
+      type: IsarType.string,
+    ),
+    r'creationDate': PropertySchema(
       id: 5,
-      name: r'esCastrado',
-      type: IsarType.bool,
+      name: r'creationDate',
+      type: IsarType.dateTime,
     ),
-    r'especie': PropertySchema(
+    r'currentWeight': PropertySchema(
       id: 6,
-      name: r'especie',
-      type: IsarType.byte,
-      enumMap: _AnimalEntityespecieEnumValueMap,
+      name: r'currentWeight',
+      type: IsarType.double,
     ),
-    r'estadoReproductivo': PropertySchema(
+    r'customName': PropertySchema(
       id: 7,
-      name: r'estadoReproductivo',
-      type: IsarType.byte,
-      enumMap: _AnimalEntityestadoReproductivoEnumValueMap,
+      name: r'customName',
+      type: IsarType.string,
     ),
-    r'etapa': PropertySchema(
+    r'dewormed': PropertySchema(
       id: 8,
-      name: r'etapa',
-      type: IsarType.byte,
-      enumMap: _AnimalEntityetapaEnumValueMap,
+      name: r'dewormed',
+      type: IsarType.bool,
     ),
-    r'etapaDescripcion': PropertySchema(
+    r'dewormerType': PropertySchema(
       id: 9,
-      name: r'etapaDescripcion',
+      name: r'dewormerType',
       type: IsarType.string,
     ),
-    r'etapaIcon': PropertySchema(
+    r'earTagNumber': PropertySchema(
       id: 10,
-      name: r'etapaIcon',
+      name: r'earTagNumber',
       type: IsarType.string,
     ),
-    r'fechaActualizacion': PropertySchema(
+    r'hasVitamins': PropertySchema(
       id: 11,
-      name: r'fechaActualizacion',
-      type: IsarType.dateTime,
+      name: r'hasVitamins',
+      type: IsarType.bool,
     ),
-    r'fechaCreacion': PropertySchema(
+    r'isCastrated': PropertySchema(
       id: 12,
-      name: r'fechaCreacion',
-      type: IsarType.dateTime,
+      name: r'isCastrated',
+      type: IsarType.bool,
     ),
-    r'fechaNacimiento': PropertySchema(
+    r'lastDewormingDate': PropertySchema(
       id: 13,
-      name: r'fechaNacimiento',
+      name: r'lastDewormingDate',
       type: IsarType.dateTime,
     ),
-    r'fechaSincronizacion': PropertySchema(
+    r'lastUpdateDate': PropertySchema(
       id: 14,
-      name: r'fechaSincronizacion',
+      name: r'lastUpdateDate',
       type: IsarType.dateTime,
     ),
-    r'fechaUltimaVacuna': PropertySchema(
+    r'lastVaccinationDate': PropertySchema(
       id: 15,
-      name: r'fechaUltimaVacuna',
+      name: r'lastVaccinationDate',
       type: IsarType.dateTime,
     ),
-    r'fechaUltimoDesparasitante': PropertySchema(
+    r'lastVitaminDate': PropertySchema(
       id: 16,
-      name: r'fechaUltimoDesparasitante',
+      name: r'lastVitaminDate',
       type: IsarType.dateTime,
     ),
-    r'fechaUltimoPesaje': PropertySchema(
+    r'lastWeighingDate': PropertySchema(
       id: 17,
-      name: r'fechaUltimoPesaje',
+      name: r'lastWeighingDate',
       type: IsarType.dateTime,
     ),
-    r'fechaVitaminas': PropertySchema(
+    r'lifeStage': PropertySchema(
       id: 18,
-      name: r'fechaVitaminas',
+      name: r'lifeStage',
+      type: IsarType.byte,
+      enumMap: _AnimalEntitylifeStageEnumValueMap,
+    ),
+    r'location': PropertySchema(
+      id: 19,
+      name: r'location',
+      type: IsarType.string,
+    ),
+    r'notes': PropertySchema(
+      id: 20,
+      name: r'notes',
+      type: IsarType.string,
+    ),
+    r'observations': PropertySchema(
+      id: 21,
+      name: r'observations',
+      type: IsarType.string,
+    ),
+    r'purchasePrice': PropertySchema(
+      id: 22,
+      name: r'purchasePrice',
+      type: IsarType.double,
+    ),
+    r'remoteId': PropertySchema(
+      id: 23,
+      name: r'remoteId',
+      type: IsarType.string,
+    ),
+    r'reproductiveStatus': PropertySchema(
+      id: 24,
+      name: r'reproductiveStatus',
+      type: IsarType.byte,
+      enumMap: _AnimalEntityreproductiveStatusEnumValueMap,
+    ),
+    r'salePrice': PropertySchema(
+      id: 25,
+      name: r'salePrice',
+      type: IsarType.double,
+    ),
+    r'sex': PropertySchema(
+      id: 26,
+      name: r'sex',
+      type: IsarType.byte,
+      enumMap: _AnimalEntitysexEnumValueMap,
+    ),
+    r'species': PropertySchema(
+      id: 27,
+      name: r'species',
+      type: IsarType.byte,
+      enumMap: _AnimalEntityspeciesEnumValueMap,
+    ),
+    r'syncDate': PropertySchema(
+      id: 28,
+      name: r'syncDate',
       type: IsarType.dateTime,
     ),
-    r'hashContenido': PropertySchema(
-      id: 19,
-      name: r'hashContenido',
-      type: IsarType.string,
-    ),
-    r'idRemoto': PropertySchema(
-      id: 20,
-      name: r'idRemoto',
-      type: IsarType.string,
-    ),
-    r'nombrePersonalizado': PropertySchema(
-      id: 21,
-      name: r'nombrePersonalizado',
-      type: IsarType.string,
-    ),
-    r'notas': PropertySchema(
-      id: 22,
-      name: r'notas',
-      type: IsarType.string,
-    ),
-    r'numeroArete': PropertySchema(
-      id: 23,
-      name: r'numeroArete',
-      type: IsarType.string,
-    ),
-    r'observaciones': PropertySchema(
-      id: 24,
-      name: r'observaciones',
-      type: IsarType.string,
-    ),
-    r'pesoActual': PropertySchema(
-      id: 25,
-      name: r'pesoActual',
-      type: IsarType.double,
-    ),
-    r'precioCompra': PropertySchema(
-      id: 26,
-      name: r'precioCompra',
-      type: IsarType.double,
-    ),
-    r'precioVenta': PropertySchema(
-      id: 27,
-      name: r'precioVenta',
-      type: IsarType.double,
-    ),
-    r'raza': PropertySchema(
-      id: 28,
-      name: r'raza',
-      type: IsarType.string,
-    ),
-    r'sexo': PropertySchema(
+    r'synced': PropertySchema(
       id: 29,
-      name: r'sexo',
-      type: IsarType.byte,
-      enumMap: _AnimalEntitysexoEnumValueMap,
+      name: r'synced',
+      type: IsarType.bool,
     ),
-    r'sincronizado': PropertySchema(
+    r'underObservation': PropertySchema(
       id: 30,
-      name: r'sincronizado',
+      name: r'underObservation',
       type: IsarType.bool,
-    ),
-    r'tieneVitaminas': PropertySchema(
-      id: 31,
-      name: r'tieneVitaminas',
-      type: IsarType.bool,
-    ),
-    r'tipoDesparasitante': PropertySchema(
-      id: 32,
-      name: r'tipoDesparasitante',
-      type: IsarType.string,
-    ),
-    r'tipoVacuna': PropertySchema(
-      id: 33,
-      name: r'tipoVacuna',
-      type: IsarType.string,
-    ),
-    r'ubicacion': PropertySchema(
-      id: 34,
-      name: r'ubicacion',
-      type: IsarType.string,
     ),
     r'uuid': PropertySchema(
-      id: 35,
+      id: 31,
       name: r'uuid',
       type: IsarType.string,
     ),
-    r'vacunado': PropertySchema(
-      id: 36,
-      name: r'vacunado',
+    r'vaccinated': PropertySchema(
+      id: 32,
+      name: r'vaccinated',
       type: IsarType.bool,
+    ),
+    r'vaccineType': PropertySchema(
+      id: 33,
+      name: r'vaccineType',
+      type: IsarType.string,
     )
   },
   estimateSize: _animalEntityEstimateSize,
@@ -227,14 +212,14 @@ const AnimalEntitySchema = CollectionSchema(
         )
       ],
     ),
-    r'numeroArete': IndexSchema(
-      id: -8256879192067858098,
-      name: r'numeroArete',
+    r'earTagNumber': IndexSchema(
+      id: 1933371050748435691,
+      name: r'earTagNumber',
       unique: false,
       replace: false,
       properties: [
         IndexPropertySchema(
-          name: r'numeroArete',
+          name: r'earTagNumber',
           type: IndexType.hash,
           caseSensitive: true,
         )
@@ -255,61 +240,57 @@ int _animalEntityEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  bytesCount += 3 + object.categoriaDescripcion.length * 3;
-  bytesCount += 3 + object.categoriaIcon.length * 3;
-  bytesCount += 3 + object.etapaDescripcion.length * 3;
-  bytesCount += 3 + object.etapaIcon.length * 3;
+  bytesCount += 3 + object.breed.length * 3;
   {
-    final value = object.hashContenido;
+    final value = object.contentHash;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
   {
-    final value = object.idRemoto;
+    final value = object.customName;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
   {
-    final value = object.nombrePersonalizado;
+    final value = object.dewormerType;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  bytesCount += 3 + object.earTagNumber.length * 3;
+  {
+    final value = object.location;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
   {
-    final value = object.notas;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  bytesCount += 3 + object.numeroArete.length * 3;
-  {
-    final value = object.observaciones;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  bytesCount += 3 + object.raza.length * 3;
-  {
-    final value = object.tipoDesparasitante;
+    final value = object.notes;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
   {
-    final value = object.tipoVacuna;
+    final value = object.observations;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
   {
-    final value = object.ubicacion;
+    final value = object.remoteId;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
   bytesCount += 3 + object.uuid.length * 3;
+  {
+    final value = object.vaccineType;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   return bytesCount;
 }
 
@@ -319,43 +300,40 @@ void _animalEntitySerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeByte(offsets[0], object.categoria.index);
-  writer.writeString(offsets[1], object.categoriaDescripcion);
-  writer.writeString(offsets[2], object.categoriaIcon);
-  writer.writeBool(offsets[3], object.desparasitado);
-  writer.writeLong(offsets[4], object.edadMeses);
-  writer.writeBool(offsets[5], object.esCastrado);
-  writer.writeByte(offsets[6], object.especie.index);
-  writer.writeByte(offsets[7], object.estadoReproductivo.index);
-  writer.writeByte(offsets[8], object.etapa.index);
-  writer.writeString(offsets[9], object.etapaDescripcion);
-  writer.writeString(offsets[10], object.etapaIcon);
-  writer.writeDateTime(offsets[11], object.fechaActualizacion);
-  writer.writeDateTime(offsets[12], object.fechaCreacion);
-  writer.writeDateTime(offsets[13], object.fechaNacimiento);
-  writer.writeDateTime(offsets[14], object.fechaSincronizacion);
-  writer.writeDateTime(offsets[15], object.fechaUltimaVacuna);
-  writer.writeDateTime(offsets[16], object.fechaUltimoDesparasitante);
-  writer.writeDateTime(offsets[17], object.fechaUltimoPesaje);
-  writer.writeDateTime(offsets[18], object.fechaVitaminas);
-  writer.writeString(offsets[19], object.hashContenido);
-  writer.writeString(offsets[20], object.idRemoto);
-  writer.writeString(offsets[21], object.nombrePersonalizado);
-  writer.writeString(offsets[22], object.notas);
-  writer.writeString(offsets[23], object.numeroArete);
-  writer.writeString(offsets[24], object.observaciones);
-  writer.writeDouble(offsets[25], object.pesoActual);
-  writer.writeDouble(offsets[26], object.precioCompra);
-  writer.writeDouble(offsets[27], object.precioVenta);
-  writer.writeString(offsets[28], object.raza);
-  writer.writeByte(offsets[29], object.sexo.index);
-  writer.writeBool(offsets[30], object.sincronizado);
-  writer.writeBool(offsets[31], object.tieneVitaminas);
-  writer.writeString(offsets[32], object.tipoDesparasitante);
-  writer.writeString(offsets[33], object.tipoVacuna);
-  writer.writeString(offsets[34], object.ubicacion);
-  writer.writeString(offsets[35], object.uuid);
-  writer.writeBool(offsets[36], object.vacunado);
+  writer.writeLong(offsets[0], object.ageMonths);
+  writer.writeDateTime(offsets[1], object.birthDate);
+  writer.writeString(offsets[2], object.breed);
+  writer.writeByte(offsets[3], object.category.index);
+  writer.writeString(offsets[4], object.contentHash);
+  writer.writeDateTime(offsets[5], object.creationDate);
+  writer.writeDouble(offsets[6], object.currentWeight);
+  writer.writeString(offsets[7], object.customName);
+  writer.writeBool(offsets[8], object.dewormed);
+  writer.writeString(offsets[9], object.dewormerType);
+  writer.writeString(offsets[10], object.earTagNumber);
+  writer.writeBool(offsets[11], object.hasVitamins);
+  writer.writeBool(offsets[12], object.isCastrated);
+  writer.writeDateTime(offsets[13], object.lastDewormingDate);
+  writer.writeDateTime(offsets[14], object.lastUpdateDate);
+  writer.writeDateTime(offsets[15], object.lastVaccinationDate);
+  writer.writeDateTime(offsets[16], object.lastVitaminDate);
+  writer.writeDateTime(offsets[17], object.lastWeighingDate);
+  writer.writeByte(offsets[18], object.lifeStage.index);
+  writer.writeString(offsets[19], object.location);
+  writer.writeString(offsets[20], object.notes);
+  writer.writeString(offsets[21], object.observations);
+  writer.writeDouble(offsets[22], object.purchasePrice);
+  writer.writeString(offsets[23], object.remoteId);
+  writer.writeByte(offsets[24], object.reproductiveStatus.index);
+  writer.writeDouble(offsets[25], object.salePrice);
+  writer.writeByte(offsets[26], object.sex.index);
+  writer.writeByte(offsets[27], object.species.index);
+  writer.writeDateTime(offsets[28], object.syncDate);
+  writer.writeBool(offsets[29], object.synced);
+  writer.writeBool(offsets[30], object.underObservation);
+  writer.writeString(offsets[31], object.uuid);
+  writer.writeBool(offsets[32], object.vaccinated);
+  writer.writeString(offsets[33], object.vaccineType);
 }
 
 AnimalEntity _animalEntityDeserialize(
@@ -365,50 +343,51 @@ AnimalEntity _animalEntityDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = AnimalEntity(
-    categoria:
-        _AnimalEntitycategoriaValueEnumMap[reader.readByteOrNull(offsets[0])] ??
-            Categoria.vaca,
-    desparasitado: reader.readBoolOrNull(offsets[3]) ?? false,
-    edadMeses: reader.readLong(offsets[4]),
-    esCastrado: reader.readBoolOrNull(offsets[5]) ?? false,
-    especie:
-        _AnimalEntityespecieValueEnumMap[reader.readByteOrNull(offsets[6])] ??
-            Especie.bovino,
-    estadoReproductivo: _AnimalEntityestadoReproductivoValueEnumMap[
-            reader.readByteOrNull(offsets[7])] ??
-        EstadoReproductivo.no_definido,
-    fechaNacimiento: reader.readDateTime(offsets[13]),
-    fechaUltimaVacuna: reader.readDateTimeOrNull(offsets[15]),
-    fechaUltimoDesparasitante: reader.readDateTimeOrNull(offsets[16]),
-    fechaVitaminas: reader.readDateTimeOrNull(offsets[18]),
-    nombrePersonalizado: reader.readStringOrNull(offsets[21]),
-    notas: reader.readStringOrNull(offsets[22]),
-    numeroArete: reader.readString(offsets[23]),
-    precioCompra: reader.readDoubleOrNull(offsets[26]),
-    precioVenta: reader.readDoubleOrNull(offsets[27]),
-    raza: reader.readString(offsets[28]),
-    sexo: _AnimalEntitysexoValueEnumMap[reader.readByteOrNull(offsets[29])] ??
-        Sexo.macho,
-    tieneVitaminas: reader.readBoolOrNull(offsets[31]) ?? false,
-    tipoDesparasitante: reader.readStringOrNull(offsets[32]),
-    tipoVacuna: reader.readStringOrNull(offsets[33]),
-    ubicacion: reader.readStringOrNull(offsets[34]),
-    vacunado: reader.readBoolOrNull(offsets[36]) ?? false,
+    ageMonths: reader.readLong(offsets[0]),
+    birthDate: reader.readDateTime(offsets[1]),
+    breed: reader.readString(offsets[2]),
+    category:
+        _AnimalEntitycategoryValueEnumMap[reader.readByteOrNull(offsets[3])] ??
+            Category.cow,
+    customName: reader.readStringOrNull(offsets[7]),
+    dewormed: reader.readBoolOrNull(offsets[8]) ?? false,
+    dewormerType: reader.readStringOrNull(offsets[9]),
+    earTagNumber: reader.readString(offsets[10]),
+    hasVitamins: reader.readBoolOrNull(offsets[11]) ?? false,
+    isCastrated: reader.readBoolOrNull(offsets[12]) ?? false,
+    lastDewormingDate: reader.readDateTimeOrNull(offsets[13]),
+    lastVaccinationDate: reader.readDateTimeOrNull(offsets[15]),
+    lastVitaminDate: reader.readDateTimeOrNull(offsets[16]),
+    location: reader.readStringOrNull(offsets[19]),
+    notes: reader.readStringOrNull(offsets[20]),
+    purchasePrice: reader.readDoubleOrNull(offsets[22]),
+    reproductiveStatus: _AnimalEntityreproductiveStatusValueEnumMap[
+            reader.readByteOrNull(offsets[24])] ??
+        ReproductiveStatus.undefined,
+    salePrice: reader.readDoubleOrNull(offsets[25]),
+    sex: _AnimalEntitysexValueEnumMap[reader.readByteOrNull(offsets[26])] ??
+        Sex.male,
+    species:
+        _AnimalEntityspeciesValueEnumMap[reader.readByteOrNull(offsets[27])] ??
+            Species.cattle,
+    vaccinated: reader.readBoolOrNull(offsets[32]) ?? false,
+    vaccineType: reader.readStringOrNull(offsets[33]),
   );
-  object.etapa =
-      _AnimalEntityetapaValueEnumMap[reader.readByteOrNull(offsets[8])] ??
-          EtapaVida.becerro;
-  object.fechaActualizacion = reader.readDateTime(offsets[11]);
-  object.fechaCreacion = reader.readDateTime(offsets[12]);
-  object.fechaSincronizacion = reader.readDateTimeOrNull(offsets[14]);
-  object.fechaUltimoPesaje = reader.readDateTimeOrNull(offsets[17]);
-  object.hashContenido = reader.readStringOrNull(offsets[19]);
+  object.contentHash = reader.readStringOrNull(offsets[4]);
+  object.creationDate = reader.readDateTime(offsets[5]);
+  object.currentWeight = reader.readDoubleOrNull(offsets[6]);
   object.id = id;
-  object.idRemoto = reader.readStringOrNull(offsets[20]);
-  object.observaciones = reader.readStringOrNull(offsets[24]);
-  object.pesoActual = reader.readDoubleOrNull(offsets[25]);
-  object.sincronizado = reader.readBool(offsets[30]);
-  object.uuid = reader.readString(offsets[35]);
+  object.lastUpdateDate = reader.readDateTime(offsets[14]);
+  object.lastWeighingDate = reader.readDateTimeOrNull(offsets[17]);
+  object.lifeStage =
+      _AnimalEntitylifeStageValueEnumMap[reader.readByteOrNull(offsets[18])] ??
+          LifeStage.calf;
+  object.observations = reader.readStringOrNull(offsets[21]);
+  object.remoteId = reader.readStringOrNull(offsets[23]);
+  object.syncDate = reader.readDateTimeOrNull(offsets[28]);
+  object.synced = reader.readBool(offsets[29]);
+  object.underObservation = reader.readBool(offsets[30]);
+  object.uuid = reader.readString(offsets[31]);
   return object;
 }
 
@@ -420,41 +399,37 @@ P _animalEntityDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (_AnimalEntitycategoriaValueEnumMap[
-              reader.readByteOrNull(offset)] ??
-          Categoria.vaca) as P;
+      return (reader.readLong(offset)) as P;
     case 1:
-      return (reader.readString(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
-      return (reader.readBoolOrNull(offset) ?? false) as P;
-    case 4:
-      return (reader.readLong(offset)) as P;
-    case 5:
-      return (reader.readBoolOrNull(offset) ?? false) as P;
-    case 6:
-      return (_AnimalEntityespecieValueEnumMap[reader.readByteOrNull(offset)] ??
-          Especie.bovino) as P;
-    case 7:
-      return (_AnimalEntityestadoReproductivoValueEnumMap[
+      return (_AnimalEntitycategoryValueEnumMap[
               reader.readByteOrNull(offset)] ??
-          EstadoReproductivo.no_definido) as P;
+          Category.cow) as P;
+    case 4:
+      return (reader.readStringOrNull(offset)) as P;
+    case 5:
+      return (reader.readDateTime(offset)) as P;
+    case 6:
+      return (reader.readDoubleOrNull(offset)) as P;
+    case 7:
+      return (reader.readStringOrNull(offset)) as P;
     case 8:
-      return (_AnimalEntityetapaValueEnumMap[reader.readByteOrNull(offset)] ??
-          EtapaVida.becerro) as P;
+      return (reader.readBoolOrNull(offset) ?? false) as P;
     case 9:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 10:
       return (reader.readString(offset)) as P;
     case 11:
-      return (reader.readDateTime(offset)) as P;
+      return (reader.readBoolOrNull(offset) ?? false) as P;
     case 12:
-      return (reader.readDateTime(offset)) as P;
+      return (reader.readBoolOrNull(offset) ?? false) as P;
     case 13:
-      return (reader.readDateTime(offset)) as P;
-    case 14:
       return (reader.readDateTimeOrNull(offset)) as P;
+    case 14:
+      return (reader.readDateTime(offset)) as P;
     case 15:
       return (reader.readDateTimeOrNull(offset)) as P;
     case 16:
@@ -462,7 +437,9 @@ P _animalEntityDeserializeProp<P>(
     case 17:
       return (reader.readDateTimeOrNull(offset)) as P;
     case 18:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (_AnimalEntitylifeStageValueEnumMap[
+              reader.readByteOrNull(offset)] ??
+          LifeStage.calf) as P;
     case 19:
       return (reader.readStringOrNull(offset)) as P;
     case 20:
@@ -470,102 +447,123 @@ P _animalEntityDeserializeProp<P>(
     case 21:
       return (reader.readStringOrNull(offset)) as P;
     case 22:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 23:
-      return (reader.readString(offset)) as P;
-    case 24:
       return (reader.readStringOrNull(offset)) as P;
+    case 24:
+      return (_AnimalEntityreproductiveStatusValueEnumMap[
+              reader.readByteOrNull(offset)] ??
+          ReproductiveStatus.undefined) as P;
     case 25:
       return (reader.readDoubleOrNull(offset)) as P;
     case 26:
-      return (reader.readDoubleOrNull(offset)) as P;
+      return (_AnimalEntitysexValueEnumMap[reader.readByteOrNull(offset)] ??
+          Sex.male) as P;
     case 27:
-      return (reader.readDoubleOrNull(offset)) as P;
+      return (_AnimalEntityspeciesValueEnumMap[reader.readByteOrNull(offset)] ??
+          Species.cattle) as P;
     case 28:
-      return (reader.readString(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 29:
-      return (_AnimalEntitysexoValueEnumMap[reader.readByteOrNull(offset)] ??
-          Sexo.macho) as P;
+      return (reader.readBool(offset)) as P;
     case 30:
       return (reader.readBool(offset)) as P;
     case 31:
-      return (reader.readBoolOrNull(offset) ?? false) as P;
+      return (reader.readString(offset)) as P;
     case 32:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset) ?? false) as P;
     case 33:
       return (reader.readStringOrNull(offset)) as P;
-    case 34:
-      return (reader.readStringOrNull(offset)) as P;
-    case 35:
-      return (reader.readString(offset)) as P;
-    case 36:
-      return (reader.readBoolOrNull(offset) ?? false) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
 
-const _AnimalEntitycategoriaEnumValueMap = {
-  'vaca': 0,
-  'caballo': 1,
-  'burro': 2,
-  'mula': 3,
+const _AnimalEntitycategoryEnumValueMap = {
+  'cow': 0,
+  'bull': 1,
+  'horse': 2,
+  'mare': 3,
+  'donkey': 4,
+  'jenny': 5,
+  'donkeyFemale': 6,
+  'mule': 7,
 };
-const _AnimalEntitycategoriaValueEnumMap = {
-  0: Categoria.vaca,
-  1: Categoria.caballo,
-  2: Categoria.burro,
-  3: Categoria.mula,
+const _AnimalEntitycategoryValueEnumMap = {
+  0: Category.cow,
+  1: Category.bull,
+  2: Category.horse,
+  3: Category.mare,
+  4: Category.donkey,
+  5: Category.jenny,
+  6: Category.donkeyFemale,
+  7: Category.mule,
 };
-const _AnimalEntityespecieEnumValueMap = {
-  'bovino': 0,
-  'equino': 1,
+const _AnimalEntitylifeStageEnumValueMap = {
+  'calf': 0,
+  'calfMale': 1,
+  'calfFemale': 2,
+  'heifer': 3,
+  'youngBull': 4,
+  'steer': 5,
+  'cow': 6,
+  'bull': 7,
+  'colt': 8,
+  'filly': 9,
+  'horse': 10,
+  'mare': 11,
+  'donkey': 12,
+  'donkeyFemale': 13,
+  'mule': 14,
 };
-const _AnimalEntityespecieValueEnumMap = {
-  0: Especie.bovino,
-  1: Especie.equino,
+const _AnimalEntitylifeStageValueEnumMap = {
+  0: LifeStage.calf,
+  1: LifeStage.calfMale,
+  2: LifeStage.calfFemale,
+  3: LifeStage.heifer,
+  4: LifeStage.youngBull,
+  5: LifeStage.steer,
+  6: LifeStage.cow,
+  7: LifeStage.bull,
+  8: LifeStage.colt,
+  9: LifeStage.filly,
+  10: LifeStage.horse,
+  11: LifeStage.mare,
+  12: LifeStage.donkey,
+  13: LifeStage.donkeyFemale,
+  14: LifeStage.mule,
 };
-const _AnimalEntityestadoReproductivoEnumValueMap = {
-  'prenada': 0,
-  'lactando': 1,
-  'seca': 2,
-  'no_definido': 3,
+const _AnimalEntityreproductiveStatusEnumValueMap = {
+  'virgin': 0,
+  'pregnant': 1,
+  'lactating': 2,
+  'empty': 3,
+  'blocked': 4,
+  'undefined': 5,
 };
-const _AnimalEntityestadoReproductivoValueEnumMap = {
-  0: EstadoReproductivo.prenada,
-  1: EstadoReproductivo.lactando,
-  2: EstadoReproductivo.seca,
-  3: EstadoReproductivo.no_definido,
+const _AnimalEntityreproductiveStatusValueEnumMap = {
+  0: ReproductiveStatus.virgin,
+  1: ReproductiveStatus.pregnant,
+  2: ReproductiveStatus.lactating,
+  3: ReproductiveStatus.empty,
+  4: ReproductiveStatus.blocked,
+  5: ReproductiveStatus.undefined,
 };
-const _AnimalEntityetapaEnumValueMap = {
-  'becerro': 0,
-  'becerra': 1,
-  'vaquilla': 2,
-  'torete': 3,
-  'novillo': 4,
-  'vaca': 5,
-  'toro': 6,
-  'potro': 7,
-  'adulto': 8,
+const _AnimalEntitysexEnumValueMap = {
+  'male': 0,
+  'female': 1,
 };
-const _AnimalEntityetapaValueEnumMap = {
-  0: EtapaVida.becerro,
-  1: EtapaVida.becerra,
-  2: EtapaVida.vaquilla,
-  3: EtapaVida.torete,
-  4: EtapaVida.novillo,
-  5: EtapaVida.vaca,
-  6: EtapaVida.toro,
-  7: EtapaVida.potro,
-  8: EtapaVida.adulto,
+const _AnimalEntitysexValueEnumMap = {
+  0: Sex.male,
+  1: Sex.female,
 };
-const _AnimalEntitysexoEnumValueMap = {
-  'macho': 0,
-  'hembra': 1,
+const _AnimalEntityspeciesEnumValueMap = {
+  'cattle': 0,
+  'equine': 1,
 };
-const _AnimalEntitysexoValueEnumMap = {
-  0: Sexo.macho,
-  1: Sexo.hembra,
+const _AnimalEntityspeciesValueEnumMap = {
+  0: Species.cattle,
+  1: Species.equine,
 };
 
 Id _animalEntityGetId(AnimalEntity object) {
@@ -760,44 +758,44 @@ extension AnimalEntityQueryWhere
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterWhereClause>
-      numeroAreteEqualTo(String numeroArete) {
+      earTagNumberEqualTo(String earTagNumber) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
-        indexName: r'numeroArete',
-        value: [numeroArete],
+        indexName: r'earTagNumber',
+        value: [earTagNumber],
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterWhereClause>
-      numeroAreteNotEqualTo(String numeroArete) {
+      earTagNumberNotEqualTo(String earTagNumber) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'numeroArete',
+              indexName: r'earTagNumber',
               lower: [],
-              upper: [numeroArete],
+              upper: [earTagNumber],
               includeUpper: false,
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'numeroArete',
-              lower: [numeroArete],
+              indexName: r'earTagNumber',
+              lower: [earTagNumber],
               includeLower: false,
               upper: [],
             ));
       } else {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'numeroArete',
-              lower: [numeroArete],
+              indexName: r'earTagNumber',
+              lower: [earTagNumber],
               includeLower: false,
               upper: [],
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'numeroArete',
+              indexName: r'earTagNumber',
               lower: [],
-              upper: [numeroArete],
+              upper: [earTagNumber],
               includeUpper: false,
             ));
       }
@@ -808,383 +806,45 @@ extension AnimalEntityQueryWhere
 extension AnimalEntityQueryFilter
     on QueryBuilder<AnimalEntity, AnimalEntity, QFilterCondition> {
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaEqualTo(Categoria value) {
+      ageMonthsEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'categoria',
+        property: r'ageMonths',
         value: value,
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaGreaterThan(
-    Categoria value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'categoria',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaLessThan(
-    Categoria value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'categoria',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaBetween(
-    Categoria lower,
-    Categoria upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'categoria',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaDescripcionEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'categoriaDescripcion',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaDescripcionGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'categoriaDescripcion',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaDescripcionLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'categoriaDescripcion',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaDescripcionBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'categoriaDescripcion',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaDescripcionStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'categoriaDescripcion',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaDescripcionEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'categoriaDescripcion',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaDescripcionContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'categoriaDescripcion',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaDescripcionMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'categoriaDescripcion',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaDescripcionIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'categoriaDescripcion',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaDescripcionIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'categoriaDescripcion',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaIconEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'categoriaIcon',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaIconGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'categoriaIcon',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaIconLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'categoriaIcon',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaIconBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'categoriaIcon',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaIconStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'categoriaIcon',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaIconEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'categoriaIcon',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaIconContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'categoriaIcon',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaIconMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'categoriaIcon',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaIconIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'categoriaIcon',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      categoriaIconIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'categoriaIcon',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      desparasitadoEqualTo(bool value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'desparasitado',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      edadMesesEqualTo(int value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'edadMeses',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      edadMesesGreaterThan(
+      ageMonthsGreaterThan(
     int value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'edadMeses',
+        property: r'ageMonths',
         value: value,
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      edadMesesLessThan(
+      ageMonthsLessThan(
     int value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'edadMeses',
+        property: r'ageMonths',
         value: value,
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      edadMesesBetween(
+      ageMonthsBetween(
     int lower,
     int upper, {
     bool includeLower = true,
@@ -1192,7 +852,7 @@ extension AnimalEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'edadMeses',
+        property: r'ageMonths',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1202,63 +862,53 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      esCastradoEqualTo(bool value) {
+      birthDateEqualTo(DateTime value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'esCastrado',
+        property: r'birthDate',
         value: value,
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      especieEqualTo(Especie value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'especie',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      especieGreaterThan(
-    Especie value, {
+      birthDateGreaterThan(
+    DateTime value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'especie',
+        property: r'birthDate',
         value: value,
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      especieLessThan(
-    Especie value, {
+      birthDateLessThan(
+    DateTime value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'especie',
+        property: r'birthDate',
         value: value,
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      especieBetween(
-    Especie lower,
-    Especie upper, {
+      birthDateBetween(
+    DateTime lower,
+    DateTime upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'especie',
+        property: r'birthDate',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1267,124 +917,13 @@ extension AnimalEntityQueryFilter
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      estadoReproductivoEqualTo(EstadoReproductivo value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'estadoReproductivo',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      estadoReproductivoGreaterThan(
-    EstadoReproductivo value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'estadoReproductivo',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      estadoReproductivoLessThan(
-    EstadoReproductivo value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'estadoReproductivo',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      estadoReproductivoBetween(
-    EstadoReproductivo lower,
-    EstadoReproductivo upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'estadoReproductivo',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> etapaEqualTo(
-      EtapaVida value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'etapa',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaGreaterThan(
-    EtapaVida value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'etapa',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> etapaLessThan(
-    EtapaVida value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'etapa',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> etapaBetween(
-    EtapaVida lower,
-    EtapaVida upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'etapa',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaDescripcionEqualTo(
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> breedEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'etapaDescripcion',
+        property: r'breed',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -1392,7 +931,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaDescripcionGreaterThan(
+      breedGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1400,15 +939,14 @@ extension AnimalEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'etapaDescripcion',
+        property: r'breed',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaDescripcionLessThan(
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> breedLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1416,15 +954,14 @@ extension AnimalEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'etapaDescripcion',
+        property: r'breed',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaDescripcionBetween(
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> breedBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -1433,7 +970,7 @@ extension AnimalEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'etapaDescripcion',
+        property: r'breed',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1444,49 +981,50 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaDescripcionStartsWith(
+      breedStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'etapaDescripcion',
+        property: r'breed',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaDescripcionEndsWith(
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> breedEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'etapaDescripcion',
+        property: r'breed',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaDescripcionContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> breedContains(
+      String value,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'etapaDescripcion',
+        property: r'breed',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaDescripcionMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> breedMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'etapaDescripcion',
+        property: r'breed',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
@@ -1494,209 +1032,73 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaDescripcionIsEmpty() {
+      breedIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'etapaDescripcion',
+        property: r'breed',
         value: '',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaDescripcionIsNotEmpty() {
+      breedIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'etapaDescripcion',
+        property: r'breed',
         value: '',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaIconEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+      categoryEqualTo(Category value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'etapaIcon',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaIconGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'etapaIcon',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaIconLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'etapaIcon',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaIconBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'etapaIcon',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaIconStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'etapaIcon',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaIconEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'etapaIcon',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaIconContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'etapaIcon',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaIconMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'etapaIcon',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaIconIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'etapaIcon',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      etapaIconIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'etapaIcon',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaActualizacionEqualTo(DateTime value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fechaActualizacion',
+        property: r'category',
         value: value,
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaActualizacionGreaterThan(
-    DateTime value, {
+      categoryGreaterThan(
+    Category value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'fechaActualizacion',
+        property: r'category',
         value: value,
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaActualizacionLessThan(
-    DateTime value, {
+      categoryLessThan(
+    Category value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'fechaActualizacion',
+        property: r'category',
         value: value,
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaActualizacionBetween(
-    DateTime lower,
-    DateTime upper, {
+      categoryBetween(
+    Category lower,
+    Category upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'fechaActualizacion',
+        property: r'category',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1706,513 +1108,31 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaCreacionEqualTo(DateTime value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fechaCreacion',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaCreacionGreaterThan(
-    DateTime value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'fechaCreacion',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaCreacionLessThan(
-    DateTime value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'fechaCreacion',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaCreacionBetween(
-    DateTime lower,
-    DateTime upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'fechaCreacion',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaNacimientoEqualTo(DateTime value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fechaNacimiento',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaNacimientoGreaterThan(
-    DateTime value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'fechaNacimiento',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaNacimientoLessThan(
-    DateTime value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'fechaNacimiento',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaNacimientoBetween(
-    DateTime lower,
-    DateTime upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'fechaNacimiento',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaSincronizacionIsNull() {
+      contentHashIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'fechaSincronizacion',
+        property: r'contentHash',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaSincronizacionIsNotNull() {
+      contentHashIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'fechaSincronizacion',
+        property: r'contentHash',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaSincronizacionEqualTo(DateTime? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fechaSincronizacion',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaSincronizacionGreaterThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'fechaSincronizacion',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaSincronizacionLessThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'fechaSincronizacion',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaSincronizacionBetween(
-    DateTime? lower,
-    DateTime? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'fechaSincronizacion',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimaVacunaIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'fechaUltimaVacuna',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimaVacunaIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'fechaUltimaVacuna',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimaVacunaEqualTo(DateTime? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fechaUltimaVacuna',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimaVacunaGreaterThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'fechaUltimaVacuna',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimaVacunaLessThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'fechaUltimaVacuna',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimaVacunaBetween(
-    DateTime? lower,
-    DateTime? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'fechaUltimaVacuna',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimoDesparasitanteIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'fechaUltimoDesparasitante',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimoDesparasitanteIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'fechaUltimoDesparasitante',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimoDesparasitanteEqualTo(DateTime? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fechaUltimoDesparasitante',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimoDesparasitanteGreaterThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'fechaUltimoDesparasitante',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimoDesparasitanteLessThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'fechaUltimoDesparasitante',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimoDesparasitanteBetween(
-    DateTime? lower,
-    DateTime? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'fechaUltimoDesparasitante',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimoPesajeIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'fechaUltimoPesaje',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimoPesajeIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'fechaUltimoPesaje',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimoPesajeEqualTo(DateTime? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fechaUltimoPesaje',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimoPesajeGreaterThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'fechaUltimoPesaje',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimoPesajeLessThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'fechaUltimoPesaje',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaUltimoPesajeBetween(
-    DateTime? lower,
-    DateTime? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'fechaUltimoPesaje',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaVitaminasIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'fechaVitaminas',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaVitaminasIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'fechaVitaminas',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaVitaminasEqualTo(DateTime? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fechaVitaminas',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaVitaminasGreaterThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'fechaVitaminas',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaVitaminasLessThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'fechaVitaminas',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      fechaVitaminasBetween(
-    DateTime? lower,
-    DateTime? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'fechaVitaminas',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      hashContenidoIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'hashContenido',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      hashContenidoIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'hashContenido',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      hashContenidoEqualTo(
+      contentHashEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'hashContenido',
+        property: r'contentHash',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -2220,7 +1140,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      hashContenidoGreaterThan(
+      contentHashGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -2228,7 +1148,7 @@ extension AnimalEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'hashContenido',
+        property: r'contentHash',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -2236,7 +1156,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      hashContenidoLessThan(
+      contentHashLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -2244,7 +1164,7 @@ extension AnimalEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'hashContenido',
+        property: r'contentHash',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -2252,7 +1172,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      hashContenidoBetween(
+      contentHashBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -2261,7 +1181,7 @@ extension AnimalEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'hashContenido',
+        property: r'contentHash',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -2272,13 +1192,13 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      hashContenidoStartsWith(
+      contentHashStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'hashContenido',
+        property: r'contentHash',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -2286,13 +1206,13 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      hashContenidoEndsWith(
+      contentHashEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'hashContenido',
+        property: r'contentHash',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -2300,10 +1220,10 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      hashContenidoContains(String value, {bool caseSensitive = true}) {
+      contentHashContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'hashContenido',
+        property: r'contentHash',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -2311,10 +1231,10 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      hashContenidoMatches(String pattern, {bool caseSensitive = true}) {
+      contentHashMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'hashContenido',
+        property: r'contentHash',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
@@ -2322,21 +1242,625 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      hashContenidoIsEmpty() {
+      contentHashIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'hashContenido',
+        property: r'contentHash',
         value: '',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      hashContenidoIsNotEmpty() {
+      contentHashIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'hashContenido',
+        property: r'contentHash',
         value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      creationDateEqualTo(DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'creationDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      creationDateGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'creationDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      creationDateLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'creationDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      creationDateBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'creationDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      currentWeightIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'currentWeight',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      currentWeightIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'currentWeight',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      currentWeightEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'currentWeight',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      currentWeightGreaterThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'currentWeight',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      currentWeightLessThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'currentWeight',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      currentWeightBetween(
+    double? lower,
+    double? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'currentWeight',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      customNameIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'customName',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      customNameIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'customName',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      customNameEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'customName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      customNameGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'customName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      customNameLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'customName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      customNameBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'customName',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      customNameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'customName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      customNameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'customName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      customNameContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'customName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      customNameMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'customName',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      customNameIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'customName',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      customNameIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'customName',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      dewormedEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'dewormed',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      dewormerTypeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'dewormerType',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      dewormerTypeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'dewormerType',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      dewormerTypeEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'dewormerType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      dewormerTypeGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'dewormerType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      dewormerTypeLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'dewormerType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      dewormerTypeBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'dewormerType',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      dewormerTypeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'dewormerType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      dewormerTypeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'dewormerType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      dewormerTypeContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'dewormerType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      dewormerTypeMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'dewormerType',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      dewormerTypeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'dewormerType',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      dewormerTypeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'dewormerType',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      earTagNumberEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'earTagNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      earTagNumberGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'earTagNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      earTagNumberLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'earTagNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      earTagNumberBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'earTagNumber',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      earTagNumberStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'earTagNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      earTagNumberEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'earTagNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      earTagNumberContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'earTagNumber',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      earTagNumberMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'earTagNumber',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      earTagNumberIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'earTagNumber',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      earTagNumberIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'earTagNumber',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      hasVitaminsEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'hasVitamins',
+        value: value,
       ));
     });
   }
@@ -2395,31 +1919,449 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      idRemotoIsNull() {
+      isCastratedEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isCastrated',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastDewormingDateIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'idRemoto',
+        property: r'lastDewormingDate',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      idRemotoIsNotNull() {
+      lastDewormingDateIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'idRemoto',
+        property: r'lastDewormingDate',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      idRemotoEqualTo(
+      lastDewormingDateEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lastDewormingDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastDewormingDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'lastDewormingDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastDewormingDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'lastDewormingDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastDewormingDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'lastDewormingDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastUpdateDateEqualTo(DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lastUpdateDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastUpdateDateGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'lastUpdateDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastUpdateDateLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'lastUpdateDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastUpdateDateBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'lastUpdateDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastVaccinationDateIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'lastVaccinationDate',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastVaccinationDateIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'lastVaccinationDate',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastVaccinationDateEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lastVaccinationDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastVaccinationDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'lastVaccinationDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastVaccinationDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'lastVaccinationDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastVaccinationDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'lastVaccinationDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastVitaminDateIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'lastVitaminDate',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastVitaminDateIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'lastVitaminDate',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastVitaminDateEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lastVitaminDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastVitaminDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'lastVitaminDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastVitaminDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'lastVitaminDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastVitaminDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'lastVitaminDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastWeighingDateIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'lastWeighingDate',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastWeighingDateIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'lastWeighingDate',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastWeighingDateEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lastWeighingDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastWeighingDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'lastWeighingDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastWeighingDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'lastWeighingDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lastWeighingDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'lastWeighingDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lifeStageEqualTo(LifeStage value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lifeStage',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lifeStageGreaterThan(
+    LifeStage value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'lifeStage',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lifeStageLessThan(
+    LifeStage value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'lifeStage',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      lifeStageBetween(
+    LifeStage lower,
+    LifeStage upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'lifeStage',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      locationIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'location',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      locationIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'location',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      locationEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'idRemoto',
+        property: r'location',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -2427,7 +2369,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      idRemotoGreaterThan(
+      locationGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -2435,7 +2377,7 @@ extension AnimalEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'idRemoto',
+        property: r'location',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -2443,7 +2385,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      idRemotoLessThan(
+      locationLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -2451,7 +2393,7 @@ extension AnimalEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'idRemoto',
+        property: r'location',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -2459,7 +2401,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      idRemotoBetween(
+      locationBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -2468,7 +2410,7 @@ extension AnimalEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'idRemoto',
+        property: r'location',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -2479,13 +2421,13 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      idRemotoStartsWith(
+      locationStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'idRemoto',
+        property: r'location',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -2493,13 +2435,13 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      idRemotoEndsWith(
+      locationEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'idRemoto',
+        property: r'location',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -2507,10 +2449,10 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      idRemotoContains(String value, {bool caseSensitive = true}) {
+      locationContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'idRemoto',
+        property: r'location',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -2518,10 +2460,10 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      idRemotoMatches(String pattern, {bool caseSensitive = true}) {
+      locationMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'idRemoto',
+        property: r'location',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
@@ -2529,51 +2471,50 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      idRemotoIsEmpty() {
+      locationIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'idRemoto',
+        property: r'location',
         value: '',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      idRemotoIsNotEmpty() {
+      locationIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'idRemoto',
+        property: r'location',
         value: '',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      nombrePersonalizadoIsNull() {
+      notesIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'nombrePersonalizado',
+        property: r'notes',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      nombrePersonalizadoIsNotNull() {
+      notesIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'nombrePersonalizado',
+        property: r'notes',
       ));
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      nombrePersonalizadoEqualTo(
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> notesEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'nombrePersonalizado',
+        property: r'notes',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -2581,7 +2522,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      nombrePersonalizadoGreaterThan(
+      notesGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -2589,15 +2530,14 @@ extension AnimalEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'nombrePersonalizado',
+        property: r'notes',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      nombrePersonalizadoLessThan(
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> notesLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -2605,15 +2545,14 @@ extension AnimalEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'nombrePersonalizado',
+        property: r'notes',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      nombrePersonalizadoBetween(
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> notesBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -2622,7 +2561,7 @@ extension AnimalEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'nombrePersonalizado',
+        property: r'notes',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -2633,201 +2572,50 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      nombrePersonalizadoStartsWith(
+      notesStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'nombrePersonalizado',
+        property: r'notes',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      nombrePersonalizadoEndsWith(
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> notesEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'nombrePersonalizado',
+        property: r'notes',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      nombrePersonalizadoContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'nombrePersonalizado',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      nombrePersonalizadoMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'nombrePersonalizado',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      nombrePersonalizadoIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'nombrePersonalizado',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      nombrePersonalizadoIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'nombrePersonalizado',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      notasIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'notas',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      notasIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'notas',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> notasEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'notas',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      notasGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'notas',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> notasLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'notas',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> notasBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'notas',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      notasStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'notas',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> notasEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'notas',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> notasContains(
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> notesContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'notas',
+        property: r'notes',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> notasMatches(
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> notesMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'notas',
+        property: r'notes',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
@@ -2835,187 +2623,51 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      notasIsEmpty() {
+      notesIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'notas',
+        property: r'notes',
         value: '',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      notasIsNotEmpty() {
+      notesIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'notas',
+        property: r'notes',
         value: '',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      numeroAreteEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'numeroArete',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      numeroAreteGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'numeroArete',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      numeroAreteLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'numeroArete',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      numeroAreteBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'numeroArete',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      numeroAreteStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'numeroArete',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      numeroAreteEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'numeroArete',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      numeroAreteContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'numeroArete',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      numeroAreteMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'numeroArete',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      numeroAreteIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'numeroArete',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      numeroAreteIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'numeroArete',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      observacionesIsNull() {
+      observationsIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'observaciones',
+        property: r'observations',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      observacionesIsNotNull() {
+      observationsIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'observaciones',
+        property: r'observations',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      observacionesEqualTo(
+      observationsEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'observaciones',
+        property: r'observations',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -3023,7 +2675,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      observacionesGreaterThan(
+      observationsGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -3031,7 +2683,7 @@ extension AnimalEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'observaciones',
+        property: r'observations',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -3039,7 +2691,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      observacionesLessThan(
+      observationsLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -3047,7 +2699,7 @@ extension AnimalEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'observaciones',
+        property: r'observations',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -3055,7 +2707,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      observacionesBetween(
+      observationsBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -3064,7 +2716,7 @@ extension AnimalEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'observaciones',
+        property: r'observations',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -3075,13 +2727,13 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      observacionesStartsWith(
+      observationsStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'observaciones',
+        property: r'observations',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -3089,13 +2741,13 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      observacionesEndsWith(
+      observationsEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'observaciones',
+        property: r'observations',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -3103,10 +2755,10 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      observacionesContains(String value, {bool caseSensitive = true}) {
+      observationsContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'observaciones',
+        property: r'observations',
         value: value,
         caseSensitive: caseSensitive,
       ));
@@ -3114,10 +2766,10 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      observacionesMatches(String pattern, {bool caseSensitive = true}) {
+      observationsMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'observaciones',
+        property: r'observations',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
@@ -3125,51 +2777,51 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      observacionesIsEmpty() {
+      observationsIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'observaciones',
+        property: r'observations',
         value: '',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      observacionesIsNotEmpty() {
+      observationsIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'observaciones',
+        property: r'observations',
         value: '',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      pesoActualIsNull() {
+      purchasePriceIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'pesoActual',
+        property: r'purchasePrice',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      pesoActualIsNotNull() {
+      purchasePriceIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'pesoActual',
+        property: r'purchasePrice',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      pesoActualEqualTo(
+      purchasePriceEqualTo(
     double? value, {
     double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'pesoActual',
+        property: r'purchasePrice',
         value: value,
         epsilon: epsilon,
       ));
@@ -3177,7 +2829,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      pesoActualGreaterThan(
+      purchasePriceGreaterThan(
     double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -3185,7 +2837,7 @@ extension AnimalEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'pesoActual',
+        property: r'purchasePrice',
         value: value,
         epsilon: epsilon,
       ));
@@ -3193,7 +2845,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      pesoActualLessThan(
+      purchasePriceLessThan(
     double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -3201,7 +2853,7 @@ extension AnimalEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'pesoActual',
+        property: r'purchasePrice',
         value: value,
         epsilon: epsilon,
       ));
@@ -3209,7 +2861,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      pesoActualBetween(
+      purchasePriceBetween(
     double? lower,
     double? upper, {
     bool includeLower = true,
@@ -3218,7 +2870,7 @@ extension AnimalEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'pesoActual',
+        property: r'purchasePrice',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -3229,31 +2881,241 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      precioCompraIsNull() {
+      remoteIdIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'precioCompra',
+        property: r'remoteId',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      precioCompraIsNotNull() {
+      remoteIdIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'precioCompra',
+        property: r'remoteId',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      precioCompraEqualTo(
+      remoteIdEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'remoteId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      remoteIdGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'remoteId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      remoteIdLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'remoteId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      remoteIdBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'remoteId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      remoteIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'remoteId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      remoteIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'remoteId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      remoteIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'remoteId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      remoteIdMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'remoteId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      remoteIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'remoteId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      remoteIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'remoteId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      reproductiveStatusEqualTo(ReproductiveStatus value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'reproductiveStatus',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      reproductiveStatusGreaterThan(
+    ReproductiveStatus value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'reproductiveStatus',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      reproductiveStatusLessThan(
+    ReproductiveStatus value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'reproductiveStatus',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      reproductiveStatusBetween(
+    ReproductiveStatus lower,
+    ReproductiveStatus upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'reproductiveStatus',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      salePriceIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'salePrice',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      salePriceIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'salePrice',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      salePriceEqualTo(
     double? value, {
     double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'precioCompra',
+        property: r'salePrice',
         value: value,
         epsilon: epsilon,
       ));
@@ -3261,7 +3123,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      precioCompraGreaterThan(
+      salePriceGreaterThan(
     double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -3269,7 +3131,7 @@ extension AnimalEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'precioCompra',
+        property: r'salePrice',
         value: value,
         epsilon: epsilon,
       ));
@@ -3277,7 +3139,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      precioCompraLessThan(
+      salePriceLessThan(
     double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -3285,7 +3147,7 @@ extension AnimalEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'precioCompra',
+        property: r'salePrice',
         value: value,
         epsilon: epsilon,
       ));
@@ -3293,7 +3155,7 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      precioCompraBetween(
+      salePriceBetween(
     double? lower,
     double? upper, {
     bool includeLower = true,
@@ -3302,7 +3164,7 @@ extension AnimalEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'precioCompra',
+        property: r'salePrice',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -3312,270 +3174,182 @@ extension AnimalEntityQueryFilter
     });
   }
 
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> sexEqualTo(
+      Sex value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'sex',
+        value: value,
+      ));
+    });
+  }
+
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      precioVentaIsNull() {
+      sexGreaterThan(
+    Sex value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'sex',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> sexLessThan(
+    Sex value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'sex',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> sexBetween(
+    Sex lower,
+    Sex upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'sex',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      speciesEqualTo(Species value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'species',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      speciesGreaterThan(
+    Species value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'species',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      speciesLessThan(
+    Species value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'species',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      speciesBetween(
+    Species lower,
+    Species upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'species',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      syncDateIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'precioVenta',
+        property: r'syncDate',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      precioVentaIsNotNull() {
+      syncDateIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'precioVenta',
+        property: r'syncDate',
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      precioVentaEqualTo(
-    double? value, {
-    double epsilon = Query.epsilon,
-  }) {
+      syncDateEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'precioVenta',
-        value: value,
-        epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      precioVentaGreaterThan(
-    double? value, {
-    bool include = false,
-    double epsilon = Query.epsilon,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'precioVenta',
-        value: value,
-        epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      precioVentaLessThan(
-    double? value, {
-    bool include = false,
-    double epsilon = Query.epsilon,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'precioVenta',
-        value: value,
-        epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      precioVentaBetween(
-    double? lower,
-    double? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    double epsilon = Query.epsilon,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'precioVenta',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        epsilon: epsilon,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> razaEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'raza',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      razaGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'raza',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> razaLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'raza',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> razaBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'raza',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      razaStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'raza',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> razaEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'raza',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> razaContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'raza',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> razaMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'raza',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      razaIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'raza',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      razaIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'raza',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> sexoEqualTo(
-      Sexo value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'sexo',
+        property: r'syncDate',
         value: value,
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      sexoGreaterThan(
-    Sexo value, {
+      syncDateGreaterThan(
+    DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'sexo',
+        property: r'syncDate',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> sexoLessThan(
-    Sexo value, {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      syncDateLessThan(
+    DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'sexo',
+        property: r'syncDate',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> sexoBetween(
-    Sexo lower,
-    Sexo upper, {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      syncDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'sexo',
+        property: r'syncDate',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -3584,484 +3358,22 @@ extension AnimalEntityQueryFilter
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      sincronizadoEqualTo(bool value) {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition> syncedEqualTo(
+      bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'sincronizado',
+        property: r'synced',
         value: value,
       ));
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tieneVitaminasEqualTo(bool value) {
+      underObservationEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'tieneVitaminas',
+        property: r'underObservation',
         value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoDesparasitanteIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'tipoDesparasitante',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoDesparasitanteIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'tipoDesparasitante',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoDesparasitanteEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'tipoDesparasitante',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoDesparasitanteGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'tipoDesparasitante',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoDesparasitanteLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'tipoDesparasitante',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoDesparasitanteBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'tipoDesparasitante',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoDesparasitanteStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'tipoDesparasitante',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoDesparasitanteEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'tipoDesparasitante',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoDesparasitanteContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'tipoDesparasitante',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoDesparasitanteMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'tipoDesparasitante',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoDesparasitanteIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'tipoDesparasitante',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoDesparasitanteIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'tipoDesparasitante',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoVacunaIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'tipoVacuna',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoVacunaIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'tipoVacuna',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoVacunaEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'tipoVacuna',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoVacunaGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'tipoVacuna',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoVacunaLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'tipoVacuna',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoVacunaBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'tipoVacuna',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoVacunaStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'tipoVacuna',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoVacunaEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'tipoVacuna',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoVacunaContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'tipoVacuna',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoVacunaMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'tipoVacuna',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoVacunaIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'tipoVacuna',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      tipoVacunaIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'tipoVacuna',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      ubicacionIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'ubicacion',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      ubicacionIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'ubicacion',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      ubicacionEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'ubicacion',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      ubicacionGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'ubicacion',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      ubicacionLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'ubicacion',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      ubicacionBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'ubicacion',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      ubicacionStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'ubicacion',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      ubicacionEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'ubicacion',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      ubicacionContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'ubicacion',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      ubicacionMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'ubicacion',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      ubicacionIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'ubicacion',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      ubicacionIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'ubicacion',
-        value: '',
       ));
     });
   }
@@ -4201,11 +3513,165 @@ extension AnimalEntityQueryFilter
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
-      vacunadoEqualTo(bool value) {
+      vaccinatedEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'vacunado',
+        property: r'vaccinated',
         value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      vaccineTypeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'vaccineType',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      vaccineTypeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'vaccineType',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      vaccineTypeEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'vaccineType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      vaccineTypeGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'vaccineType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      vaccineTypeLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'vaccineType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      vaccineTypeBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'vaccineType',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      vaccineTypeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'vaccineType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      vaccineTypeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'vaccineType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      vaccineTypeContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'vaccineType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      vaccineTypeMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'vaccineType',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      vaccineTypeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'vaccineType',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterFilterCondition>
+      vaccineTypeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'vaccineType',
+        value: '',
       ));
     });
   }
@@ -4219,461 +3685,399 @@ extension AnimalEntityQueryLinks
 
 extension AnimalEntityQuerySortBy
     on QueryBuilder<AnimalEntity, AnimalEntity, QSortBy> {
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByCategoria() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByAgeMonths() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'categoria', Sort.asc);
+      return query.addSortBy(r'ageMonths', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByCategoriaDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByAgeMonthsDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'categoria', Sort.desc);
+      return query.addSortBy(r'ageMonths', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByCategoriaDescripcion() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByBirthDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'categoriaDescripcion', Sort.asc);
+      return query.addSortBy(r'birthDate', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByCategoriaDescripcionDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByBirthDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'categoriaDescripcion', Sort.desc);
+      return query.addSortBy(r'birthDate', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByCategoriaIcon() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByBreed() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'categoriaIcon', Sort.asc);
+      return query.addSortBy(r'breed', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByCategoriaIconDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByBreedDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'categoriaIcon', Sort.desc);
+      return query.addSortBy(r'breed', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByDesparasitado() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByCategory() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'desparasitado', Sort.asc);
+      return query.addSortBy(r'category', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByDesparasitadoDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByCategoryDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'desparasitado', Sort.desc);
+      return query.addSortBy(r'category', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByEdadMeses() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByContentHash() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'edadMeses', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByEdadMesesDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'edadMeses', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByEsCastrado() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'esCastrado', Sort.asc);
+      return query.addSortBy(r'contentHash', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByEsCastradoDesc() {
+      sortByContentHashDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'esCastrado', Sort.desc);
+      return query.addSortBy(r'contentHash', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByEspecie() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByCreationDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'especie', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByEspecieDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'especie', Sort.desc);
+      return query.addSortBy(r'creationDate', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByEstadoReproductivo() {
+      sortByCreationDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'estadoReproductivo', Sort.asc);
+      return query.addSortBy(r'creationDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByCurrentWeight() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'currentWeight', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByEstadoReproductivoDesc() {
+      sortByCurrentWeightDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'estadoReproductivo', Sort.desc);
+      return query.addSortBy(r'currentWeight', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByEtapa() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByCustomName() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etapa', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByEtapaDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etapa', Sort.desc);
+      return query.addSortBy(r'customName', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByEtapaDescripcion() {
+      sortByCustomNameDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etapaDescripcion', Sort.asc);
+      return query.addSortBy(r'customName', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByDewormed() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'dewormed', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByDewormedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'dewormed', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByDewormerType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'dewormerType', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByEtapaDescripcionDesc() {
+      sortByDewormerTypeDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etapaDescripcion', Sort.desc);
+      return query.addSortBy(r'dewormerType', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByEtapaIcon() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByEarTagNumber() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etapaIcon', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByEtapaIconDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etapaIcon', Sort.desc);
+      return query.addSortBy(r'earTagNumber', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByFechaActualizacion() {
+      sortByEarTagNumberDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaActualizacion', Sort.asc);
+      return query.addSortBy(r'earTagNumber', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByHasVitamins() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hasVitamins', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByFechaActualizacionDesc() {
+      sortByHasVitaminsDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaActualizacion', Sort.desc);
+      return query.addSortBy(r'hasVitamins', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByFechaCreacion() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByIsCastrated() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaCreacion', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByFechaCreacionDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaCreacion', Sort.desc);
+      return query.addSortBy(r'isCastrated', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByFechaNacimiento() {
+      sortByIsCastratedDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaNacimiento', Sort.asc);
+      return query.addSortBy(r'isCastrated', Sort.desc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByFechaNacimientoDesc() {
+      sortByLastDewormingDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaNacimiento', Sort.desc);
+      return query.addSortBy(r'lastDewormingDate', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByFechaSincronizacion() {
+      sortByLastDewormingDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaSincronizacion', Sort.asc);
+      return query.addSortBy(r'lastDewormingDate', Sort.desc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByFechaSincronizacionDesc() {
+      sortByLastUpdateDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaSincronizacion', Sort.desc);
+      return query.addSortBy(r'lastUpdateDate', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByFechaUltimaVacuna() {
+      sortByLastUpdateDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimaVacuna', Sort.asc);
+      return query.addSortBy(r'lastUpdateDate', Sort.desc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByFechaUltimaVacunaDesc() {
+      sortByLastVaccinationDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimaVacuna', Sort.desc);
+      return query.addSortBy(r'lastVaccinationDate', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByFechaUltimoDesparasitante() {
+      sortByLastVaccinationDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimoDesparasitante', Sort.asc);
+      return query.addSortBy(r'lastVaccinationDate', Sort.desc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByFechaUltimoDesparasitanteDesc() {
+      sortByLastVitaminDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimoDesparasitante', Sort.desc);
+      return query.addSortBy(r'lastVitaminDate', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByFechaUltimoPesaje() {
+      sortByLastVitaminDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimoPesaje', Sort.asc);
+      return query.addSortBy(r'lastVitaminDate', Sort.desc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByFechaUltimoPesajeDesc() {
+      sortByLastWeighingDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimoPesaje', Sort.desc);
+      return query.addSortBy(r'lastWeighingDate', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByFechaVitaminas() {
+      sortByLastWeighingDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaVitaminas', Sort.asc);
+      return query.addSortBy(r'lastWeighingDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByLifeStage() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lifeStage', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByLifeStageDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lifeStage', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByLocation() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByLocationDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByNotes() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'notes', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByNotesDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'notes', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByObservations() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'observations', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByFechaVitaminasDesc() {
+      sortByObservationsDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaVitaminas', Sort.desc);
+      return query.addSortBy(r'observations', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByHashContenido() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByPurchasePrice() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'hashContenido', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByHashContenidoDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'hashContenido', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByIdRemoto() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'idRemoto', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByIdRemotoDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'idRemoto', Sort.desc);
+      return query.addSortBy(r'purchasePrice', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByNombrePersonalizado() {
+      sortByPurchasePriceDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'nombrePersonalizado', Sort.asc);
+      return query.addSortBy(r'purchasePrice', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByRemoteId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByRemoteIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteId', Sort.desc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByNombrePersonalizadoDesc() {
+      sortByReproductiveStatus() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'nombrePersonalizado', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByNotas() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'notas', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByNotasDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'notas', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByNumeroArete() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'numeroArete', Sort.asc);
+      return query.addSortBy(r'reproductiveStatus', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByNumeroAreteDesc() {
+      sortByReproductiveStatusDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'numeroArete', Sort.desc);
+      return query.addSortBy(r'reproductiveStatus', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByObservaciones() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortBySalePrice() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'observaciones', Sort.asc);
+      return query.addSortBy(r'salePrice', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByObservacionesDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortBySalePriceDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'observaciones', Sort.desc);
+      return query.addSortBy(r'salePrice', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByPesoActual() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortBySex() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'pesoActual', Sort.asc);
+      return query.addSortBy(r'sex', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByPesoActualDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortBySexDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'pesoActual', Sort.desc);
+      return query.addSortBy(r'sex', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByPrecioCompra() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortBySpecies() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'precioCompra', Sort.asc);
+      return query.addSortBy(r'species', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByPrecioCompraDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortBySpeciesDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'precioCompra', Sort.desc);
+      return query.addSortBy(r'species', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByPrecioVenta() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortBySyncDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'precioVenta', Sort.asc);
+      return query.addSortBy(r'syncDate', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByPrecioVentaDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortBySyncDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'precioVenta', Sort.desc);
+      return query.addSortBy(r'syncDate', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByRaza() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortBySynced() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'raza', Sort.asc);
+      return query.addSortBy(r'synced', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByRazaDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortBySyncedDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'raza', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortBySexo() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sexo', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortBySexoDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sexo', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortBySincronizado() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sincronizado', Sort.asc);
+      return query.addSortBy(r'synced', Sort.desc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortBySincronizadoDesc() {
+      sortByUnderObservation() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sincronizado', Sort.desc);
+      return query.addSortBy(r'underObservation', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByTieneVitaminas() {
+      sortByUnderObservationDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tieneVitaminas', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByTieneVitaminasDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tieneVitaminas', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByTipoDesparasitante() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tipoDesparasitante', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByTipoDesparasitanteDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tipoDesparasitante', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByTipoVacuna() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tipoVacuna', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      sortByTipoVacunaDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tipoVacuna', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByUbicacion() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'ubicacion', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByUbicacionDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'ubicacion', Sort.desc);
+      return query.addSortBy(r'underObservation', Sort.desc);
     });
   }
 
@@ -4689,283 +4093,183 @@ extension AnimalEntityQuerySortBy
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByVacunado() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByVaccinated() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'vacunado', Sort.asc);
+      return query.addSortBy(r'vaccinated', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByVacunadoDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
+      sortByVaccinatedDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'vacunado', Sort.desc);
+      return query.addSortBy(r'vaccinated', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> sortByVaccineType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'vaccineType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
+      sortByVaccineTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'vaccineType', Sort.desc);
     });
   }
 }
 
 extension AnimalEntityQuerySortThenBy
     on QueryBuilder<AnimalEntity, AnimalEntity, QSortThenBy> {
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByCategoria() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByAgeMonths() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'categoria', Sort.asc);
+      return query.addSortBy(r'ageMonths', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByCategoriaDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByAgeMonthsDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'categoria', Sort.desc);
+      return query.addSortBy(r'ageMonths', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByCategoriaDescripcion() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByBirthDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'categoriaDescripcion', Sort.asc);
+      return query.addSortBy(r'birthDate', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByCategoriaDescripcionDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByBirthDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'categoriaDescripcion', Sort.desc);
+      return query.addSortBy(r'birthDate', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByCategoriaIcon() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByBreed() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'categoriaIcon', Sort.asc);
+      return query.addSortBy(r'breed', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByCategoriaIconDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByBreedDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'categoriaIcon', Sort.desc);
+      return query.addSortBy(r'breed', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByDesparasitado() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByCategory() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'desparasitado', Sort.asc);
+      return query.addSortBy(r'category', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByDesparasitadoDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByCategoryDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'desparasitado', Sort.desc);
+      return query.addSortBy(r'category', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByEdadMeses() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByContentHash() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'edadMeses', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByEdadMesesDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'edadMeses', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByEsCastrado() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'esCastrado', Sort.asc);
+      return query.addSortBy(r'contentHash', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByEsCastradoDesc() {
+      thenByContentHashDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'esCastrado', Sort.desc);
+      return query.addSortBy(r'contentHash', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByEspecie() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByCreationDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'especie', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByEspecieDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'especie', Sort.desc);
+      return query.addSortBy(r'creationDate', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByEstadoReproductivo() {
+      thenByCreationDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'estadoReproductivo', Sort.asc);
+      return query.addSortBy(r'creationDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByCurrentWeight() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'currentWeight', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByEstadoReproductivoDesc() {
+      thenByCurrentWeightDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'estadoReproductivo', Sort.desc);
+      return query.addSortBy(r'currentWeight', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByEtapa() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByCustomName() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etapa', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByEtapaDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etapa', Sort.desc);
+      return query.addSortBy(r'customName', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByEtapaDescripcion() {
+      thenByCustomNameDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etapaDescripcion', Sort.asc);
+      return query.addSortBy(r'customName', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByDewormed() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'dewormed', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByDewormedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'dewormed', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByDewormerType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'dewormerType', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByEtapaDescripcionDesc() {
+      thenByDewormerTypeDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etapaDescripcion', Sort.desc);
+      return query.addSortBy(r'dewormerType', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByEtapaIcon() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByEarTagNumber() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etapaIcon', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByEtapaIconDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'etapaIcon', Sort.desc);
+      return query.addSortBy(r'earTagNumber', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByFechaActualizacion() {
+      thenByEarTagNumberDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaActualizacion', Sort.asc);
+      return query.addSortBy(r'earTagNumber', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByHasVitamins() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hasVitamins', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByFechaActualizacionDesc() {
+      thenByHasVitaminsDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaActualizacion', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByFechaCreacion() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaCreacion', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByFechaCreacionDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaCreacion', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByFechaNacimiento() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaNacimiento', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByFechaNacimientoDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaNacimiento', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByFechaSincronizacion() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaSincronizacion', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByFechaSincronizacionDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaSincronizacion', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByFechaUltimaVacuna() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimaVacuna', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByFechaUltimaVacunaDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimaVacuna', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByFechaUltimoDesparasitante() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimoDesparasitante', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByFechaUltimoDesparasitanteDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimoDesparasitante', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByFechaUltimoPesaje() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimoPesaje', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByFechaUltimoPesajeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimoPesaje', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByFechaVitaminas() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaVitaminas', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByFechaVitaminasDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaVitaminas', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByHashContenido() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'hashContenido', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByHashContenidoDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'hashContenido', Sort.desc);
+      return query.addSortBy(r'hasVitamins', Sort.desc);
     });
   }
 
@@ -4981,196 +4285,248 @@ extension AnimalEntityQuerySortThenBy
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByIdRemoto() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByIsCastrated() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'idRemoto', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByIdRemotoDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'idRemoto', Sort.desc);
+      return query.addSortBy(r'isCastrated', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByNombrePersonalizado() {
+      thenByIsCastratedDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'nombrePersonalizado', Sort.asc);
+      return query.addSortBy(r'isCastrated', Sort.desc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByNombrePersonalizadoDesc() {
+      thenByLastDewormingDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'nombrePersonalizado', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByNotas() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'notas', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByNotasDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'notas', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByNumeroArete() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'numeroArete', Sort.asc);
+      return query.addSortBy(r'lastDewormingDate', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByNumeroAreteDesc() {
+      thenByLastDewormingDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'numeroArete', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByObservaciones() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'observaciones', Sort.asc);
+      return query.addSortBy(r'lastDewormingDate', Sort.desc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByObservacionesDesc() {
+      thenByLastUpdateDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'observaciones', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByPesoActual() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'pesoActual', Sort.asc);
+      return query.addSortBy(r'lastUpdateDate', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByPesoActualDesc() {
+      thenByLastUpdateDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'pesoActual', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByPrecioCompra() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'precioCompra', Sort.asc);
+      return query.addSortBy(r'lastUpdateDate', Sort.desc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByPrecioCompraDesc() {
+      thenByLastVaccinationDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'precioCompra', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByPrecioVenta() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'precioVenta', Sort.asc);
+      return query.addSortBy(r'lastVaccinationDate', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByPrecioVentaDesc() {
+      thenByLastVaccinationDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'precioVenta', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByRaza() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'raza', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByRazaDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'raza', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenBySexo() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sexo', Sort.asc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenBySexoDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sexo', Sort.desc);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenBySincronizado() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sincronizado', Sort.asc);
+      return query.addSortBy(r'lastVaccinationDate', Sort.desc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenBySincronizadoDesc() {
+      thenByLastVitaminDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sincronizado', Sort.desc);
+      return query.addSortBy(r'lastVitaminDate', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByTieneVitaminas() {
+      thenByLastVitaminDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tieneVitaminas', Sort.asc);
+      return query.addSortBy(r'lastVitaminDate', Sort.desc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByTieneVitaminasDesc() {
+      thenByLastWeighingDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tieneVitaminas', Sort.desc);
+      return query.addSortBy(r'lastWeighingDate', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByTipoDesparasitante() {
+      thenByLastWeighingDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tipoDesparasitante', Sort.asc);
+      return query.addSortBy(r'lastWeighingDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByLifeStage() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lifeStage', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByLifeStageDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lifeStage', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByLocation() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByLocationDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByNotes() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'notes', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByNotesDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'notes', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByObservations() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'observations', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByTipoDesparasitanteDesc() {
+      thenByObservationsDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tipoDesparasitante', Sort.desc);
+      return query.addSortBy(r'observations', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByTipoVacuna() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByPurchasePrice() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tipoVacuna', Sort.asc);
+      return query.addSortBy(r'purchasePrice', Sort.asc);
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
-      thenByTipoVacunaDesc() {
+      thenByPurchasePriceDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tipoVacuna', Sort.desc);
+      return query.addSortBy(r'purchasePrice', Sort.desc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByUbicacion() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByRemoteId() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'ubicacion', Sort.asc);
+      return query.addSortBy(r'remoteId', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByUbicacionDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByRemoteIdDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'ubicacion', Sort.desc);
+      return query.addSortBy(r'remoteId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
+      thenByReproductiveStatus() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'reproductiveStatus', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
+      thenByReproductiveStatusDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'reproductiveStatus', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenBySalePrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'salePrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenBySalePriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'salePrice', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenBySex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sex', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenBySexDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sex', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenBySpecies() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'species', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenBySpeciesDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'species', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenBySyncDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'syncDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenBySyncDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'syncDate', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenBySynced() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'synced', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenBySyncedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'synced', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
+      thenByUnderObservation() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'underObservation', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
+      thenByUnderObservationDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'underObservation', Sort.desc);
     });
   }
 
@@ -5186,260 +4542,236 @@ extension AnimalEntityQuerySortThenBy
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByVacunado() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByVaccinated() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'vacunado', Sort.asc);
+      return query.addSortBy(r'vaccinated', Sort.asc);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByVacunadoDesc() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
+      thenByVaccinatedDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'vacunado', Sort.desc);
+      return query.addSortBy(r'vaccinated', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy> thenByVaccineType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'vaccineType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QAfterSortBy>
+      thenByVaccineTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'vaccineType', Sort.desc);
     });
   }
 }
 
 extension AnimalEntityQueryWhereDistinct
     on QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> {
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByCategoria() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByAgeMonths() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'categoria');
+      return query.addDistinctBy(r'ageMonths');
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
-      distinctByCategoriaDescripcion({bool caseSensitive = true}) {
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByBirthDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'categoriaDescripcion',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'birthDate');
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByCategoriaIcon(
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByBreed(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'categoriaIcon',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'breed', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
-      distinctByDesparasitado() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByCategory() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'desparasitado');
+      return query.addDistinctBy(r'category');
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByEdadMeses() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'edadMeses');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByEsCastrado() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'esCastrado');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByEspecie() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'especie');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
-      distinctByEstadoReproductivo() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'estadoReproductivo');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByEtapa() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'etapa');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
-      distinctByEtapaDescripcion({bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'etapaDescripcion',
-          caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByEtapaIcon(
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByContentHash(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'etapaIcon', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'contentHash', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByCreationDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'creationDate');
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
-      distinctByFechaActualizacion() {
+      distinctByCurrentWeight() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fechaActualizacion');
+      return query.addDistinctBy(r'currentWeight');
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
-      distinctByFechaCreacion() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fechaCreacion');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
-      distinctByFechaNacimiento() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fechaNacimiento');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
-      distinctByFechaSincronizacion() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fechaSincronizacion');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
-      distinctByFechaUltimaVacuna() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fechaUltimaVacuna');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
-      distinctByFechaUltimoDesparasitante() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fechaUltimoDesparasitante');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
-      distinctByFechaUltimoPesaje() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fechaUltimoPesaje');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
-      distinctByFechaVitaminas() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fechaVitaminas');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByHashContenido(
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByCustomName(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'hashContenido',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'customName', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByIdRemoto(
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByDewormed() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'dewormed');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByDewormerType(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'idRemoto', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'dewormerType', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByEarTagNumber(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'earTagNumber', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByHasVitamins() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'hasVitamins');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByIsCastrated() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'isCastrated');
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
-      distinctByNombrePersonalizado({bool caseSensitive = true}) {
+      distinctByLastDewormingDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'nombrePersonalizado',
-          caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByNotas(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'notas', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByNumeroArete(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'numeroArete', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByObservaciones(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'observaciones',
-          caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByPesoActual() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'pesoActual');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByPrecioCompra() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'precioCompra');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByPrecioVenta() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'precioVenta');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByRaza(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'raza', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctBySexo() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'sexo');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctBySincronizado() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'sincronizado');
+      return query.addDistinctBy(r'lastDewormingDate');
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
-      distinctByTieneVitaminas() {
+      distinctByLastUpdateDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'tieneVitaminas');
+      return query.addDistinctBy(r'lastUpdateDate');
     });
   }
 
   QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
-      distinctByTipoDesparasitante({bool caseSensitive = true}) {
+      distinctByLastVaccinationDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'tipoDesparasitante',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'lastVaccinationDate');
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByTipoVacuna(
-      {bool caseSensitive = true}) {
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
+      distinctByLastVitaminDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'tipoVacuna', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'lastVitaminDate');
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByUbicacion(
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
+      distinctByLastWeighingDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'lastWeighingDate');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByLifeStage() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'lifeStage');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByLocation(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'ubicacion', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'location', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByNotes(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'notes', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByObservations(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'observations', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
+      distinctByPurchasePrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'purchasePrice');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByRemoteId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'remoteId', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
+      distinctByReproductiveStatus() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'reproductiveStatus');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctBySalePrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'salePrice');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctBySex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'sex');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctBySpecies() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'species');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctBySyncDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'syncDate');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctBySynced() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'synced');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct>
+      distinctByUnderObservation() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'underObservation');
     });
   }
 
@@ -5450,9 +4782,16 @@ extension AnimalEntityQueryWhereDistinct
     });
   }
 
-  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByVacunado() {
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByVaccinated() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'vacunado');
+      return query.addDistinctBy(r'vaccinated');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, AnimalEntity, QDistinct> distinctByVaccineType(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'vaccineType', caseSensitive: caseSensitive);
     });
   }
 }
@@ -5465,228 +4804,199 @@ extension AnimalEntityQueryProperty
     });
   }
 
-  QueryBuilder<AnimalEntity, Categoria, QQueryOperations> categoriaProperty() {
+  QueryBuilder<AnimalEntity, int, QQueryOperations> ageMonthsProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'categoria');
+      return query.addPropertyName(r'ageMonths');
     });
   }
 
-  QueryBuilder<AnimalEntity, String, QQueryOperations>
-      categoriaDescripcionProperty() {
+  QueryBuilder<AnimalEntity, DateTime, QQueryOperations> birthDateProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'categoriaDescripcion');
+      return query.addPropertyName(r'birthDate');
     });
   }
 
-  QueryBuilder<AnimalEntity, String, QQueryOperations> categoriaIconProperty() {
+  QueryBuilder<AnimalEntity, String, QQueryOperations> breedProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'categoriaIcon');
+      return query.addPropertyName(r'breed');
     });
   }
 
-  QueryBuilder<AnimalEntity, bool, QQueryOperations> desparasitadoProperty() {
+  QueryBuilder<AnimalEntity, Category, QQueryOperations> categoryProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'desparasitado');
+      return query.addPropertyName(r'category');
     });
   }
 
-  QueryBuilder<AnimalEntity, int, QQueryOperations> edadMesesProperty() {
+  QueryBuilder<AnimalEntity, String?, QQueryOperations> contentHashProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'edadMeses');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, bool, QQueryOperations> esCastradoProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'esCastrado');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, Especie, QQueryOperations> especieProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'especie');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, EstadoReproductivo, QQueryOperations>
-      estadoReproductivoProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'estadoReproductivo');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, EtapaVida, QQueryOperations> etapaProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'etapa');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, String, QQueryOperations>
-      etapaDescripcionProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'etapaDescripcion');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, String, QQueryOperations> etapaIconProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'etapaIcon');
+      return query.addPropertyName(r'contentHash');
     });
   }
 
   QueryBuilder<AnimalEntity, DateTime, QQueryOperations>
-      fechaActualizacionProperty() {
+      creationDateProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fechaActualizacion');
+      return query.addPropertyName(r'creationDate');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, double?, QQueryOperations>
+      currentWeightProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'currentWeight');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, String?, QQueryOperations> customNameProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'customName');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, bool, QQueryOperations> dewormedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'dewormed');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, String?, QQueryOperations> dewormerTypeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'dewormerType');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, String, QQueryOperations> earTagNumberProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'earTagNumber');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, bool, QQueryOperations> hasVitaminsProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'hasVitamins');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, bool, QQueryOperations> isCastratedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'isCastrated');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, DateTime?, QQueryOperations>
+      lastDewormingDateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'lastDewormingDate');
     });
   }
 
   QueryBuilder<AnimalEntity, DateTime, QQueryOperations>
-      fechaCreacionProperty() {
+      lastUpdateDateProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fechaCreacion');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, DateTime, QQueryOperations>
-      fechaNacimientoProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fechaNacimiento');
+      return query.addPropertyName(r'lastUpdateDate');
     });
   }
 
   QueryBuilder<AnimalEntity, DateTime?, QQueryOperations>
-      fechaSincronizacionProperty() {
+      lastVaccinationDateProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fechaSincronizacion');
+      return query.addPropertyName(r'lastVaccinationDate');
     });
   }
 
   QueryBuilder<AnimalEntity, DateTime?, QQueryOperations>
-      fechaUltimaVacunaProperty() {
+      lastVitaminDateProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fechaUltimaVacuna');
+      return query.addPropertyName(r'lastVitaminDate');
     });
   }
 
   QueryBuilder<AnimalEntity, DateTime?, QQueryOperations>
-      fechaUltimoDesparasitanteProperty() {
+      lastWeighingDateProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fechaUltimoDesparasitante');
+      return query.addPropertyName(r'lastWeighingDate');
     });
   }
 
-  QueryBuilder<AnimalEntity, DateTime?, QQueryOperations>
-      fechaUltimoPesajeProperty() {
+  QueryBuilder<AnimalEntity, LifeStage, QQueryOperations> lifeStageProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fechaUltimoPesaje');
+      return query.addPropertyName(r'lifeStage');
     });
   }
 
-  QueryBuilder<AnimalEntity, DateTime?, QQueryOperations>
-      fechaVitaminasProperty() {
+  QueryBuilder<AnimalEntity, String?, QQueryOperations> locationProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fechaVitaminas');
+      return query.addPropertyName(r'location');
     });
   }
 
-  QueryBuilder<AnimalEntity, String?, QQueryOperations>
-      hashContenidoProperty() {
+  QueryBuilder<AnimalEntity, String?, QQueryOperations> notesProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'hashContenido');
+      return query.addPropertyName(r'notes');
     });
   }
 
-  QueryBuilder<AnimalEntity, String?, QQueryOperations> idRemotoProperty() {
+  QueryBuilder<AnimalEntity, String?, QQueryOperations> observationsProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'idRemoto');
+      return query.addPropertyName(r'observations');
     });
   }
 
-  QueryBuilder<AnimalEntity, String?, QQueryOperations>
-      nombrePersonalizadoProperty() {
+  QueryBuilder<AnimalEntity, double?, QQueryOperations>
+      purchasePriceProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'nombrePersonalizado');
+      return query.addPropertyName(r'purchasePrice');
     });
   }
 
-  QueryBuilder<AnimalEntity, String?, QQueryOperations> notasProperty() {
+  QueryBuilder<AnimalEntity, String?, QQueryOperations> remoteIdProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'notas');
+      return query.addPropertyName(r'remoteId');
     });
   }
 
-  QueryBuilder<AnimalEntity, String, QQueryOperations> numeroAreteProperty() {
+  QueryBuilder<AnimalEntity, ReproductiveStatus, QQueryOperations>
+      reproductiveStatusProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'numeroArete');
+      return query.addPropertyName(r'reproductiveStatus');
     });
   }
 
-  QueryBuilder<AnimalEntity, String?, QQueryOperations>
-      observacionesProperty() {
+  QueryBuilder<AnimalEntity, double?, QQueryOperations> salePriceProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'observaciones');
+      return query.addPropertyName(r'salePrice');
     });
   }
 
-  QueryBuilder<AnimalEntity, double?, QQueryOperations> pesoActualProperty() {
+  QueryBuilder<AnimalEntity, Sex, QQueryOperations> sexProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'pesoActual');
+      return query.addPropertyName(r'sex');
     });
   }
 
-  QueryBuilder<AnimalEntity, double?, QQueryOperations> precioCompraProperty() {
+  QueryBuilder<AnimalEntity, Species, QQueryOperations> speciesProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'precioCompra');
+      return query.addPropertyName(r'species');
     });
   }
 
-  QueryBuilder<AnimalEntity, double?, QQueryOperations> precioVentaProperty() {
+  QueryBuilder<AnimalEntity, DateTime?, QQueryOperations> syncDateProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'precioVenta');
+      return query.addPropertyName(r'syncDate');
     });
   }
 
-  QueryBuilder<AnimalEntity, String, QQueryOperations> razaProperty() {
+  QueryBuilder<AnimalEntity, bool, QQueryOperations> syncedProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'raza');
+      return query.addPropertyName(r'synced');
     });
   }
 
-  QueryBuilder<AnimalEntity, Sexo, QQueryOperations> sexoProperty() {
+  QueryBuilder<AnimalEntity, bool, QQueryOperations>
+      underObservationProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'sexo');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, bool, QQueryOperations> sincronizadoProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'sincronizado');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, bool, QQueryOperations> tieneVitaminasProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'tieneVitaminas');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, String?, QQueryOperations>
-      tipoDesparasitanteProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'tipoDesparasitante');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, String?, QQueryOperations> tipoVacunaProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'tipoVacuna');
-    });
-  }
-
-  QueryBuilder<AnimalEntity, String?, QQueryOperations> ubicacionProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'ubicacion');
+      return query.addPropertyName(r'underObservation');
     });
   }
 
@@ -5696,9 +5006,15 @@ extension AnimalEntityQueryProperty
     });
   }
 
-  QueryBuilder<AnimalEntity, bool, QQueryOperations> vacunadoProperty() {
+  QueryBuilder<AnimalEntity, bool, QQueryOperations> vaccinatedProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'vacunado');
+      return query.addPropertyName(r'vaccinated');
+    });
+  }
+
+  QueryBuilder<AnimalEntity, String?, QQueryOperations> vaccineTypeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'vaccineType');
     });
   }
 }

@@ -1,64 +1,69 @@
 import 'package:miganado/features/mantenimiento/data/models/tratamiento_entity.dart';
 import 'package:miganado/data/database/isar_database.dart';
 
-class RegistrarTratamientoUseCase {
+/// Caso de uso para registrar un nuevo tratamiento médico
+class RegisterTreatmentUseCase {
   final MiGanadoDatabase database;
 
-  RegistrarTratamientoUseCase({required this.database});
+  RegisterTreatmentUseCase({required this.database});
 
+  /// Registra un nuevo tratamiento médico para un animal
+  /// Incluye medicamento, dosis, frecuencia y costos asociados
   Future<void> call({
     required String animalUuid,
-    required String motivo,
-    required String medicamento,
-    required DateTime fechaInicio,
-    required String dosis,
-    required String viaAplicacion,
-    required int duracionDias,
-    required String frecuencia,
-    required String registradoPor,
-    String? marca,
-    String? lote,
-    DateTime? fechaFin,
-    String? resultado,
-    String? diagnosticoPrevio,
-    String? diagnosticoFinal,
-    double? costoMedicamento,
-    double? costoVeterinario,
-    String? observaciones,
-    String? diagnosticadoPor,
+    required String reason,
+    required String medicament,
+    required DateTime startDate,
+    required String dosage,
+    required String administrationRoute,
+    required int durationDays,
+    required String frequency,
+    required String recordedBy,
+    String? brand,
+    String? lot,
+    DateTime? endDate,
+    String? result,
+    String? priorDiagnosis,
+    String? finalDiagnosis,
+    double? medicamentCost,
+    double? veterinaryCost,
+    String? observations,
+    String? diagnosedBy,
   }) async {
-    final tratamiento = TratamientoEntity(
+    final treatment = TratamientoEntity(
       animalUuid: animalUuid,
-      motivo: motivo,
-      medicamento: medicamento,
-      fechaInicio: fechaInicio,
-      dosis: dosis,
-      viaAplicacion: viaAplicacion,
-      duracionDias: duracionDias,
-      frecuencia: frecuencia,
-      registradoPor: registradoPor,
-      marca: marca,
-      lote: lote,
-      fechaFin: fechaFin,
-      resultado: resultado,
-      diagnosticoPrevio: diagnosticoPrevio,
-      diagnosticoFinal: diagnosticoFinal,
-      costoMedicamento: costoMedicamento,
-      costoVeterinario: costoVeterinario,
-      costoTotal: (costoMedicamento ?? 0) + (costoVeterinario ?? 0),
-      observaciones: observaciones,
-      diagnosticadoPor: diagnosticadoPor,
+      motivo: reason,
+      medicamento: medicament,
+      fechaInicio: startDate,
+      dosis: dosage,
+      viaAplicacion: administrationRoute,
+      duracionDias: durationDays,
+      frecuencia: frequency,
+      registradoPor: recordedBy,
+      marca: brand,
+      lote: lot,
+      fechaFin: endDate,
+      resultado: result,
+      diagnosticoPrevio: priorDiagnosis,
+      diagnosticoFinal: finalDiagnosis,
+      costoMedicina: medicamentCost,
+      costoVeterinario: veterinaryCost,
+      costoTotal: (medicamentCost ?? 0) + (veterinaryCost ?? 0),
+      observaciones: observations,
+      diagnosticadoPor: diagnosedBy,
     );
 
-    await database.saveTratamiento(tratamiento);
+    await database.saveTratamiento(treatment);
   }
 }
 
-class ObtenerTratamientosUseCase {
+/// Caso de uso para obtener el historial de tratamientos
+class GetTreatmentsUseCase {
   final MiGanadoDatabase database;
 
-  ObtenerTratamientosUseCase({required this.database});
+  GetTreatmentsUseCase({required this.database});
 
+  /// Obtiene todos los tratamientos registrados para un animal
   Future<List<TratamientoEntity>> call({
     required String animalUuid,
   }) async {
@@ -66,34 +71,38 @@ class ObtenerTratamientosUseCase {
   }
 }
 
-class ActualizarTratamientoUseCase {
+/// Caso de uso para actualizar un tratamiento existente
+class UpdateTreatmentUseCase {
   final MiGanadoDatabase database;
 
-  ActualizarTratamientoUseCase({required this.database});
+  UpdateTreatmentUseCase({required this.database});
 
+  /// Actualiza los datos de un tratamiento ya registrado
   Future<void> call({
-    required TratamientoEntity tratamiento,
+    required TratamientoEntity treatment,
   }) async {
-    await database.updateTratamiento(tratamiento);
+    await database.updateTratamiento(treatment);
   }
 }
 
-class FinalizarTratamientoUseCase {
+/// Caso de uso para finalizar un tratamiento
+class FinishTreatmentUseCase {
   final MiGanadoDatabase database;
 
-  FinalizarTratamientoUseCase({required this.database});
+  FinishTreatmentUseCase({required this.database});
 
+  /// Finaliza un tratamiento y registra el resultado y diagnóstico final
   Future<void> call({
-    required TratamientoEntity tratamiento,
-    required String resultado,
-    String? diagnosticoFinal,
-    String? observaciones,
+    required TratamientoEntity treatment,
+    required String result,
+    String? finalDiagnosis,
+    String? observations,
   }) async {
-    final updated = tratamiento.copyWith(
+    final updated = treatment.copyWith(
       fechaFin: DateTime.now(),
-      resultado: resultado,
-      diagnosticoFinal: diagnosticoFinal,
-      observaciones: observaciones,
+      resultado: result,
+      diagnosticoFinal: finalDiagnosis,
+      observaciones: observations,
     );
 
     await database.updateTratamiento(updated);

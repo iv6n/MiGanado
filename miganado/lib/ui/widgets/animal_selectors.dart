@@ -1,6 +1,11 @@
+// DEPRECATED: This file uses old enum classes (Categoria, Especie, EtapaVida)
+// that no longer exist in the current codebase. 
+// Use new enum classes instead: Category, LotSpecies, LifeStage
+// This file is kept for reference only and should not be used.
+
+/*
 import 'package:flutter/material.dart';
 import 'package:miganado/core/utils/asset_mapper.dart';
-import 'package:miganado/features/animals/data/models/animal_entity.dart';
 
 /// Widget para seleccionar categoría de animal con interfaz visual
 class CategoriaSelector extends StatefulWidget {
@@ -272,7 +277,12 @@ class _EtapaSelectorState extends State<EtapaSelector> {
       'vaca': Color(0xFF4CAF50),
       'toro': Color(0xFFFF9800),
       'potro': Color(0xFF009688),
-      'adulto': Color(0xFF8BC34A),
+      'potranca': Color(0xFF00897B),
+      'caballo': Color(0xFF5C6BC0),
+      'yegua': Color(0xFF9C27B0),
+      'burro': Color(0xFF455A64),
+      'burra': Color(0xFF37474F),
+      'mula': Color(0xFF8BC34A),
     };
     return colorMap[etapaStr] ?? Colors.grey;
   }
@@ -407,3 +417,4 @@ class _EtapaCard extends StatelessWidget {
     );
   }
 }
+*/

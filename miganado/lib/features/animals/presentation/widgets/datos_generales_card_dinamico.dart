@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:miganado/core/config/animal_type_config.dart';
 import 'package:miganado/features/animals/domain/entities/animal.dart';
-import 'package:miganado/features/animals/data/models/animal_entity.dart';
+import 'package:miganado/features/animals/domain/entities/etapa_vida.dart';
 
 /// Widget personalizado que muestra datos generales del animal
 /// adaptados al tipo específico (bovino hembra, macho, caballo)
@@ -67,8 +67,7 @@ class DatosGeneralesCardDinamico extends StatelessWidget {
             ),
             _DatoGeneralItem(
               label: 'Etapa de Vida',
-              valor: animal.etapa.name[0].toUpperCase() +
-                  animal.etapa.name.substring(1),
+              valor: animal.etapa.descripcion, // Usar extensión para Spanish
               icono: Icons.trending_up,
             ),
             if (config.puedeSerCastrado)
@@ -77,7 +76,7 @@ class DatosGeneralesCardDinamico extends StatelessWidget {
                 valor: animal.esCastrado ? 'Castrado' : 'Sin castrar',
                 icono: animal.esCastrado ? Icons.check_circle : Icons.cancel,
               ),
-            if (config.muestraEstadoReproductivo && animal.sexo == Sexo.hembra)
+            if (config.muestraEstadoReproductivo && animal.sexo == Sex.female)
               _DatoGeneralItem(
                 label: 'Estado Reproductivo',
                 valor: _getEstadoReproductivo(animal),
@@ -111,12 +110,12 @@ class DatosGeneralesCardDinamico extends StatelessWidget {
     );
   }
 
-  String _getSexoNombre(Sexo sexo) {
-    return sexo == Sexo.macho ? '♂ Macho' : '♀ Hembra';
+  String _getSexoNombre(Sex sexo) {
+    return sexo == Sex.male ? '♂ Macho' : '♀ Hembra';
   }
 
-  IconData _getSexoIcono(Sexo sexo) {
-    return sexo == Sexo.macho ? Icons.male : Icons.female;
+  IconData _getSexoIcono(Sex sexo) {
+    return sexo == Sex.male ? Icons.male : Icons.female;
   }
 
   String _getEspecieCategoria(Animal animal) {

@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/features/pesos/domain/entities/pesaje.dart';
 import 'package:miganado/features/pesos/domain/usecases/pesos_usecases.dart';
 import 'package:miganado/providers/database_providers.dart';
+import 'package:miganado/core/exceptions/app_exception.dart';
+import 'package:miganado/core/services/logger_service.dart';
 
 // ============================================================================
 // USE CASE PROVIDERS
@@ -42,24 +44,66 @@ final obtenerUltimosPesosUseCaseProvider =
 /// Usage: ref.watch(historialPesosProvider(animalUuid))
 final historialPesosProvider =
     FutureProvider.family<List<Pesaje>, String>((ref, animalUuid) async {
-  final useCase = ref.watch(obtenerHistorialPesosUseCaseProvider);
-  return useCase(animalUuid);
+  try {
+    LoggerService.startOperation('historialPesos', 'pesos_providers');
+    final useCase = ref.watch(obtenerHistorialPesosUseCaseProvider);
+    final pesos = await useCase(animalUuid);
+    LoggerService.operationCompleted('historialPesos', 'pesos_providers');
+    return pesos;
+  } catch (e, st) {
+    final appEx = toAppException(e, st);
+    LoggerService.error(
+        'Error obteniendo historial de pesos', appEx, st, 'pesos_providers');
+    throw DatabaseException(
+      message: 'No se pudo cargar el historial de pesos: ${appEx.message}',
+      originalError: e,
+      stackTrace: st,
+    );
+  }
 });
 
 /// Provider para obtener análisis de pesos por animal
 /// Usage: ref.watch(analisisPesosProvider(animalUuid))
 final analisisPesosProvider =
     FutureProvider.family<AnalisisPesos, String>((ref, animalUuid) async {
-  final useCase = ref.watch(obtenerAnalisisPesosUseCaseProvider);
-  return useCase(animalUuid);
+  try {
+    LoggerService.startOperation('analisisPesos', 'pesos_providers');
+    final useCase = ref.watch(obtenerAnalisisPesosUseCaseProvider);
+    final analisis = await useCase(animalUuid);
+    LoggerService.operationCompleted('analisisPesos', 'pesos_providers');
+    return analisis;
+  } catch (e, st) {
+    final appEx = toAppException(e, st);
+    LoggerService.error(
+        'Error obteniendo análisis de pesos', appEx, st, 'pesos_providers');
+    throw DatabaseException(
+      message: 'No se pudo cargar el análisis de pesos: ${appEx.message}',
+      originalError: e,
+      stackTrace: st,
+    );
+  }
 });
 
 /// Provider para obtener últimos pesajes (para gráfico)
 /// Usage: ref.watch(ultimosPesosProvider(animalUuid))
 final ultimosPesosProvider =
     FutureProvider.family<List<Pesaje>, String>((ref, animalUuid) async {
-  final useCase = ref.watch(obtenerUltimosPesosUseCaseProvider);
-  return useCase(animalUuid, limite: 30);
+  try {
+    LoggerService.startOperation('ultimosPesos', 'pesos_providers');
+    final useCase = ref.watch(obtenerUltimosPesosUseCaseProvider);
+    final pesos = await useCase(animalUuid, limite: 30);
+    LoggerService.operationCompleted('ultimosPesos', 'pesos_providers');
+    return pesos;
+  } catch (e, st) {
+    final appEx = toAppException(e, st);
+    LoggerService.error(
+        'Error obteniendo últimos pesos', appEx, st, 'pesos_providers');
+    throw DatabaseException(
+      message: 'No se pudieron cargar los pesos recientes: ${appEx.message}',
+      originalError: e,
+      stackTrace: st,
+    );
+  }
 });
 
 // ============================================================================

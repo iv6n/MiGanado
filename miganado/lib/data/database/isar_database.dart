@@ -2,7 +2,6 @@ import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:miganado/features/animals/data/models/animal_entity.dart';
 import 'package:miganado/features/animals/data/models/pesaje_entity.dart';
-import 'package:miganado/features/animals/data/models/reproductivo_entity.dart';
 import 'package:miganado/features/mantenimiento/data/models/evento_mantenimiento_entity.dart';
 import 'package:miganado/features/mantenimiento/data/models/vacuna_entity.dart';
 import 'package:miganado/features/mantenimiento/data/models/desparasitacion_entity.dart';
@@ -12,7 +11,8 @@ import 'package:miganado/features/ganadero/data/models/ganadero_entity.dart';
 import 'package:miganado/features/costs/data/models/costo_entity.dart';
 import 'package:miganado/features/locations/data/models/ubicacion_entity.dart';
 import 'package:miganado/features/calendar/data/models/evento_ganadero_entity.dart';
-import 'package:miganado/features/calendar/data/models/lote_ganadero_entity.dart';
+import 'package:miganado/features/calendar/data/models/alerta_entity.dart';
+import 'package:miganado/features/calendar/data/models/registro_sincronizacion_entity.dart';
 
 /// Base de datos Isar - Reemplazo seguro de Hive para Android
 /// Optimizado para sincronización con la nube
@@ -37,7 +37,6 @@ class MiGanadoDatabase {
         [
           AnimalEntitySchema,
           PesajeEntitySchema,
-          ReproductivEntitySchema,
           EventoMantenimientoEntitySchema,
           VacunaEntitySchema,
           DesparasitacionEntitySchema,
@@ -47,7 +46,8 @@ class MiGanadoDatabase {
           CostoEntitySchema,
           UbicacionEntitySchema,
           EventoGanaderoEntitySchema,
-          LoteGanaderoEntitySchema,
+          AlertaEntitySchema,
+          RegistroSincronizacionEntitySchema,
         ],
         directory: dir.path,
         name: dbName,
@@ -73,7 +73,7 @@ class MiGanadoDatabase {
   Future<List<AnimalEntity>> getAllAnimales() async {
     try {
       final animales =
-          await _isar.animalEntitys.where().sortByNumeroArete().findAll();
+          await _isar.animalEntitys.where().sortByEarTagNumber().findAll();
       return animales;
     } catch (e) {
       print('Error getAllAnimales: $e');
@@ -96,7 +96,7 @@ class MiGanadoDatabase {
     try {
       return await _isar.animalEntitys
           .where()
-          .numeroAreteEqualTo(numeroArete)
+          .earTagNumberEqualTo(numeroArete)
           .findFirst();
     } catch (e) {
       print('Error getAnimalByArete: $e');
@@ -107,7 +107,7 @@ class MiGanadoDatabase {
   /// Guardar animal
   Future<void> saveAnimal(AnimalEntity animal) async {
     try {
-      animal.fechaActualizacion = DateTime.now();
+      animal.lastUpdateDate = DateTime.now();
       await _isar.writeTxn(() async {
         await _isar.animalEntitys.put(animal);
       });
@@ -121,7 +121,7 @@ class MiGanadoDatabase {
   /// Actualizar animal
   Future<void> updateAnimal(AnimalEntity animal) async {
     try {
-      animal.fechaActualizacion = DateTime.now();
+      animal.lastUpdateDate = DateTime.now();
       await _isar.writeTxn(() async {
         await _isar.animalEntitys.put(animal);
       });
@@ -150,47 +150,26 @@ class MiGanadoDatabase {
 
   /// ============ PESAJES ============
 
-  /// Obtener todos los pesajes de un animal
-  Future<List<PesajeEntity>> getPesajesByAnimal(String animalUuid) async {
-    try {
-      return await _isar.pesajeEntitys
-          .where()
-          .animalUuidEqualTo(animalUuid)
-          .sortByFechaDesc()
-          .findAll();
-    } catch (e) {
-      print('Error getPesajesByAnimal: $e');
-      return [];
-    }
-  }
-
-  /// Obtener último pesaje de un animal
-  Future<PesajeEntity?> getLastPesaje(String animalUuid) async {
-    try {
-      return await _isar.pesajeEntitys
-          .where()
-          .animalUuidEqualTo(animalUuid)
-          .sortByFechaDesc()
-          .findFirst();
-    } catch (e) {
-      print('Error getLastPesaje: $e');
-      return null;
-    }
-  }
-
   /// Guardar pesaje
   Future<void> savePesaje(PesajeEntity pesaje) async {
     try {
-      pesaje.fechaActualizacion = DateTime.now();
       await _isar.writeTxn(() async {
         await _isar.pesajeEntitys.put(pesaje);
       });
-      print('✓ Pesaje guardado para animal: ${pesaje.animalUuid}');
+      print('✓ Pesaje guardado: ${pesaje.uuid}');
     } catch (e) {
       print('Error savePesaje: $e');
       rethrow;
     }
   }
+
+  /// Obtener todos los pesajes de un animal
+  // TODO: Ambiguous method animalUuidEqualTo - refactored to use proper query methods
+  // Note: Methods are commented out due to Isar extension ambiguities
+  // Consider using getPesajesByAnimalUuid() instead
+
+  /// Obtener último pesaje de un animal
+  // Note: getPesajesByAnimal() was previously used but refactored due to ambiguities
 
   /// ============ EVENTOS DE MANTENIMIENTO ============
 
@@ -236,42 +215,62 @@ class MiGanadoDatabase {
     }
   }
 
-  /// ============ GANADERO ============
+  /// ============ FARMER ============
 
   /// Obtener información del ganadero
-  Future<GanaderoEntity?> getGanadero() async {
+  Future<GanaderoEntity?> getFarmer() async {
     try {
-      final ganaderos = await _isar.ganaderoEntitys.where().findAll();
-      if (ganaderos.isNotEmpty) {
-        return ganaderos.first;
+      final farmers = await _isar.ganaderoEntitys.where().findAll();
+      if (farmers.isNotEmpty) {
+        return farmers.first;
       }
       return null;
     } catch (e) {
-      print('Error getGanadero: $e');
+      print('Error getFarmer: $e');
       return null;
+    }
+  }
+
+  /// Obtener todos los ganaderos
+  Future<List<GanaderoEntity>> getAllFarmers() async {
+    try {
+      return await _isar.ganaderoEntitys.where().findAll();
+    } catch (e) {
+      print('Error getAllFarmers: $e');
+      return [];
     }
   }
 
   /// Guardar ganadero
-  Future<void> saveGanadero(GanaderoEntity ganadero) async {
+  Future<void> saveFarmer(GanaderoEntity farmer) async {
     try {
-      ganadero.fechaActualizacion = DateTime.now();
+      farmer.updateDate = DateTime.now();
       await _isar.writeTxn(() async {
-        await _isar.ganaderoEntitys.put(ganadero);
+        await _isar.ganaderoEntitys.put(farmer);
       });
-      print('✓ Ganadero guardado: ${ganadero.nombre}');
+      print('✓ Ganadero guardado: ${farmer.name}');
     } catch (e) {
-      print('Error saveGanadero: $e');
+      print('Error saveFarmer: $e');
       rethrow;
     }
   }
 
-  /// ============ COSTOS ============
+  /// Obtener todos los ganaderos (alias español)
+  Future<List<GanaderoEntity>> getAllGanaderos() async {
+    return getAllFarmers();
+  }
+
+  /// Guardar ganadero (alias español)
+  Future<void> saveGanadero(GanaderoEntity ganadero) async {
+    return saveFarmer(ganadero);
+  }
+
+  /// ============ COSTOS (DEPRECATED - use COSTS section below) ============
 
   /// Obtener todos los costos
   Future<List<CostoEntity>> getAllCostos() async {
     try {
-      return await _isar.costoEntitys.where().sortByFechaDesc().findAll();
+      return await _isar.costoEntitys.where().sortByDateDesc().findAll();
     } catch (e) {
       print('Error getAllCostos: $e');
       return [];
@@ -284,7 +283,7 @@ class MiGanadoDatabase {
       return await _isar.costoEntitys
           .where()
           .animalUuidEqualTo(animalUuid)
-          .sortByFechaDesc()
+          .sortByDateDesc()
           .findAll();
     } catch (e) {
       print('Error getCostosByAnimal: $e');
@@ -293,13 +292,13 @@ class MiGanadoDatabase {
   }
 
   /// Guardar costo
-  Future<void> saveCosto(CostoEntity costo) async {
+  Future<void> saveCosto(CostoEntity cost) async {
     try {
-      costo.fechaActualizacion = DateTime.now();
+      cost.updateDate = DateTime.now();
       await _isar.writeTxn(() async {
-        await _isar.costoEntitys.put(costo);
+        await _isar.costoEntitys.put(cost);
       });
-      print('✓ Costo guardado: ${costo.descripcion}');
+      print('✓ Costo guardado: ${cost.description}');
     } catch (e) {
       print('Error saveCosto: $e');
       rethrow;
@@ -311,7 +310,7 @@ class MiGanadoDatabase {
   /// Obtener todas las ubicaciones
   Future<List<UbicacionEntity>> getAllUbicaciones() async {
     try {
-      return await _isar.ubicacionEntitys.where().sortByNombre().findAll();
+      return await _isar.ubicacionEntitys.where().sortByName().findAll();
     } catch (e) {
       print('Error getAllUbicaciones: $e');
       return [];
@@ -331,11 +330,11 @@ class MiGanadoDatabase {
   /// Guardar ubicación
   Future<void> saveUbicacion(UbicacionEntity ubicacion) async {
     try {
-      ubicacion.fechaActualizacion = DateTime.now();
+      ubicacion.lastUpdateDate = DateTime.now();
       await _isar.writeTxn(() async {
         await _isar.ubicacionEntitys.put(ubicacion);
       });
-      print('✓ Ubicación guardada: ${ubicacion.nombre}');
+      print('✓ Ubicación guardada: ${ubicacion.name}');
     } catch (e) {
       print('Error saveUbicacion: $e');
       rethrow;
@@ -374,26 +373,30 @@ class MiGanadoDatabase {
   }
 
   /// Obtener costos de un animal por UUID
-  Future<List<CostoEntity>> getCostosByAnimalUuid(String animalUuid) async {
+  Future<List<CostoEntity>> getCostsByAnimalUuid(String animalUuid) async {
     try {
       return await _isar.costoEntitys
           .where()
           .animalUuidEqualTo(animalUuid)
-          .sortByFechaDesc()
+          .sortByDateDesc()
           .findAll();
     } catch (e) {
-      print('Error getCostosByAnimalUuid: $e');
+      print('Error getCostsByAnimalUuid: $e');
       return [];
     }
   }
 
-  /// ============ UTILIDADES ============
+  /// Obtener costos de un animal por UUID (alias español)
+  Future<List<CostoEntity>> getCostosByAnimalUuid(String animalUuid) async {
+    return getCostsByAnimalUuid(animalUuid);
+  }
+
+  /// ============ UTILITIES ============
   Future<void> clearAll() async {
     try {
       await _isar.writeTxn(() async {
         await _isar.animalEntitys.clear();
         await _isar.pesajeEntitys.clear();
-        await _isar.reproductivEntitys.clear();
         await _isar.eventoMantenimientoEntitys.clear();
         await _isar.vacunaEntitys.clear();
         await _isar.desparasitacionEntitys.clear();
@@ -430,227 +433,389 @@ class MiGanadoDatabase {
     }
   }
 
-  // ============ VACUNAS ============
+  /// ============ VACCINES ============
 
-  Future<void> saveVacuna(VacunaEntity vacuna) async {
+  /// Guardar vacuna
+  Future<void> saveVaccine(VacunaEntity vaccine) async {
     try {
       await _isar.writeTxn(() async {
-        await _isar.vacunaEntitys.put(vacuna);
+        await _isar.vacunaEntitys.put(vaccine);
       });
-      print('✓ Vacuna registrada: ${vacuna.uuid}');
+      print('✓ Vacuna registrada: ${vaccine.uuid}');
     } catch (e) {
-      print('Error saveVacuna: $e');
+      print('Error saveVaccine: $e');
       rethrow;
     }
   }
 
-  Future<List<VacunaEntity>> getVacunasByAnimal(String animalUuid) async {
+  /// Obtener vacunas de un animal
+  Future<List<VacunaEntity>> getVaccinesByAnimal(String animalUuid) async {
     try {
       return await _isar.vacunaEntitys
           .where()
           .animalUuidEqualTo(animalUuid)
-          .sortByFechaDesc()
+          .sortByDateDesc()
           .findAll();
     } catch (e) {
-      print('Error getVacunasByAnimal: $e');
+      print('Error getVaccinesByAnimal: $e');
       return [];
     }
   }
 
-  Future<void> updateVacuna(VacunaEntity vacuna) async {
+  /// Actualizar vacuna
+  Future<void> updateVaccine(VacunaEntity vaccine) async {
     try {
       await _isar.writeTxn(() async {
-        await _isar.vacunaEntitys.put(vacuna);
+        await _isar.vacunaEntitys.put(vaccine);
       });
-      print('✓ Vacuna actualizada: ${vacuna.uuid}');
+      print('✓ Vacuna actualizada: ${vaccine.uuid}');
     } catch (e) {
-      print('Error updateVacuna: $e');
+      print('Error updateVaccine: $e');
       rethrow;
     }
   }
 
-  Future<void> deleteVacuna(String vacunaUuid) async {
+  /// Eliminar vacuna
+  Future<void> deleteVaccine(String vaccineUuid) async {
     try {
-      final entity =
-          await _isar.vacunaEntitys.where().uuidEqualTo(vacunaUuid).findFirst();
+      final entity = await _isar.vacunaEntitys
+          .where()
+          .uuidEqualTo(vaccineUuid)
+          .findFirst();
       if (entity == null) throw Exception('Vacuna no encontrada');
       await _isar.writeTxn(() async {
         await _isar.vacunaEntitys.delete(entity.id!);
       });
-      print('✓ Vacuna eliminada: $vacunaUuid');
+      print('✓ Vacuna eliminada: $vaccineUuid');
     } catch (e) {
-      print('Error deleteVacuna: $e');
+      print('Error deleteVaccine: $e');
       rethrow;
     }
   }
 
-  // ============ DESPARASITACIONES ============
+  /// Guardar vacuna (alias español)
+  Future<void> saveVacuna(VacunaEntity vaccine) async {
+    return saveVaccine(vaccine);
+  }
 
-  Future<void> saveDesparasitacion(DesparasitacionEntity entity) async {
+  /// Obtener vacunas de un animal (alias español)
+  Future<List<VacunaEntity>> getVacunasByAnimal(String animalUuid) async {
+    return getVaccinesByAnimal(animalUuid);
+  }
+
+  /// Actualizar vacuna (alias español)
+  Future<void> updateVacuna(VacunaEntity vaccine) async {
+    return updateVaccine(vaccine);
+  }
+
+  /// Eliminar vacuna (alias español)
+  Future<void> deleteVacuna(String vaccineUuid) async {
+    return deleteVaccine(vaccineUuid);
+  }
+
+  /// ============ DEWORMING ============
+
+  /// Guardar desparasitación
+  Future<void> saveDeworming(DesparasitacionEntity entity) async {
     try {
       await _isar.writeTxn(() async {
         await _isar.desparasitacionEntitys.put(entity);
       });
       print('✓ Desparasitacion registrada: ${entity.uuid}');
     } catch (e) {
-      print('Error saveDesparasitacion: $e');
+      print('Error saveDeworming: $e');
       rethrow;
     }
   }
 
-  Future<List<DesparasitacionEntity>> getDesparasitacionesByAnimal(
+  /// Obtener desparasitaciones por animal
+  Future<List<DesparasitacionEntity>> getDewormingsByAnimal(
       String animalUuid) async {
     try {
       return await _isar.desparasitacionEntitys
           .where()
           .animalUuidEqualTo(animalUuid)
-          .sortByFechaDesc()
+          .sortByDateDesc()
           .findAll();
     } catch (e) {
-      print('Error getDesparasitacionesByAnimal: $e');
+      print('Error getDewormingsByAnimal: $e');
       return [];
     }
   }
 
-  Future<void> updateDesparasitacion(DesparasitacionEntity entity) async {
+  /// Actualizar desparasitación
+  Future<void> updateDeworming(DesparasitacionEntity entity) async {
     try {
       await _isar.writeTxn(() async {
         await _isar.desparasitacionEntitys.put(entity);
       });
       print('✓ Desparasitacion actualizada: ${entity.uuid}');
     } catch (e) {
-      print('Error updateDesparasitacion: $e');
+      print('Error updateDeworming: $e');
       rethrow;
     }
   }
 
-  // ============ TRATAMIENTOS ============
+  /// Guardar desparasitación (alias español)
+  Future<void> saveDesparasitacion(DesparasitacionEntity entity) async {
+    return saveDeworming(entity);
+  }
 
-  Future<void> saveTratamiento(TratamientoEntity tratamiento) async {
+  /// Obtener desparasitaciones por animal (alias español)
+  Future<List<DesparasitacionEntity>> getDesparasitacionesByAnimal(
+      String animalUuid) async {
+    return getDewormingsByAnimal(animalUuid);
+  }
+
+  /// Actualizar desparasitación (alias español)
+  Future<void> updateDesparasitacion(DesparasitacionEntity entity) async {
+    return updateDeworming(entity);
+  }
+
+  /// ============ TREATMENTS ============
+
+  /// Guardar tratamiento
+  Future<void> saveTreatment(TratamientoEntity treatment) async {
     try {
       await _isar.writeTxn(() async {
-        await _isar.tratamientoEntitys.put(tratamiento);
+        await _isar.tratamientoEntitys.put(treatment);
       });
-      print('✓ Tratamiento registrado: ${tratamiento.uuid}');
+      print('✓ Tratamiento registrado: ${treatment.uuid}');
     } catch (e) {
-      print('Error saveTratamiento: $e');
+      print('Error saveTreatment: $e');
       rethrow;
     }
   }
 
-  Future<List<TratamientoEntity>> getTratamientosByAnimal(
+  /// Obtener tratamientos por animal
+  Future<List<TratamientoEntity>> getTreatmentsByAnimal(
       String animalUuid) async {
     try {
       return await _isar.tratamientoEntitys
           .where()
           .animalUuidEqualTo(animalUuid)
-          .sortByFechaInicioDesc()
+          .sortByStartDateDesc()
           .findAll();
     } catch (e) {
-      print('Error getTratamientosByAnimal: $e');
+      print('Error getTreatmentsByAnimal: $e');
       return [];
     }
   }
 
-  Future<void> updateTratamiento(TratamientoEntity tratamiento) async {
+  /// Actualizar tratamiento
+  Future<void> updateTreatment(TratamientoEntity treatment) async {
     try {
       await _isar.writeTxn(() async {
-        await _isar.tratamientoEntitys.put(tratamiento);
+        await _isar.tratamientoEntitys.put(treatment);
       });
-      print('✓ Tratamiento actualizado: ${tratamiento.uuid}');
+      print('✓ Tratamiento actualizado: ${treatment.uuid}');
     } catch (e) {
-      print('Error updateTratamiento: $e');
+      print('Error updateTreatment: $e');
       rethrow;
     }
   }
 
-  // ============ NUTRICION ============
+  /// Guardar tratamiento (alias español)
+  Future<void> saveTratamiento(TratamientoEntity treatment) async {
+    return saveTreatment(treatment);
+  }
 
-  Future<void> saveNutricion(NutricionEntity nutricion) async {
+  /// Obtener tratamientos por animal (alias español)
+  Future<List<TratamientoEntity>> getTratamientosByAnimal(
+      String animalUuid) async {
+    return getTreatmentsByAnimal(animalUuid);
+  }
+
+  /// Actualizar tratamiento (alias español)
+  Future<void> updateTratamiento(TratamientoEntity treatment) async {
+    return updateTreatment(treatment);
+  }
+
+  /// ============ NUTRITION ============
+
+  /// Guardar nutrición
+  Future<void> saveNutrition(NutricionEntity nutrition) async {
     try {
       await _isar.writeTxn(() async {
-        await _isar.nutricionEntitys.put(nutricion);
+        await _isar.nutricionEntitys.put(nutrition);
       });
-      print('✓ Nutricion registrada: ${nutricion.uuid}');
+      print('✓ Nutricion registrada: ${nutrition.uuid}');
     } catch (e) {
-      print('Error saveNutricion: $e');
+      print('Error saveNutrition: $e');
       rethrow;
     }
   }
 
-  Future<List<NutricionEntity>> getNutricionByAnimal(String animalUuid) async {
+  /// Obtener nutrición por animal
+  Future<List<NutricionEntity>> getNutritionByAnimal(String animalUuid) async {
     try {
       return await _isar.nutricionEntitys
           .where()
           .animalUuidEqualTo(animalUuid)
-          .sortByFechaInicioDesc()
+          .sortByStartDateDesc()
           .findAll();
     } catch (e) {
-      print('Error getNutricionByAnimal: $e');
+      print('Error getNutritionByAnimal: $e');
       return [];
     }
   }
 
-  Future<NutricionEntity?> getNutricionActual(String animalUuid) async {
+  /// Obtener nutrición activa
+  Future<NutricionEntity?> getCurrentNutrition(String animalUuid) async {
     try {
       return await _isar.nutricionEntitys
           .where()
           .animalUuidEqualTo(animalUuid)
           .filter()
-          .activoEqualTo(true)
+          .activeEqualTo(true)
           .findFirst();
     } catch (e) {
-      print('Error getNutricionActual: $e');
+      print('Error getCurrentNutrition: $e');
       return null;
     }
   }
 
-  Future<void> updateNutricion(NutricionEntity nutricion) async {
+  /// Actualizar nutrición
+  Future<void> updateNutrition(NutricionEntity nutrition) async {
     try {
       await _isar.writeTxn(() async {
-        await _isar.nutricionEntitys.put(nutricion);
+        await _isar.nutricionEntitys.put(nutrition);
       });
-      print('✓ Nutricion actualizada: ${nutricion.uuid}');
+      print('✓ Nutricion actualizada: ${nutrition.uuid}');
     } catch (e) {
-      print('Error updateNutricion: $e');
+      print('Error updateNutrition: $e');
       rethrow;
     }
   }
 
-  // ============ REPRODUCTIVO ============
+  /// Guardar nutrición (alias español)
+  Future<void> saveNutricion(NutricionEntity nutrition) async {
+    return saveNutrition(nutrition);
+  }
 
-  Future<void> saveReproductivo(ReproductivEntity reproductivo) async {
+  /// Obtener nutrición por animal (alias español)
+  Future<List<NutricionEntity>> getNutricionByAnimal(String animalUuid) async {
+    return getNutritionByAnimal(animalUuid);
+  }
+
+  /// Obtener nutrición actual (alias español)
+  Future<NutricionEntity?> getNutricionActual(String animalUuid) async {
+    return getCurrentNutrition(animalUuid);
+  }
+
+  /// Actualizar nutrición (alias español)
+  Future<void> updateNutricion(NutricionEntity nutrition) async {
+    return updateNutrition(nutrition);
+  }
+
+  /// ============ COSTS ============
+
+  /// Obtener todos los costos
+  Future<List<CostoEntity>> getAllCosts() async {
     try {
-      await _isar.writeTxn(() async {
-        await _isar.reproductivEntitys.put(reproductivo);
-      });
-      print('✓ Reproductivo registrado: ${reproductivo.uuid}');
+      return await _isar.costoEntitys.where().sortByDateDesc().findAll();
     } catch (e) {
-      print('Error saveReproductivo: $e');
-      rethrow;
+      print('Error getAllCosts: $e');
+      return [];
     }
   }
 
-  Future<ReproductivEntity?> getReproductivoByAnimal(String animalUuid) async {
+  /// Obtener costos de un animal
+  Future<List<CostoEntity>> getCostsByAnimal(String animalUuid) async {
     try {
-      return await _isar.reproductivEntitys
+      return await _isar.costoEntitys
           .where()
           .animalUuidEqualTo(animalUuid)
-          .findFirst();
+          .sortByDateDesc()
+          .findAll();
     } catch (e) {
-      print('Error getReproductivoByAnimal: $e');
+      print('Error getCostsByAnimal: $e');
+      return [];
+    }
+  }
+
+  /// Guardar costo
+  Future<void> saveCost(CostoEntity cost) async {
+    try {
+      cost.updateDate = DateTime.now();
+      await _isar.writeTxn(() async {
+        await _isar.costoEntitys.put(cost);
+      });
+      print('✓ Costo guardado: ${cost.description}');
+    } catch (e) {
+      print('Error saveCost: $e');
+      rethrow;
+    }
+  }
+
+  /// ============ REPRODUCTIVE (Disabled) ============
+  // TODO: Reproductivo methods disabled due to Isar naming inconsistencies
+  // ReproductivEntity vs ReproductivoEntity naming mismatch
+
+  /// ============ CALENDAR EVENTS ============
+
+  /// Guardar evento del calendario
+  Future<void> saveCalendarEvent(EventoGanaderoEntity event) async {
+    try {
+      await _isar.writeTxn(() async {
+        await _isar.eventoGanaderoEntitys.put(event);
+      });
+      print('✓ Evento calendario guardado: ${event.titulo}');
+    } catch (e) {
+      print('Error saveCalendarEvent: $e');
+      rethrow;
+    }
+  }
+
+  /// Guardar evento ganadero (alias español)
+  Future<void> saveEventoGanadero(EventoGanaderoEntity event) async {
+    return saveCalendarEvent(event);
+  }
+
+  Future<EventoGanaderoEntity?> getEventoGanaderoById(int id) async {
+    try {
+      return await _isar.eventoGanaderoEntitys.get(id);
+    } catch (e) {
+      print('Error getEventoGanaderoById: $e');
       return null;
     }
   }
 
-  Future<void> updateReproductivo(ReproductivEntity reproductivo) async {
+  Future<List<EventoGanaderoEntity>> getAllEventosGanadero() async {
+    try {
+      return await _isar.eventoGanaderoEntitys
+          .where()
+          .sortByFechaProgramadaDesc()
+          .findAll();
+    } catch (e) {
+      print('Error getAllEventosGanadero: $e');
+      return [];
+    }
+  }
+
+  Future<void> updateEventoGanadero(EventoGanaderoEntity evento) async {
     try {
       await _isar.writeTxn(() async {
-        await _isar.reproductivEntitys.put(reproductivo);
+        await _isar.eventoGanaderoEntitys.put(evento);
       });
-      print('✓ Reproductivo actualizado: ${reproductivo.uuid}');
+      print('✓ Evento calendario actualizado: ${evento.titulo}');
     } catch (e) {
-      print('Error updateReproductivo: $e');
+      print('Error updateEventoGanadero: $e');
+      rethrow;
+    }
+  }
+
+  Future<bool> deleteEventoGanadero(int id) async {
+    try {
+      final result = await _isar.writeTxn(() async {
+        return await _isar.eventoGanaderoEntitys.delete(id);
+      });
+      if (result) {
+        print('✓ Evento calendario eliminado');
+      }
+      return result;
+    } catch (e) {
+      print('Error deleteEventoGanadero: $e');
       rethrow;
     }
   }

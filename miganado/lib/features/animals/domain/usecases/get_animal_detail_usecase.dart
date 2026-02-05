@@ -23,11 +23,11 @@ class GetAnimalDetailUseCase {
       final animal = Animal.fromEntity(animalEntity);
 
       // 2. Obtener ubicación actual (si existe)
-      final ubicacionNombre = animalEntity.ubicacion;
+      final ubicacionNombre = animalEntity.location;
 
       // 3. Obtener observaciones del animal
-      final observaciones = animalEntity.observaciones;
-      final ultimaActualizacion = animalEntity.fechaActualizacion;
+      final observaciones = animalEntity.observations;
+      final ultimaActualizacion = animalEntity.lastUpdateDate;
 
       // 4. Construir histórico de eventos (últimos 10)
       final eventos = await _construirHistorico(uuid);

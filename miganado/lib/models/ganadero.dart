@@ -1,80 +1,80 @@
 import 'package:uuid/uuid.dart';
 
-/// Modelo de Ganadero - Información personal del ganadero
-class Ganadero {
-  /// Identificador único (UUID)
+/// Rancher model - Personal information of the rancher
+class Rancher {
+  /// Unique identifier (UUID)
   final String id;
 
-  /// Nombre del ganadero
-  final String nombre;
+  /// Rancher name
+  final String name;
 
-  /// Marca de herrado (hierro único para marcar animales)
-  final String? marcaHerrado;
+  /// Branding mark (unique iron for marking animals)
+  final String? brandingMark;
 
-  /// Señal de oreja (corte característico en la oreja)
-  final String? senalOreja;
+  /// Ear notch (characteristic ear cut)
+  final String? earNotch;
 
-  /// UPP (Unidad de Producción Pecuaria - número de registro)
+  /// UPP (Livestock Production Unit - registration number)
   final String? upp;
 
-  /// Teléfono de contacto
-  final String? telefono;
+  /// Contact phone
+  final String? phone;
 
-  /// Dirección de la finca
-  final String? direccion;
+  /// Ranch address
+  final String? address;
 
-  /// Notas adicionales
-  final String? notas;
+  /// Additional notes
+  final String? notes;
 
-  /// Fecha de creación del registro
-  final DateTime fechaRegistro;
+  /// Record creation date
+  final DateTime registrationDate;
 
-  /// Fecha de última actualización
-  final DateTime ultimaActualizacion;
+  /// Last update date
+  final DateTime lastUpdateDate;
 
   /// Constructor
-  Ganadero({
+  Rancher({
     String? id,
-    required this.nombre,
-    this.marcaHerrado,
-    this.senalOreja,
+    required this.name,
+    this.brandingMark,
+    this.earNotch,
     this.upp,
-    this.telefono,
-    this.direccion,
-    this.notas,
-    DateTime? fechaRegistro,
-    DateTime? ultimaActualizacion,
+    this.phone,
+    this.address,
+    this.notes,
+    DateTime? registrationDate,
+    DateTime? lastUpdateDate,
   })  : id = id ?? const Uuid().v4(),
-        fechaRegistro = fechaRegistro ?? DateTime.now(),
-        ultimaActualizacion = ultimaActualizacion ?? DateTime.now();
+        registrationDate = registrationDate ?? DateTime.now(),
+        lastUpdateDate = lastUpdateDate ?? DateTime.now();
 
-  /// Copia el objeto con campos opcionales actualizados
-  Ganadero copyWith({
+  /// Copy the object with updated optional fields
+  Rancher copyWith({
     String? id,
-    String? nombre,
-    String? marcaHerrado,
-    String? senalOreja,
+    String? name,
+    String? brandingMark,
+    String? earNotch,
     String? upp,
-    String? telefono,
-    String? direccion,
-    String? notas,
-    DateTime? fechaRegistro,
-    DateTime? ultimaActualizacion,
+    String? phone,
+    String? address,
+    String? notes,
+    DateTime? registrationDate,
+    DateTime? lastUpdateDate,
   }) {
-    return Ganadero(
+    return Rancher(
       id: id ?? this.id,
-      nombre: nombre ?? this.nombre,
-      marcaHerrado: marcaHerrado ?? this.marcaHerrado,
-      senalOreja: senalOreja ?? this.senalOreja,
+      name: name ?? this.name,
+      brandingMark: brandingMark ?? this.brandingMark,
+      earNotch: earNotch ?? this.earNotch,
       upp: upp ?? this.upp,
-      telefono: telefono ?? this.telefono,
-      direccion: direccion ?? this.direccion,
-      notas: notas ?? this.notas,
-      fechaRegistro: fechaRegistro ?? this.fechaRegistro,
-      ultimaActualizacion: ultimaActualizacion ?? this.ultimaActualizacion,
+      phone: phone ?? this.phone,
+      address: address ?? this.address,
+      notes: notes ?? this.notes,
+      registrationDate: registrationDate ?? this.registrationDate,
+      lastUpdateDate: lastUpdateDate ?? this.lastUpdateDate,
     );
   }
 
   @override
-  String toString() => 'Ganadero(id: $id, nombre: $nombre)';
+  String toString() => 'Rancher(id: $id, name: $name)';
 }

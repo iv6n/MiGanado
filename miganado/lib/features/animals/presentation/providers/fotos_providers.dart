@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/data/database/isar_database.dart';
 import 'package:miganado/features/animals/domain/entities/foto.dart';
 import 'package:miganado/features/animals/domain/usecases/fotos_usecases.dart';
+import 'package:miganado/core/exceptions/app_exception.dart';
+import 'package:miganado/core/services/logger_service.dart';
 
 // Provider de la base de datos
 final miganadoDatabaseProvider = Provider<MiGanadoDatabase>((ref) {
@@ -33,8 +35,21 @@ final actualizarFotoUseCaseProvider = Provider<ActualizarFotoUseCase>((ref) {
 // Provider para obtener fotos de un animal
 final fotosByAnimalProvider =
     FutureProvider.family<List<Foto>, String>((ref, animalUuid) async {
-  final useCase = ref.watch(obtenerFotosByAnimalUseCaseProvider);
-  return useCase(animalUuid: animalUuid);
+  try {
+    LoggerService.startOperation('fotosByAnimal', 'fotos_providers');
+    final useCase = ref.watch(obtenerFotosByAnimalUseCaseProvider);
+    final fotos = await useCase(animalUuid: animalUuid);
+    LoggerService.operationCompleted('fotosByAnimal', 'fotos_providers');
+    return fotos;
+  } catch (e, st) {
+    final appEx = toAppException(e, st);
+    LoggerService.error('Error obteniendo fotos', appEx, st, 'fotos_providers');
+    throw DatabaseException(
+      message: 'No se pudieron cargar las fotos: ${appEx.message}',
+      originalError: e,
+      stackTrace: st,
+    );
+  }
 });
 
 // Provider para estado de captura de foto

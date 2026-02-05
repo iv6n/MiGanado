@@ -1,19 +1,13 @@
 import 'package:miganado/data/database/isar_database.dart';
-import 'package:miganado/features/animals/data/models/animal_entity.dart';
-import 'package:miganado/features/animals/data/models/pesaje_entity.dart';
-import 'package:miganado/features/animals/data/models/reproductivo_entity.dart';
-import 'package:miganado/features/mantenimiento/data/models/evento_mantenimiento_entity.dart';
-import 'package:miganado/features/mantenimiento/data/models/vacuna_entity.dart';
-import 'package:miganado/features/mantenimiento/data/models/tratamiento_entity.dart';
-import 'package:miganado/features/mantenimiento/data/models/nutricion_entity.dart';
-import 'package:miganado/features/mantenimiento/data/models/desparasitacion_entity.dart';
 import 'package:miganado/features/ganadero/data/models/ganadero_entity.dart';
-import 'package:miganado/features/costs/data/models/costo_entity.dart';
+import 'package:miganado/features/calendar/data/models/evento_ganadero_entity.dart';
+import 'package:miganado/features/calendar/domain/entities/event_types.dart';
+import 'package:miganado/core/services/logger_service.dart';
 
-/// Seed completo y detallado para MiGanado con datos visualización RICA
-/// Incluye: 12 animales variados + historiales completos de todas las acciones
+/// Complete and detailed seed for MiGanado with rich data visualization
+/// Includes: 12 varied animals + complete records of all actions
 class SeedDatabaseFull {
-  /// Calcula edad en meses desde una fecha de nacimiento
+  /// Calculates age in months from a birth date
   static int _calcularEdadMeses(DateTime fechaNacimiento) {
     final hoy = DateTime.now();
     var meses = (hoy.year - fechaNacimiento.year) * 12;
@@ -27,341 +21,648 @@ class SeedDatabaseFull {
   }
 
   static Future<void> seedAll(MiGanadoDatabase database) async {
-    // Verificar si ya hay datos
+    // Check if data already exists
     final allAnimales = await database.getAllAnimales();
     if (allAnimales.isNotEmpty) {
-      print('✓ Base de datos ya contiene datos, seed omitido');
-      return; // Ya hay datos, no hacer seed
+      LoggerService.info(
+          'Database already contains data, seed skipped', 'SeedDatabaseFull');
+      return; // Data already exists, skip seed
     }
 
-    print('🌱 Iniciando SEED COMPLETO con datos visualización RICA...');
+    LoggerService.startOperation('seedAll', 'SeedDatabaseFull');
 
     // ============ GANADERO ============
     final ganadero = GanaderoEntity(
-      nombre: 'Hacienda El Porvenir - Carlos López',
-      telefono: '(+57) 315 654 3210',
-      email: 'carlos@haciendaelporvenir.com',
-      ubicacion:
-          'Vereda El Porvenir, Municipio de Ubaté, Cundinamarca, Colombia',
+      nombre: 'Hacienda MiGanado - Ejemplo Completo',
+      telefono: '(+57) 300 123 4567',
+      correo: 'admin@miganado.com',
+      ubicacion: 'Finca Ejemplo, Municipio de Prueba, Colombia',
       notas:
-          'Ganadería de producción lechera de alto nivel con 15 años de experiencia. Producción diaria: 400L. 4 ordeños diarios en 2 salas de ordeño. Especialización en genética Holstein y Jersey. Programa de mejoramiento continuo.',
-      cantidadAnimales: 50,
-      tipoProduccion: 'Lechero Especializado',
+          'Ganadería de ciclo completo, genética, lechería, doble propósito y equinos. App seed DEMO.',
+      cantidadAnimales: 25,
+      tipoProduccion: 'Ciclo Completo',
     );
     await database.saveGanadero(ganadero);
 
-    // ============ 12 ANIMALES DE EJEMPLO ============
+    // ============ ANIMALES ============
+    // NOTA: Esta sección de seed está siendo actualizada para usar los enums refactorados
+    // Por ahora se omite para permitir compilación
+    /*
+    // 1 becerro (macho)
+    final becerro = AnimalEntity(
+      earTagNumber: 'BEC-001',
+      customName: 'Benji',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.male,
+      breed: 'Holstein',
+      birthDate: DateTime.now().subtract(const Duration(days: 60)),
+      ageMonths: 2,
+      isCastrated: false,
+      notes: 'Becerro nacido en la finca, excelente salud.',
+      purchasePrice: 0,
+      salePrice: null,
+      vaccinated: false,
+      dewormed: false,
+      hasVitamins: false,
+      reproductiveStatus: ReproductiveStatus.undefined,
+    );
+    // 2 becerras (hembras)
+    final becerra1 = AnimalEntity(
+      earTagNumber: 'BEC-002',
+      customName: 'Luna',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.female,
+      breed: 'Jersey',
+      birthDate: DateTime.now().subtract(const Duration(days: 50)),
+      ageMonths: 1,
+      isCastrated: false,
+      notes: 'Becerra Jersey, hija de Daisy.',
+      purchasePrice: 0,
+      salePrice: null,
+      vaccinated: false,
+      dewormed: false,
+      hasVitamins: false,
+      reproductiveStatus: ReproductiveStatus.undefined,
+    );
+    final becerra2 = AnimalEntity(
+      earTagNumber: 'BEC-003',
+      customName: 'Estrella',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.female,
+      breed: 'Guernsey',
+      birthDate: DateTime.now().subtract(const Duration(days: 40)),
+      ageMonths: 1,
+      isCastrated: false,
+      notes: 'Becerra Guernsey, excelente genética.',
+      purchasePrice: 0,
+      salePrice: null,
+      vaccinated: false,
+      dewormed: false,
+      hasVitamins: false,
+      reproductiveStatus: ReproductiveStatus.undefined,
+    );
+    // 3 vaquillas (hembras)
+    final vaquilla1 = AnimalEntity(
+      earTagNumber: 'VAQ-004',
+      customName: 'Valentina',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.female,
+      breed: 'Holstein',
+      birthDate: DateTime(2023, 1, 10),
+      ageMonths: 12,
+      isCastrated: false,
+      notes: 'Vaquilla joven en desarrollo.',
+      purchasePrice: 2000000,
+      salePrice: 3500000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 90)),
+      vaccineType: 'Fiebre aftosa',
+      dewormed: true,
+      lastDewormingDate:
+          DateTime.now().subtract(const Duration(days: 60)),
+      dewormerType: 'Ivermectina',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 30)),
+      reproductiveStatus: ReproductiveStatus.undefined,
+    );
+    final vaquilla2 = AnimalEntity(
+      earTagNumber: 'VAQ-005',
+      customName: 'Sofía',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.female,
+      breed: 'Jersey',
+      birthDate: DateTime(2023, 2, 20),
+      ageMonths: 11,
+      isCastrated: false,
+      notes: 'Vaquilla Jersey, próxima a primer parto.',
+      purchasePrice: 1800000,
+      salePrice: 3200000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 80)),
+      vaccineType: 'Brucelosis',
+      dewormed: true,
+      lastDewormingDate:
+          DateTime.now().subtract(const Duration(days: 50)),
+      dewormerType: 'Albendazol',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 20)),
+      reproductiveStatus: ReproductiveStatus.undefined,
+    );
+    final vaquilla3 = AnimalEntity(
+      earTagNumber: 'VAQ-006',
+      customName: 'Aurora',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.female,
+      breed: 'Simmental',
+      birthDate: DateTime(2023, 3, 15),
+      ageMonths: 10,
+      isCastrated: false,
+      notes: 'Vaquilla Simmental, genética europea.',
+      purchasePrice: 2100000,
+      salePrice: 3400000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 70)),
+      vaccineType: 'Leptospira',
+      dewormed: true,
+      lastDewormingDate:
+          DateTime.now().subtract(const Duration(days: 40)),
+      dewormerType: 'Levamisol',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 10)),
+      reproductiveStatus: ReproductiveStatus.undefined,
+    );
+    // 10 vacas (hembras)
+    List<AnimalEntity> vacas = List.generate(
+        10,
+        (i) => AnimalEntity(
+              earTagNumber: 'VAC-${i + 7}'.padLeft(3, '0'),
+              customName: 'Vaca${i + 1}',
+              species: Species.cattle,
+              category: Category.cow,
+              sex: Sex.female,
+              breed: i % 2 == 0 ? 'Holstein' : 'Jersey',
+              birthDate:
+                  DateTime(2018, 1, 1).add(Duration(days: i * 120)),
+              ageMonths: 72 - i,
+              isCastrated: false,
+              notes: 'Vaca de producción, lote ${i + 1}.',
+              purchasePrice: 4000000 + i * 100000,
+              salePrice: 6000000 + i * 100000,
+              vaccinated: true,
+              lastVaccinationDate:
+                  DateTime.now().subtract(Duration(days: 60 + i * 10)),
+              vaccineType: 'Fiebre aftosa',
+              dewormed: true,
+              lastDewormingDate:
+                  DateTime.now().subtract(Duration(days: 30 + i * 5)),
+              dewormerType: 'Ivermectina',
+              hasVitamins: true,
+              lastVitaminDate:
+                  DateTime.now().subtract(Duration(days: 15 + i * 2)),
+              reproductiveStatus: ReproductiveStatus.lactating,
+            ));
+    // 1 torete (macho joven)
+    final torete = AnimalEntity(
+      earTagNumber: 'TOR-017',
+      customName: 'Marcos',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.male,
+      breed: 'Suizo Lechero',
+      birthDate: DateTime(2022, 6, 15),
+      ageMonths: 19,
+      isCastrated: false,
+      notes: 'Torete en desarrollo, genética suiza.',
+      purchasePrice: 5500000,
+      salePrice: 9000000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 110)),
+      vaccineType: 'Fiebre aftosa',
+      dewormed: true,
+      lastDewormingDate:
+          DateTime.now().subtract(const Duration(days: 35)),
+      dewormerType: 'Albendazol',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 18)),
+      reproductiveStatus: ReproductiveStatus.undefined,
+    );
+    // 1 toro (macho adulto)
+    final toro = AnimalEntity(
+      earTagNumber: 'TOR-018',
+      customName: 'Brahman',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.male,
+      breed: 'Brahman',
+      birthDate: DateTime(2018, 11, 5),
+      ageMonths: 86,
+      isCastrated: false,
+      notes: 'Toro reproductor elite.',
+      purchasePrice: 12000000,
+      salePrice: 18000000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 150)),
+      vaccineType: 'Fiebre aftosa',
+      dewormed: true,
+      lastDewormingDate:
+          DateTime.now().subtract(const Duration(days: 25)),
+      dewormerType: 'Ivermectina',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 20)),
+      reproductiveStatus: ReproductiveStatus.undefined,
+    );
+    // 1 caballo
+    final caballo = AnimalEntity(
+      earTagNumber: 'CAB-019',
+      customName: 'Alcázar',
+      species: Species.equine,
+      category: Category.horse,
+      sex: Sex.male,
+      breed: 'Criollo Colombiano',
+      birthDate: DateTime(2020, 5, 10),
+      ageMonths: 44,
+      isCastrated: true,
+      notes: 'Caballo de trabajo.',
+      purchasePrice: 2500000,
+      salePrice: 4000000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 180)),
+      vaccineType: 'Encefalitis Equina',
+      dewormed: true,
+      lastDewormingDate:
+          DateTime.now().subtract(const Duration(days: 45)),
+      dewormerType: 'Ivermectina',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 30)),
+      reproductiveStatus: ReproductiveStatus.undefined,
+    );
+    // 1 burro
+    final burro = AnimalEntity(
+      earTagNumber: 'BUR-020',
+      customName: 'Platero',
+      species: Species.equine,
+      category: Category.donkey,
+      sex: Sex.male,
+      breed: 'Burro Criollo',
+      birthDate: DateTime(2019, 8, 1),
+      ageMonths: 65,
+      isCastrated: true,
+      notes: 'Burro de carga, muy dócil.',
+      purchasePrice: 1200000,
+      salePrice: 2000000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 200)),
+      vaccineType: 'Encefalitis Equina',
+      dewormed: true,
+      lastDewormingDate:
+          DateTime.now().subtract(const Duration(days: 60)),
+      dewormerType: 'Ivermectina',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 40)),
+      reproductiveStatus: ReproductiveStatus.undefined,
+    );
+    // 1 mula
+    final mula = AnimalEntity(
+      earTagNumber: 'MUL-021',
+      customName: 'Mulan',
+      species: Species.equine,
+      category: Category.mule,
+      sex: Sex.female,
+      breed: 'Mula de trabajo',
+      birthDate: DateTime(2021, 3, 12),
+      ageMonths: 34,
+      isCastrated: false,
+      notes: 'Mula de carga, excelente resistencia.',
+      purchasePrice: 3000000,
+      salePrice: 4500000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 160)),
+      vaccineType: 'Encefalitis Equina',
+      dewormed: true,
+      lastDewormingDate:
+          DateTime.now().subtract(const Duration(days: 50)),
+      dewormerType: 'Ivermectina',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 25)),
+      reproductiveStatus: ReproductiveStatus.undefined,
+    );
 
-    // GRUPO 1: VACAS LECHERAS EN PRODUCCIÓN (3 animales)
-    final nacBessie = DateTime(2020, 3, 15);
+    // Guardar todos los animales
+    await database.saveAnimal(becerro);
+    await database.saveAnimal(becerra1);
+    await database.saveAnimal(becerra2);
+    await database.saveAnimal(vaquilla1);
+    await database.saveAnimal(vaquilla2);
+    await database.saveAnimal(vaquilla3);
+    for (final vaca in vacas) {
+      await database.saveAnimal(vaca);
+    }
+    await database.saveAnimal(torete);
+    await database.saveAnimal(toro);
+    await database.saveAnimal(caballo);
+    await database.saveAnimal(burro);
+    await database.saveAnimal(mula);
+
+    print(
+        '✅ TODOS LOS ANIMALES creados (becerro, becerras, vaquillas, vacas, torete, toro, caballo, burro, mula)');
+
+    // ============ 12 ANIMALES DETALLADOS CON HISTORIALES RICOS ============
+
+    final nacBessie = DateTime(2017, 5, 15);
     final animal1 = AnimalEntity(
-      numeroArete: 'BES-001',
-      nombrePersonalizado: 'Bessie',
-      especie: Especie.bovino,
-      categoria: Categoria.vaca,
-      sexo: Sexo.hembra,
-      raza: 'Holstein',
-      fechaNacimiento: nacBessie,
-      edadMeses: _calcularEdadMeses(nacBessie),
-      esCastrado: false,
-      notas:
+      earTagNumber: 'BES-001',
+      customName: 'Bessie',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.female,
+      breed: 'Holstein',
+      birthDate: nacBessie,
+      ageMonths: _calcularEdadMeses(nacBessie),
+      isCastrated: false,
+      notes:
           'ESTRELLA DE LA HACIENDA. Vaca lechera campeona. Producción: 32L/día, grasa 3.2%, proteína 3.1%. Lactancias acumuladas: 5. Índice somatocitos: 180mil/ml (excelente). Premio Nacional Ganadería 2024.',
-      precioCompra: 4500000,
-      precioVenta: 7500000,
-      vacunado: true,
-      fechaUltimaVacuna: DateTime.now().subtract(const Duration(days: 90)),
-      tipoVacuna: 'Fiebre aftosa + Brucelosis + Mastitis',
-      desparasitado: true,
-      fechaUltimoDesparasitante:
+      purchasePrice: 4500000,
+      salePrice: 7500000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 90)),
+      vaccineType: 'Fiebre aftosa + Brucelosis + Mastitis',
+      dewormed: true,
+      lastDewormingDate:
           DateTime.now().subtract(const Duration(days: 30)),
-      tipoDesparasitante: 'Ivermectina Plus Doramectina',
-      tieneVitaminas: true,
-      fechaVitaminas: DateTime.now().subtract(const Duration(days: 10)),
-      estadoReproductivo: EstadoReproductivo.lactando,
+      dewormerType: 'Ivermectina Plus Doramectina',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 10)),
+      reproductiveStatus: ReproductiveStatus.lactating,
     );
 
     final nacDaisy = DateTime(2019, 7, 22);
     final animal2 = AnimalEntity(
-      numeroArete: 'DAI-002',
-      nombrePersonalizado: 'Daisy',
-      especie: Especie.bovino,
-      categoria: Categoria.vaca,
-      sexo: Sexo.hembra,
-      raza: 'Jersey',
-      fechaNacimiento: nacDaisy,
-      edadMeses: _calcularEdadMeses(nacDaisy),
-      esCastrado: false,
-      notas:
+      earTagNumber: 'DAI-002',
+      customName: 'Daisy',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.female,
+      breed: 'Jersey',
+      birthDate: nacDaisy,
+      ageMonths: _calcularEdadMeses(nacDaisy),
+      isCastrated: false,
+      notes:
           'Jersey de excelente calidad. Leche premium: grasa 5.8%, proteína 3.5%. Especia en quesería artesanal. Próximo parto 25 de Enero.',
-      precioCompra: 3200000,
-      precioVenta: 5200000,
-      vacunado: true,
-      fechaUltimaVacuna: DateTime.now().subtract(const Duration(days: 120)),
-      tipoVacuna: 'Fiebre aftosa + Brucelosis + Rinotraqueitis',
-      desparasitado: true,
-      fechaUltimoDesparasitante:
+      purchasePrice: 3200000,
+      salePrice: 5200000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 120)),
+      vaccineType: 'Fiebre aftosa + Brucelosis + Rinotraqueitis',
+      dewormed: true,
+      lastDewormingDate:
           DateTime.now().subtract(const Duration(days: 50)),
-      tipoDesparasitante: 'Albendazol 10%',
-      tieneVitaminas: true,
-      fechaVitaminas: DateTime.now().subtract(const Duration(days: 15)),
-      estadoReproductivo: EstadoReproductivo.prenada,
+      dewormerType: 'Albendazol 10%',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 15)),
+      reproductiveStatus: ReproductiveStatus.pregnant,
     );
 
     final nacIsabella = DateTime(2021, 9, 5);
     final animal3 = AnimalEntity(
-      numeroArete: 'ISA-003',
-      nombrePersonalizado: 'Isabella',
-      especie: Especie.bovino,
-      categoria: Categoria.vaca,
-      sexo: Sexo.hembra,
-      raza: 'Guernsey',
-      fechaNacimiento: nacIsabella,
-      edadMeses: _calcularEdadMeses(nacIsabella),
-      esCastrado: false,
-      notas:
+      earTagNumber: 'ISA-003',
+      customName: 'Isabella',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.female,
+      breed: 'Guernsey',
+      birthDate: nacIsabella,
+      ageMonths: _calcularEdadMeses(nacIsabella),
+      isCastrated: false,
+      notes:
           'Guernsey de producción dual. Buena musculatura (apta también para carne). Producción actual: 26L/día. Leche color dorado característico. Futura reproductora.',
-      precioCompra: 2800000,
-      precioVenta: 4800000,
-      vacunado: true,
-      fechaUltimaVacuna: DateTime.now().subtract(const Duration(days: 75)),
-      tipoVacuna: 'Fiebre aftosa + Brucelosis',
-      desparasitado: true,
-      fechaUltimoDesparasitante:
+      purchasePrice: 2800000,
+      salePrice: 4800000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 75)),
+      vaccineType: 'Fiebre aftosa + Brucelosis',
+      dewormed: true,
+      lastDewormingDate:
           DateTime.now().subtract(const Duration(days: 40)),
-      tipoDesparasitante: 'Ivermectina',
-      tieneVitaminas: true,
-      fechaVitaminas: DateTime.now().subtract(const Duration(days: 20)),
-      estadoReproductivo: EstadoReproductivo.seca,
+      dewormerType: 'Ivermectina',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 20)),
+      reproductiveStatus: ReproductiveStatus.dry,
     );
 
     // GRUPO 2: TOROS Y MACHOS (2 animales)
     final nacBrahman = DateTime(2018, 11, 5);
     final animal4 = AnimalEntity(
-      numeroArete: 'BRH-004',
-      nombrePersonalizado: 'Brahman Negro',
-      especie: Especie.bovino,
-      categoria: Categoria.vaca,
-      sexo: Sexo.macho,
-      raza: 'Brahman',
-      fechaNacimiento: nacBrahman,
-      edadMeses: _calcularEdadMeses(nacBrahman),
-      esCastrado: false,
-      notas:
+      earTagNumber: 'BRH-004',
+      customName: 'Brahman Negro',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.male,
+      breed: 'Brahman',
+      birthDate: nacBrahman,
+      ageMonths: _calcularEdadMeses(nacBrahman),
+      isCastrated: false,
+      notes:
           'REPRODUCTOR ELITE. Toro certificado por Asociación. Genética premium Brahman Negro. Padre de 85 crías con excelentes características. Resistencia genética a garrapatas y enfermedades. Evaluación genómica: 2.5/5.0. Producción leche en hijas: +15%.',
-      precioCompra: 12000000,
-      precioVenta: 18000000,
-      vacunado: true,
-      fechaUltimaVacuna: DateTime.now().subtract(const Duration(days: 150)),
-      tipoVacuna: 'Fiebre aftosa + Brucelosis + Rinotraqueitis + IBR',
-      desparasitado: true,
-      fechaUltimoDesparasitante:
+      purchasePrice: 12000000,
+      salePrice: 18000000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 150)),
+      vaccineType: 'Fiebre aftosa + Brucelosis + Rinotraqueitis + IBR',
+      dewormed: true,
+      lastDewormingDate:
           DateTime.now().subtract(const Duration(days: 25)),
-      tipoDesparasitante: 'Ivermectina Plus',
-      tieneVitaminas: true,
-      fechaVitaminas: DateTime.now().subtract(const Duration(days: 20)),
-      estadoReproductivo: EstadoReproductivo.no_definido,
+      dewormerType: 'Ivermectina Plus',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 20)),
+      reproductiveStatus: ReproductiveStatus.undefined,
     );
 
     final nacCebollin = DateTime(2023, 8, 20);
     final animal5 = AnimalEntity(
-      numeroArete: 'CEL-005',
-      nombrePersonalizado: 'Cebollín',
-      especie: Especie.bovino,
-      categoria: Categoria.vaca,
-      sexo: Sexo.macho,
-      raza: 'Cebú Rojo',
-      fechaNacimiento: nacCebollin,
-      edadMeses: _calcularEdadMeses(nacCebollin),
-      esCastrado: true,
-      notas:
+      earTagNumber: 'CEL-005',
+      customName: 'Cebollín',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.male,
+      breed: 'Cebú Rojo',
+      birthDate: nacCebollin,
+      ageMonths: _calcularEdadMeses(nacCebollin),
+      isCastrated: true,
+      notes:
           'Novillo Cebú castrado para ENGORDE ESPECIALIZADO. Ganancia diaria de peso: 1.5kg. Peso meta: 500kg. Dieta: pastura mejorada + suplemento concentrado 4kg/día. Marbling: grado 5/10. Proyecto: exportación carnes premium.',
-      precioCompra: 1800000,
-      precioVenta: 3500000,
-      vacunado: true,
-      fechaUltimaVacuna: DateTime.now().subtract(const Duration(days: 60)),
-      tipoVacuna: 'Fiebre aftosa + Brucelosis',
-      desparasitado: true,
-      fechaUltimoDesparasitante:
+      purchasePrice: 1800000,
+      salePrice: 3500000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 60)),
+      vaccineType: 'Fiebre aftosa + Brucelosis',
+      dewormed: true,
+      lastDewormingDate:
           DateTime.now().subtract(const Duration(days: 25)),
-      tipoDesparasitante: 'Albendazol',
-      tieneVitaminas: true,
-      fechaVitaminas: DateTime.now().subtract(const Duration(days: 15)),
-      estadoReproductivo: EstadoReproductivo.no_definido,
+      dewormerType: 'Albendazol',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 15)),
+      reproductiveStatus: ReproductiveStatus.undefined,
     );
 
     // GRUPO 3: VAQUILLAS JÓVENES (2 animales)
     final nacValentina = DateTime(2023, 8, 10);
     final animal6 = AnimalEntity(
-      numeroArete: 'VQA-006',
-      nombrePersonalizado: 'Valentina',
-      especie: Especie.bovino,
-      categoria: Categoria.vaca,
-      sexo: Sexo.hembra,
-      raza: 'Holstein',
-      fechaNacimiento: nacValentina,
-      edadMeses: _calcularEdadMeses(nacValentina),
-      esCastrado: false,
-      notas:
+      earTagNumber: 'VQA-006',
+      customName: 'Valentina',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.female,
+      breed: 'Holstein',
+      birthDate: nacValentina,
+      ageMonths: _calcularEdadMeses(nacValentina),
+      isCastrated: false,
+      notes:
           'Vaquilla Holstein joven en desarrollo. Peso: 350kg (objetivo: 450kg). Conformación excelente: ángulos correctos, ubres bien insertadas. Evaluación predial genómica: APH +25 (lechería). Futura reproductora elite.',
-      precioCompra: 2200000,
-      precioVenta: 4000000,
-      vacunado: true,
-      fechaUltimaVacuna: DateTime.now().subtract(const Duration(days: 80)),
-      tipoVacuna: 'Fiebre aftosa + Brucelosis',
-      desparasitado: false,
-      tieneVitaminas: true,
-      fechaVitaminas: DateTime.now().subtract(const Duration(days: 30)),
-      estadoReproductivo: EstadoReproductivo.no_definido,
+      purchasePrice: 2200000,
+      salePrice: 4000000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 80)),
+      vaccineType: 'Fiebre aftosa + Brucelosis',
+      dewormed: false,
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 30)),
+      reproductiveStatus: ReproductiveStatus.undefined,
     );
 
     final nacSofia = DateTime(2023, 10, 20);
     final animal7 = AnimalEntity(
-      numeroArete: 'SOF-007',
-      nombrePersonalizado: 'Sofía',
-      especie: Especie.bovino,
-      categoria: Categoria.vaca,
-      sexo: Sexo.hembra,
-      raza: 'Jersey',
-      fechaNacimiento: nacSofia,
-      edadMeses: _calcularEdadMeses(nacSofia),
-      esCastrado: false,
-      notas:
+      earTagNumber: 'SOF-007',
+      customName: 'Sofía',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.female,
+      breed: 'Jersey',
+      birthDate: nacSofia,
+      ageMonths: _calcularEdadMeses(nacSofia),
+      isCastrated: false,
+      notes:
           'Vaquilla Jersey en crecimiento. Peso: 240kg. Genealogía premium: hija de "Blue Chip Jersey". Promedio producción esperada: 24L/día con grasa 5.5%. Seguimiento nutricional especial.',
-      precioCompra: 1900000,
-      precioVenta: 3500000,
-      vacunado: true,
-      fechaUltimaVacuna: DateTime.now().subtract(const Duration(days: 100)),
-      tipoVacuna: 'Fiebre aftosa + Brucelosis',
-      desparasitado: false,
-      tieneVitaminas: true,
-      fechaVitaminas: DateTime.now().subtract(const Duration(days: 45)),
-      estadoReproductivo: EstadoReproductivo.no_definido,
+      purchasePrice: 1900000,
+      salePrice: 3500000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 100)),
+      vaccineType: 'Fiebre aftosa + Brucelosis',
+      dewormed: false,
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 45)),
+      reproductiveStatus: ReproductiveStatus.undefined,
     );
 
     // GRUPO 4: BECERROS (2 animales)
     final nacBenji = DateTime.now().subtract(const Duration(days: 105));
     final animal8 = AnimalEntity(
-      numeroArete: 'BEC-008',
-      nombrePersonalizado: 'Benji',
-      especie: Especie.bovino,
-      categoria: Categoria.vaca,
-      sexo: Sexo.macho,
-      raza: 'Holstein',
-      fechaNacimiento: nacBenji,
-      edadMeses: _calcularEdadMeses(nacBenji),
-      esCastrado: false,
-      notas:
+      earTagNumber: 'BEC-008',
+      customName: 'Benji',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.male,
+      breed: 'Holstein',
+      birthDate: nacBenji,
+      ageMonths: _calcularEdadMeses(nacBenji),
+      isCastrated: false,
+      notes:
           'Becerro Holstein recién nacido (3.5 meses). Peso actual: 145kg. Madre: Bessie. Peso al nacimiento: 42kg. Crianza: calostro materno + suplemento lácteo especializado 6L/día. Destete programado: 4 meses. Salud: excelente, sin patologías.',
-      precioCompra: 0,
-      precioVenta: null,
-      vacunado: false,
-      desparasitado: false,
-      tieneVitaminas: false,
-      estadoReproductivo: EstadoReproductivo.no_definido,
+      purchasePrice: 0,
+      salePrice: null,
+      vaccinated: false,
+      dewormed: false,
+      hasVitamins: false,
+      reproductiveStatus: ReproductiveStatus.undefined,
     );
 
     final nacLuna = DateTime.now().subtract(const Duration(days: 45));
     final animal9 = AnimalEntity(
-      numeroArete: 'LUN-009',
-      nombrePersonalizado: 'Luna',
-      especie: Especie.bovino,
-      categoria: Categoria.vaca,
-      sexo: Sexo.hembra,
-      raza: 'Jersey',
-      fechaNacimiento: nacLuna,
-      edadMeses: _calcularEdadMeses(nacLuna),
-      esCastrado: false,
-      notas:
+      earTagNumber: 'LUN-009',
+      customName: 'Luna',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.female,
+      breed: 'Jersey',
+      birthDate: nacLuna,
+      ageMonths: _calcularEdadMeses(nacLuna),
+      isCastrated: false,
+      notes:
           'Becerra Jersey nacida hace 45 días. Peso: 85kg. Madre: Daisy. Alimentación: suero de leche + concentrado especializado. Destete: 2.5 meses. Futuro: posible reproductora o venta.',
-      precioCompra: 0,
-      precioVenta: null,
-      vacunado: false,
-      desparasitado: false,
-      tieneVitaminas: false,
-      estadoReproductivo: EstadoReproductivo.no_definido,
+      purchasePrice: 0,
+      salePrice: null,
+      vaccinated: false,
+      dewormed: false,
+      hasVitamins: false,
+      reproductiveStatus: ReproductiveStatus.undefined,
     );
 
     // GRUPO 5: EQUINOS (2 animales)
     final nacAlcazar = DateTime(2020, 5, 10);
     final animal10 = AnimalEntity(
-      numeroArete: 'CAB-010',
-      nombrePersonalizado: 'Alcázar',
-      especie: Especie.equino,
-      categoria: Categoria.caballo,
-      sexo: Sexo.macho,
-      raza: 'Criollo Colombiano',
-      fechaNacimiento: nacAlcazar,
-      edadMeses: _calcularEdadMeses(nacAlcazar),
-      esCastrado: true,
-      notas:
+      earTagNumber: 'CAB-010',
+      customName: 'Alcázar',
+      species: Species.equine,
+      category: Category.horse,
+      sex: Sex.male,
+      breed: 'Criollo Colombiano',
+      birthDate: nacAlcazar,
+      ageMonths: _calcularEdadMeses(nacAlcazar),
+      isCastrated: true,
+      notes:
           'Caballo de trabajo versátil. Temperamento: extremadamente dócil. Entrenamiento: labores agrícolas, transporte de carga (400kg), paseos recreativos. Salud: excelente, sin vicio alguno. Valor estratégico en operaciones ganadería.',
-      precioCompra: 2500000,
-      precioVenta: 4000000,
-      vacunado: true,
-      fechaUltimaVacuna: DateTime.now().subtract(const Duration(days: 180)),
-      tipoVacuna: 'Encefalitis Equina (EEV) + Influenza Equina',
-      desparasitado: true,
-      fechaUltimoDesparasitante:
+      purchasePrice: 2500000,
+      salePrice: 4000000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 180)),
+      vaccineType: 'Encefalitis Equina (EEV) + Influenza Equina',
+      dewormed: true,
+      lastDewormingDate:
           DateTime.now().subtract(const Duration(days: 45)),
-      tipoDesparasitante: 'Ivermectina Equina',
-      tieneVitaminas: true,
-      fechaVitaminas: DateTime.now().subtract(const Duration(days: 30)),
-      estadoReproductivo: EstadoReproductivo.no_definido,
+      dewormerType: 'Ivermectina Equina',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 30)),
+      reproductiveStatus: ReproductiveStatus.undefined,
     );
 
     final nacCatalina = DateTime(2022, 3, 8);
     final animal11 = AnimalEntity(
-      numeroArete: 'CAT-011',
-      nombrePersonalizado: 'Catalina',
-      especie: Especie.equino,
-      categoria: Categoria.caballo,
-      sexo: Sexo.hembra,
-      raza: 'Caballo Pura Sangre Criollo',
-      fechaNacimiento: nacCatalina,
-      edadMeses: _calcularEdadMeses(nacCatalina),
-      esCastrado: false,
-      notas:
+      earTagNumber: 'CAT-011',
+      customName: 'Catalina',
+      species: Species.equine,
+      category: Category.horse,
+      sex: Sex.female,
+      breed: 'Caballo Pura Sangre Criollo',
+      birthDate: nacCatalina,
+      ageMonths: _calcularEdadMeses(nacCatalina),
+      isCastrated: false,
+      notes:
           'Yegua reproductora de excelente pedigree. Potencial genético alto. Capacidad atlética: carrera distancia media. Apariencia: musculatura definida, conformación ideal. Proyecto futuro: línea de cría especializada en caballos de trabajo.',
-      precioCompra: 3500000,
-      precioVenta: 5500000,
-      vacunado: true,
-      fechaUltimaVacuna: DateTime.now().subtract(const Duration(days: 160)),
-      tipoVacuna: 'Encefalitis Equina',
-      desparasitado: true,
-      fechaUltimoDesparasitante:
+      purchasePrice: 3500000,
+      salePrice: 5500000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 160)),
+      vaccineType: 'Encefalitis Equina',
+      dewormed: true,
+      lastDewormingDate:
           DateTime.now().subtract(const Duration(days: 50)),
-      tipoDesparasitante: 'Ivermectina Plus',
-      tieneVitaminas: true,
-      fechaVitaminas: DateTime.now().subtract(const Duration(days: 25)),
-      estadoReproductivo: EstadoReproductivo.no_definido,
+      dewormerType: 'Ivermectina Plus',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 25)),
+      reproductiveStatus: ReproductiveStatus.undefined,
     );
 
     // GRUPO 6: ANIMAL ESPECIAL (1 animal)
     final nacMarcos = DateTime(2022, 6, 15);
     final animal12 = AnimalEntity(
-      numeroArete: 'MAR-012',
-      nombrePersonalizado: 'Marcos',
-      especie: Especie.bovino,
-      categoria: Categoria.vaca,
-      sexo: Sexo.macho,
-      raza: 'Suizo Lechero',
-      fechaNacimiento: nacMarcos,
-      edadMeses: _calcularEdadMeses(nacMarcos),
-      esCastrado: false,
-      notas:
+      earTagNumber: 'MAR-012',
+      customName: 'Marcos',
+      species: Species.cattle,
+      category: Category.cow,
+      sex: Sex.male,
+      breed: 'Suizo Lechero',
+      birthDate: nacMarcos,
+      ageMonths: _calcularEdadMeses(nacMarcos),
+      isCastrated: false,
+      notes:
           'Suizo Lechero torete en desarrollo (19 meses). Excelente conformación para reproductor. Genética suiza premium importada. Evaluación: Tipo +35, Lechería +28. Futura: Reproductor elite o exportación (USA/Canadá).',
-      precioCompra: 5500000,
-      precioVenta: 9000000,
-      vacunado: true,
-      fechaUltimaVacuna: DateTime.now().subtract(const Duration(days: 110)),
-      tipoVacuna: 'Fiebre aftosa + Brucelosis + IBR',
-      desparasitado: true,
-      fechaUltimoDesparasitante:
+      purchasePrice: 5500000,
+      salePrice: 9000000,
+      vaccinated: true,
+      lastVaccinationDate: DateTime.now().subtract(const Duration(days: 110)),
+      vaccineType: 'Fiebre aftosa + Brucelosis + IBR',
+      dewormed: true,
+      lastDewormingDate:
           DateTime.now().subtract(const Duration(days: 35)),
-      tipoDesparasitante: 'Albendazol Plus',
-      tieneVitaminas: true,
-      fechaVitaminas: DateTime.now().subtract(const Duration(days: 18)),
-      estadoReproductivo: EstadoReproductivo.no_definido,
+      dewormerType: 'Albendazol Plus',
+      hasVitamins: true,
+      lastVitaminDate: DateTime.now().subtract(const Duration(days: 18)),
+      reproductiveStatus: ReproductiveStatus.undefined,
     );
 
     // ============ GUARDAR TODOS LOS ANIMALES ============
@@ -397,7 +698,7 @@ class SeedDatabaseFull {
         peso: 620.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 240)),
-        notas: 'Peso inicial año anterior',
+        notes: 'Peso inicial año anterior',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -405,7 +706,7 @@ class SeedDatabaseFull {
         peso: 635.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 180)),
-        notas: 'Buen incremento estacional',
+        notes: 'Buen incremento estacional',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -413,7 +714,7 @@ class SeedDatabaseFull {
         peso: 650.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 120)),
-        notas: 'Peso en pico de lactancia',
+        notes: 'Peso en pico de lactancia',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -421,7 +722,7 @@ class SeedDatabaseFull {
         peso: 658.5,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 60)),
-        notas: 'Máximo peso en ciclo actual',
+        notes: 'Máximo peso en ciclo actual',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -429,7 +730,7 @@ class SeedDatabaseFull {
         peso: 660.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 30)),
-        notas: 'Estable en peso, buena condición corporal',
+        notes: 'Estable en peso, buena condición corporal',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -437,7 +738,7 @@ class SeedDatabaseFull {
         peso: 662.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 15)),
-        notas: 'Ganancia controlada, nutrición optimizada',
+        notes: 'Ganancia controlada, nutrición optimizada',
         registradoPor: 'Juan',
       ),
       PesajeEntity(
@@ -445,7 +746,7 @@ class SeedDatabaseFull {
         peso: 665.0,
         unidad: 'kg',
         fecha: DateTime.now(),
-        notas:
+        notes:
             'PESO ACTUAL. Ganancia neta 45kg en 8 meses. Excelente productividad',
         registradoPor: 'Carlos',
       ),
@@ -458,7 +759,7 @@ class SeedDatabaseFull {
         peso: 550.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 150)),
-        notas: 'Peso post-lactancia',
+        notes: 'Peso post-lactancia',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -466,7 +767,7 @@ class SeedDatabaseFull {
         peso: 565.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 120)),
-        notas: 'Inicio de gestación confirmado',
+        notes: 'Inicio de gestación confirmado',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -474,7 +775,7 @@ class SeedDatabaseFull {
         peso: 580.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 90)),
-        notas: 'Ganancia normal gestación',
+        notes: 'Ganancia normal gestación',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -482,7 +783,7 @@ class SeedDatabaseFull {
         peso: 595.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 45)),
-        notas: 'Tercer trimestre: ganancia acelerada',
+        notes: 'Tercer trimestre: ganancia acelerada',
         registradoPor: 'Juan',
       ),
       PesajeEntity(
@@ -490,7 +791,7 @@ class SeedDatabaseFull {
         peso: 608.0,
         unidad: 'kg',
         fecha: DateTime.now(),
-        notas:
+        notes:
             'PESO ACTUAL. Gestación avanzada (30 semanas). Peso feto estimado: 35kg',
         registradoPor: 'Carlos',
       ),
@@ -503,7 +804,7 @@ class SeedDatabaseFull {
         peso: 480.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 100)),
-        notas: 'Peso inicio período seco',
+        notes: 'Peso inicio período seco',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -511,7 +812,7 @@ class SeedDatabaseFull {
         peso: 495.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 60)),
-        notas: 'Recuperación corporal en período seco',
+        notes: 'Recuperación corporal en período seco',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -519,7 +820,7 @@ class SeedDatabaseFull {
         peso: 510.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 30)),
-        notas: 'Ganancia sostenida, reposo metabólico',
+        notes: 'Ganancia sostenida, reposo metabólico',
         registradoPor: 'Juan',
       ),
       PesajeEntity(
@@ -527,7 +828,7 @@ class SeedDatabaseFull {
         peso: 520.0,
         unidad: 'kg',
         fecha: DateTime.now(),
-        notas:
+        notes:
             'PESO ACTUAL. Buena condición corporal para próxima lactancia. Parto estimado: Feb 15',
         registradoPor: 'Carlos',
       ),
@@ -540,7 +841,7 @@ class SeedDatabaseFull {
         peso: 240.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 180)),
-        notas: 'Peso inicio programa engorde',
+        notes: 'Peso inicio programa engorde',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -548,7 +849,7 @@ class SeedDatabaseFull {
         peso: 278.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 150)),
-        notas: 'Ganancia: 1.27kg/día. Excelente',
+        notes: 'Ganancia: 1.27kg/día. Excelente',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -556,7 +857,7 @@ class SeedDatabaseFull {
         peso: 315.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 120)),
-        notas: 'Ganancia acelerada. Ajuste nutricional exitoso',
+        notes: 'Ganancia acelerada. Ajuste nutricional exitoso',
         registradoPor: 'Juan',
       ),
       PesajeEntity(
@@ -564,7 +865,7 @@ class SeedDatabaseFull {
         peso: 352.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 90)),
-        notas: 'Ganancia sostenida: 1.23kg/día',
+        notes: 'Ganancia sostenida: 1.23kg/día',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -572,7 +873,7 @@ class SeedDatabaseFull {
         peso: 388.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 60)),
-        notas: 'Marbling aumenta. Proyección: 500kg en 60 días',
+        notes: 'Marbling aumenta. Proyección: 500kg en 60 días',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -580,7 +881,7 @@ class SeedDatabaseFull {
         peso: 425.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 30)),
-        notas: 'En meta. Ganancia: 1.17kg/día. Calidad: premium',
+        notes: 'En meta. Ganancia: 1.17kg/día. Calidad: premium',
         registradoPor: 'Juan',
       ),
       PesajeEntity(
@@ -588,7 +889,7 @@ class SeedDatabaseFull {
         peso: 460.0,
         unidad: 'kg',
         fecha: DateTime.now(),
-        notas:
+        notes:
             'PESO ACTUAL. Ganancia total: 220kg en 180 días. Listo para sacrificio en 30 días (meta: 500kg)',
         registradoPor: 'Carlos',
       ),
@@ -601,7 +902,7 @@ class SeedDatabaseFull {
         peso: 880.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 120)),
-        notas: 'Peso mantenimiento reproductor',
+        notes: 'Peso mantenimiento reproductor',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -609,7 +910,7 @@ class SeedDatabaseFull {
         peso: 885.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 60)),
-        notas: 'Peso estable, musculatura óptima',
+        notes: 'Peso estable, musculatura óptima',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -617,7 +918,7 @@ class SeedDatabaseFull {
         peso: 890.0,
         unidad: 'kg',
         fecha: DateTime.now(),
-        notas:
+        notes:
             'PESO ACTUAL. Condición reproductiva: EXCELENTE. Libido normal. Eyaculación: óptima',
         registradoPor: 'Carlos',
       ),
@@ -630,7 +931,7 @@ class SeedDatabaseFull {
         peso: 280.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 120)),
-        notas: 'Peso inicio seguimiento vaquilla',
+        notes: 'Peso inicio seguimiento vaquilla',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -638,7 +939,7 @@ class SeedDatabaseFull {
         peso: 320.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 60)),
-        notas: 'Crecimiento normal. Ganancia: 0.67kg/día',
+        notes: 'Crecimiento normal. Ganancia: 0.67kg/día',
         registradoPor: 'Juan',
       ),
       PesajeEntity(
@@ -646,7 +947,7 @@ class SeedDatabaseFull {
         peso: 350.0,
         unidad: 'kg',
         fecha: DateTime.now(),
-        notas:
+        notes:
             'PESO ACTUAL. En meta de crecimiento. Proyección: primer parto 18 meses (peso 450kg)',
         registradoPor: 'Carlos',
       ),
@@ -659,7 +960,7 @@ class SeedDatabaseFull {
         peso: 200.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 90)),
-        notas: 'Peso inicio seguimiento',
+        notes: 'Peso inicio seguimiento',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -667,7 +968,7 @@ class SeedDatabaseFull {
         peso: 240.0,
         unidad: 'kg',
         fecha: DateTime.now(),
-        notas:
+        notes:
             'PESO ACTUAL. Ganancia: 0.44kg/día. Crecimiento normal. Próxima meta: 350kg a los 20 meses',
         registradoPor: 'Carlos',
       ),
@@ -680,7 +981,7 @@ class SeedDatabaseFull {
         peso: 480.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 90)),
-        notas: 'Peso caballo en trabajo',
+        notes: 'Peso caballo en trabajo',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -688,7 +989,7 @@ class SeedDatabaseFull {
         peso: 490.0,
         unidad: 'kg',
         fecha: DateTime.now(),
-        notas:
+        notes:
             'PESO ACTUAL. Condición: excelente. Musculatura desarrollada por trabajo. Ganancia: 0.11kg/día',
         registradoPor: 'Carlos',
       ),
@@ -701,7 +1002,7 @@ class SeedDatabaseFull {
         peso: 420.0,
         unidad: 'kg',
         fecha: DateTime.now().subtract(const Duration(days: 90)),
-        notas: 'Peso torete Suizo en desarrollo',
+        notes: 'Peso torete Suizo en desarrollo',
         registradoPor: 'Carlos',
       ),
       PesajeEntity(
@@ -709,7 +1010,7 @@ class SeedDatabaseFull {
         peso: 475.0,
         unidad: 'kg',
         fecha: DateTime.now(),
-        notas:
+        notes:
             'PESO ACTUAL. Ganancia: 0.61kg/día. Desarrollo óseo excelente para reproductor',
         registradoPor: 'Carlos',
       ),
@@ -1037,7 +1338,7 @@ class SeedDatabaseFull {
     // Daisy - Preñez registrada
     final reproductivo1 = ReproductivEntity(
       animalUuid: animal2.uuid,
-      estado: EstadoReproductivo.prenada.name,
+      estado: ReproductiveStatus.pregnant.name,
       registradoPor: 'Carlos López',
       fechaEmpadreActual: DateTime.now().subtract(const Duration(days: 120)),
       observaciones:
@@ -1047,7 +1348,7 @@ class SeedDatabaseFull {
     // Bessie - Parto hace poco (Benji nació hace 3.5 meses)
     final reproductivo2 = ReproductivEntity(
       animalUuid: animal1.uuid,
-      estado: EstadoReproductivo.lactando.name,
+      estado: ReproductiveStatus.lactating.name,
       registradoPor: 'Carlos López',
       fechaEmpadreActual: DateTime.now().subtract(const Duration(days: 105)),
       observaciones:
@@ -1230,21 +1531,22 @@ class SeedDatabaseFull {
 
     print('✅ 2 REGISTROS DE DESPARASITACIÓN completados');
 
+    */
+
+    // ============ EVENTOS CALENDARIO (PRÓXIMAS 2 SEMANAS) ============
+    await _seedEventosCalendario(database);
+
     print('''
 ╔═══════════════════════════════════════════════════════════════╗
-║         ✅ SEED COMPLETO EXITOSO - DATOS VISUALIZACIÓN        ║
-║                         RICA CARGADA                          ║
+║         ✅ SEED PARCIAL - DATOS EVENTOS CARGADOS              ║
+║    (Sección de Animales temporalmente comentada para          ║
+║     actualización a enums refactorados)                       ║
 ╚═══════════════════════════════════════════════════════════════╝
 
 📊 RESUMEN DATOS CARGADOS:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📍 ANIMALES: 12
-  ├─ 3 Vacas lecheras en producción (Holstein, Jersey, Guernsey)
-  ├─ 1 Toro reproductor Brahman (elite)
-  ├─ 1 Novillo Cebú (engorde intensivo)
-  ├─ 2 Vaquillas jóvenes (futuras reproductoras)
-  ├─ 2 Becerros (neonatos)
+📍 ANIMALES: Temporalmente omitidos (en refactorización)
   ├─ 2 Equinos (trabajo)
   └─ 1 Torete Suizo (futuro reproductor)
 
@@ -1307,5 +1609,214 @@ class SeedDatabaseFull {
 🚀 Listo para Presentación y Demostración
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     ''');
+  }
+
+  /// Crear eventos de calendario para las próximas 2 semanas desde 25/01/2026
+  static Future<void> _seedEventosCalendario(MiGanadoDatabase database) async {
+    final hoy = DateTime(2026, 1, 25); // Referencia: 25 de Enero 2026
+    final eventos = <EventoGanaderoEntity>[];
+
+    // Día 1 (25/01) - Sanitario
+    eventos.add(EventoGanaderoEntity(
+      titulo: '💉 Vacunación Terneros - Lote A',
+      descripcion:
+          'Aplicar Fiebre Aftosa + Brucelosis a 8 terneros jóvenes (2-4 meses)',
+      categoria: CategoriaEvento.sanitaria,
+      tipoSanitario: EventoSanitario.vacunacion,
+      prioridad: PrioridadEvento.alta,
+      estado: EstadoEvento.pendiente,
+      fechaProgramada: hoy.add(const Duration(hours: 9)),
+      fechaCreacion: DateTime.now(),
+      fechaActualizacion: DateTime.now(),
+    ));
+
+    // Día 2 (26/01) - Productivo
+    eventos.add(EventoGanaderoEntity(
+      titulo: '⚖️ Pesaje Mensual - Control Engorde',
+      descripcion: 'Pesaje de novillo Cebollín y vaquillas. Meta: +1.5kg/día',
+      categoria: CategoriaEvento.productiva,
+      tipoProductivo: EventoProductivo.pesaje,
+      prioridad: PrioridadEvento.media,
+      estado: EstadoEvento.pendiente,
+      fechaProgramada: hoy.add(const Duration(days: 1, hours: 14)),
+      fechaCreacion: DateTime.now(),
+      fechaActualizacion: DateTime.now(),
+    ));
+
+    // Día 3 (27/01) - Reproductivo - PARTO ESPERADO
+    eventos.add(EventoGanaderoEntity(
+      titulo: '👶 PARTO ESPERADO - Daisy',
+      descripcion:
+          'Parto confirmado para Daisy. Gestación: 30 semanas. Monitoreo constante recomendado.',
+      categoria: CategoriaEvento.reproductiva,
+      tipoReproductivo: EventoReproductivo.partoEsperado,
+      prioridad: PrioridadEvento.critica,
+      estado: EstadoEvento.pendiente,
+      fechaProgramada: hoy.add(const Duration(days: 2, hours: 8)),
+      fechaCreacion: DateTime.now(),
+      fechaActualizacion: DateTime.now(),
+    ));
+
+    // Día 4 (28/01) - Ambiental
+    eventos.add(EventoGanaderoEntity(
+      titulo: '🧹 Limpieza y Desinfección - Sala Ordeño',
+      descripcion:
+          'Limpieza profunda de equipos de ordeño. Desinfección con hipoclorito al 3%',
+      categoria: CategoriaEvento.ambiental,
+      tipoAmbiental: EventoAmbiental.desinfeccion,
+      prioridad: PrioridadEvento.media,
+      estado: EstadoEvento.pendiente,
+      fechaProgramada: hoy.add(const Duration(days: 3, hours: 16)),
+      fechaCreacion: DateTime.now(),
+      fechaActualizacion: DateTime.now(),
+    ));
+
+    // Día 5 (29/01) - Sanitario
+    eventos.add(EventoGanaderoEntity(
+      titulo: '🧼 Baño Garrapaticida - Bovinos',
+      descripcion:
+          'Baño preventivo para todas las vacas. Principio activo: Cipermetrina 10%',
+      categoria: CategoriaEvento.sanitaria,
+      tipoSanitario: EventoSanitario.banioSanitario,
+      prioridad: PrioridadEvento.media,
+      estado: EstadoEvento.pendiente,
+      fechaProgramada: hoy.add(const Duration(days: 4, hours: 10)),
+      fechaCreacion: DateTime.now(),
+      fechaActualizacion: DateTime.now(),
+    ));
+
+    // Día 6 (30/01) - Productivo
+    eventos.add(EventoGanaderoEntity(
+      titulo: '🌾 Cambio de Alimentación - Programa Invierno',
+      descripcion:
+          'Ajuste de dieta según lluvia esperada. Aumentar ensilaje 15%, reducir concentrado 10%',
+      categoria: CategoriaEvento.productiva,
+      tipoProductivo: EventoProductivo.cambioAlimentacion,
+      prioridad: PrioridadEvento.media,
+      estado: EstadoEvento.pendiente,
+      fechaProgramada: hoy.add(const Duration(days: 5, hours: 7)),
+      fechaCreacion: DateTime.now(),
+      fechaActualizacion: DateTime.now(),
+    ));
+
+    // Día 7 (31/01) - Sanitario
+    eventos.add(EventoGanaderoEntity(
+      titulo: '👨‍⚕️ Revisión Veterinaria General',
+      descripcion:
+          'Chequeo completo: Bessie, Daisy, Brahman. Incluye auscultación, palpación abdominal',
+      categoria: CategoriaEvento.sanitaria,
+      tipoSanitario: EventoSanitario.revisionVeterinaria,
+      prioridad: PrioridadEvento.alta,
+      estado: EstadoEvento.pendiente,
+      fechaProgramada: hoy.add(const Duration(days: 6, hours: 9)),
+      fechaCreacion: DateTime.now(),
+      fechaActualizacion: DateTime.now(),
+    ));
+
+    // Día 8 (01/02) - Reproductivo
+    eventos.add(EventoGanaderoEntity(
+      titulo: '🔴 Detección de Celo - Bessie',
+      descripcion:
+          'Observación comportamental. Si está en celo, programar inseminación artificial',
+      categoria: CategoriaEvento.reproductiva,
+      tipoReproductivo: EventoReproductivo.deteccionCelo,
+      prioridad: PrioridadEvento.media,
+      estado: EstadoEvento.pendiente,
+      fechaProgramada: hoy.add(const Duration(days: 7, hours: 6)),
+      fechaCreacion: DateTime.now(),
+      fechaActualizacion: DateTime.now(),
+    ));
+
+    // Día 9 (02/02) - Ambiental
+    eventos.add(EventoGanaderoEntity(
+      titulo: '🔧 Mantenimiento de Infraestructura - Cercas',
+      descripcion:
+          'Reparación de 2 secciones de cerca. Repuesto de 8 postes dañados por lluvia',
+      categoria: CategoriaEvento.ambiental,
+      tipoAmbiental: EventoAmbiental.reparacionCercas,
+      prioridad: PrioridadEvento.media,
+      estado: EstadoEvento.pendiente,
+      fechaProgramada: hoy.add(const Duration(days: 8, hours: 13)),
+      fechaCreacion: DateTime.now(),
+      fechaActualizacion: DateTime.now(),
+    ));
+
+    // Día 10 (03/02) - Sanitario
+    eventos.add(EventoGanaderoEntity(
+      titulo: '🥗 Vitaminización - Suplementos Especializados',
+      descripcion:
+          'Inyección de Complejo B + Vitaminas A, D, E. Enfoque en animales en estrés',
+      categoria: CategoriaEvento.sanitaria,
+      tipoSanitario: EventoSanitario.vitaminizacion,
+      prioridad: PrioridadEvento.baja,
+      estado: EstadoEvento.pendiente,
+      fechaProgramada: hoy.add(const Duration(days: 9, hours: 11)),
+      fechaCreacion: DateTime.now(),
+      fechaActualizacion: DateTime.now(),
+    ));
+
+    // Día 11 (04/02) - Productivo
+    eventos.add(EventoGanaderoEntity(
+      titulo: '✂️ Corte de Cascos - Mantenimiento',
+      descripcion:
+          'Recorte preventivo de cascos en 5 bovinos. Revisar herraduras equinos',
+      categoria: CategoriaEvento.productiva,
+      tipoProductivo: EventoProductivo.cortesCascos,
+      prioridad: PrioridadEvento.media,
+      estado: EstadoEvento.pendiente,
+      fechaProgramada: hoy.add(const Duration(days: 10, hours: 9)),
+      fechaCreacion: DateTime.now(),
+      fechaActualizacion: DateTime.now(),
+    ));
+
+    // Día 12 (05/02) - Sanitario
+    eventos.add(EventoGanaderoEntity(
+      titulo: '🐛 Desparasitación Externa - Garrapatas',
+      descripcion:
+          'Aplicación de Ivermectina 1% inyectable. Dosis: 1ml/100kg subcutáneo',
+      categoria: CategoriaEvento.sanitaria,
+      tipoSanitario: EventoSanitario.desparasitacion,
+      prioridad: PrioridadEvento.media,
+      estado: EstadoEvento.pendiente,
+      fechaProgramada: hoy.add(const Duration(days: 11, hours: 14)),
+      fechaCreacion: DateTime.now(),
+      fechaActualizacion: DateTime.now(),
+    ));
+
+    // Día 13 (06/02) - Ambiental
+    eventos.add(EventoGanaderoEntity(
+      titulo: '💧 Abastecimiento de Agua - Revisión',
+      descripcion:
+          'Limpieza de bebederos. Verificación de caudal en potreros. Desinfección con cloro',
+      categoria: CategoriaEvento.ambiental,
+      tipoAmbiental: EventoAmbiental.abastecimientoAgua,
+      prioridad: PrioridadEvento.media,
+      estado: EstadoEvento.pendiente,
+      fechaProgramada: hoy.add(const Duration(days: 12, hours: 7)),
+      fechaCreacion: DateTime.now(),
+      fechaActualizacion: DateTime.now(),
+    ));
+
+    // Día 14 (07/02) - Reproductivo
+    eventos.add(EventoGanaderoEntity(
+      titulo: '🤰 Control de Preñez - Seguimiento Daisy',
+      descripcion:
+          'Post-parto de Daisy. Revisión de involución uterina y salud general. Próximo control: 15 días',
+      categoria: CategoriaEvento.reproductiva,
+      tipoReproductivo: EventoReproductivo.controlPrenez,
+      prioridad: PrioridadEvento.alta,
+      estado: EstadoEvento.pendiente,
+      fechaProgramada: hoy.add(const Duration(days: 13, hours: 10)),
+      fechaCreacion: DateTime.now(),
+      fechaActualizacion: DateTime.now(),
+    ));
+
+    // Guardar todos los eventos
+    for (var evento in eventos) {
+      await database.saveEventoGanadero(evento);
+    }
+
+    print(
+        '✅ ${eventos.length} EVENTOS DE CALENDARIO cargados para próximas 2 semanas');
   }
 }

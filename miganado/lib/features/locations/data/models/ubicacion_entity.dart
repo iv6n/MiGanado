@@ -3,92 +3,101 @@ import 'package:uuid/uuid.dart';
 
 part 'ubicacion_entity.g.dart';
 
-/// Entidad de Ubicación para Isar
 @collection
 class UbicacionEntity {
   /// Identificador único
   Id id = Isar.autoIncrement;
 
-  /// UUID de la ubicación para sincronización
   @Index(unique: true)
   late String uuid;
 
-  /// Nombre de la ubicación
   @Index()
-  late String nombre;
+  late String name;
 
   /// Descripción de la ubicación
-  String? descripcion;
+  String? description;
 
   /// Tipo de ubicación (potrero, corral, establo, etc)
-  String? tipo;
+  String? type;
 
   /// Capacidad de animales
-  int? capacidad;
+  int? capacity;
 
   /// Animales actuales (referencia a UUIDs de animales)
-  List<String>? animalesPresentesUuids;
+  List<String>? presentAnimalUuids;
 
   /// Notas adicionales
-  String? notas;
+  String? notes;
 
   /// Fecha de creación
-  late DateTime fechaCreacion;
+  late DateTime creationDate;
 
   /// Fecha de última actualización
-  late DateTime fechaActualizacion;
+  late DateTime lastUpdateDate;
 
   /// Sincronizado con servidor
-  bool sincronizado = false;
+  bool synced = false;
 
   /// ID remoto (para sincronización)
-  String? idRemoto;
+  String? remoteId;
 
-  /// Campos de auditoría
-  DateTime? fechaSincronizacion;
-  String? hashContenido;
+  /// Fecha de sincronización
+  DateTime? syncDate;
 
+  /// Hash de contenido
+  String? contentHash;
+
+  /// Constructor con valores iniciales
   UbicacionEntity({
-    required this.nombre,
-    this.descripcion,
-    this.tipo,
-    this.capacidad,
-    this.animalesPresentesUuids,
-    this.notas,
+    required this.name,
+    this.description,
+    this.type,
+    this.capacity,
+    this.presentAnimalUuids,
+    this.notes,
   }) {
     uuid = const Uuid().v4();
-    fechaCreacion = DateTime.now();
-    fechaActualizacion = DateTime.now();
+    creationDate = DateTime.now();
+    lastUpdateDate = DateTime.now();
   }
 
-  /// Crear una copia de la ubicación
+  /// Constructor vacío (requerido por Isar)
+  UbicacionEntity.empty() {
+    uuid = const Uuid().v4();
+    creationDate = DateTime.now();
+    lastUpdateDate = DateTime.now();
+    name = '';
+  }
+
+  /// Copia con cambios opcionales
   UbicacionEntity copyWith({
     String? uuid,
-    String? nombre,
-    String? descripcion,
-    String? tipo,
-    int? capacidad,
-    List<String>? animalesPresentesUuids,
-    String? notas,
-    bool? sincronizado,
-    String? idRemoto,
+    String? name,
+    String? description,
+    String? type,
+    int? capacity,
+    List<String>? presentAnimalUuids,
+    String? notes,
+    bool? synced,
+    String? remoteId,
+    DateTime? syncDate,
+    String? contentHash,
   }) {
     return UbicacionEntity(
-      nombre: nombre ?? this.nombre,
-      descripcion: descripcion ?? this.descripcion,
-      tipo: tipo ?? this.tipo,
-      capacidad: capacidad ?? this.capacidad,
-      animalesPresentesUuids:
-          animalesPresentesUuids ?? this.animalesPresentesUuids,
-      notas: notas ?? this.notas,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      type: type ?? this.type,
+      capacity: capacity ?? this.capacity,
+      presentAnimalUuids: presentAnimalUuids ?? this.presentAnimalUuids,
+      notes: notes ?? this.notes,
     )
-      ..id = this.id
+      ..id = id
       ..uuid = uuid ?? this.uuid
-      ..fechaCreacion = this.fechaCreacion
-      ..fechaActualizacion = DateTime.now()
-      ..sincronizado = sincronizado ?? this.sincronizado
-      ..idRemoto = idRemoto ?? this.idRemoto
-      ..fechaSincronizacion = this.fechaSincronizacion
-      ..hashContenido = this.hashContenido;
+      ..creationDate = creationDate
+      ..lastUpdateDate = DateTime.now()
+      ..synced = synced ?? this.synced
+      ..remoteId = remoteId ?? this.remoteId
+      ..syncDate = syncDate ?? this.syncDate
+      ..contentHash = contentHash ?? this.contentHash;
   }
 }

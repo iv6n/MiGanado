@@ -241,12 +241,12 @@ class RepositorioCalendarioGanadero {
   // ============ LOTES - CRUD ============
 
   /// Crear un nuevo lote
-  Future<LoteGanaderoEntity> crearLote(LoteGanaderoEntity lote) async {
+  Future<LivestockLotEntity> crearLote(LivestockLotEntity lote) async {
     try {
       await MiGanadoDatabase.isar.writeTxn(() async {
-        await MiGanadoDatabase.isar.loteGanaderoEntitys.put(lote);
+        await MiGanadoDatabase.isar.livestockLotEntitys.put(lote);
       });
-      print('✓ Lote creado: ${lote.nombre}');
+      print('✓ Lote creado: ${lote.name}');
       return lote;
     } catch (e) {
       print('✗ Error al crear lote: $e');
@@ -255,9 +255,9 @@ class RepositorioCalendarioGanadero {
   }
 
   /// Obtener lote por ID
-  Future<LoteGanaderoEntity?> obtenerLotePorId(int id) async {
+  Future<LivestockLotEntity?> obtenerLotePorId(int id) async {
     try {
-      return await MiGanadoDatabase.isar.loteGanaderoEntitys.get(id);
+      return await MiGanadoDatabase.isar.livestockLotEntitys.get(id);
     } catch (e) {
       print('✗ Error al obtener lote: $e');
       return null;
@@ -265,11 +265,11 @@ class RepositorioCalendarioGanadero {
   }
 
   /// Obtener todos los lotes
-  Future<List<LoteGanaderoEntity>> obtenerTodosLosLotes() async {
+  Future<List<LivestockLotEntity>> obtenerTodosLosLotes() async {
     try {
       final lotes =
-          await MiGanadoDatabase.isar.loteGanaderoEntitys.where().findAll();
-      lotes.sort((a, b) => a.nombre.compareTo(b.nombre));
+          await MiGanadoDatabase.isar.livestockLotEntitys.where().findAll();
+      lotes.sort((a, b) => a.name.compareTo(b.name));
       return lotes;
     } catch (e) {
       print('✗ Error al obtener lotes: $e');
@@ -278,13 +278,13 @@ class RepositorioCalendarioGanadero {
   }
 
   /// Actualizar lote existente
-  Future<void> actualizarLote(LoteGanaderoEntity lote) async {
+  Future<void> actualizarLote(LivestockLotEntity lote) async {
     try {
       lote.fechaActualizacion = DateTime.now();
       await MiGanadoDatabase.isar.writeTxn(() async {
-        await MiGanadoDatabase.isar.loteGanaderoEntitys.put(lote);
+        await MiGanadoDatabase.isar.livestockLotEntitys.put(lote);
       });
-      print('✓ Lote actualizado: ${lote.nombre}');
+      print('✓ Lote actualizado: ${lote.name}');
     } catch (e) {
       print('✗ Error al actualizar lote: $e');
       rethrow;
@@ -295,7 +295,7 @@ class RepositorioCalendarioGanadero {
   Future<bool> eliminarLote(int id) async {
     try {
       final resultado = await MiGanadoDatabase.isar.writeTxn(() async {
-        return await MiGanadoDatabase.isar.loteGanaderoEntitys.delete(id);
+        return await MiGanadoDatabase.isar.livestockLotEntitys.delete(id);
       });
       if (resultado) {
         print('✓ Lote eliminado');

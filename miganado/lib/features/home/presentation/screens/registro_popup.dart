@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 
 class RegistroPopup extends StatelessWidget {
   const RegistroPopup({super.key});
@@ -7,7 +8,7 @@ class RegistroPopup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Registro'),
+        title: const Text(AppStrings.registroTitle),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.close),

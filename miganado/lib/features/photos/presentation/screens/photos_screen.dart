@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 
 /// Pantalla para capturar y gestionar fotos de animales
 class AnimalPhotosScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class AnimalPhotosScreen extends StatefulWidget {
 
 class _AnimalPhotosScreenState extends State<AnimalPhotosScreen> {
   final ImagePicker _picker = ImagePicker();
-  List<String> _photoUrls = []; // En el futuro, esto vendrá de la BD
+  final List<String> _photoUrls = []; // En el futuro, esto vendrá de la BD
   bool _isLoading = false;
 
   @override
@@ -56,7 +57,9 @@ class _AnimalPhotosScreenState extends State<AnimalPhotosScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error al capturar foto: $e')),
+          SnackBar(
+              content: Text(
+                  'Error al capturar foto: $e')), // TODO: Mover a AppStrings y ARB
         );
       }
     }
@@ -77,7 +80,9 @@ class _AnimalPhotosScreenState extends State<AnimalPhotosScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error al seleccionar foto: $e')),
+          SnackBar(
+              content: Text(
+                  'Error al seleccionar foto: $e')), // TODO: Mover a AppStrings y ARB
         );
       }
     }
@@ -127,7 +132,7 @@ class _AnimalPhotosScreenState extends State<AnimalPhotosScreen> {
                   const SizedBox(height: 16),
                   Text(
                     'Fecha: ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now())}',
-                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                    style: const TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ],
               ),
@@ -170,7 +175,7 @@ class _AnimalPhotosScreenState extends State<AnimalPhotosScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Foto guardada exitosamente'),
+            content: Text(AppStrings.photoSavedSuccess),
             backgroundColor: Colors.green,
           ),
         );
@@ -180,7 +185,9 @@ class _AnimalPhotosScreenState extends State<AnimalPhotosScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error al guardar foto: $e')),
+          SnackBar(
+              content: Text(
+                  'Error al guardar foto: $e')), // TODO: Mover a AppStrings y ARB
         );
       }
     } finally {
@@ -197,7 +204,7 @@ class _AnimalPhotosScreenState extends State<AnimalPhotosScreen> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Fotos'),
+            const Text(AppStrings.photosTitle),
             Text(
               widget.animalNombre,
               style: Theme.of(context).textTheme.bodySmall,
@@ -207,13 +214,13 @@ class _AnimalPhotosScreenState extends State<AnimalPhotosScreen> {
         elevation: 0,
       ),
       body: _isLoading
-          ? Center(
+          ? const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircularProgressIndicator(),
                   SizedBox(height: 16),
-                  Text('Cargando...'),
+                  Text('Cargando...'), // TODO: Mover a AppStrings y ARB
                 ],
               ),
             )
@@ -222,17 +229,17 @@ class _AnimalPhotosScreenState extends State<AnimalPhotosScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.image_not_supported,
                         size: 64,
                         color: Colors.grey,
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Text(
                         'Sin fotos registradas',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Text(
                         'Toca uno de los botones para agregar tu primera foto',
                         style: Theme.of(context).textTheme.bodySmall,
@@ -243,7 +250,7 @@ class _AnimalPhotosScreenState extends State<AnimalPhotosScreen> {
                 )
               : GridView.builder(
                   padding: const EdgeInsets.all(16),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 8,
@@ -264,7 +271,7 @@ class _AnimalPhotosScreenState extends State<AnimalPhotosScreen> {
                               errorBuilder: (context, error, stackTrace) =>
                                   Container(
                                 color: Colors.grey.shade200,
-                                child: Icon(Icons.broken_image),
+                                child: const Icon(Icons.broken_image),
                               ),
                             ),
                             Positioned(
@@ -274,7 +281,7 @@ class _AnimalPhotosScreenState extends State<AnimalPhotosScreen> {
                                 backgroundColor: Colors.red,
                                 radius: 16,
                                 child: IconButton(
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.close,
                                     size: 12,
                                     color: Colors.white,
@@ -282,7 +289,7 @@ class _AnimalPhotosScreenState extends State<AnimalPhotosScreen> {
                                   onPressed: () {
                                     // TODO: Eliminar foto
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
+                                      const SnackBar(
                                           content: Text(
                                               'Función de eliminar próximamente')),
                                     );
@@ -301,15 +308,15 @@ class _AnimalPhotosScreenState extends State<AnimalPhotosScreen> {
         children: [
           FloatingActionButton.extended(
             onPressed: _selectPhotoFromGallery,
-            icon: Icon(Icons.photo_library),
-            label: Text('Galería'),
+            icon: const Icon(Icons.photo_library),
+            label: const Text(AppStrings.buttonGallery),
             heroTag: 'gallery',
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           FloatingActionButton.extended(
             onPressed: _capturePhoto,
-            icon: Icon(Icons.camera_alt),
-            label: Text('Cámara'),
+            icon: const Icon(Icons.camera_alt),
+            label: const Text(AppStrings.buttonCamera),
             heroTag: 'camera',
           ),
         ],

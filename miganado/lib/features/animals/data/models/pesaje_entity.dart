@@ -82,13 +82,13 @@ class PesajeEntity {
       notas: notas ?? this.notas,
       registradoPor: registradoPor ?? this.registradoPor,
     )
-      ..id = this.id
+      ..id = id
       ..uuid = uuid ?? this.uuid
-      ..fechaCreacion = this.fechaCreacion
+      ..fechaCreacion = fechaCreacion
       ..fechaActualizacion = DateTime.now()
       ..sincronizado = sincronizado ?? this.sincronizado
       ..idRemoto = idRemoto ?? this.idRemoto
-      ..fechaSincronizacion = this.fechaSincronizacion
-      ..hashContenido = this.hashContenido;
+      ..fechaSincronizacion = fechaSincronizacion
+      ..hashContenido = hashContenido;
   }
 }

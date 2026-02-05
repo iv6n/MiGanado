@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 import 'package:miganado/features/animals/domain/entities/animal.dart';
 import 'package:miganado/features/reports/services/report_service.dart';
 import 'package:miganado/data/database/isar_database.dart';
@@ -32,14 +33,14 @@ class _GenerarReportScreenState extends ConsumerState<GenerarReportScreen> {
       final vacunas = await db.getVacunasByAnimal(widget.animalUuid);
       final tratamientos = await db.getTratamientosByAnimal(widget.animalUuid);
       final nutricion = await db.getNutricionByAnimal(widget.animalUuid);
-      final reproductivo = await db.getReproductivoByAnimal(widget.animalUuid);
-
+      // final reproductivo = await db.getReproductivoByAnimal(widget.animalUuid);
+      // const reproductivo = null; // TODO: Reproductivo methods are disabled
       final reportData = ReportData(
         animal: widget.animal,
         vacunas: vacunas,
         tratamientos: tratamientos,
         nutricion: nutricion,
-        reproductivo: reproductivo,
+        // reproductivo: reproductivo, // TODO: Add when reproductive feature is implemented
       );
 
       String contenido = '';
@@ -49,14 +50,15 @@ class _GenerarReportScreenState extends ConsumerState<GenerarReportScreen> {
       } else if (tipo == 'txt') {
         contenido = ReportService.generatePlainText(reportData);
       } else if (tipo == 'resumen') {
-        contenido = ReportService.generateCostSummary(reportData);
+        // contenido = ReportService.generateCostSummary(reportData); // TODO: Implement cost summary
+        contenido = 'Resumen de costos: Funcionalidad en desarrollo';
       }
 
       // Compartir o copiar al portapapeles
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('Reporte Generado'),
+          title: const Text(AppStrings.reportGenerated),
           content: SizedBox(
             height: 300,
             child: SingleChildScrollView(
@@ -66,7 +68,7 @@ class _GenerarReportScreenState extends ConsumerState<GenerarReportScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Cerrar'),
+              child: const Text(AppStrings.buttonClose),
             ),
             ElevatedButton(
               onPressed: () {
@@ -78,7 +80,7 @@ class _GenerarReportScreenState extends ConsumerState<GenerarReportScreen> {
                       content: Text('Reporte preparado para compartir')),
                 );
               },
-              child: const Text('Aceptar'),
+              child: const Text(AppStrings.buttonOk),
             ),
           ],
         ),
@@ -86,13 +88,14 @@ class _GenerarReportScreenState extends ConsumerState<GenerarReportScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Reporte $tipo generado exitosamente')),
+          SnackBar(
+              content: Text('${AppStrings.reportGeneratedSuccess}: $tipo')),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e')),
+          SnackBar(content: Text('${AppStrings.errorTitle}: $e')),
         );
       }
     } finally {
@@ -106,7 +109,8 @@ class _GenerarReportScreenState extends ConsumerState<GenerarReportScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Generar Reporte - ${widget.animal.numeroArete}'),
+        title: Text(
+            '${AppStrings.reportVaccineTitle}${widget.animal.numeroArete}'),
         elevation: 0,
       ),
       body: SingleChildScrollView(

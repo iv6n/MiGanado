@@ -1,0 +1,108 @@
+name: 🧪 Test Suite
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'miganado/lib/**'
+      - 'miganado/test/**'
+      - 'miganado/pubspec.yaml'
+      - 'miganado/pubspec.lock'
+      - '.github/workflows/test.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'miganado/lib/**'
+      - 'miganado/test/**'
+      - 'miganado/pubspec.yaml'
+      - 'miganado/pubspec.lock'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: 🧪 Unit & Integration Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🎯 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          cache: true
+          cache-key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+
+      - name: 📦 Get dependencies
+        working-directory: miganado
+        run: flutter pub get
+
+      - name: 🔍 Analyze code
+        working-directory: miganado
+        run: flutter analyze lib/ test/
+        continue-on-error: true
+
+      - name: 🧪 Run tests
+        working-directory: miganado
+        run: flutter test --coverage --verbose
+        continue-on-error: false
+
+      - name: 📊 Upload coverage reports
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./miganado/coverage/lcov.info
+          flags: unittests
+          name: codecov-flutter
+          fail_ci_if_error: false
+          verbose: true
+
+      - name: ✅ Test Summary
+        if: always()
+        run: |
+          echo "## ✅ Test Execution Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Workflow**: ${{ github.workflow }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+
+  code-quality:
+    name: 📋 Code Quality Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🎯 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          cache: true
+
+      - name: 📦 Get dependencies
+        working-directory: miganado
+        run: flutter pub get
+
+      - name: 🎨 Format check
+        working-directory: miganado
+        run: dart format --set-exit-if-changed lib/ test/
+        continue-on-error: true
+
+      - name: 🔍 Lint check
+        working-directory: miganado
+        run: flutter analyze lib/ test/
+        continue-on-error: true
+
+      - name: 📋 Pub outdated check
+        working-directory: miganado
+        run: flutter pub outdated --no-dev-dependencies || true
+        continue-on-error: true

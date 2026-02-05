@@ -27,7 +27,7 @@ class AlertasSanitariasWidget extends ConsumerWidget {
           border: Border.all(color: Colors.grey[300]!, width: 1),
         ),
         child: Text(
-          '📋 Widget de alertas sanitarias en desarrollo',
+          'Widget de alertas sanitarias en desarrollo', // TODO: Mover a AppStrings y ARB
           style: TextStyle(
             fontSize: 14,
             color: Colors.grey[700],
@@ -64,7 +64,7 @@ class AlertasSanitariasWidget extends ConsumerWidget {
             const SizedBox(width: 16),
             Expanded(
               child: Text(
-                'Cargando estado de alertas...',
+                'Cargando estado de alertas...', // TODO: Mover a AppStrings y ARB
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.blue[900],
@@ -101,7 +101,7 @@ class AlertasSanitariasWidget extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Error al cargar alertas',
+                    'Error al cargar alertas', // TODO: Mover a AppStrings y ARB
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,

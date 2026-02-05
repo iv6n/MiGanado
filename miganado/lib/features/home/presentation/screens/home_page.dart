@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// ...existing code...
 import 'package:miganado/features/home/presentation/screens/page_inicio.dart';
 import 'package:miganado/features/home/presentation/screens/page_animales.dart';
 import 'package:miganado/features/home/presentation/screens/page_calendario.dart';
 import 'package:miganado/features/home/presentation/screens/page_ubicaciones.dart';
 import 'package:miganado/features/home/presentation/screens/page_perfil.dart';
 import 'package:miganado/features/home/presentation/screens/registro_popup.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -30,6 +30,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
+        sizing: StackFit.expand,
         index: _selectedIndex,
         children: _pages,
       ),
@@ -43,10 +44,11 @@ class _HomePageState extends ConsumerState<HomePage> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Expanded(child: _buildNavItem(0, Icons.pets, 'Animales')),
                 Expanded(
-                    child:
-                        _buildNavItem(1, Icons.calendar_today, 'Calendario')),
+                    child: _buildNavItem(0, Icons.pets, AppStrings.navAnimals)),
+                Expanded(
+                    child: _buildNavItem(
+                        1, Icons.calendar_today, AppStrings.navCalendar)),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -59,7 +61,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                               scale: animation, child: child);
                         },
                         child: Text(
-                          _selectedIndex == 2 ? 'Registro' : 'Inicio',
+                          _selectedIndex == 2
+                              ? AppStrings.navRegister
+                              : AppStrings.navHome,
                           key: ValueKey(_selectedIndex == 2),
                           style: TextStyle(
                             fontSize: _selectedIndex == 2 ? 11 : 10,
@@ -74,8 +78,11 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ),
                 ), // Espacio para el FAB
                 Expanded(
-                    child: _buildNavItem(3, Icons.location_on, 'Ubicaciones')),
-                Expanded(child: _buildNavItem(4, Icons.person, 'Perfil')),
+                    child: _buildNavItem(
+                        3, Icons.location_on, AppStrings.navLocations)),
+                Expanded(
+                    child:
+                        _buildNavItem(4, Icons.person, AppStrings.navProfile)),
               ],
             ),
             Center(
@@ -83,6 +90,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               child: SizedBox(
                 width: 65,
                 child: FloatingActionButton(
+                  heroTag: 'home_fab_central',
                   onPressed: () {
                     if (_selectedIndex != 2) {
                       setState(() => _selectedIndex = 2);

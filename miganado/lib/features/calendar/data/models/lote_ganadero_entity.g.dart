@@ -9,147 +9,147 @@ part of 'lote_ganadero_entity.dart';
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-extension GetLoteGanaderoEntityCollection on Isar {
-  IsarCollection<LoteGanaderoEntity> get loteGanaderoEntitys =>
+extension GetLivestockLotEntityCollection on Isar {
+  IsarCollection<LivestockLotEntity> get livestockLotEntitys =>
       this.collection();
 }
 
-const LoteGanaderoEntitySchema = CollectionSchema(
-  name: r'LoteGanaderoEntity',
-  id: 7833244748676449954,
+const LivestockLotEntitySchema = CollectionSchema(
+  name: r'LivestockLotEntity',
+  id: 1579785046679767272,
   properties: {
     r'activo': PropertySchema(
       id: 0,
       name: r'activo',
       type: IsarType.bool,
     ),
-    r'animalIds': PropertySchema(
+    r'animalCount': PropertySchema(
       id: 1,
+      name: r'animalCount',
+      type: IsarType.long,
+    ),
+    r'animalIds': PropertySchema(
+      id: 2,
       name: r'animalIds',
       type: IsarType.stringList,
     ),
-    r'cantidadAnimales': PropertySchema(
-      id: 2,
-      name: r'cantidadAnimales',
+    r'averageAgeMonths': PropertySchema(
+      id: 3,
+      name: r'averageAgeMonths',
       type: IsarType.long,
     ),
     r'datosEspecificosJson': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'datosEspecificosJson',
       type: IsarType.string,
     ),
-    r'descripcion': PropertySchema(
-      id: 4,
-      name: r'descripcion',
+    r'description': PropertySchema(
+      id: 5,
+      name: r'description',
       type: IsarType.string,
     ),
-    r'edadPromedioMeses': PropertySchema(
-      id: 5,
-      name: r'edadPromedioMeses',
-      type: IsarType.long,
-    ),
-    r'especie': PropertySchema(
-      id: 6,
-      name: r'especie',
-      type: IsarType.byte,
-      enumMap: _LoteGanaderoEntityespecieEnumValueMap,
-    ),
     r'estaActivo': PropertySchema(
-      id: 7,
+      id: 6,
       name: r'estaActivo',
       type: IsarType.bool,
     ),
     r'etiquetas': PropertySchema(
-      id: 8,
+      id: 7,
       name: r'etiquetas',
       type: IsarType.stringList,
     ),
     r'fechaActualizacion': PropertySchema(
-      id: 9,
+      id: 8,
       name: r'fechaActualizacion',
       type: IsarType.dateTime,
     ),
     r'fechaCierre': PropertySchema(
-      id: 10,
+      id: 9,
       name: r'fechaCierre',
       type: IsarType.dateTime,
     ),
     r'fechaCreacion': PropertySchema(
-      id: 11,
+      id: 10,
       name: r'fechaCreacion',
       type: IsarType.dateTime,
     ),
     r'fechaRegistro': PropertySchema(
-      id: 12,
+      id: 11,
       name: r'fechaRegistro',
       type: IsarType.dateTime,
     ),
     r'historicoCambios': PropertySchema(
-      id: 13,
+      id: 12,
       name: r'historicoCambios',
       type: IsarType.objectList,
       target: r'IsarCambioLote',
     ),
-    r'nombre': PropertySchema(
-      id: 14,
-      name: r'nombre',
+    r'name': PropertySchema(
+      id: 13,
+      name: r'name',
       type: IsarType.string,
     ),
     r'nombreEspecie': PropertySchema(
-      id: 15,
+      id: 14,
       name: r'nombreEspecie',
       type: IsarType.string,
     ),
     r'nombreProduccion': PropertySchema(
-      id: 16,
+      id: 15,
       name: r'nombreProduccion',
       type: IsarType.string,
     ),
     r'notas': PropertySchema(
-      id: 17,
+      id: 16,
       name: r'notas',
       type: IsarType.string,
     ),
     r'objetivo': PropertySchema(
-      id: 18,
+      id: 17,
       name: r'objetivo',
       type: IsarType.string,
     ),
     r'pesoMaximo': PropertySchema(
-      id: 19,
+      id: 18,
       name: r'pesoMaximo',
       type: IsarType.double,
     ),
     r'pesoMinimo': PropertySchema(
-      id: 20,
+      id: 19,
       name: r'pesoMinimo',
       type: IsarType.double,
     ),
     r'pesoPromedio': PropertySchema(
-      id: 21,
+      id: 20,
       name: r'pesoPromedio',
       type: IsarType.double,
+    ),
+    r'predominantBreed': PropertySchema(
+      id: 21,
+      name: r'predominantBreed',
+      type: IsarType.string,
     ),
     r'produccionDiaria': PropertySchema(
       id: 22,
       name: r'produccionDiaria',
       type: IsarType.double,
     ),
-    r'razaPredominante': PropertySchema(
+    r'productionType': PropertySchema(
       id: 23,
-      name: r'razaPredominante',
-      type: IsarType.string,
+      name: r'productionType',
+      type: IsarType.byte,
+      enumMap: _LivestockLotEntityproductionTypeEnumValueMap,
     ),
     r'responsable': PropertySchema(
       id: 24,
       name: r'responsable',
       type: IsarType.string,
     ),
-    r'tipoProduccion': PropertySchema(
+    r'species': PropertySchema(
       id: 25,
-      name: r'tipoProduccion',
+      name: r'species',
       type: IsarType.byte,
-      enumMap: _LoteGanaderoEntitytipoProduccionEnumValueMap,
+      enumMap: _LivestockLotEntityspeciesEnumValueMap,
     ),
     r'ubicacionId': PropertySchema(
       id: 26,
@@ -177,10 +177,10 @@ const LoteGanaderoEntitySchema = CollectionSchema(
       type: IsarType.string,
     )
   },
-  estimateSize: _loteGanaderoEntityEstimateSize,
-  serialize: _loteGanaderoEntitySerialize,
-  deserialize: _loteGanaderoEntityDeserialize,
-  deserializeProp: _loteGanaderoEntityDeserializeProp,
+  estimateSize: _livestockLotEntityEstimateSize,
+  serialize: _livestockLotEntitySerialize,
+  deserialize: _livestockLotEntityDeserialize,
+  deserializeProp: _livestockLotEntityDeserializeProp,
   idName: r'id',
   indexes: {
     r'uuid': IndexSchema(
@@ -196,14 +196,14 @@ const LoteGanaderoEntitySchema = CollectionSchema(
         )
       ],
     ),
-    r'nombre': IndexSchema(
-      id: -8239814765453414572,
-      name: r'nombre',
+    r'name': IndexSchema(
+      id: 879695947855722453,
+      name: r'name',
       unique: false,
       replace: false,
       properties: [
         IndexPropertySchema(
-          name: r'nombre',
+          name: r'name',
           type: IndexType.hash,
           caseSensitive: true,
         )
@@ -212,14 +212,14 @@ const LoteGanaderoEntitySchema = CollectionSchema(
   },
   links: {},
   embeddedSchemas: {r'IsarCambioLote': IsarCambioLoteSchema},
-  getId: _loteGanaderoEntityGetId,
-  getLinks: _loteGanaderoEntityGetLinks,
-  attach: _loteGanaderoEntityAttach,
+  getId: _livestockLotEntityGetId,
+  getLinks: _livestockLotEntityGetLinks,
+  attach: _livestockLotEntityAttach,
   version: '3.1.0+1',
 );
 
-int _loteGanaderoEntityEstimateSize(
-  LoteGanaderoEntity object,
+int _livestockLotEntityEstimateSize(
+  LivestockLotEntity object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
@@ -238,7 +238,7 @@ int _loteGanaderoEntityEstimateSize(
     }
   }
   {
-    final value = object.descripcion;
+    final value = object.description;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -259,7 +259,7 @@ int _loteGanaderoEntityEstimateSize(
           IsarCambioLoteSchema.estimateSize(value, offsets, allOffsets);
     }
   }
-  bytesCount += 3 + object.nombre.length * 3;
+  bytesCount += 3 + object.name.length * 3;
   bytesCount += 3 + object.nombreEspecie.length * 3;
   bytesCount += 3 + object.nombreProduccion.length * 3;
   {
@@ -275,7 +275,7 @@ int _loteGanaderoEntityEstimateSize(
     }
   }
   {
-    final value = object.razaPredominante;
+    final value = object.predominantBreed;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -319,43 +319,43 @@ int _loteGanaderoEntityEstimateSize(
   return bytesCount;
 }
 
-void _loteGanaderoEntitySerialize(
-  LoteGanaderoEntity object,
+void _livestockLotEntitySerialize(
+  LivestockLotEntity object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeBool(offsets[0], object.activo);
-  writer.writeStringList(offsets[1], object.animalIds);
-  writer.writeLong(offsets[2], object.cantidadAnimales);
-  writer.writeString(offsets[3], object.datosEspecificosJson);
-  writer.writeString(offsets[4], object.descripcion);
-  writer.writeLong(offsets[5], object.edadPromedioMeses);
-  writer.writeByte(offsets[6], object.especie.index);
-  writer.writeBool(offsets[7], object.estaActivo);
-  writer.writeStringList(offsets[8], object.etiquetas);
-  writer.writeDateTime(offsets[9], object.fechaActualizacion);
-  writer.writeDateTime(offsets[10], object.fechaCierre);
-  writer.writeDateTime(offsets[11], object.fechaCreacion);
-  writer.writeDateTime(offsets[12], object.fechaRegistro);
+  writer.writeLong(offsets[1], object.animalCount);
+  writer.writeStringList(offsets[2], object.animalIds);
+  writer.writeLong(offsets[3], object.averageAgeMonths);
+  writer.writeString(offsets[4], object.datosEspecificosJson);
+  writer.writeString(offsets[5], object.description);
+  writer.writeBool(offsets[6], object.estaActivo);
+  writer.writeStringList(offsets[7], object.etiquetas);
+  writer.writeDateTime(offsets[8], object.fechaActualizacion);
+  writer.writeDateTime(offsets[9], object.fechaCierre);
+  writer.writeDateTime(offsets[10], object.fechaCreacion);
+  writer.writeDateTime(offsets[11], object.fechaRegistro);
   writer.writeObjectList<IsarCambioLote>(
-    offsets[13],
+    offsets[12],
     allOffsets,
     IsarCambioLoteSchema.serialize,
     object.historicoCambios,
   );
-  writer.writeString(offsets[14], object.nombre);
-  writer.writeString(offsets[15], object.nombreEspecie);
-  writer.writeString(offsets[16], object.nombreProduccion);
-  writer.writeString(offsets[17], object.notas);
-  writer.writeString(offsets[18], object.objetivo);
-  writer.writeDouble(offsets[19], object.pesoMaximo);
-  writer.writeDouble(offsets[20], object.pesoMinimo);
-  writer.writeDouble(offsets[21], object.pesoPromedio);
+  writer.writeString(offsets[13], object.name);
+  writer.writeString(offsets[14], object.nombreEspecie);
+  writer.writeString(offsets[15], object.nombreProduccion);
+  writer.writeString(offsets[16], object.notas);
+  writer.writeString(offsets[17], object.objetivo);
+  writer.writeDouble(offsets[18], object.pesoMaximo);
+  writer.writeDouble(offsets[19], object.pesoMinimo);
+  writer.writeDouble(offsets[20], object.pesoPromedio);
+  writer.writeString(offsets[21], object.predominantBreed);
   writer.writeDouble(offsets[22], object.produccionDiaria);
-  writer.writeString(offsets[23], object.razaPredominante);
+  writer.writeByte(offsets[23], object.productionType.index);
   writer.writeString(offsets[24], object.responsable);
-  writer.writeByte(offsets[25], object.tipoProduccion.index);
+  writer.writeByte(offsets[25], object.species.index);
   writer.writeString(offsets[26], object.ubicacionId);
   writer.writeString(offsets[27], object.unidadProduccion);
   writer.writeString(offsets[28], object.usuarioActualizacion);
@@ -363,48 +363,47 @@ void _loteGanaderoEntitySerialize(
   writer.writeString(offsets[30], object.uuid);
 }
 
-LoteGanaderoEntity _loteGanaderoEntityDeserialize(
+LivestockLotEntity _livestockLotEntityDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = LoteGanaderoEntity(
-    activo: reader.readBoolOrNull(offsets[0]) ?? true,
-    cantidadAnimales: reader.readLong(offsets[2]),
-    datosEspecificosJson: reader.readStringOrNull(offsets[3]),
-    descripcion: reader.readStringOrNull(offsets[4]),
-    edadPromedioMeses: reader.readLongOrNull(offsets[5]),
-    especie: _LoteGanaderoEntityespecieValueEnumMap[
-            reader.readByteOrNull(offsets[6])] ??
-        EspecieLote.bovino,
-    fechaActualizacion: reader.readDateTimeOrNull(offsets[9]),
-    fechaCierre: reader.readDateTimeOrNull(offsets[10]),
-    fechaCreacion: reader.readDateTimeOrNull(offsets[11]),
-    fechaRegistro: reader.readDateTimeOrNull(offsets[12]),
-    nombre: reader.readString(offsets[14]),
-    notas: reader.readStringOrNull(offsets[17]),
-    objetivo: reader.readStringOrNull(offsets[18]),
-    pesoMaximo: reader.readDoubleOrNull(offsets[19]),
-    pesoMinimo: reader.readDoubleOrNull(offsets[20]),
-    pesoPromedio: reader.readDoubleOrNull(offsets[21]),
-    produccionDiaria: reader.readDoubleOrNull(offsets[22]),
-    razaPredominante: reader.readStringOrNull(offsets[23]),
-    responsable: reader.readStringOrNull(offsets[24]),
-    tipoProduccion: _LoteGanaderoEntitytipoProduccionValueEnumMap[
-            reader.readByteOrNull(offsets[25])] ??
-        TipoProduccion.carne,
-    ubicacionId: reader.readStringOrNull(offsets[26]),
-    unidadProduccion: reader.readStringOrNull(offsets[27]),
-    usuarioActualizacion: reader.readStringOrNull(offsets[28]),
-    usuarioCreacion: reader.readStringOrNull(offsets[29]),
-    uuid: reader.readStringOrNull(offsets[30]),
-  );
+  final object = LivestockLotEntity();
+  object.activo = reader.readBool(offsets[0]);
+  object.animalCount = reader.readLong(offsets[1]);
+  object.averageAgeMonths = reader.readLongOrNull(offsets[3]);
+  object.datosEspecificosJson = reader.readStringOrNull(offsets[4]);
+  object.description = reader.readStringOrNull(offsets[5]);
+  object.fechaActualizacion = reader.readDateTimeOrNull(offsets[8]);
+  object.fechaCierre = reader.readDateTimeOrNull(offsets[9]);
+  object.fechaCreacion = reader.readDateTimeOrNull(offsets[10]);
+  object.fechaRegistro = reader.readDateTimeOrNull(offsets[11]);
   object.id = id;
+  object.name = reader.readString(offsets[13]);
+  object.notas = reader.readStringOrNull(offsets[16]);
+  object.objetivo = reader.readStringOrNull(offsets[17]);
+  object.pesoMaximo = reader.readDoubleOrNull(offsets[18]);
+  object.pesoMinimo = reader.readDoubleOrNull(offsets[19]);
+  object.pesoPromedio = reader.readDoubleOrNull(offsets[20]);
+  object.predominantBreed = reader.readStringOrNull(offsets[21]);
+  object.produccionDiaria = reader.readDoubleOrNull(offsets[22]);
+  object.productionType = _LivestockLotEntityproductionTypeValueEnumMap[
+          reader.readByteOrNull(offsets[23])] ??
+      ProductionType.meat;
+  object.responsable = reader.readStringOrNull(offsets[24]);
+  object.species = _LivestockLotEntityspeciesValueEnumMap[
+          reader.readByteOrNull(offsets[25])] ??
+      LotSpecies.cattle;
+  object.ubicacionId = reader.readStringOrNull(offsets[26]);
+  object.unidadProduccion = reader.readStringOrNull(offsets[27]);
+  object.usuarioActualizacion = reader.readStringOrNull(offsets[28]);
+  object.usuarioCreacion = reader.readStringOrNull(offsets[29]);
+  object.uuid = reader.readStringOrNull(offsets[30]);
   return object;
 }
 
-P _loteGanaderoEntityDeserializeProp<P>(
+P _livestockLotEntityDeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -412,25 +411,23 @@ P _loteGanaderoEntityDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readBoolOrNull(offset) ?? true) as P;
+      return (reader.readBool(offset)) as P;
     case 1:
-      return (reader.readStringList(offset) ?? []) as P;
-    case 2:
       return (reader.readLong(offset)) as P;
+    case 2:
+      return (reader.readStringList(offset) ?? []) as P;
     case 3:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 4:
       return (reader.readStringOrNull(offset)) as P;
     case 5:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 6:
-      return (_LoteGanaderoEntityespecieValueEnumMap[
-              reader.readByteOrNull(offset)] ??
-          EspecieLote.bovino) as P;
-    case 7:
       return (reader.readBool(offset)) as P;
-    case 8:
+    case 7:
       return (reader.readStringList(offset) ?? []) as P;
+    case 8:
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 9:
       return (reader.readDateTimeOrNull(offset)) as P;
     case 10:
@@ -438,8 +435,6 @@ P _loteGanaderoEntityDeserializeProp<P>(
     case 11:
       return (reader.readDateTimeOrNull(offset)) as P;
     case 12:
-      return (reader.readDateTimeOrNull(offset)) as P;
-    case 13:
       return (reader.readObjectList<IsarCambioLote>(
             offset,
             IsarCambioLoteSchema.deserialize,
@@ -447,32 +442,36 @@ P _loteGanaderoEntityDeserializeProp<P>(
             IsarCambioLote(),
           ) ??
           []) as P;
+    case 13:
+      return (reader.readString(offset)) as P;
     case 14:
       return (reader.readString(offset)) as P;
     case 15:
       return (reader.readString(offset)) as P;
     case 16:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 17:
       return (reader.readStringOrNull(offset)) as P;
     case 18:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 19:
       return (reader.readDoubleOrNull(offset)) as P;
     case 20:
       return (reader.readDoubleOrNull(offset)) as P;
     case 21:
-      return (reader.readDoubleOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 22:
       return (reader.readDoubleOrNull(offset)) as P;
     case 23:
-      return (reader.readStringOrNull(offset)) as P;
+      return (_LivestockLotEntityproductionTypeValueEnumMap[
+              reader.readByteOrNull(offset)] ??
+          ProductionType.meat) as P;
     case 24:
       return (reader.readStringOrNull(offset)) as P;
     case 25:
-      return (_LoteGanaderoEntitytipoProduccionValueEnumMap[
+      return (_LivestockLotEntityspeciesValueEnumMap[
               reader.readByteOrNull(offset)] ??
-          TipoProduccion.carne) as P;
+          LotSpecies.cattle) as P;
     case 26:
       return (reader.readStringOrNull(offset)) as P;
     case 27:
@@ -488,55 +487,55 @@ P _loteGanaderoEntityDeserializeProp<P>(
   }
 }
 
-const _LoteGanaderoEntityespecieEnumValueMap = {
-  'bovino': 0,
-  'equino': 1,
-  'ovino': 2,
-  'caprino': 3,
+const _LivestockLotEntityproductionTypeEnumValueMap = {
+  'meat': 0,
+  'milk': 1,
+  'dual': 2,
+  'breeding': 3,
+  'fattening': 4,
+  'raising': 5,
 };
-const _LoteGanaderoEntityespecieValueEnumMap = {
-  0: EspecieLote.bovino,
-  1: EspecieLote.equino,
-  2: EspecieLote.ovino,
-  3: EspecieLote.caprino,
+const _LivestockLotEntityproductionTypeValueEnumMap = {
+  0: ProductionType.meat,
+  1: ProductionType.milk,
+  2: ProductionType.dual,
+  3: ProductionType.breeding,
+  4: ProductionType.fattening,
+  5: ProductionType.raising,
 };
-const _LoteGanaderoEntitytipoProduccionEnumValueMap = {
-  'carne': 0,
-  'leche': 1,
-  'doble': 2,
-  'reproduccion': 3,
-  'engorde': 4,
-  'levante': 5,
+const _LivestockLotEntityspeciesEnumValueMap = {
+  'cattle': 0,
+  'equine': 1,
+  'ovine': 2,
+  'caprine': 3,
 };
-const _LoteGanaderoEntitytipoProduccionValueEnumMap = {
-  0: TipoProduccion.carne,
-  1: TipoProduccion.leche,
-  2: TipoProduccion.doble,
-  3: TipoProduccion.reproduccion,
-  4: TipoProduccion.engorde,
-  5: TipoProduccion.levante,
+const _LivestockLotEntityspeciesValueEnumMap = {
+  0: LotSpecies.cattle,
+  1: LotSpecies.equine,
+  2: LotSpecies.ovine,
+  3: LotSpecies.caprine,
 };
 
-Id _loteGanaderoEntityGetId(LoteGanaderoEntity object) {
+Id _livestockLotEntityGetId(LivestockLotEntity object) {
   return object.id;
 }
 
-List<IsarLinkBase<dynamic>> _loteGanaderoEntityGetLinks(
-    LoteGanaderoEntity object) {
+List<IsarLinkBase<dynamic>> _livestockLotEntityGetLinks(
+    LivestockLotEntity object) {
   return [];
 }
 
-void _loteGanaderoEntityAttach(
-    IsarCollection<dynamic> col, Id id, LoteGanaderoEntity object) {
+void _livestockLotEntityAttach(
+    IsarCollection<dynamic> col, Id id, LivestockLotEntity object) {
   object.id = id;
 }
 
-extension LoteGanaderoEntityByIndex on IsarCollection<LoteGanaderoEntity> {
-  Future<LoteGanaderoEntity?> getByUuid(String? uuid) {
+extension LivestockLotEntityByIndex on IsarCollection<LivestockLotEntity> {
+  Future<LivestockLotEntity?> getByUuid(String? uuid) {
     return getByIndex(r'uuid', [uuid]);
   }
 
-  LoteGanaderoEntity? getByUuidSync(String? uuid) {
+  LivestockLotEntity? getByUuidSync(String? uuid) {
     return getByIndexSync(r'uuid', [uuid]);
   }
 
@@ -548,12 +547,12 @@ extension LoteGanaderoEntityByIndex on IsarCollection<LoteGanaderoEntity> {
     return deleteByIndexSync(r'uuid', [uuid]);
   }
 
-  Future<List<LoteGanaderoEntity?>> getAllByUuid(List<String?> uuidValues) {
+  Future<List<LivestockLotEntity?>> getAllByUuid(List<String?> uuidValues) {
     final values = uuidValues.map((e) => [e]).toList();
     return getAllByIndex(r'uuid', values);
   }
 
-  List<LoteGanaderoEntity?> getAllByUuidSync(List<String?> uuidValues) {
+  List<LivestockLotEntity?> getAllByUuidSync(List<String?> uuidValues) {
     final values = uuidValues.map((e) => [e]).toList();
     return getAllByIndexSync(r'uuid', values);
   }
@@ -568,36 +567,36 @@ extension LoteGanaderoEntityByIndex on IsarCollection<LoteGanaderoEntity> {
     return deleteAllByIndexSync(r'uuid', values);
   }
 
-  Future<Id> putByUuid(LoteGanaderoEntity object) {
+  Future<Id> putByUuid(LivestockLotEntity object) {
     return putByIndex(r'uuid', object);
   }
 
-  Id putByUuidSync(LoteGanaderoEntity object, {bool saveLinks = true}) {
+  Id putByUuidSync(LivestockLotEntity object, {bool saveLinks = true}) {
     return putByIndexSync(r'uuid', object, saveLinks: saveLinks);
   }
 
-  Future<List<Id>> putAllByUuid(List<LoteGanaderoEntity> objects) {
+  Future<List<Id>> putAllByUuid(List<LivestockLotEntity> objects) {
     return putAllByIndex(r'uuid', objects);
   }
 
-  List<Id> putAllByUuidSync(List<LoteGanaderoEntity> objects,
+  List<Id> putAllByUuidSync(List<LivestockLotEntity> objects,
       {bool saveLinks = true}) {
     return putAllByIndexSync(r'uuid', objects, saveLinks: saveLinks);
   }
 }
 
-extension LoteGanaderoEntityQueryWhereSort
-    on QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QWhere> {
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterWhere> anyId() {
+extension LivestockLotEntityQueryWhereSort
+    on QueryBuilder<LivestockLotEntity, LivestockLotEntity, QWhere> {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 }
 
-extension LoteGanaderoEntityQueryWhere
-    on QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QWhereClause> {
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterWhereClause>
+extension LivestockLotEntityQueryWhere
+    on QueryBuilder<LivestockLotEntity, LivestockLotEntity, QWhereClause> {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterWhereClause>
       idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
@@ -607,7 +606,7 @@ extension LoteGanaderoEntityQueryWhere
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterWhereClause>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterWhereClause>
       idNotEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
@@ -630,7 +629,7 @@ extension LoteGanaderoEntityQueryWhere
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterWhereClause>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterWhereClause>
       idGreaterThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -639,7 +638,7 @@ extension LoteGanaderoEntityQueryWhere
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterWhereClause>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterWhereClause>
       idLessThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -648,7 +647,7 @@ extension LoteGanaderoEntityQueryWhere
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterWhereClause>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterWhereClause>
       idBetween(
     Id lowerId,
     Id upperId, {
@@ -665,7 +664,7 @@ extension LoteGanaderoEntityQueryWhere
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterWhereClause>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterWhereClause>
       uuidIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
@@ -675,7 +674,7 @@ extension LoteGanaderoEntityQueryWhere
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterWhereClause>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterWhereClause>
       uuidIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
@@ -687,7 +686,7 @@ extension LoteGanaderoEntityQueryWhere
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterWhereClause>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterWhereClause>
       uuidEqualTo(String? uuid) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
@@ -697,7 +696,7 @@ extension LoteGanaderoEntityQueryWhere
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterWhereClause>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterWhereClause>
       uuidNotEqualTo(String? uuid) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
@@ -732,45 +731,45 @@ extension LoteGanaderoEntityQueryWhere
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterWhereClause>
-      nombreEqualTo(String nombre) {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterWhereClause>
+      nameEqualTo(String name) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
-        indexName: r'nombre',
-        value: [nombre],
+        indexName: r'name',
+        value: [name],
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterWhereClause>
-      nombreNotEqualTo(String nombre) {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterWhereClause>
+      nameNotEqualTo(String name) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'nombre',
+              indexName: r'name',
               lower: [],
-              upper: [nombre],
+              upper: [name],
               includeUpper: false,
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'nombre',
-              lower: [nombre],
+              indexName: r'name',
+              lower: [name],
               includeLower: false,
               upper: [],
             ));
       } else {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'nombre',
-              lower: [nombre],
+              indexName: r'name',
+              lower: [name],
               includeLower: false,
               upper: [],
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'nombre',
+              indexName: r'name',
               lower: [],
-              upper: [nombre],
+              upper: [name],
               includeUpper: false,
             ));
       }
@@ -778,9 +777,9 @@ extension LoteGanaderoEntityQueryWhere
   }
 }
 
-extension LoteGanaderoEntityQueryFilter
-    on QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QFilterCondition> {
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+extension LivestockLotEntityQueryFilter
+    on QueryBuilder<LivestockLotEntity, LivestockLotEntity, QFilterCondition> {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       activoEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -790,7 +789,63 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      animalCountEqualTo(int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'animalCount',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      animalCountGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'animalCount',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      animalCountLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'animalCount',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      animalCountBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'animalCount',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsElementEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -804,7 +859,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsElementGreaterThan(
     String value, {
     bool include = false,
@@ -820,7 +875,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsElementLessThan(
     String value, {
     bool include = false,
@@ -836,7 +891,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsElementBetween(
     String lower,
     String upper, {
@@ -856,7 +911,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsElementStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -870,7 +925,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsElementEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -884,7 +939,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsElementContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -895,7 +950,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsElementMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -906,7 +961,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsElementIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -916,7 +971,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsElementIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -926,7 +981,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -939,7 +994,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -952,7 +1007,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -965,7 +1020,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsLengthLessThan(
     int length, {
     bool include = false,
@@ -981,7 +1036,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsLengthGreaterThan(
     int length, {
     bool include = false,
@@ -997,7 +1052,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       animalIdsLengthBetween(
     int lower,
     int upper, {
@@ -1015,54 +1070,72 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      cantidadAnimalesEqualTo(int value) {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      averageAgeMonthsIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'averageAgeMonths',
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      averageAgeMonthsIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'averageAgeMonths',
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      averageAgeMonthsEqualTo(int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'cantidadAnimales',
+        property: r'averageAgeMonths',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      cantidadAnimalesGreaterThan(
-    int value, {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      averageAgeMonthsGreaterThan(
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'cantidadAnimales',
+        property: r'averageAgeMonths',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      cantidadAnimalesLessThan(
-    int value, {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      averageAgeMonthsLessThan(
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'cantidadAnimales',
+        property: r'averageAgeMonths',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      cantidadAnimalesBetween(
-    int lower,
-    int upper, {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      averageAgeMonthsBetween(
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'cantidadAnimales',
+        property: r'averageAgeMonths',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1071,7 +1144,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       datosEspecificosJsonIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1080,7 +1153,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       datosEspecificosJsonIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -1089,7 +1162,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       datosEspecificosJsonEqualTo(
     String? value, {
     bool caseSensitive = true,
@@ -1103,7 +1176,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       datosEspecificosJsonGreaterThan(
     String? value, {
     bool include = false,
@@ -1119,7 +1192,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       datosEspecificosJsonLessThan(
     String? value, {
     bool include = false,
@@ -1135,7 +1208,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       datosEspecificosJsonBetween(
     String? lower,
     String? upper, {
@@ -1155,7 +1228,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       datosEspecificosJsonStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -1169,7 +1242,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       datosEspecificosJsonEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -1183,7 +1256,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       datosEspecificosJsonContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -1194,7 +1267,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       datosEspecificosJsonMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -1205,7 +1278,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       datosEspecificosJsonIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -1215,7 +1288,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       datosEspecificosJsonIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -1225,40 +1298,40 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      descripcionIsNull() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      descriptionIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'descripcion',
+        property: r'description',
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      descripcionIsNotNull() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      descriptionIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'descripcion',
+        property: r'description',
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      descripcionEqualTo(
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      descriptionEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'descripcion',
+        property: r'description',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      descripcionGreaterThan(
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      descriptionGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1266,15 +1339,15 @@ extension LoteGanaderoEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'descripcion',
+        property: r'description',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      descripcionLessThan(
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      descriptionLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1282,15 +1355,15 @@ extension LoteGanaderoEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'descripcion',
+        property: r'description',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      descripcionBetween(
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      descriptionBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -1299,7 +1372,7 @@ extension LoteGanaderoEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'descripcion',
+        property: r'description',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1309,207 +1382,77 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      descripcionStartsWith(
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      descriptionStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'descripcion',
+        property: r'description',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      descripcionEndsWith(
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      descriptionEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'descripcion',
+        property: r'description',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      descripcionContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      descriptionContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'descripcion',
+        property: r'description',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      descripcionMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      descriptionMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'descripcion',
+        property: r'description',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      descripcionIsEmpty() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      descriptionIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'descripcion',
+        property: r'description',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      descripcionIsNotEmpty() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      descriptionIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'descripcion',
+        property: r'description',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      edadPromedioMesesIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'edadPromedioMeses',
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      edadPromedioMesesIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'edadPromedioMeses',
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      edadPromedioMesesEqualTo(int? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'edadPromedioMeses',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      edadPromedioMesesGreaterThan(
-    int? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'edadPromedioMeses',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      edadPromedioMesesLessThan(
-    int? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'edadPromedioMeses',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      edadPromedioMesesBetween(
-    int? lower,
-    int? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'edadPromedioMeses',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      especieEqualTo(EspecieLote value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'especie',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      especieGreaterThan(
-    EspecieLote value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'especie',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      especieLessThan(
-    EspecieLote value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'especie',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      especieBetween(
-    EspecieLote lower,
-    EspecieLote upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'especie',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       estaActivoEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -1519,7 +1462,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasElementEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -1533,7 +1476,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasElementGreaterThan(
     String value, {
     bool include = false,
@@ -1549,7 +1492,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasElementLessThan(
     String value, {
     bool include = false,
@@ -1565,7 +1508,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasElementBetween(
     String lower,
     String upper, {
@@ -1585,7 +1528,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasElementStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -1599,7 +1542,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasElementEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -1613,7 +1556,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasElementContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -1624,7 +1567,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasElementMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -1635,7 +1578,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasElementIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -1645,7 +1588,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasElementIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -1655,7 +1598,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -1668,7 +1611,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -1681,7 +1624,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -1694,7 +1637,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasLengthLessThan(
     int length, {
     bool include = false,
@@ -1710,7 +1653,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasLengthGreaterThan(
     int length, {
     bool include = false,
@@ -1726,7 +1669,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       etiquetasLengthBetween(
     int lower,
     int upper, {
@@ -1744,7 +1687,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaActualizacionIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1753,7 +1696,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaActualizacionIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -1762,7 +1705,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaActualizacionEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -1772,7 +1715,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaActualizacionGreaterThan(
     DateTime? value, {
     bool include = false,
@@ -1786,7 +1729,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaActualizacionLessThan(
     DateTime? value, {
     bool include = false,
@@ -1800,7 +1743,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaActualizacionBetween(
     DateTime? lower,
     DateTime? upper, {
@@ -1818,7 +1761,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaCierreIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1827,7 +1770,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaCierreIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -1836,7 +1779,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaCierreEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -1846,7 +1789,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaCierreGreaterThan(
     DateTime? value, {
     bool include = false,
@@ -1860,7 +1803,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaCierreLessThan(
     DateTime? value, {
     bool include = false,
@@ -1874,7 +1817,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaCierreBetween(
     DateTime? lower,
     DateTime? upper, {
@@ -1892,7 +1835,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaCreacionIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1901,7 +1844,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaCreacionIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -1910,7 +1853,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaCreacionEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -1920,7 +1863,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaCreacionGreaterThan(
     DateTime? value, {
     bool include = false,
@@ -1934,7 +1877,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaCreacionLessThan(
     DateTime? value, {
     bool include = false,
@@ -1948,7 +1891,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaCreacionBetween(
     DateTime? lower,
     DateTime? upper, {
@@ -1966,7 +1909,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaRegistroIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1975,7 +1918,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaRegistroIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -1984,7 +1927,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaRegistroEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -1994,7 +1937,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaRegistroGreaterThan(
     DateTime? value, {
     bool include = false,
@@ -2008,7 +1951,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaRegistroLessThan(
     DateTime? value, {
     bool include = false,
@@ -2022,7 +1965,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       fechaRegistroBetween(
     DateTime? lower,
     DateTime? upper, {
@@ -2040,7 +1983,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       historicoCambiosLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -2053,7 +1996,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       historicoCambiosIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -2066,7 +2009,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       historicoCambiosIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -2079,7 +2022,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       historicoCambiosLengthLessThan(
     int length, {
     bool include = false,
@@ -2095,7 +2038,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       historicoCambiosLengthGreaterThan(
     int length, {
     bool include = false,
@@ -2111,7 +2054,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       historicoCambiosLengthBetween(
     int lower,
     int upper, {
@@ -2129,7 +2072,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -2139,7 +2082,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       idGreaterThan(
     Id value, {
     bool include = false,
@@ -2153,7 +2096,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       idLessThan(
     Id value, {
     bool include = false,
@@ -2167,7 +2110,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       idBetween(
     Id lower,
     Id upper, {
@@ -2185,22 +2128,22 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      nombreEqualTo(
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      nameEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'nombre',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      nombreGreaterThan(
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      nameGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -2208,15 +2151,15 @@ extension LoteGanaderoEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'nombre',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      nombreLessThan(
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      nameLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -2224,15 +2167,15 @@ extension LoteGanaderoEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'nombre',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      nombreBetween(
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      nameBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -2241,7 +2184,7 @@ extension LoteGanaderoEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'nombre',
+        property: r'name',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -2251,77 +2194,77 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      nombreStartsWith(
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      nameStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'nombre',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      nombreEndsWith(
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      nameEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'nombre',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      nombreContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      nameContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'nombre',
+        property: r'name',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      nombreMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      nameMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'nombre',
+        property: r'name',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      nombreIsEmpty() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      nameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'nombre',
+        property: r'name',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      nombreIsNotEmpty() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      nameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'nombre',
+        property: r'name',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreEspecieEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -2335,7 +2278,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreEspecieGreaterThan(
     String value, {
     bool include = false,
@@ -2351,7 +2294,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreEspecieLessThan(
     String value, {
     bool include = false,
@@ -2367,7 +2310,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreEspecieBetween(
     String lower,
     String upper, {
@@ -2387,7 +2330,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreEspecieStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -2401,7 +2344,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreEspecieEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -2415,7 +2358,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreEspecieContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -2426,7 +2369,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreEspecieMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -2437,7 +2380,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreEspecieIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -2447,7 +2390,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreEspecieIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -2457,7 +2400,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreProduccionEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -2471,7 +2414,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreProduccionGreaterThan(
     String value, {
     bool include = false,
@@ -2487,7 +2430,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreProduccionLessThan(
     String value, {
     bool include = false,
@@ -2503,7 +2446,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreProduccionBetween(
     String lower,
     String upper, {
@@ -2523,7 +2466,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreProduccionStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -2537,7 +2480,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreProduccionEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -2551,7 +2494,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreProduccionContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -2562,7 +2505,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreProduccionMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -2573,7 +2516,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreProduccionIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -2583,7 +2526,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       nombreProduccionIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -2593,7 +2536,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       notasIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -2602,7 +2545,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       notasIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -2611,7 +2554,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       notasEqualTo(
     String? value, {
     bool caseSensitive = true,
@@ -2625,7 +2568,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       notasGreaterThan(
     String? value, {
     bool include = false,
@@ -2641,7 +2584,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       notasLessThan(
     String? value, {
     bool include = false,
@@ -2657,7 +2600,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       notasBetween(
     String? lower,
     String? upper, {
@@ -2677,7 +2620,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       notasStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -2691,7 +2634,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       notasEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -2705,7 +2648,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       notasContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -2716,7 +2659,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       notasMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -2727,7 +2670,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       notasIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -2737,7 +2680,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       notasIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -2747,7 +2690,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       objetivoIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -2756,7 +2699,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       objetivoIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -2765,7 +2708,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       objetivoEqualTo(
     String? value, {
     bool caseSensitive = true,
@@ -2779,7 +2722,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       objetivoGreaterThan(
     String? value, {
     bool include = false,
@@ -2795,7 +2738,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       objetivoLessThan(
     String? value, {
     bool include = false,
@@ -2811,7 +2754,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       objetivoBetween(
     String? lower,
     String? upper, {
@@ -2831,7 +2774,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       objetivoStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -2845,7 +2788,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       objetivoEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -2859,7 +2802,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       objetivoContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -2870,7 +2813,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       objetivoMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -2881,7 +2824,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       objetivoIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -2891,7 +2834,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       objetivoIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -2901,7 +2844,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoMaximoIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -2910,7 +2853,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoMaximoIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -2919,7 +2862,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoMaximoEqualTo(
     double? value, {
     double epsilon = Query.epsilon,
@@ -2933,7 +2876,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoMaximoGreaterThan(
     double? value, {
     bool include = false,
@@ -2949,7 +2892,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoMaximoLessThan(
     double? value, {
     bool include = false,
@@ -2965,7 +2908,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoMaximoBetween(
     double? lower,
     double? upper, {
@@ -2985,7 +2928,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoMinimoIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -2994,7 +2937,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoMinimoIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -3003,7 +2946,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoMinimoEqualTo(
     double? value, {
     double epsilon = Query.epsilon,
@@ -3017,7 +2960,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoMinimoGreaterThan(
     double? value, {
     bool include = false,
@@ -3033,7 +2976,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoMinimoLessThan(
     double? value, {
     bool include = false,
@@ -3049,7 +2992,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoMinimoBetween(
     double? lower,
     double? upper, {
@@ -3069,7 +3012,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoPromedioIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -3078,7 +3021,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoPromedioIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -3087,7 +3030,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoPromedioEqualTo(
     double? value, {
     double epsilon = Query.epsilon,
@@ -3101,7 +3044,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoPromedioGreaterThan(
     double? value, {
     bool include = false,
@@ -3117,7 +3060,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoPromedioLessThan(
     double? value, {
     bool include = false,
@@ -3133,7 +3076,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       pesoPromedioBetween(
     double? lower,
     double? upper, {
@@ -3153,7 +3096,161 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      predominantBreedIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'predominantBreed',
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      predominantBreedIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'predominantBreed',
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      predominantBreedEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'predominantBreed',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      predominantBreedGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'predominantBreed',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      predominantBreedLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'predominantBreed',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      predominantBreedBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'predominantBreed',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      predominantBreedStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'predominantBreed',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      predominantBreedEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'predominantBreed',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      predominantBreedContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'predominantBreed',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      predominantBreedMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'predominantBreed',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      predominantBreedIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'predominantBreed',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      predominantBreedIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'predominantBreed',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       produccionDiariaIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -3162,7 +3259,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       produccionDiariaIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -3171,7 +3268,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       produccionDiariaEqualTo(
     double? value, {
     double epsilon = Query.epsilon,
@@ -3185,7 +3282,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       produccionDiariaGreaterThan(
     double? value, {
     bool include = false,
@@ -3201,7 +3298,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       produccionDiariaLessThan(
     double? value, {
     bool include = false,
@@ -3217,7 +3314,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       produccionDiariaBetween(
     double? lower,
     double? upper, {
@@ -3237,161 +3334,63 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      razaPredominanteIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'razaPredominante',
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      razaPredominanteIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'razaPredominante',
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      razaPredominanteEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      productionTypeEqualTo(ProductionType value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'razaPredominante',
+        property: r'productionType',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      razaPredominanteGreaterThan(
-    String? value, {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      productionTypeGreaterThan(
+    ProductionType value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'razaPredominante',
+        property: r'productionType',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      razaPredominanteLessThan(
-    String? value, {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      productionTypeLessThan(
+    ProductionType value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'razaPredominante',
+        property: r'productionType',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      razaPredominanteBetween(
-    String? lower,
-    String? upper, {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      productionTypeBetween(
+    ProductionType lower,
+    ProductionType upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'razaPredominante',
+        property: r'productionType',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      razaPredominanteStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'razaPredominante',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      razaPredominanteEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'razaPredominante',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      razaPredominanteContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'razaPredominante',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      razaPredominanteMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'razaPredominante',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      razaPredominanteIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'razaPredominante',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      razaPredominanteIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'razaPredominante',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       responsableIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -3400,7 +3399,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       responsableIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -3409,7 +3408,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       responsableEqualTo(
     String? value, {
     bool caseSensitive = true,
@@ -3423,7 +3422,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       responsableGreaterThan(
     String? value, {
     bool include = false,
@@ -3439,7 +3438,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       responsableLessThan(
     String? value, {
     bool include = false,
@@ -3455,7 +3454,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       responsableBetween(
     String? lower,
     String? upper, {
@@ -3475,7 +3474,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       responsableStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -3489,7 +3488,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       responsableEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -3503,7 +3502,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       responsableContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -3514,7 +3513,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       responsableMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -3525,7 +3524,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       responsableIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -3535,7 +3534,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       responsableIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -3545,54 +3544,54 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      tipoProduccionEqualTo(TipoProduccion value) {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      speciesEqualTo(LotSpecies value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'tipoProduccion',
+        property: r'species',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      tipoProduccionGreaterThan(
-    TipoProduccion value, {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      speciesGreaterThan(
+    LotSpecies value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'tipoProduccion',
+        property: r'species',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      tipoProduccionLessThan(
-    TipoProduccion value, {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      speciesLessThan(
+    LotSpecies value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'tipoProduccion',
+        property: r'species',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
-      tipoProduccionBetween(
-    TipoProduccion lower,
-    TipoProduccion upper, {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
+      speciesBetween(
+    LotSpecies lower,
+    LotSpecies upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'tipoProduccion',
+        property: r'species',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -3601,7 +3600,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       ubicacionIdIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -3610,7 +3609,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       ubicacionIdIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -3619,7 +3618,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       ubicacionIdEqualTo(
     String? value, {
     bool caseSensitive = true,
@@ -3633,7 +3632,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       ubicacionIdGreaterThan(
     String? value, {
     bool include = false,
@@ -3649,7 +3648,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       ubicacionIdLessThan(
     String? value, {
     bool include = false,
@@ -3665,7 +3664,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       ubicacionIdBetween(
     String? lower,
     String? upper, {
@@ -3685,7 +3684,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       ubicacionIdStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -3699,7 +3698,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       ubicacionIdEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -3713,7 +3712,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       ubicacionIdContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -3724,7 +3723,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       ubicacionIdMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -3735,7 +3734,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       ubicacionIdIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -3745,7 +3744,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       ubicacionIdIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -3755,7 +3754,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       unidadProduccionIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -3764,7 +3763,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       unidadProduccionIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -3773,7 +3772,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       unidadProduccionEqualTo(
     String? value, {
     bool caseSensitive = true,
@@ -3787,7 +3786,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       unidadProduccionGreaterThan(
     String? value, {
     bool include = false,
@@ -3803,7 +3802,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       unidadProduccionLessThan(
     String? value, {
     bool include = false,
@@ -3819,7 +3818,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       unidadProduccionBetween(
     String? lower,
     String? upper, {
@@ -3839,7 +3838,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       unidadProduccionStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -3853,7 +3852,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       unidadProduccionEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -3867,7 +3866,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       unidadProduccionContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -3878,7 +3877,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       unidadProduccionMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -3889,7 +3888,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       unidadProduccionIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -3899,7 +3898,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       unidadProduccionIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -3909,7 +3908,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioActualizacionIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -3918,7 +3917,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioActualizacionIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -3927,7 +3926,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioActualizacionEqualTo(
     String? value, {
     bool caseSensitive = true,
@@ -3941,7 +3940,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioActualizacionGreaterThan(
     String? value, {
     bool include = false,
@@ -3957,7 +3956,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioActualizacionLessThan(
     String? value, {
     bool include = false,
@@ -3973,7 +3972,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioActualizacionBetween(
     String? lower,
     String? upper, {
@@ -3993,7 +3992,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioActualizacionStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -4007,7 +4006,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioActualizacionEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -4021,7 +4020,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioActualizacionContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -4032,7 +4031,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioActualizacionMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -4043,7 +4042,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioActualizacionIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -4053,7 +4052,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioActualizacionIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -4063,7 +4062,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioCreacionIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -4072,7 +4071,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioCreacionIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -4081,7 +4080,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioCreacionEqualTo(
     String? value, {
     bool caseSensitive = true,
@@ -4095,7 +4094,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioCreacionGreaterThan(
     String? value, {
     bool include = false,
@@ -4111,7 +4110,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioCreacionLessThan(
     String? value, {
     bool include = false,
@@ -4127,7 +4126,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioCreacionBetween(
     String? lower,
     String? upper, {
@@ -4147,7 +4146,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioCreacionStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -4161,7 +4160,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioCreacionEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -4175,7 +4174,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioCreacionContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -4186,7 +4185,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioCreacionMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -4197,7 +4196,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioCreacionIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -4207,7 +4206,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       usuarioCreacionIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -4217,7 +4216,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       uuidIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -4226,7 +4225,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       uuidIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -4235,7 +4234,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       uuidEqualTo(
     String? value, {
     bool caseSensitive = true,
@@ -4249,7 +4248,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       uuidGreaterThan(
     String? value, {
     bool include = false,
@@ -4265,7 +4264,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       uuidLessThan(
     String? value, {
     bool include = false,
@@ -4281,7 +4280,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       uuidBetween(
     String? lower,
     String? upper, {
@@ -4301,7 +4300,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       uuidStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -4315,7 +4314,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       uuidEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -4329,7 +4328,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       uuidContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -4340,7 +4339,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       uuidMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -4351,7 +4350,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       uuidIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -4361,7 +4360,7 @@ extension LoteGanaderoEntityQueryFilter
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       uuidIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -4372,9 +4371,9 @@ extension LoteGanaderoEntityQueryFilter
   }
 }
 
-extension LoteGanaderoEntityQueryObject
-    on QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QFilterCondition> {
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterFilterCondition>
+extension LivestockLotEntityQueryObject
+    on QueryBuilder<LivestockLotEntity, LivestockLotEntity, QFilterCondition> {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterFilterCondition>
       historicoCambiosElement(FilterQuery<IsarCambioLote> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, r'historicoCambios');
@@ -4382,397 +4381,397 @@ extension LoteGanaderoEntityQueryObject
   }
 }
 
-extension LoteGanaderoEntityQueryLinks
-    on QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QFilterCondition> {}
+extension LivestockLotEntityQueryLinks
+    on QueryBuilder<LivestockLotEntity, LivestockLotEntity, QFilterCondition> {}
 
-extension LoteGanaderoEntityQuerySortBy
-    on QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QSortBy> {
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+extension LivestockLotEntityQuerySortBy
+    on QueryBuilder<LivestockLotEntity, LivestockLotEntity, QSortBy> {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByActivo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'activo', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByActivoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'activo', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      sortByCantidadAnimales() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      sortByAnimalCount() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'cantidadAnimales', Sort.asc);
+      return query.addSortBy(r'animalCount', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      sortByCantidadAnimalesDesc() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      sortByAnimalCountDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'cantidadAnimales', Sort.desc);
+      return query.addSortBy(r'animalCount', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      sortByAverageAgeMonths() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'averageAgeMonths', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      sortByAverageAgeMonthsDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'averageAgeMonths', Sort.desc);
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByDatosEspecificosJson() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'datosEspecificosJson', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByDatosEspecificosJsonDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'datosEspecificosJson', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      sortByDescripcion() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      sortByDescription() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'descripcion', Sort.asc);
+      return query.addSortBy(r'description', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      sortByDescripcionDesc() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      sortByDescriptionDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'descripcion', Sort.desc);
+      return query.addSortBy(r'description', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      sortByEdadPromedioMeses() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'edadPromedioMeses', Sort.asc);
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      sortByEdadPromedioMesesDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'edadPromedioMeses', Sort.desc);
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      sortByEspecie() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'especie', Sort.asc);
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      sortByEspecieDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'especie', Sort.desc);
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByEstaActivo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'estaActivo', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByEstaActivoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'estaActivo', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByFechaActualizacion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaActualizacion', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByFechaActualizacionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaActualizacion', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByFechaCierre() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaCierre', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByFechaCierreDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaCierre', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByFechaCreacion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaCreacion', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByFechaCreacionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaCreacion', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByFechaRegistro() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaRegistro', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByFechaRegistroDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaRegistro', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      sortByNombre() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      sortByName() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'nombre', Sort.asc);
+      return query.addSortBy(r'name', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      sortByNombreDesc() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      sortByNameDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'nombre', Sort.desc);
+      return query.addSortBy(r'name', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByNombreEspecie() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nombreEspecie', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByNombreEspecieDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nombreEspecie', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByNombreProduccion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nombreProduccion', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByNombreProduccionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nombreProduccion', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByNotas() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'notas', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByNotasDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'notas', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByObjetivo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'objetivo', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByObjetivoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'objetivo', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByPesoMaximo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'pesoMaximo', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByPesoMaximoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'pesoMaximo', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByPesoMinimo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'pesoMinimo', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByPesoMinimoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'pesoMinimo', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByPesoPromedio() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'pesoPromedio', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByPesoPromedioDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'pesoPromedio', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      sortByPredominantBreed() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'predominantBreed', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      sortByPredominantBreedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'predominantBreed', Sort.desc);
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByProduccionDiaria() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'produccionDiaria', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByProduccionDiariaDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'produccionDiaria', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      sortByRazaPredominante() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      sortByProductionType() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'razaPredominante', Sort.asc);
+      return query.addSortBy(r'productionType', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      sortByRazaPredominanteDesc() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      sortByProductionTypeDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'razaPredominante', Sort.desc);
+      return query.addSortBy(r'productionType', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByResponsable() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'responsable', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByResponsableDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'responsable', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      sortByTipoProduccion() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      sortBySpecies() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tipoProduccion', Sort.asc);
+      return query.addSortBy(r'species', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      sortByTipoProduccionDesc() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      sortBySpeciesDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tipoProduccion', Sort.desc);
+      return query.addSortBy(r'species', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByUbicacionId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'ubicacionId', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByUbicacionIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'ubicacionId', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByUnidadProduccion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'unidadProduccion', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByUnidadProduccionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'unidadProduccion', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByUsuarioActualizacion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'usuarioActualizacion', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByUsuarioActualizacionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'usuarioActualizacion', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByUsuarioCreacion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'usuarioCreacion', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByUsuarioCreacionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'usuarioCreacion', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByUuid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uuid', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       sortByUuidDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uuid', Sort.desc);
@@ -4780,408 +4779,408 @@ extension LoteGanaderoEntityQuerySortBy
   }
 }
 
-extension LoteGanaderoEntityQuerySortThenBy
-    on QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QSortThenBy> {
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+extension LivestockLotEntityQuerySortThenBy
+    on QueryBuilder<LivestockLotEntity, LivestockLotEntity, QSortThenBy> {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByActivo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'activo', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByActivoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'activo', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      thenByCantidadAnimales() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      thenByAnimalCount() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'cantidadAnimales', Sort.asc);
+      return query.addSortBy(r'animalCount', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      thenByCantidadAnimalesDesc() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      thenByAnimalCountDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'cantidadAnimales', Sort.desc);
+      return query.addSortBy(r'animalCount', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      thenByAverageAgeMonths() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'averageAgeMonths', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      thenByAverageAgeMonthsDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'averageAgeMonths', Sort.desc);
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByDatosEspecificosJson() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'datosEspecificosJson', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByDatosEspecificosJsonDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'datosEspecificosJson', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      thenByDescripcion() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      thenByDescription() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'descripcion', Sort.asc);
+      return query.addSortBy(r'description', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      thenByDescripcionDesc() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      thenByDescriptionDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'descripcion', Sort.desc);
+      return query.addSortBy(r'description', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      thenByEdadPromedioMeses() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'edadPromedioMeses', Sort.asc);
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      thenByEdadPromedioMesesDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'edadPromedioMeses', Sort.desc);
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      thenByEspecie() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'especie', Sort.asc);
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      thenByEspecieDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'especie', Sort.desc);
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByEstaActivo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'estaActivo', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByEstaActivoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'estaActivo', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByFechaActualizacion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaActualizacion', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByFechaActualizacionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaActualizacion', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByFechaCierre() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaCierre', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByFechaCierreDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaCierre', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByFechaCreacion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaCreacion', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByFechaCreacionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaCreacion', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByFechaRegistro() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaRegistro', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByFechaRegistroDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fechaRegistro', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      thenByNombre() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      thenByName() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'nombre', Sort.asc);
+      return query.addSortBy(r'name', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      thenByNombreDesc() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      thenByNameDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'nombre', Sort.desc);
+      return query.addSortBy(r'name', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByNombreEspecie() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nombreEspecie', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByNombreEspecieDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nombreEspecie', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByNombreProduccion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nombreProduccion', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByNombreProduccionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'nombreProduccion', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByNotas() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'notas', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByNotasDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'notas', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByObjetivo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'objetivo', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByObjetivoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'objetivo', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByPesoMaximo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'pesoMaximo', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByPesoMaximoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'pesoMaximo', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByPesoMinimo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'pesoMinimo', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByPesoMinimoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'pesoMinimo', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByPesoPromedio() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'pesoPromedio', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByPesoPromedioDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'pesoPromedio', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      thenByPredominantBreed() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'predominantBreed', Sort.asc);
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      thenByPredominantBreedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'predominantBreed', Sort.desc);
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByProduccionDiaria() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'produccionDiaria', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByProduccionDiariaDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'produccionDiaria', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      thenByRazaPredominante() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      thenByProductionType() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'razaPredominante', Sort.asc);
+      return query.addSortBy(r'productionType', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      thenByRazaPredominanteDesc() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      thenByProductionTypeDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'razaPredominante', Sort.desc);
+      return query.addSortBy(r'productionType', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByResponsable() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'responsable', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByResponsableDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'responsable', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      thenByTipoProduccion() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      thenBySpecies() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tipoProduccion', Sort.asc);
+      return query.addSortBy(r'species', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
-      thenByTipoProduccionDesc() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
+      thenBySpeciesDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'tipoProduccion', Sort.desc);
+      return query.addSortBy(r'species', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByUbicacionId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'ubicacionId', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByUbicacionIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'ubicacionId', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByUnidadProduccion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'unidadProduccion', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByUnidadProduccionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'unidadProduccion', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByUsuarioActualizacion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'usuarioActualizacion', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByUsuarioActualizacionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'usuarioActualizacion', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByUsuarioCreacion() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'usuarioCreacion', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByUsuarioCreacionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'usuarioCreacion', Sort.desc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByUuid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uuid', Sort.asc);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QAfterSortBy>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QAfterSortBy>
       thenByUuidDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uuid', Sort.desc);
@@ -5189,30 +5188,37 @@ extension LoteGanaderoEntityQuerySortThenBy
   }
 }
 
-extension LoteGanaderoEntityQueryWhereDistinct
-    on QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct> {
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+extension LivestockLotEntityQueryWhereDistinct
+    on QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct> {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByActivo() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'activo');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
+      distinctByAnimalCount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'animalCount');
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByAnimalIds() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'animalIds');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
-      distinctByCantidadAnimales() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
+      distinctByAverageAgeMonths() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'cantidadAnimales');
+      return query.addDistinctBy(r'averageAgeMonths');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByDatosEspecificosJson({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'datosEspecificosJson',
@@ -5220,77 +5226,63 @@ extension LoteGanaderoEntityQueryWhereDistinct
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
-      distinctByDescripcion({bool caseSensitive = true}) {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
+      distinctByDescription({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'descripcion', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'description', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
-      distinctByEdadPromedioMeses() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'edadPromedioMeses');
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
-      distinctByEspecie() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'especie');
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByEstaActivo() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'estaActivo');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByEtiquetas() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'etiquetas');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByFechaActualizacion() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'fechaActualizacion');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByFechaCierre() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'fechaCierre');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByFechaCreacion() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'fechaCreacion');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByFechaRegistro() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'fechaRegistro');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
-      distinctByNombre({bool caseSensitive = true}) {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
+      distinctByName({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'nombre', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'name', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByNombreEspecie({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'nombreEspecie',
@@ -5298,7 +5290,7 @@ extension LoteGanaderoEntityQueryWhereDistinct
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByNombreProduccion({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'nombreProduccion',
@@ -5306,78 +5298,85 @@ extension LoteGanaderoEntityQueryWhereDistinct
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByNotas({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'notas', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByObjetivo({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'objetivo', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByPesoMaximo() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'pesoMaximo');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByPesoMinimo() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'pesoMinimo');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByPesoPromedio() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'pesoPromedio');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
+      distinctByPredominantBreed({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'predominantBreed',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByProduccionDiaria() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'produccionDiaria');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
-      distinctByRazaPredominante({bool caseSensitive = true}) {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
+      distinctByProductionType() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'razaPredominante',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'productionType');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByResponsable({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'responsable', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
-      distinctByTipoProduccion() {
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
+      distinctBySpecies() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'tipoProduccion');
+      return query.addDistinctBy(r'species');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByUbicacionId({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'ubicacionId', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByUnidadProduccion({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'unidadProduccion',
@@ -5385,7 +5384,7 @@ extension LoteGanaderoEntityQueryWhereDistinct
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByUsuarioActualizacion({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'usuarioActualizacion',
@@ -5393,7 +5392,7 @@ extension LoteGanaderoEntityQueryWhereDistinct
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByUsuarioCreacion({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'usuarioCreacion',
@@ -5401,7 +5400,7 @@ extension LoteGanaderoEntityQueryWhereDistinct
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QDistinct>
+  QueryBuilder<LivestockLotEntity, LivestockLotEntity, QDistinct>
       distinctByUuid({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'uuid', caseSensitive: caseSensitive);
@@ -5409,222 +5408,222 @@ extension LoteGanaderoEntityQueryWhereDistinct
   }
 }
 
-extension LoteGanaderoEntityQueryProperty
-    on QueryBuilder<LoteGanaderoEntity, LoteGanaderoEntity, QQueryProperty> {
-  QueryBuilder<LoteGanaderoEntity, int, QQueryOperations> idProperty() {
+extension LivestockLotEntityQueryProperty
+    on QueryBuilder<LivestockLotEntity, LivestockLotEntity, QQueryProperty> {
+  QueryBuilder<LivestockLotEntity, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, bool, QQueryOperations> activoProperty() {
+  QueryBuilder<LivestockLotEntity, bool, QQueryOperations> activoProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'activo');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, List<String>, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, int, QQueryOperations>
+      animalCountProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'animalCount');
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, List<String>, QQueryOperations>
       animalIdsProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'animalIds');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, int, QQueryOperations>
-      cantidadAnimalesProperty() {
+  QueryBuilder<LivestockLotEntity, int?, QQueryOperations>
+      averageAgeMonthsProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'cantidadAnimales');
+      return query.addPropertyName(r'averageAgeMonths');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, String?, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, String?, QQueryOperations>
       datosEspecificosJsonProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'datosEspecificosJson');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, String?, QQueryOperations>
-      descripcionProperty() {
+  QueryBuilder<LivestockLotEntity, String?, QQueryOperations>
+      descriptionProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'descripcion');
+      return query.addPropertyName(r'description');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, int?, QQueryOperations>
-      edadPromedioMesesProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'edadPromedioMeses');
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, EspecieLote, QQueryOperations>
-      especieProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'especie');
-    });
-  }
-
-  QueryBuilder<LoteGanaderoEntity, bool, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, bool, QQueryOperations>
       estaActivoProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'estaActivo');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, List<String>, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, List<String>, QQueryOperations>
       etiquetasProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'etiquetas');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, DateTime?, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, DateTime?, QQueryOperations>
       fechaActualizacionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'fechaActualizacion');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, DateTime?, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, DateTime?, QQueryOperations>
       fechaCierreProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'fechaCierre');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, DateTime?, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, DateTime?, QQueryOperations>
       fechaCreacionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'fechaCreacion');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, DateTime?, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, DateTime?, QQueryOperations>
       fechaRegistroProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'fechaRegistro');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, List<IsarCambioLote>, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, List<IsarCambioLote>, QQueryOperations>
       historicoCambiosProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'historicoCambios');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, String, QQueryOperations> nombreProperty() {
+  QueryBuilder<LivestockLotEntity, String, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'nombre');
+      return query.addPropertyName(r'name');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, String, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, String, QQueryOperations>
       nombreEspecieProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'nombreEspecie');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, String, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, String, QQueryOperations>
       nombreProduccionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'nombreProduccion');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, String?, QQueryOperations> notasProperty() {
+  QueryBuilder<LivestockLotEntity, String?, QQueryOperations> notasProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'notas');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, String?, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, String?, QQueryOperations>
       objetivoProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'objetivo');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, double?, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, double?, QQueryOperations>
       pesoMaximoProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'pesoMaximo');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, double?, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, double?, QQueryOperations>
       pesoMinimoProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'pesoMinimo');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, double?, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, double?, QQueryOperations>
       pesoPromedioProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'pesoPromedio');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, double?, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, String?, QQueryOperations>
+      predominantBreedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'predominantBreed');
+    });
+  }
+
+  QueryBuilder<LivestockLotEntity, double?, QQueryOperations>
       produccionDiariaProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'produccionDiaria');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, String?, QQueryOperations>
-      razaPredominanteProperty() {
+  QueryBuilder<LivestockLotEntity, ProductionType, QQueryOperations>
+      productionTypeProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'razaPredominante');
+      return query.addPropertyName(r'productionType');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, String?, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, String?, QQueryOperations>
       responsableProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'responsable');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, TipoProduccion, QQueryOperations>
-      tipoProduccionProperty() {
+  QueryBuilder<LivestockLotEntity, LotSpecies, QQueryOperations>
+      speciesProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'tipoProduccion');
+      return query.addPropertyName(r'species');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, String?, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, String?, QQueryOperations>
       ubicacionIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'ubicacionId');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, String?, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, String?, QQueryOperations>
       unidadProduccionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'unidadProduccion');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, String?, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, String?, QQueryOperations>
       usuarioActualizacionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'usuarioActualizacion');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, String?, QQueryOperations>
+  QueryBuilder<LivestockLotEntity, String?, QQueryOperations>
       usuarioCreacionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'usuarioCreacion');
     });
   }
 
-  QueryBuilder<LoteGanaderoEntity, String?, QQueryOperations> uuidProperty() {
+  QueryBuilder<LivestockLotEntity, String?, QQueryOperations> uuidProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'uuid');
     });

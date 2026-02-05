@@ -71,7 +71,7 @@ class AnimalDetailHeader extends StatelessWidget {
                   _getTipoGanadoAsset(),
                   fit: BoxFit.contain,
                   errorBuilder: (context, error, stackTrace) {
-                    return Icon(
+                    return const Icon(
                       Icons.pets,
                       size: 32,
                       color: Colors.white,
@@ -383,7 +383,7 @@ class _DatosRow extends StatelessWidget {
     required this.label,
     required this.valor,
     required this.icono,
-    this.esUltimo = false,
+    required this.esUltimo,
   });
 
   @override
@@ -452,11 +452,11 @@ class UbicacionCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            const Row(
               children: [
-                const Icon(Icons.location_on, color: Colors.purple),
-                const SizedBox(width: 8),
-                const Text(
+                Icon(Icons.location_on, color: Colors.purple),
+                SizedBox(width: 8),
+                Text(
                   'Ubicación Actual',
                   style: TextStyle(
                     fontSize: 16,
@@ -912,11 +912,11 @@ class HistoricoEventosCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            const Row(
               children: [
-                const Icon(Icons.history, color: Colors.indigo),
-                const SizedBox(width: 8),
-                const Text(
+                Icon(Icons.history, color: Colors.indigo),
+                SizedBox(width: 8),
+                Text(
                   'Histórico (últimos 10)',
                   style: TextStyle(
                     fontSize: 16,

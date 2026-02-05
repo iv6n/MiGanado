@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 
 class PageUbicaciones extends ConsumerWidget {
   const PageUbicaciones({super.key});
@@ -8,13 +9,13 @@ class PageUbicaciones extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ubicaciones'),
+        title: const Text(AppStrings.locationsScreenTitle),
         centerTitle: true,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
-        children: [
-          const SizedBox(height: 8),
+        children: const [
+          SizedBox(height: 8),
           _UbicacionCard('Corral Principal', 15, Icons.location_on),
           _UbicacionCard('Potrero Sur', 8, Icons.landscape),
           _UbicacionCard('Establo', 12, Icons.house),

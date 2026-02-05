@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 
 class PagePerfil extends ConsumerWidget {
   const PagePerfil({super.key});
@@ -8,7 +9,7 @@ class PagePerfil extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Perfil Ganadero'),
+        title: const Text(AppStrings.profileGanaderTitle),
         centerTitle: true,
       ),
       body: ListView(
@@ -16,21 +17,21 @@ class PagePerfil extends ConsumerWidget {
         children: [
           const SizedBox(height: 16),
           // Datos personales
-          Card(
+          const Card(
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Datos Personales',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   _ProfileField('Nombre', 'Tu Nombre'),
-                  const Divider(),
+                  Divider(),
                   _ProfileField('Teléfono', '+57 XXX XXX XXXX'),
-                  const Divider(),
+                  Divider(),
                   _ProfileField('Correo', 'correo@example.com'),
                 ],
               ),

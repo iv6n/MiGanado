@@ -1,57 +1,62 @@
 import 'package:miganado/features/mantenimiento/data/models/desparasitacion_entity.dart';
 import 'package:miganado/data/database/isar_database.dart';
 
-class RegistrarDesparasitacionUseCase {
+/// Caso de uso para registrar una nueva desparasitación
+class RegisterDewormedUseCase {
   final MiGanadoDatabase database;
 
-  RegistrarDesparasitacionUseCase({required this.database});
+  RegisterDewormedUseCase({required this.database});
 
+  /// Registra una nueva aplicación de desparasitante
+  /// Calcula automáticamente la siguiente fecha de aplicación
   Future<void> call({
     required String animalUuid,
-    required String tipo,
-    required String producto,
-    required DateTime fecha,
-    required String dosis,
-    required String viaAplicacion,
-    required int diasIntervalo,
-    required String registradoPor,
-    String? marca,
-    String? lote,
-    String? aplicadoPor,
-    double? costo,
-    String? observaciones,
+    required String type,
+    required String product,
+    required DateTime date,
+    required String dosage,
+    required String administrationRoute,
+    required int intervalDays,
+    required String recordedBy,
+    String? brand,
+    String? lot,
+    String? appliedBy,
+    double? cost,
+    String? observations,
   }) async {
-    DateTime? proximaAplicacion;
-    if (diasIntervalo > 0) {
-      proximaAplicacion = fecha.add(Duration(days: diasIntervalo));
+    DateTime? nextApplication;
+    if (intervalDays > 0) {
+      nextApplication = date.add(Duration(days: intervalDays));
     }
 
-    final desparasitacion = DesparasitacionEntity(
+    final dewormed = DesparasitacionEntity(
       animalUuid: animalUuid,
-      tipo: tipo,
-      producto: producto,
-      fecha: fecha,
-      dosis: dosis,
-      viaAplicacion: viaAplicacion,
-      diasIntervalo: diasIntervalo,
-      registradoPor: registradoPor,
-      marca: marca,
-      lote: lote,
-      aplicadoPor: aplicadoPor,
-      proximaAplicacion: proximaAplicacion,
-      costo: costo,
-      observaciones: observaciones,
+      tipo: type,
+      producto: product,
+      fecha: date,
+      dosis: dosage,
+      viaAplicacion: administrationRoute,
+      diasIntervalo: intervalDays,
+      registradoPor: recordedBy,
+      marca: brand,
+      lote: lot,
+      aplicadoPor: appliedBy,
+      proximaAplicacion: nextApplication,
+      costo: cost,
+      observaciones: observations,
     );
 
-    await database.saveDesparasitacion(desparasitacion);
+    await database.saveDesparasitacion(dewormed);
   }
 }
 
-class ObtenerDesparasitacionesUseCase {
+/// Caso de uso para obtener el historial de desparasitaciones
+class GetDewormedUseCase {
   final MiGanadoDatabase database;
 
-  ObtenerDesparasitacionesUseCase({required this.database});
+  GetDewormedUseCase({required this.database});
 
+  /// Obtiene todas las desparasitaciones registradas para un animal
   Future<List<DesparasitacionEntity>> call({
     required String animalUuid,
   }) async {
@@ -59,14 +64,16 @@ class ObtenerDesparasitacionesUseCase {
   }
 }
 
-class ActualizarDesparasitacionUseCase {
+/// Caso de uso para actualizar informaci ón de una desparasitación
+class UpdateDewormedUseCase {
   final MiGanadoDatabase database;
 
-  ActualizarDesparasitacionUseCase({required this.database});
+  UpdateDewormedUseCase({required this.database});
 
+  /// Actualiza los datos de una desparasitación ya registrada
   Future<void> call({
-    required DesparasitacionEntity desparasitacion,
+    required DesparasitacionEntity dewormed,
   }) async {
-    await database.updateDesparasitacion(desparasitacion);
+    await database.updateDesparasitacion(dewormed);
   }
 }

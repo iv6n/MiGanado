@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/features/pesos/presentation/providers/pesos_providers.dart';
 import 'package:miganado/features/pesos/presentation/widgets/pesos_widgets.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 
 /// Pantalla de gestión de pesos para un animal específico
 class AnimalPesosScreen extends ConsumerWidget {
@@ -24,7 +25,7 @@ class AnimalPesosScreen extends ConsumerWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Pesos'),
+            const Text(AppStrings.screenWeights),
             Text(
               animalNombre,
               style: Theme.of(context).textTheme.bodySmall,
@@ -45,9 +46,9 @@ class AnimalPesosScreen extends ConsumerWidget {
               // Análisis de Pesos
               analisisAsync.when(
                 data: (analisis) => AnalisisPesosWidget(analisis: analisis),
-                loading: () => Center(
+                loading: () => const Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(24),
+                    padding: EdgeInsets.all(24),
                     child: CircularProgressIndicator(),
                   ),
                 ),
@@ -83,7 +84,7 @@ class AnimalPesosScreen extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Historial de Pesajes',
+                      'Historial de Pesajes', // TODO: Mover a AppStrings y ARB
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge
@@ -119,7 +120,7 @@ class AnimalPesosScreen extends ConsumerWidget {
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            'Sin pesajes registrados',
+                            'Sin pesajes registrados', // TODO: Mover a AppStrings y ARB
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -127,7 +128,7 @@ class AnimalPesosScreen extends ConsumerWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'Toca el botón + para registrar el primer pesaje',
+                            'Toca el botón + para registrar el primer pesaje', // TODO: Mover a AppStrings y ARB
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall
@@ -170,9 +171,9 @@ class AnimalPesosScreen extends ConsumerWidget {
                     },
                   );
                 },
-                loading: () => Center(
+                loading: () => const Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(24),
+                    padding: EdgeInsets.all(24),
                     child: CircularProgressIndicator(),
                   ),
                 ),
@@ -207,7 +208,7 @@ class AnimalPesosScreen extends ConsumerWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        heroTag: 'pesos_fab',
+        heroTag: 'pesos_fab_add',
         onPressed: () {
           showDialog(
             context: context,
@@ -216,7 +217,7 @@ class AnimalPesosScreen extends ConsumerWidget {
             ),
           );
         },
-        tooltip: 'Registrar pesaje',
+        tooltip: 'Registrar pesaje', // TODO: Mover a AppStrings y ARB
         child: const Icon(Icons.add),
       ),
     );

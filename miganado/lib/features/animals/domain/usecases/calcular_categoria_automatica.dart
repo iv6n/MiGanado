@@ -1,82 +1,82 @@
-import 'package:miganado/core/enums/sexo.dart';
+import 'package:miganado/core/enums/gender.dart';
 
-/// Use Case: Calcular la categoría automática de un animal
+/// Use Case: Calculate the automatic category of an animal
 ///
-/// Implementa la REGLA DE NEGOCIO:
-/// - Becerro/Becerra: < 12 meses
-/// - Novillo/Vaquilla: 12-36 meses
-/// - Torete/Vaca: > 36 meses
+/// Implements the BUSINESS RULE:
+/// - Calf/Heifer: < 12 months
+/// - Young Bull/Young Cow: 12-36 months
+/// - Bull/Cow: > 36 months
 ///
-/// Nota: "Becerrón" NO existe en MiGanado. Se diferencia por sexo.
-class CalcularCategoriaAutomatica {
-  /// Calcula la categoría basada en sexo + edad en meses
+/// Note: Differentiation is made by gender.
+class CalculateCategoryAutomatically {
+  /// Calculates the category based on gender + age in months
   ///
-  /// Parámetros:
-  /// - [sexo]: Sexo del animal (Macho o Hembra)
-  /// - [edadMeses]: Edad en meses del animal
+  /// Parameters:
+  /// - [gender]: Gender of the animal (Male or Female)
+  /// - [ageMonths]: Age in months of the animal
   ///
-  /// Retorna:
-  /// - "Becerro" si es macho < 12 meses
-  /// - "Becerra" si es hembra < 12 meses
-  /// - "Novillo" si es macho entre 12-36 meses
-  /// - "Vaquilla" si es hembra entre 12-36 meses
-  /// - "Toro" si es macho > 36 meses
-  /// - "Vaca" si es hembra > 36 meses
+  /// Returns:
+  /// - "Calf" if male < 12 months
+  /// - "Heifer" if female < 12 months
+  /// - "Young Bull" if male between 12-36 months
+  /// - "Young Cow" if female between 12-36 months
+  /// - "Bull" if male > 36 months
+  /// - "Cow" if female > 36 months
   ///
-  /// Ejemplo:
+  /// Example:
   /// ```dart
-  /// final useCase = CalcularCategoriaAutomatica();
-  /// expect(useCase.call(Sexo.macho, 8), 'Becerro');
-  /// expect(useCase.call(Sexo.hembra, 24), 'Vaquilla');
-  /// expect(useCase.call(Sexo.macho, 60), 'Toro');
+  /// final useCase = CalculateCategoryAutomatically();
+  /// expect(useCase.call(Gender.male, 8), 'Calf');
+  /// expect(useCase.call(Gender.female, 24), 'Young Cow');
+  /// expect(useCase.call(Gender.male, 60), 'Bull');
   /// ```
-  String call(Sexo sexo, int edadMeses) {
-    if (edadMeses < 12) {
-      return sexo == Sexo.macho ? 'Becerro' : 'Becerra';
-    } else if (edadMeses < 36) {
-      return sexo == Sexo.macho ? 'Novillo' : 'Vaquilla';
+  String call(Gender gender, int ageMonths) {
+    if (ageMonths < 12) {
+      return gender == Gender.male ? 'Calf' : 'Heifer';
+    } else if (ageMonths < 36) {
+      return gender == Gender.male ? 'Young Bull' : 'Young Cow';
     } else {
-      return sexo == Sexo.macho ? 'Toro' : 'Vaca';
+      return gender == Gender.male ? 'Bull' : 'Cow';
     }
   }
 
-  /// Calcula la categoría aproximada sin fecha exacta
-  /// Útil cuando se usa el método "simulada_por_categoria"
+  /// Calculates the approximate category without exact date
+  /// Useful when using the "simulated_by_category" method
   ///
-  /// Se asume que si no hay fecha, el animal está iniciando esa categoría:
-  /// - Si elegís Becerro/Becerra, asumimos que tiene ~6 meses
-  /// - Si elegís Novillo/Vaquilla, asumimos que tiene ~24 meses
-  /// - Si elegís Toro/Vaca, asumimos que tiene ~48 meses
-  String getCategoriaPorNombre(String nombreCategoria) {
-    final validosCategoriaBecerro = ['Becerro', 'Becerra'];
-    final validosCategoriaIntermedia = ['Novillo', 'Vaquilla'];
-    final validosCategoriaMayor = ['Toro', 'Vaca'];
+  /// It is assumed that if there is no date, the animal is starting that category:
+  /// - If you choose Calf/Heifer, we assume it is ~6 months old
+  /// - If you choose Young Bull/Young Cow, we assume it is ~24 months old
+  /// - If you choose Bull/Cow, we assume it is ~48 months old
+  String getCategoryByName(String categoryName) {
+    final validCalfCategories = ['Calf', 'Heifer'];
+    final validIntermediateCategories = ['Young Bull', 'Young Cow'];
+    final validAdultCategories = ['Bull', 'Cow'];
 
-    if (validosCategoriaBecerro.contains(nombreCategoria)) {
-      return nombreCategoria;
-    } else if (validosCategoriaIntermedia.contains(nombreCategoria)) {
-      return nombreCategoria;
-    } else if (validosCategoriaMayor.contains(nombreCategoria)) {
-      return nombreCategoria;
+    if (validCalfCategories.contains(categoryName)) {
+      return categoryName;
+    } else if (validIntermediateCategories.contains(categoryName)) {
+      return categoryName;
+    } else if (validAdultCategories.contains(categoryName)) {
+      return categoryName;
     }
 
-    return 'Desconocido';
+    return 'Unknown';
   }
 
-  /// Obtiene el rango de edad estimado para una categoría
-  /// Retorna tupla (mínimo, máximo, aproximado)
-  ({int min, int max, int approx}) getRangoEdadPorCategoria(
-    String categoria,
+  /// Gets the estimated age range for a category
+  /// Returns tuple (minimum, maximum, approximate)
+  ({int min, int max, int approx}) getAgeRangeByCategory(
+    String category,
   ) {
-    switch (categoria) {
-      case 'Becerro':
-      case 'Becerra':
+    switch (category) {
+      case 'Calf':
+      case 'Heifer':
         return (min: 0, max: 12, approx: 6);
-      case 'Novillo':
-      case 'Vaquilla':
+      case 'Young Bull':
+      case 'Young Cow':
         return (min: 12, max: 36, approx: 24);
-      case 'Toro':
-      case 'Vaca':
+      case 'Bull':
+      case 'Cow':
         return (min: 36, max: 999, approx: 48);
       default:
         return (min: 0, max: 0, approx: 0);

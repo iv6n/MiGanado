@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 import 'package:miganado/ui/screens/home_screen.dart';
 import 'package:miganado/ui/screens/register_animal_screen.dart';
 import 'package:miganado/ui/screens/ganadero_info_screen.dart';
@@ -51,9 +52,9 @@ final goRouter = GoRouter(
     ),
   ],
   errorBuilder: (context, state) => Scaffold(
-    appBar: AppBar(title: const Text('Error')),
+    appBar: AppBar(title: const Text(AppStrings.errorTitle)),
     body: Center(
-      child: Text('Ruta no encontrada: ${state.error}'),
+      child: Text('${AppStrings.errorOccurred}: ${state.error}'),
     ),
   ),
 );

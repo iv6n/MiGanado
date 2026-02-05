@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 import 'package:miganado/features/mantenimiento/data/models/vacuna_entity.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/vacunas_providers.dart';
 
@@ -17,7 +18,7 @@ class VacunasHistorialScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Usar el provider FutureProvider que ya está configurado
-    final vacunasAsync = ref.watch(vacunasByAnimalProvider(animalUuid));
+    final vacunasAsync = ref.watch(vaccinesByAnimalProvider(animalUuid));
 
     return Scaffold(
       appBar: AppBar(
@@ -32,19 +33,20 @@ class VacunasHistorialScreen extends ConsumerWidget {
             children: [
               const Icon(Icons.error_outline, size: 64, color: Colors.red),
               const SizedBox(height: 16),
-              Text('Error: $error'),
+              Text('${AppStrings.errorTitle}: $error'),
             ],
           ),
         ),
         data: (vacunas) {
           if (vacunas.isEmpty) {
-            return Center(
+            return const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.health_and_safety, size: 64, color: Colors.grey),
-                  const SizedBox(height: 16),
-                  const Text('No hay vacunas registradas'),
+                  SizedBox(height: 16),
+                  Text(
+                      'No hay vacunas registradas'), // TODO: Mover a AppStrings y ARB
                 ],
               ),
             );
@@ -56,7 +58,8 @@ class VacunasHistorialScreen extends ConsumerWidget {
 
           return RefreshIndicator(
             onRefresh: () async {
-              await ref.refresh(vacunasByAnimalProvider(animalUuid).future);
+              // ignore: unused_result
+              ref.refresh(vaccinesByAnimalProvider(animalUuid).future);
             },
             child: ListView.separated(
               padding: const EdgeInsets.all(16),
@@ -100,7 +103,7 @@ class _VacunaCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -113,26 +116,27 @@ class _VacunaCard extends StatelessWidget {
                     children: [
                       Text(
                         vacuna.tipo,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         'Enfermedad: ${vacuna.enfermedad}',
-                        style: TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: Colors.green.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Aplicada',
                     style: TextStyle(
                       color: Colors.green,
@@ -143,7 +147,7 @@ class _VacunaCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _InfoRow(label: 'Producto', value: vacuna.producto ?? 'N/A'),
             _InfoRow(label: 'Lote', value: vacuna.lote ?? 'N/A'),
             _InfoRow(label: 'Dosis', value: vacuna.dosis ?? 'N/A'),
@@ -177,7 +181,7 @@ class _InfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -190,7 +194,7 @@ class _InfoRow extends StatelessWidget {
           ),
           Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 13,
             ),

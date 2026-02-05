@@ -46,17 +46,17 @@ class Costo {
   CostoEntity toEntity() {
     return CostoEntity(
       animalUuid: animalUuid,
-      tipo: TipoCosto.otro,
-      descripcion: descripcion,
-      monto: monto,
-      fecha: fecha,
-      detalles: detalles,
-      responsable: responsable,
-      comprobante: comprobante,
+      type: CostType.other,
+      description: descripcion,
+      amount: monto,
+      date: fecha,
+      details: detalles,
+      responsible: responsable,
+      receipt: comprobante,
     )
       ..uuid = uuid
-      ..fechaCreacion = fechaCreacion
-      ..fechaActualizacion = fechaActualizacion;
+      ..creationDate = fechaCreacion
+      ..updateDate = fechaActualizacion;
   }
 
   /// Crear copia modificada

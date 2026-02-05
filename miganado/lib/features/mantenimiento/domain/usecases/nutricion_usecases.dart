@@ -1,52 +1,57 @@
 import 'package:miganado/features/mantenimiento/data/models/nutricion_entity.dart';
 import 'package:miganado/data/database/isar_database.dart';
 
-class RegistrarNutricionUseCase {
+/// Caso de uso para registrar un nuevo plan de nutrición
+class RegisterNutritionUseCase {
   final MiGanadoDatabase database;
 
-  RegistrarNutricionUseCase({required this.database});
+  RegisterNutritionUseCase({required this.database});
 
+  /// Registra un nuevo plan de nutrición para un animal
+  /// Cierra automáticamente cualquier plan anterior activo
   Future<void> call({
     required String animalUuid,
-    required String tipoAlimentacion,
-    required DateTime fechaInicio,
-    required String registradoPor,
-    String? alimentoPrincipal,
-    List<String>? suplementos,
-    String? cantidadDiaria,
-    double? costoPorDia,
-    String? observaciones,
+    required String feedingType,
+    required DateTime startDate,
+    required String recordedBy,
+    String? mainFeed,
+    List<String>? supplements,
+    String? dailyQuantity,
+    double? costPerDay,
+    String? observations,
   }) async {
     // Cerrar nutrición anterior si existe y está activa
-    final nutricionActual = await database.getNutricionActual(animalUuid);
-    if (nutricionActual != null) {
-      final cerrada = nutricionActual.copyWith(
-        fechaFin: fechaInicio,
+    final currentNutrition = await database.getNutricionActual(animalUuid);
+    if (currentNutrition != null) {
+      final closed = currentNutrition.copyWith(
+        fechaFin: startDate,
       );
-      await database.updateNutricion(cerrada);
+      await database.updateNutricion(closed);
     }
 
-    final nutricion = NutricionEntity(
+    final nutrition = NutricionEntity(
       animalUuid: animalUuid,
-      tipoAlimentacion: tipoAlimentacion,
-      fechaInicio: fechaInicio,
-      registradoPor: registradoPor,
-      alimentoPrincipal: alimentoPrincipal,
-      suplementos: suplementos ?? [],
-      cantidadDiaria: cantidadDiaria,
-      costoPorDia: costoPorDia,
-      observaciones: observaciones,
+      tipoAlimentacion: feedingType,
+      fechaInicio: startDate,
+      registradoPor: recordedBy,
+      alimentoPrincipal: mainFeed,
+      suplementos: supplements ?? [],
+      cantidadDiaria: dailyQuantity,
+      costoPorDia: costPerDay,
+      observaciones: observations,
     );
 
-    await database.saveNutricion(nutricion);
+    await database.saveNutricion(nutrition);
   }
 }
 
-class ObtenerNutricionUseCase {
+/// Caso de uso para obtener historial de nutrición
+class GetNutritionHistoryUseCase {
   final MiGanadoDatabase database;
 
-  ObtenerNutricionUseCase({required this.database});
+  GetNutritionHistoryUseCase({required this.database});
 
+  /// Obtiene todo el historial de planes de nutrición de un animal
   Future<List<NutricionEntity>> call({
     required String animalUuid,
   }) async {
@@ -54,11 +59,13 @@ class ObtenerNutricionUseCase {
   }
 }
 
-class ObtenerNutricionActualUseCase {
+/// Caso de uso para obtener plan de nutrición actual
+class GetCurrentNutritionUseCase {
   final MiGanadoDatabase database;
 
-  ObtenerNutricionActualUseCase({required this.database});
+  GetCurrentNutritionUseCase({required this.database});
 
+  /// Obtiene el plan de nutrición activo (sin fecha final)
   Future<NutricionEntity?> call({
     required String animalUuid,
   }) async {
@@ -66,20 +73,22 @@ class ObtenerNutricionActualUseCase {
   }
 }
 
-class FinalizarNutricionUseCase {
+/// Caso de uso para finalizar un plan de nutrición
+class FinishNutritionUseCase {
   final MiGanadoDatabase database;
 
-  FinalizarNutricionUseCase({required this.database});
+  FinishNutritionUseCase({required this.database});
 
+  /// Finaliza un plan de nutrición y registra cambios observados
   Future<void> call({
-    required NutricionEntity nutricion,
-    String? cambiosObservados,
+    required NutricionEntity nutrition,
+    String? observedChanges,
   }) async {
-    final finalizada = nutricion.copyWith(
+    final finished = nutrition.copyWith(
       fechaFin: DateTime.now(),
-      cambiosObservados: cambiosObservados,
+      cambiosObservados: observedChanges,
     );
 
-    await database.updateNutricion(finalizada);
+    await database.updateNutricion(finished);
   }
 }

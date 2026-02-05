@@ -1,8 +1,8 @@
-import 'package:miganado/features/animals/data/models/reproductivo_entity.dart';
 import 'package:miganado/features/mantenimiento/data/models/vacuna_entity.dart';
 import 'package:miganado/features/mantenimiento/data/models/tratamiento_entity.dart';
 import 'package:miganado/features/mantenimiento/data/models/nutricion_entity.dart';
 import 'package:miganado/features/animals/domain/entities/animal.dart';
+import 'package:miganado/features/animals/domain/entities/etapa_vida.dart';
 import 'package:intl/intl.dart';
 
 class ReportData {
@@ -10,14 +10,14 @@ class ReportData {
   final List<VacunaEntity> vacunas;
   final List<TratamientoEntity> tratamientos;
   final List<NutricionEntity> nutricion;
-  final ReproductivEntity? reproductivo;
+  // final ReproductivEntity? reproductivo; // TODO: Add when reproductive feature is implemented
 
   ReportData({
     required this.animal,
     required this.vacunas,
     required this.tratamientos,
     required this.nutricion,
-    this.reproductivo,
+    // this.reproductivo,
   });
 }
 
@@ -31,9 +31,9 @@ class ReportService {
     buffer.writeln(
         'REPORTE DE SALUD - ${data.animal.nombrePersonalizado ?? data.animal.numeroArete}');
     buffer.writeln('Arete,${data.animal.numeroArete}');
-    buffer.writeln('Especie,${data.animal.especie.name}');
-    buffer.writeln('Categoría,${data.animal.categoria.name}');
-    buffer.writeln('Etapa,${data.animal.etapa.name}');
+    buffer.writeln('Especie,${data.animal.especie.descripcion}');
+    buffer.writeln('Categoría,${data.animal.categoria.descripcion}');
+    buffer.writeln('Etapa,${data.animal.etapa.descripcion}');
     buffer.writeln('Raza,${data.animal.raza}');
     buffer.writeln('Sexo,${data.animal.sexo.name}');
     buffer.writeln(
@@ -76,20 +76,20 @@ class ReportService {
     buffer.writeln('');
     buffer.writeln('');
 
-    // Reproductivo (si aplica)
-    if (data.reproductivo != null) {
-      final repro = data.reproductivo!;
-      buffer.writeln('DATOS REPRODUCTIVOS');
-      buffer.writeln('Estado,${repro.estado}');
-      buffer.writeln('Total Partos,${repro.totalPartos}');
-      buffer.writeln('Total Crias,${repro.totalCrias}');
-      if (repro.primerParto != null) {
-        buffer.writeln('Primer Parto,${dateFormat.format(repro.primerParto!)}');
-      }
-      if (repro.ultimoParto != null) {
-        buffer.writeln('Ultimo Parto,${dateFormat.format(repro.ultimoParto!)}');
-      }
-    }
+    // Reproductivo (si aplica) - TODO: Implement when reproductive tracking is added
+    // if (data.reproductivo != null) {
+    //   final repro = data.reproductivo!;
+    //   buffer.writeln('DATOS REPRODUCTIVOS');
+    //   buffer.writeln('Estado,${repro.estado}');
+    //   buffer.writeln('Total Partos,${repro.totalPartos}');
+    //   buffer.writeln('Total Crias,${repro.totalCrias}');
+    //   if (repro.primerParto != null) {
+    //     buffer.writeln('Primer Parto,${dateFormat.format(repro.primerParto!)}');
+    //   }
+    //   if (repro.ultimoParto != null) {
+    //     buffer.writeln('Ultimo Parto,${dateFormat.format(repro.ultimoParto!)}');
+    //   }
+    // }
 
     return buffer.toString();
   }
@@ -100,29 +100,29 @@ class ReportService {
     final dateFormat = DateFormat('dd/MM/yyyy');
 
     // Encabezado
-    buffer.writeln('═' * 80);
+    buffer.writeln('=' * 80);
     buffer.writeln('REPORTE DE HISTORIAL DE SALUD ANIMAL');
-    buffer.writeln('═' * 80);
+    buffer.writeln('=' * 80);
     buffer.writeln('');
 
     // Datos del animal
     buffer.writeln('INFORMACIÓN DEL ANIMAL');
-    buffer.writeln('─' * 80);
+    buffer.writeln('-' * 80);
     buffer
         .writeln('Nombre: ${data.animal.nombrePersonalizado ?? 'Sin nombre'}');
     buffer.writeln('Arete: ${data.animal.numeroArete}');
-    buffer.writeln('Especie: ${data.animal.especie.name}');
-    buffer.writeln('Categoría: ${data.animal.categoria.name}');
-    buffer.writeln('Etapa: ${data.animal.etapa.name}');
+    buffer.writeln('Especie: ${data.animal.especie.descripcion}');
+    buffer.writeln('Categoría: ${data.animal.categoria.descripcion}');
+    buffer.writeln('Etapa: ${data.animal.etapa.descripcion}');
     buffer.writeln('Raza: ${data.animal.raza}');
     buffer.writeln('Sexo: ${data.animal.sexo.name}');
     buffer.writeln(
         'Fecha de Nacimiento: ${dateFormat.format(data.animal.fechaNacimiento)}');
     buffer.writeln('');
 
-    // Vacunas
+    // Historial de vacunaciones
     buffer.writeln('HISTORIAL DE VACUNACIONES');
-    buffer.writeln('─' * 80);
+    buffer.writeln('-' * 80);
     if (data.vacunas.isEmpty) {
       buffer.writeln('Sin registros de vacunación');
     } else {
@@ -144,7 +144,7 @@ class ReportService {
 
     // Tratamientos
     buffer.writeln('HISTORIAL DE TRATAMIENTOS');
-    buffer.writeln('─' * 80);
+    buffer.writeln('-' * 80);
     if (data.tratamientos.isEmpty) {
       buffer.writeln('Sin registros de tratamiento');
     } else {
@@ -169,7 +169,7 @@ class ReportService {
 
     // Nutrición
     buffer.writeln('HISTORIAL NUTRICIONAL');
-    buffer.writeln('─' * 80);
+    buffer.writeln('-' * 80);
     if (data.nutricion.isEmpty) {
       buffer.writeln('Sin registros nutricionales');
     } else {
@@ -187,35 +187,35 @@ class ReportService {
       }
     }
 
-    // Datos reproductivos
-    if (data.reproductivo != null) {
-      final repro = data.reproductivo!;
-      buffer.writeln('INFORMACIÓN REPRODUCTIVA');
-      buffer.writeln('─' * 80);
-      buffer.writeln('Estado: ${repro.estado}');
-      buffer.writeln('Total de Partos: ${repro.totalPartos}');
-      buffer.writeln('Total de Crías: ${repro.totalCrias}');
-      if (repro.primerParto != null) {
-        buffer
-            .writeln('Primer Parto: ${dateFormat.format(repro.primerParto!)}');
-      }
-      if (repro.ultimoParto != null) {
-        buffer
-            .writeln('Último Parto: ${dateFormat.format(repro.ultimoParto!)}');
-      }
-      if (repro.estado == 'Gestante' && repro.fechaPartoEstimada != null) {
-        final diasFalta =
-            repro.fechaPartoEstimada!.difference(DateTime.now()).inDays;
-        buffer.writeln(
-            'Parto Estimado: ${dateFormat.format(repro.fechaPartoEstimada!)} (Faltan $diasFalta días)');
-      }
-      buffer.writeln('');
-    }
+    // Datos reproductivos - TODO: Implement when reproductive tracking is added
+    // if (data.reproductivo != null) {
+    //   final repro = data.reproductivo!;
+    //   buffer.writeln('INFORMACIÓN REPRODUCTIVA');
+    //   buffer.writeln('-' * 80);
+    //   buffer.writeln('Estado: ${repro.estado}');
+    //   buffer.writeln('Total de Partos: ${repro.totalPartos}');
+    //   buffer.writeln('Total de Crías: ${repro.totalCrias}');
+    //   if (repro.primerParto != null) {
+    //     buffer
+    //         .writeln('Primer Parto: ${dateFormat.format(repro.primerParto!)}');
+    //   }
+    //   if (repro.ultimoParto != null) {
+    //     buffer
+    //         .writeln('Último Parto: ${dateFormat.format(repro.ultimoParto!)}');
+    //   }
+    //   if (repro.estado == 'Gestante' && repro.fechaPartoEstimada != null) {
+    //     final diasFalta =
+    //         repro.fechaPartoEstimada!.difference(DateTime.now()).inDays;
+    //     buffer.writeln(
+    //         'Parto Estimado: ${dateFormat.format(repro.fechaPartoEstimada!)} (Faltan $diasFalta días)');
+    //   }
+    // }
+    buffer.writeln('');
 
     // Pie de página
-    buffer.writeln('═' * 80);
+    buffer.writeln('=' * 80);
     buffer.writeln('Reporte generado: ${dateFormat.format(DateTime.now())}');
-    buffer.writeln('═' * 80);
+    buffer.writeln('=' * 80);
 
     return buffer.toString();
   }
@@ -246,7 +246,7 @@ RESUMEN DE COSTOS - ${data.animal.nombrePersonalizado ?? data.animal.numeroArete
 Vacunas: \$$totalVacunas
 Tratamientos: \$$totalTratamientos
 Nutrición: \$$totalNutricion
-─────────────────────
+---------------------
 TOTAL: \$$total
 ''';
   }

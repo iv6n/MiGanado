@@ -1,4 +1,5 @@
 import 'package:miganado/features/animals/domain/entities/animal.dart';
+import 'package:miganado/features/animals/domain/entities/etapa_vida.dart';
 import 'package:miganado/features/animals/data/models/animal_entity.dart';
 import 'package:miganado/data/database/isar_database.dart';
 
@@ -24,9 +25,9 @@ class RegisterAnimalUseCase {
   /// Returns el Animal creado
   Future<Animal> call({
     required String numeroArete,
-    required Especie especie,
-    required Categoria categoria,
-    required Sexo sexo,
+    required Species especie,
+    required Category categoria,
+    required Sex sexo,
     required String raza,
     required DateTime fechaNacimiento,
     required int edadMeses,
@@ -48,15 +49,15 @@ class RegisterAnimalUseCase {
 
     // 3. Calcular la etapa automáticamente (se calcula en el constructor)
     final animalEntity = AnimalEntity(
-      numeroArete: numeroArete.trim(),
-      nombrePersonalizado: nombrePersonalizado?.trim(),
-      especie: especie,
-      categoria: categoria,
-      sexo: sexo,
-      raza: raza.trim(),
-      fechaNacimiento: fechaNacimiento,
-      edadMeses: edadMeses,
-      esCastrado: esCastrado,
+      earTagNumber: numeroArete.trim(),
+      customName: nombrePersonalizado?.trim(),
+      species: especie,
+      category: categoria,
+      sex: sexo,
+      breed: raza.trim(),
+      birthDate: fechaNacimiento,
+      ageMonths: edadMeses,
+      isCastrated: esCastrado,
     );
 
     // 4. Guardar en base de datos
@@ -75,8 +76,8 @@ class RegisterAnimalUseCase {
   /// Validaciones de datos
   void _validate({
     required String numeroArete,
-    required Especie especie,
-    required Sexo sexo,
+    required Species especie,
+    required Sex sexo,
     required String raza,
     required DateTime fechaNacimiento,
     required int edadMeses,

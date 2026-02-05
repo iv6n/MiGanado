@@ -9,88 +9,89 @@ part of 'reproductivo_entity.dart';
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-extension GetReproductivEntityCollection on Isar {
-  IsarCollection<ReproductivEntity> get reproductivEntitys => this.collection();
+extension GetReproductiveEntityCollection on Isar {
+  IsarCollection<ReproductiveEntity> get reproductiveEntitys =>
+      this.collection();
 }
 
-const ReproductivEntitySchema = CollectionSchema(
-  name: r'ReproductivEntity',
-  id: 2304355568806951129,
+const ReproductiveEntitySchema = CollectionSchema(
+  name: r'ReproductiveEntity',
+  id: 5893137532483089381,
   properties: {
     r'animalUuid': PropertySchema(
       id: 0,
       name: r'animalUuid',
       type: IsarType.string,
     ),
-    r'estado': PropertySchema(
+    r'currentMatingDate': PropertySchema(
       id: 1,
-      name: r'estado',
-      type: IsarType.string,
+      name: r'currentMatingDate',
+      type: IsarType.dateTime,
     ),
-    r'fechaActualizacion': PropertySchema(
+    r'estimatedBirthDate': PropertySchema(
       id: 2,
-      name: r'fechaActualizacion',
+      name: r'estimatedBirthDate',
       type: IsarType.dateTime,
     ),
-    r'fechaEmpadreActual': PropertySchema(
+    r'firstBirth': PropertySchema(
       id: 3,
-      name: r'fechaEmpadreActual',
+      name: r'firstBirth',
       type: IsarType.dateTime,
     ),
-    r'fechaPartoEstimada': PropertySchema(
+    r'lastBirth': PropertySchema(
       id: 4,
-      name: r'fechaPartoEstimada',
+      name: r'lastBirth',
       type: IsarType.dateTime,
     ),
-    r'fechaRegistro': PropertySchema(
+    r'lastEstrusDate': PropertySchema(
       id: 5,
-      name: r'fechaRegistro',
+      name: r'lastEstrusDate',
       type: IsarType.dateTime,
     ),
-    r'fechaUltimoEstro': PropertySchema(
+    r'lastUpdateDate': PropertySchema(
       id: 6,
-      name: r'fechaUltimoEstro',
+      name: r'lastUpdateDate',
       type: IsarType.dateTime,
     ),
-    r'observaciones': PropertySchema(
+    r'matingObservations': PropertySchema(
       id: 7,
-      name: r'observaciones',
+      name: r'matingObservations',
       type: IsarType.string,
     ),
-    r'observacionesEmpadre': PropertySchema(
+    r'observations': PropertySchema(
       id: 8,
-      name: r'observacionesEmpadre',
+      name: r'observations',
       type: IsarType.string,
     ),
-    r'primerParto': PropertySchema(
+    r'registeredBy': PropertySchema(
       id: 9,
-      name: r'primerParto',
-      type: IsarType.dateTime,
+      name: r'registeredBy',
+      type: IsarType.string,
     ),
-    r'registradoPor': PropertySchema(
+    r'registrationDate': PropertySchema(
       id: 10,
-      name: r'registradoPor',
-      type: IsarType.string,
-    ),
-    r'sementalUuid': PropertySchema(
-      id: 11,
-      name: r'sementalUuid',
-      type: IsarType.string,
-    ),
-    r'totalCrias': PropertySchema(
-      id: 12,
-      name: r'totalCrias',
-      type: IsarType.long,
-    ),
-    r'totalPartos': PropertySchema(
-      id: 13,
-      name: r'totalPartos',
-      type: IsarType.long,
-    ),
-    r'ultimoParto': PropertySchema(
-      id: 14,
-      name: r'ultimoParto',
+      name: r'registrationDate',
       type: IsarType.dateTime,
+    ),
+    r'sireUuid': PropertySchema(
+      id: 11,
+      name: r'sireUuid',
+      type: IsarType.string,
+    ),
+    r'status': PropertySchema(
+      id: 12,
+      name: r'status',
+      type: IsarType.string,
+    ),
+    r'totalBirths': PropertySchema(
+      id: 13,
+      name: r'totalBirths',
+      type: IsarType.long,
+    ),
+    r'totalOffspring': PropertySchema(
+      id: 14,
+      name: r'totalOffspring',
+      type: IsarType.long,
     ),
     r'uuid': PropertySchema(
       id: 15,
@@ -98,10 +99,10 @@ const ReproductivEntitySchema = CollectionSchema(
       type: IsarType.string,
     )
   },
-  estimateSize: _reproductivEntityEstimateSize,
-  serialize: _reproductivEntitySerialize,
-  deserialize: _reproductivEntityDeserialize,
-  deserializeProp: _reproductivEntityDeserializeProp,
+  estimateSize: _reproductiveEntityEstimateSize,
+  serialize: _reproductiveEntitySerialize,
+  deserialize: _reproductiveEntityDeserialize,
+  deserializeProp: _reproductiveEntityDeserializeProp,
   idName: r'id',
   indexes: {
     r'uuid': IndexSchema(
@@ -133,96 +134,96 @@ const ReproductivEntitySchema = CollectionSchema(
   },
   links: {},
   embeddedSchemas: {},
-  getId: _reproductivEntityGetId,
-  getLinks: _reproductivEntityGetLinks,
-  attach: _reproductivEntityAttach,
+  getId: _reproductiveEntityGetId,
+  getLinks: _reproductiveEntityGetLinks,
+  attach: _reproductiveEntityAttach,
   version: '3.1.0+1',
 );
 
-int _reproductivEntityEstimateSize(
-  ReproductivEntity object,
+int _reproductiveEntityEstimateSize(
+  ReproductiveEntity object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
   bytesCount += 3 + object.animalUuid.length * 3;
-  bytesCount += 3 + object.estado.length * 3;
   {
-    final value = object.observaciones;
+    final value = object.matingObservations;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
   {
-    final value = object.observacionesEmpadre;
+    final value = object.observations;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
-  bytesCount += 3 + object.registradoPor.length * 3;
+  bytesCount += 3 + object.registeredBy.length * 3;
   {
-    final value = object.sementalUuid;
+    final value = object.sireUuid;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
+  bytesCount += 3 + object.status.length * 3;
   bytesCount += 3 + object.uuid.length * 3;
   return bytesCount;
 }
 
-void _reproductivEntitySerialize(
-  ReproductivEntity object,
+void _reproductiveEntitySerialize(
+  ReproductiveEntity object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeString(offsets[0], object.animalUuid);
-  writer.writeString(offsets[1], object.estado);
-  writer.writeDateTime(offsets[2], object.fechaActualizacion);
-  writer.writeDateTime(offsets[3], object.fechaEmpadreActual);
-  writer.writeDateTime(offsets[4], object.fechaPartoEstimada);
-  writer.writeDateTime(offsets[5], object.fechaRegistro);
-  writer.writeDateTime(offsets[6], object.fechaUltimoEstro);
-  writer.writeString(offsets[7], object.observaciones);
-  writer.writeString(offsets[8], object.observacionesEmpadre);
-  writer.writeDateTime(offsets[9], object.primerParto);
-  writer.writeString(offsets[10], object.registradoPor);
-  writer.writeString(offsets[11], object.sementalUuid);
-  writer.writeLong(offsets[12], object.totalCrias);
-  writer.writeLong(offsets[13], object.totalPartos);
-  writer.writeDateTime(offsets[14], object.ultimoParto);
+  writer.writeDateTime(offsets[1], object.currentMatingDate);
+  writer.writeDateTime(offsets[2], object.estimatedBirthDate);
+  writer.writeDateTime(offsets[3], object.firstBirth);
+  writer.writeDateTime(offsets[4], object.lastBirth);
+  writer.writeDateTime(offsets[5], object.lastEstrusDate);
+  writer.writeDateTime(offsets[6], object.lastUpdateDate);
+  writer.writeString(offsets[7], object.matingObservations);
+  writer.writeString(offsets[8], object.observations);
+  writer.writeString(offsets[9], object.registeredBy);
+  writer.writeDateTime(offsets[10], object.registrationDate);
+  writer.writeString(offsets[11], object.sireUuid);
+  writer.writeString(offsets[12], object.status);
+  writer.writeLong(offsets[13], object.totalBirths);
+  writer.writeLong(offsets[14], object.totalOffspring);
   writer.writeString(offsets[15], object.uuid);
 }
 
-ReproductivEntity _reproductivEntityDeserialize(
+ReproductiveEntity _reproductiveEntityDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = ReproductivEntity(
+  final object = ReproductiveEntity(
     animalUuid: reader.readString(offsets[0]),
-    estado: reader.readString(offsets[1]),
-    fechaEmpadreActual: reader.readDateTimeOrNull(offsets[3]),
-    fechaPartoEstimada: reader.readDateTimeOrNull(offsets[4]),
-    fechaUltimoEstro: reader.readDateTimeOrNull(offsets[6]),
-    observaciones: reader.readStringOrNull(offsets[7]),
-    observacionesEmpadre: reader.readStringOrNull(offsets[8]),
-    registradoPor: reader.readString(offsets[10]),
-    sementalUuid: reader.readStringOrNull(offsets[11]),
+    currentMatingDate: reader.readDateTimeOrNull(offsets[1]),
+    estimatedBirthDate: reader.readDateTimeOrNull(offsets[2]),
+    lastEstrusDate: reader.readDateTimeOrNull(offsets[5]),
+    matingObservations: reader.readStringOrNull(offsets[7]),
+    observations: reader.readStringOrNull(offsets[8]),
+    registeredBy: reader.readString(offsets[9]),
+    sireUuid: reader.readStringOrNull(offsets[11]),
+    status: reader.readString(offsets[12]),
   );
-  object.fechaActualizacion = reader.readDateTimeOrNull(offsets[2]);
-  object.fechaRegistro = reader.readDateTime(offsets[5]);
+  object.firstBirth = reader.readDateTimeOrNull(offsets[3]);
   object.id = id;
-  object.primerParto = reader.readDateTimeOrNull(offsets[9]);
-  object.totalCrias = reader.readLong(offsets[12]);
-  object.totalPartos = reader.readLong(offsets[13]);
-  object.ultimoParto = reader.readDateTimeOrNull(offsets[14]);
+  object.lastBirth = reader.readDateTimeOrNull(offsets[4]);
+  object.lastUpdateDate = reader.readDateTimeOrNull(offsets[6]);
+  object.registrationDate = reader.readDateTime(offsets[10]);
+  object.totalBirths = reader.readLong(offsets[13]);
+  object.totalOffspring = reader.readLong(offsets[14]);
   object.uuid = reader.readString(offsets[15]);
   return object;
 }
 
-P _reproductivEntityDeserializeProp<P>(
+P _reproductiveEntityDeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -232,7 +233,7 @@ P _reproductivEntityDeserializeProp<P>(
     case 0:
       return (reader.readString(offset)) as P;
     case 1:
-      return (reader.readString(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 2:
       return (reader.readDateTimeOrNull(offset)) as P;
     case 3:
@@ -240,7 +241,7 @@ P _reproductivEntityDeserializeProp<P>(
     case 4:
       return (reader.readDateTimeOrNull(offset)) as P;
     case 5:
-      return (reader.readDateTime(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 6:
       return (reader.readDateTimeOrNull(offset)) as P;
     case 7:
@@ -248,17 +249,17 @@ P _reproductivEntityDeserializeProp<P>(
     case 8:
       return (reader.readStringOrNull(offset)) as P;
     case 9:
-      return (reader.readDateTimeOrNull(offset)) as P;
-    case 10:
       return (reader.readString(offset)) as P;
+    case 10:
+      return (reader.readDateTime(offset)) as P;
     case 11:
       return (reader.readStringOrNull(offset)) as P;
     case 12:
-      return (reader.readLong(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 13:
       return (reader.readLong(offset)) as P;
     case 14:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 15:
       return (reader.readString(offset)) as P;
     default:
@@ -266,26 +267,26 @@ P _reproductivEntityDeserializeProp<P>(
   }
 }
 
-Id _reproductivEntityGetId(ReproductivEntity object) {
+Id _reproductiveEntityGetId(ReproductiveEntity object) {
   return object.id ?? Isar.autoIncrement;
 }
 
-List<IsarLinkBase<dynamic>> _reproductivEntityGetLinks(
-    ReproductivEntity object) {
+List<IsarLinkBase<dynamic>> _reproductiveEntityGetLinks(
+    ReproductiveEntity object) {
   return [];
 }
 
-void _reproductivEntityAttach(
-    IsarCollection<dynamic> col, Id id, ReproductivEntity object) {
+void _reproductiveEntityAttach(
+    IsarCollection<dynamic> col, Id id, ReproductiveEntity object) {
   object.id = id;
 }
 
-extension ReproductivEntityByIndex on IsarCollection<ReproductivEntity> {
-  Future<ReproductivEntity?> getByUuid(String uuid) {
+extension ReproductiveEntityByIndex on IsarCollection<ReproductiveEntity> {
+  Future<ReproductiveEntity?> getByUuid(String uuid) {
     return getByIndex(r'uuid', [uuid]);
   }
 
-  ReproductivEntity? getByUuidSync(String uuid) {
+  ReproductiveEntity? getByUuidSync(String uuid) {
     return getByIndexSync(r'uuid', [uuid]);
   }
 
@@ -297,12 +298,12 @@ extension ReproductivEntityByIndex on IsarCollection<ReproductivEntity> {
     return deleteByIndexSync(r'uuid', [uuid]);
   }
 
-  Future<List<ReproductivEntity?>> getAllByUuid(List<String> uuidValues) {
+  Future<List<ReproductiveEntity?>> getAllByUuid(List<String> uuidValues) {
     final values = uuidValues.map((e) => [e]).toList();
     return getAllByIndex(r'uuid', values);
   }
 
-  List<ReproductivEntity?> getAllByUuidSync(List<String> uuidValues) {
+  List<ReproductiveEntity?> getAllByUuidSync(List<String> uuidValues) {
     final values = uuidValues.map((e) => [e]).toList();
     return getAllByIndexSync(r'uuid', values);
   }
@@ -317,36 +318,36 @@ extension ReproductivEntityByIndex on IsarCollection<ReproductivEntity> {
     return deleteAllByIndexSync(r'uuid', values);
   }
 
-  Future<Id> putByUuid(ReproductivEntity object) {
+  Future<Id> putByUuid(ReproductiveEntity object) {
     return putByIndex(r'uuid', object);
   }
 
-  Id putByUuidSync(ReproductivEntity object, {bool saveLinks = true}) {
+  Id putByUuidSync(ReproductiveEntity object, {bool saveLinks = true}) {
     return putByIndexSync(r'uuid', object, saveLinks: saveLinks);
   }
 
-  Future<List<Id>> putAllByUuid(List<ReproductivEntity> objects) {
+  Future<List<Id>> putAllByUuid(List<ReproductiveEntity> objects) {
     return putAllByIndex(r'uuid', objects);
   }
 
-  List<Id> putAllByUuidSync(List<ReproductivEntity> objects,
+  List<Id> putAllByUuidSync(List<ReproductiveEntity> objects,
       {bool saveLinks = true}) {
     return putAllByIndexSync(r'uuid', objects, saveLinks: saveLinks);
   }
 }
 
-extension ReproductivEntityQueryWhereSort
-    on QueryBuilder<ReproductivEntity, ReproductivEntity, QWhere> {
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterWhere> anyId() {
+extension ReproductiveEntityQueryWhereSort
+    on QueryBuilder<ReproductiveEntity, ReproductiveEntity, QWhere> {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 }
 
-extension ReproductivEntityQueryWhere
-    on QueryBuilder<ReproductivEntity, ReproductivEntity, QWhereClause> {
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterWhereClause>
+extension ReproductiveEntityQueryWhere
+    on QueryBuilder<ReproductiveEntity, ReproductiveEntity, QWhereClause> {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterWhereClause>
       idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
@@ -356,7 +357,7 @@ extension ReproductivEntityQueryWhere
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterWhereClause>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterWhereClause>
       idNotEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
@@ -379,7 +380,7 @@ extension ReproductivEntityQueryWhere
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterWhereClause>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterWhereClause>
       idGreaterThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -388,7 +389,7 @@ extension ReproductivEntityQueryWhere
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterWhereClause>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterWhereClause>
       idLessThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -397,7 +398,7 @@ extension ReproductivEntityQueryWhere
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterWhereClause>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterWhereClause>
       idBetween(
     Id lowerId,
     Id upperId, {
@@ -414,7 +415,7 @@ extension ReproductivEntityQueryWhere
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterWhereClause>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterWhereClause>
       uuidEqualTo(String uuid) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
@@ -424,7 +425,7 @@ extension ReproductivEntityQueryWhere
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterWhereClause>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterWhereClause>
       uuidNotEqualTo(String uuid) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
@@ -459,7 +460,7 @@ extension ReproductivEntityQueryWhere
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterWhereClause>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterWhereClause>
       animalUuidEqualTo(String animalUuid) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
@@ -469,7 +470,7 @@ extension ReproductivEntityQueryWhere
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterWhereClause>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterWhereClause>
       animalUuidNotEqualTo(String animalUuid) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
@@ -505,9 +506,9 @@ extension ReproductivEntityQueryWhere
   }
 }
 
-extension ReproductivEntityQueryFilter
-    on QueryBuilder<ReproductivEntity, ReproductivEntity, QFilterCondition> {
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+extension ReproductiveEntityQueryFilter
+    on QueryBuilder<ReproductiveEntity, ReproductiveEntity, QFilterCondition> {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       animalUuidEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -521,7 +522,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       animalUuidGreaterThan(
     String value, {
     bool include = false,
@@ -537,7 +538,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       animalUuidLessThan(
     String value, {
     bool include = false,
@@ -553,7 +554,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       animalUuidBetween(
     String lower,
     String upper, {
@@ -573,7 +574,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       animalUuidStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -587,7 +588,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       animalUuidEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -601,7 +602,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       animalUuidContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -612,7 +613,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       animalUuidMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -623,7 +624,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       animalUuidIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -633,7 +634,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       animalUuidIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -643,200 +644,64 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      estadoEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'estado',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      estadoGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'estado',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      estadoLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'estado',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      estadoBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'estado',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      estadoStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'estado',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      estadoEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'estado',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      estadoContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'estado',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      estadoMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'estado',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      estadoIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'estado',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      estadoIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'estado',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaActualizacionIsNull() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      currentMatingDateIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'fechaActualizacion',
+        property: r'currentMatingDate',
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaActualizacionIsNotNull() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      currentMatingDateIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'fechaActualizacion',
+        property: r'currentMatingDate',
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaActualizacionEqualTo(DateTime? value) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      currentMatingDateEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fechaActualizacion',
+        property: r'currentMatingDate',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaActualizacionGreaterThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      currentMatingDateGreaterThan(
     DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'fechaActualizacion',
+        property: r'currentMatingDate',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaActualizacionLessThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      currentMatingDateLessThan(
     DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'fechaActualizacion',
+        property: r'currentMatingDate',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaActualizacionBetween(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      currentMatingDateBetween(
     DateTime? lower,
     DateTime? upper, {
     bool includeLower = true,
@@ -844,7 +709,7 @@ extension ReproductivEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'fechaActualizacion',
+        property: r'currentMatingDate',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -853,64 +718,64 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaEmpadreActualIsNull() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      estimatedBirthDateIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'fechaEmpadreActual',
+        property: r'estimatedBirthDate',
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaEmpadreActualIsNotNull() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      estimatedBirthDateIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'fechaEmpadreActual',
+        property: r'estimatedBirthDate',
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaEmpadreActualEqualTo(DateTime? value) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      estimatedBirthDateEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fechaEmpadreActual',
+        property: r'estimatedBirthDate',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaEmpadreActualGreaterThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      estimatedBirthDateGreaterThan(
     DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'fechaEmpadreActual',
+        property: r'estimatedBirthDate',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaEmpadreActualLessThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      estimatedBirthDateLessThan(
     DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'fechaEmpadreActual',
+        property: r'estimatedBirthDate',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaEmpadreActualBetween(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      estimatedBirthDateBetween(
     DateTime? lower,
     DateTime? upper, {
     bool includeLower = true,
@@ -918,7 +783,7 @@ extension ReproductivEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'fechaEmpadreActual',
+        property: r'estimatedBirthDate',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -927,64 +792,64 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaPartoEstimadaIsNull() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      firstBirthIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'fechaPartoEstimada',
+        property: r'firstBirth',
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaPartoEstimadaIsNotNull() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      firstBirthIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'fechaPartoEstimada',
+        property: r'firstBirth',
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaPartoEstimadaEqualTo(DateTime? value) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      firstBirthEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fechaPartoEstimada',
+        property: r'firstBirth',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaPartoEstimadaGreaterThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      firstBirthGreaterThan(
     DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'fechaPartoEstimada',
+        property: r'firstBirth',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaPartoEstimadaLessThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      firstBirthLessThan(
     DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'fechaPartoEstimada',
+        property: r'firstBirth',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaPartoEstimadaBetween(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      firstBirthBetween(
     DateTime? lower,
     DateTime? upper, {
     bool includeLower = true,
@@ -992,7 +857,7 @@ extension ReproductivEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'fechaPartoEstimada',
+        property: r'firstBirth',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1001,137 +866,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaRegistroEqualTo(DateTime value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fechaRegistro',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaRegistroGreaterThan(
-    DateTime value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'fechaRegistro',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaRegistroLessThan(
-    DateTime value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'fechaRegistro',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaRegistroBetween(
-    DateTime lower,
-    DateTime upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'fechaRegistro',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaUltimoEstroIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'fechaUltimoEstro',
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaUltimoEstroIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'fechaUltimoEstro',
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaUltimoEstroEqualTo(DateTime? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fechaUltimoEstro',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaUltimoEstroGreaterThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'fechaUltimoEstro',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaUltimoEstroLessThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'fechaUltimoEstro',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      fechaUltimoEstroBetween(
-    DateTime? lower,
-    DateTime? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'fechaUltimoEstro',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       idIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1140,7 +875,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       idIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -1149,7 +884,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       idEqualTo(Id? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -1159,7 +894,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       idGreaterThan(
     Id? value, {
     bool include = false,
@@ -1173,7 +908,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       idLessThan(
     Id? value, {
     bool include = false,
@@ -1187,7 +922,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       idBetween(
     Id? lower,
     Id? upper, {
@@ -1205,372 +940,64 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesIsNull() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastBirthIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'observaciones',
+        property: r'lastBirth',
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesIsNotNull() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastBirthIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'observaciones',
+        property: r'lastBirth',
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastBirthEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'observaciones',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'observaciones',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'observaciones',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'observaciones',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'observaciones',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'observaciones',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'observaciones',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'observaciones',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'observaciones',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'observaciones',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesEmpadreIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'observacionesEmpadre',
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesEmpadreIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'observacionesEmpadre',
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesEmpadreEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'observacionesEmpadre',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesEmpadreGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'observacionesEmpadre',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesEmpadreLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'observacionesEmpadre',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesEmpadreBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'observacionesEmpadre',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesEmpadreStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'observacionesEmpadre',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesEmpadreEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'observacionesEmpadre',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesEmpadreContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'observacionesEmpadre',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesEmpadreMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'observacionesEmpadre',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesEmpadreIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'observacionesEmpadre',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      observacionesEmpadreIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'observacionesEmpadre',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      primerPartoIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'primerParto',
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      primerPartoIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'primerParto',
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      primerPartoEqualTo(DateTime? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'primerParto',
+        property: r'lastBirth',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      primerPartoGreaterThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastBirthGreaterThan(
     DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'primerParto',
+        property: r'lastBirth',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      primerPartoLessThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastBirthLessThan(
     DateTime? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'primerParto',
+        property: r'lastBirth',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      primerPartoBetween(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastBirthBetween(
     DateTime? lower,
     DateTime? upper, {
     bool includeLower = true,
@@ -1578,7 +1005,7 @@ extension ReproductivEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'primerParto',
+        property: r'lastBirth',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1587,22 +1014,478 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      registradoPorEqualTo(
-    String value, {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastEstrusDateIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'lastEstrusDate',
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastEstrusDateIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'lastEstrusDate',
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastEstrusDateEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lastEstrusDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastEstrusDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'lastEstrusDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastEstrusDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'lastEstrusDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastEstrusDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'lastEstrusDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastUpdateDateIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'lastUpdateDate',
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastUpdateDateIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'lastUpdateDate',
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastUpdateDateEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lastUpdateDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastUpdateDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'lastUpdateDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastUpdateDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'lastUpdateDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      lastUpdateDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'lastUpdateDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      matingObservationsIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'matingObservations',
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      matingObservationsIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'matingObservations',
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      matingObservationsEqualTo(
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'registradoPor',
+        property: r'matingObservations',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      registradoPorGreaterThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      matingObservationsGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'matingObservations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      matingObservationsLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'matingObservations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      matingObservationsBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'matingObservations',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      matingObservationsStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'matingObservations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      matingObservationsEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'matingObservations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      matingObservationsContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'matingObservations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      matingObservationsMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'matingObservations',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      matingObservationsIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'matingObservations',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      matingObservationsIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'matingObservations',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      observationsIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'observations',
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      observationsIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'observations',
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      observationsEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'observations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      observationsGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'observations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      observationsLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'observations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      observationsBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'observations',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      observationsStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'observations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      observationsEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'observations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      observationsContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'observations',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      observationsMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'observations',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      observationsIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'observations',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      observationsIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'observations',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      registeredByEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'registeredBy',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      registeredByGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1610,15 +1493,15 @@ extension ReproductivEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'registradoPor',
+        property: r'registeredBy',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      registradoPorLessThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      registeredByLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1626,15 +1509,15 @@ extension ReproductivEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'registradoPor',
+        property: r'registeredBy',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      registradoPorBetween(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      registeredByBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -1643,7 +1526,7 @@ extension ReproductivEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'registradoPor',
+        property: r'registeredBy',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1653,110 +1536,166 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      registradoPorStartsWith(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      registeredByStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'registradoPor',
+        property: r'registeredBy',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      registradoPorEndsWith(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      registeredByEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'registradoPor',
+        property: r'registeredBy',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      registradoPorContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      registeredByContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'registradoPor',
+        property: r'registeredBy',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      registradoPorMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      registeredByMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'registradoPor',
+        property: r'registeredBy',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      registradoPorIsEmpty() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      registeredByIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'registradoPor',
+        property: r'registeredBy',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      registradoPorIsNotEmpty() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      registeredByIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'registradoPor',
+        property: r'registeredBy',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      sementalUuidIsNull() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      registrationDateEqualTo(DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'registrationDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      registrationDateGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'registrationDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      registrationDateLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'registrationDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      registrationDateBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'registrationDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      sireUuidIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'sementalUuid',
+        property: r'sireUuid',
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      sementalUuidIsNotNull() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      sireUuidIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'sementalUuid',
+        property: r'sireUuid',
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      sementalUuidEqualTo(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      sireUuidEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'sementalUuid',
+        property: r'sireUuid',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      sementalUuidGreaterThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      sireUuidGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1764,15 +1703,15 @@ extension ReproductivEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'sementalUuid',
+        property: r'sireUuid',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      sementalUuidLessThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      sireUuidLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1780,15 +1719,15 @@ extension ReproductivEntityQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'sementalUuid',
+        property: r'sireUuid',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      sementalUuidBetween(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      sireUuidBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -1797,7 +1736,7 @@ extension ReproductivEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'sementalUuid',
+        property: r'sireUuid',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1807,116 +1746,252 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      sementalUuidStartsWith(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      sireUuidStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'sementalUuid',
+        property: r'sireUuid',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      sementalUuidEndsWith(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      sireUuidEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'sementalUuid',
+        property: r'sireUuid',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      sementalUuidContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      sireUuidContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'sementalUuid',
+        property: r'sireUuid',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      sementalUuidMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      sireUuidMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'sementalUuid',
+        property: r'sireUuid',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      sementalUuidIsEmpty() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      sireUuidIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'sementalUuid',
+        property: r'sireUuid',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      sementalUuidIsNotEmpty() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      sireUuidIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'sementalUuid',
+        property: r'sireUuid',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      totalCriasEqualTo(int value) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      statusEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'totalCrias',
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      statusGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      statusLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      statusBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'status',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      statusStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      statusEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      statusContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      statusMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'status',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      statusIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'status',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      statusIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'status',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      totalBirthsEqualTo(int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'totalBirths',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      totalCriasGreaterThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      totalBirthsGreaterThan(
     int value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'totalCrias',
+        property: r'totalBirths',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      totalCriasLessThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      totalBirthsLessThan(
     int value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'totalCrias',
+        property: r'totalBirths',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      totalCriasBetween(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      totalBirthsBetween(
     int lower,
     int upper, {
     bool includeLower = true,
@@ -1924,7 +1999,7 @@ extension ReproductivEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'totalCrias',
+        property: r'totalBirths',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1933,46 +2008,46 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      totalPartosEqualTo(int value) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      totalOffspringEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'totalPartos',
+        property: r'totalOffspring',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      totalPartosGreaterThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      totalOffspringGreaterThan(
     int value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'totalPartos',
+        property: r'totalOffspring',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      totalPartosLessThan(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      totalOffspringLessThan(
     int value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'totalPartos',
+        property: r'totalOffspring',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      totalPartosBetween(
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
+      totalOffspringBetween(
     int lower,
     int upper, {
     bool includeLower = true,
@@ -1980,7 +2055,7 @@ extension ReproductivEntityQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'totalPartos',
+        property: r'totalOffspring',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1989,81 +2064,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      ultimoPartoIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'ultimoParto',
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      ultimoPartoIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'ultimoParto',
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      ultimoPartoEqualTo(DateTime? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'ultimoParto',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      ultimoPartoGreaterThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'ultimoParto',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      ultimoPartoLessThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'ultimoParto',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
-      ultimoPartoBetween(
-    DateTime? lower,
-    DateTime? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'ultimoParto',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       uuidEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -2077,7 +2078,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       uuidGreaterThan(
     String value, {
     bool include = false,
@@ -2093,7 +2094,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       uuidLessThan(
     String value, {
     bool include = false,
@@ -2109,7 +2110,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       uuidBetween(
     String lower,
     String upper, {
@@ -2129,7 +2130,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       uuidStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -2143,7 +2144,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       uuidEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -2157,7 +2158,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       uuidContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -2168,7 +2169,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       uuidMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -2179,7 +2180,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       uuidIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -2189,7 +2190,7 @@ extension ReproductivEntityQueryFilter
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterFilterCondition>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterFilterCondition>
       uuidIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -2200,232 +2201,232 @@ extension ReproductivEntityQueryFilter
   }
 }
 
-extension ReproductivEntityQueryObject
-    on QueryBuilder<ReproductivEntity, ReproductivEntity, QFilterCondition> {}
+extension ReproductiveEntityQueryObject
+    on QueryBuilder<ReproductiveEntity, ReproductiveEntity, QFilterCondition> {}
 
-extension ReproductivEntityQueryLinks
-    on QueryBuilder<ReproductivEntity, ReproductivEntity, QFilterCondition> {}
+extension ReproductiveEntityQueryLinks
+    on QueryBuilder<ReproductiveEntity, ReproductiveEntity, QFilterCondition> {}
 
-extension ReproductivEntityQuerySortBy
-    on QueryBuilder<ReproductivEntity, ReproductivEntity, QSortBy> {
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
+extension ReproductiveEntityQuerySortBy
+    on QueryBuilder<ReproductiveEntity, ReproductiveEntity, QSortBy> {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
       sortByAnimalUuid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'animalUuid', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
       sortByAnimalUuidDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'animalUuid', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByEstado() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByCurrentMatingDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'estado', Sort.asc);
+      return query.addSortBy(r'currentMatingDate', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByEstadoDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByCurrentMatingDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'estado', Sort.desc);
+      return query.addSortBy(r'currentMatingDate', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByFechaActualizacion() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByEstimatedBirthDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaActualizacion', Sort.asc);
+      return query.addSortBy(r'estimatedBirthDate', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByFechaActualizacionDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByEstimatedBirthDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaActualizacion', Sort.desc);
+      return query.addSortBy(r'estimatedBirthDate', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByFechaEmpadreActual() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByFirstBirth() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaEmpadreActual', Sort.asc);
+      return query.addSortBy(r'firstBirth', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByFechaEmpadreActualDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByFirstBirthDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaEmpadreActual', Sort.desc);
+      return query.addSortBy(r'firstBirth', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByFechaPartoEstimada() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByLastBirth() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaPartoEstimada', Sort.asc);
+      return query.addSortBy(r'lastBirth', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByFechaPartoEstimadaDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByLastBirthDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaPartoEstimada', Sort.desc);
+      return query.addSortBy(r'lastBirth', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByFechaRegistro() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByLastEstrusDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaRegistro', Sort.asc);
+      return query.addSortBy(r'lastEstrusDate', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByFechaRegistroDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByLastEstrusDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaRegistro', Sort.desc);
+      return query.addSortBy(r'lastEstrusDate', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByFechaUltimoEstro() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByLastUpdateDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimoEstro', Sort.asc);
+      return query.addSortBy(r'lastUpdateDate', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByFechaUltimoEstroDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByLastUpdateDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimoEstro', Sort.desc);
+      return query.addSortBy(r'lastUpdateDate', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByObservaciones() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByMatingObservations() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'observaciones', Sort.asc);
+      return query.addSortBy(r'matingObservations', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByObservacionesDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByMatingObservationsDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'observaciones', Sort.desc);
+      return query.addSortBy(r'matingObservations', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByObservacionesEmpadre() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByObservations() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'observacionesEmpadre', Sort.asc);
+      return query.addSortBy(r'observations', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByObservacionesEmpadreDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByObservationsDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'observacionesEmpadre', Sort.desc);
+      return query.addSortBy(r'observations', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByPrimerParto() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByRegisteredBy() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'primerParto', Sort.asc);
+      return query.addSortBy(r'registeredBy', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByPrimerPartoDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByRegisteredByDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'primerParto', Sort.desc);
+      return query.addSortBy(r'registeredBy', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByRegistradoPor() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByRegistrationDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'registradoPor', Sort.asc);
+      return query.addSortBy(r'registrationDate', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByRegistradoPorDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByRegistrationDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'registradoPor', Sort.desc);
+      return query.addSortBy(r'registrationDate', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortBySementalUuid() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortBySireUuid() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sementalUuid', Sort.asc);
+      return query.addSortBy(r'sireUuid', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortBySementalUuidDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortBySireUuidDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sementalUuid', Sort.desc);
+      return query.addSortBy(r'sireUuid', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByTotalCrias() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByStatus() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'totalCrias', Sort.asc);
+      return query.addSortBy(r'status', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByTotalCriasDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByStatusDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'totalCrias', Sort.desc);
+      return query.addSortBy(r'status', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByTotalPartos() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByTotalBirths() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'totalPartos', Sort.asc);
+      return query.addSortBy(r'totalBirths', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByTotalPartosDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByTotalBirthsDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'totalPartos', Sort.desc);
+      return query.addSortBy(r'totalBirths', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByUltimoParto() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByTotalOffspring() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'ultimoParto', Sort.asc);
+      return query.addSortBy(r'totalOffspring', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      sortByUltimoPartoDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      sortByTotalOffspringDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'ultimoParto', Sort.desc);
+      return query.addSortBy(r'totalOffspring', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
       sortByUuid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uuid', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
       sortByUuidDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uuid', Sort.desc);
@@ -2433,239 +2434,240 @@ extension ReproductivEntityQuerySortBy
   }
 }
 
-extension ReproductivEntityQuerySortThenBy
-    on QueryBuilder<ReproductivEntity, ReproductivEntity, QSortThenBy> {
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
+extension ReproductiveEntityQuerySortThenBy
+    on QueryBuilder<ReproductiveEntity, ReproductiveEntity, QSortThenBy> {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
       thenByAnimalUuid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'animalUuid', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
       thenByAnimalUuidDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'animalUuid', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByEstado() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByCurrentMatingDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'estado', Sort.asc);
+      return query.addSortBy(r'currentMatingDate', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByEstadoDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByCurrentMatingDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'estado', Sort.desc);
+      return query.addSortBy(r'currentMatingDate', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByFechaActualizacion() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByEstimatedBirthDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaActualizacion', Sort.asc);
+      return query.addSortBy(r'estimatedBirthDate', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByFechaActualizacionDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByEstimatedBirthDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaActualizacion', Sort.desc);
+      return query.addSortBy(r'estimatedBirthDate', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByFechaEmpadreActual() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByFirstBirth() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaEmpadreActual', Sort.asc);
+      return query.addSortBy(r'firstBirth', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByFechaEmpadreActualDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByFirstBirthDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaEmpadreActual', Sort.desc);
+      return query.addSortBy(r'firstBirth', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByFechaPartoEstimada() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaPartoEstimada', Sort.asc);
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByFechaPartoEstimadaDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaPartoEstimada', Sort.desc);
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByFechaRegistro() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaRegistro', Sort.asc);
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByFechaRegistroDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaRegistro', Sort.desc);
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByFechaUltimoEstro() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimoEstro', Sort.asc);
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByFechaUltimoEstroDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fechaUltimoEstro', Sort.desc);
-    });
-  }
-
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy> thenById() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
       thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByObservaciones() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByLastBirth() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'observaciones', Sort.asc);
+      return query.addSortBy(r'lastBirth', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByObservacionesDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByLastBirthDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'observaciones', Sort.desc);
+      return query.addSortBy(r'lastBirth', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByObservacionesEmpadre() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByLastEstrusDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'observacionesEmpadre', Sort.asc);
+      return query.addSortBy(r'lastEstrusDate', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByObservacionesEmpadreDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByLastEstrusDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'observacionesEmpadre', Sort.desc);
+      return query.addSortBy(r'lastEstrusDate', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByPrimerParto() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByLastUpdateDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'primerParto', Sort.asc);
+      return query.addSortBy(r'lastUpdateDate', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByPrimerPartoDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByLastUpdateDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'primerParto', Sort.desc);
+      return query.addSortBy(r'lastUpdateDate', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByRegistradoPor() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByMatingObservations() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'registradoPor', Sort.asc);
+      return query.addSortBy(r'matingObservations', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByRegistradoPorDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByMatingObservationsDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'registradoPor', Sort.desc);
+      return query.addSortBy(r'matingObservations', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenBySementalUuid() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByObservations() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sementalUuid', Sort.asc);
+      return query.addSortBy(r'observations', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenBySementalUuidDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByObservationsDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'sementalUuid', Sort.desc);
+      return query.addSortBy(r'observations', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByTotalCrias() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByRegisteredBy() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'totalCrias', Sort.asc);
+      return query.addSortBy(r'registeredBy', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByTotalCriasDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByRegisteredByDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'totalCrias', Sort.desc);
+      return query.addSortBy(r'registeredBy', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByTotalPartos() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByRegistrationDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'totalPartos', Sort.asc);
+      return query.addSortBy(r'registrationDate', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByTotalPartosDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByRegistrationDateDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'totalPartos', Sort.desc);
+      return query.addSortBy(r'registrationDate', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByUltimoParto() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenBySireUuid() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'ultimoParto', Sort.asc);
+      return query.addSortBy(r'sireUuid', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
-      thenByUltimoPartoDesc() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenBySireUuidDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'ultimoParto', Sort.desc);
+      return query.addSortBy(r'sireUuid', Sort.desc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByStatus() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'status', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByStatusDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'status', Sort.desc);
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByTotalBirths() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'totalBirths', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByTotalBirthsDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'totalBirths', Sort.desc);
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByTotalOffspring() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'totalOffspring', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
+      thenByTotalOffspringDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'totalOffspring', Sort.desc);
+    });
+  }
+
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
       thenByUuid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uuid', Sort.asc);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QAfterSortBy>
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QAfterSortBy>
       thenByUuidDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uuid', Sort.desc);
@@ -2673,235 +2675,235 @@ extension ReproductivEntityQuerySortThenBy
   }
 }
 
-extension ReproductivEntityQueryWhereDistinct
-    on QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct> {
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct>
+extension ReproductiveEntityQueryWhereDistinct
+    on QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct> {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
       distinctByAnimalUuid({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'animalUuid', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct>
-      distinctByEstado({bool caseSensitive = true}) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
+      distinctByCurrentMatingDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'estado', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'currentMatingDate');
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct>
-      distinctByFechaActualizacion() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
+      distinctByEstimatedBirthDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fechaActualizacion');
+      return query.addDistinctBy(r'estimatedBirthDate');
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct>
-      distinctByFechaEmpadreActual() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
+      distinctByFirstBirth() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fechaEmpadreActual');
+      return query.addDistinctBy(r'firstBirth');
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct>
-      distinctByFechaPartoEstimada() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
+      distinctByLastBirth() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fechaPartoEstimada');
+      return query.addDistinctBy(r'lastBirth');
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct>
-      distinctByFechaRegistro() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
+      distinctByLastEstrusDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fechaRegistro');
+      return query.addDistinctBy(r'lastEstrusDate');
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct>
-      distinctByFechaUltimoEstro() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
+      distinctByLastUpdateDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fechaUltimoEstro');
+      return query.addDistinctBy(r'lastUpdateDate');
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct>
-      distinctByObservaciones({bool caseSensitive = true}) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
+      distinctByMatingObservations({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'observaciones',
+      return query.addDistinctBy(r'matingObservations',
           caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct>
-      distinctByObservacionesEmpadre({bool caseSensitive = true}) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
+      distinctByObservations({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'observacionesEmpadre',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'observations', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct>
-      distinctByPrimerParto() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
+      distinctByRegisteredBy({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'primerParto');
+      return query.addDistinctBy(r'registeredBy', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct>
-      distinctByRegistradoPor({bool caseSensitive = true}) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
+      distinctByRegistrationDate() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'registradoPor',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'registrationDate');
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct>
-      distinctBySementalUuid({bool caseSensitive = true}) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
+      distinctBySireUuid({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'sementalUuid', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'sireUuid', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct>
-      distinctByTotalCrias() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
+      distinctByStatus({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'totalCrias');
+      return query.addDistinctBy(r'status', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct>
-      distinctByTotalPartos() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
+      distinctByTotalBirths() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'totalPartos');
+      return query.addDistinctBy(r'totalBirths');
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct>
-      distinctByUltimoParto() {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
+      distinctByTotalOffspring() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'ultimoParto');
+      return query.addDistinctBy(r'totalOffspring');
     });
   }
 
-  QueryBuilder<ReproductivEntity, ReproductivEntity, QDistinct> distinctByUuid(
-      {bool caseSensitive = true}) {
+  QueryBuilder<ReproductiveEntity, ReproductiveEntity, QDistinct>
+      distinctByUuid({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'uuid', caseSensitive: caseSensitive);
     });
   }
 }
 
-extension ReproductivEntityQueryProperty
-    on QueryBuilder<ReproductivEntity, ReproductivEntity, QQueryProperty> {
-  QueryBuilder<ReproductivEntity, int, QQueryOperations> idProperty() {
+extension ReproductiveEntityQueryProperty
+    on QueryBuilder<ReproductiveEntity, ReproductiveEntity, QQueryProperty> {
+  QueryBuilder<ReproductiveEntity, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<ReproductivEntity, String, QQueryOperations>
+  QueryBuilder<ReproductiveEntity, String, QQueryOperations>
       animalUuidProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'animalUuid');
     });
   }
 
-  QueryBuilder<ReproductivEntity, String, QQueryOperations> estadoProperty() {
+  QueryBuilder<ReproductiveEntity, DateTime?, QQueryOperations>
+      currentMatingDateProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'estado');
+      return query.addPropertyName(r'currentMatingDate');
     });
   }
 
-  QueryBuilder<ReproductivEntity, DateTime?, QQueryOperations>
-      fechaActualizacionProperty() {
+  QueryBuilder<ReproductiveEntity, DateTime?, QQueryOperations>
+      estimatedBirthDateProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fechaActualizacion');
+      return query.addPropertyName(r'estimatedBirthDate');
     });
   }
 
-  QueryBuilder<ReproductivEntity, DateTime?, QQueryOperations>
-      fechaEmpadreActualProperty() {
+  QueryBuilder<ReproductiveEntity, DateTime?, QQueryOperations>
+      firstBirthProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fechaEmpadreActual');
+      return query.addPropertyName(r'firstBirth');
     });
   }
 
-  QueryBuilder<ReproductivEntity, DateTime?, QQueryOperations>
-      fechaPartoEstimadaProperty() {
+  QueryBuilder<ReproductiveEntity, DateTime?, QQueryOperations>
+      lastBirthProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fechaPartoEstimada');
+      return query.addPropertyName(r'lastBirth');
     });
   }
 
-  QueryBuilder<ReproductivEntity, DateTime, QQueryOperations>
-      fechaRegistroProperty() {
+  QueryBuilder<ReproductiveEntity, DateTime?, QQueryOperations>
+      lastEstrusDateProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fechaRegistro');
+      return query.addPropertyName(r'lastEstrusDate');
     });
   }
 
-  QueryBuilder<ReproductivEntity, DateTime?, QQueryOperations>
-      fechaUltimoEstroProperty() {
+  QueryBuilder<ReproductiveEntity, DateTime?, QQueryOperations>
+      lastUpdateDateProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fechaUltimoEstro');
+      return query.addPropertyName(r'lastUpdateDate');
     });
   }
 
-  QueryBuilder<ReproductivEntity, String?, QQueryOperations>
-      observacionesProperty() {
+  QueryBuilder<ReproductiveEntity, String?, QQueryOperations>
+      matingObservationsProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'observaciones');
+      return query.addPropertyName(r'matingObservations');
     });
   }
 
-  QueryBuilder<ReproductivEntity, String?, QQueryOperations>
-      observacionesEmpadreProperty() {
+  QueryBuilder<ReproductiveEntity, String?, QQueryOperations>
+      observationsProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'observacionesEmpadre');
+      return query.addPropertyName(r'observations');
     });
   }
 
-  QueryBuilder<ReproductivEntity, DateTime?, QQueryOperations>
-      primerPartoProperty() {
+  QueryBuilder<ReproductiveEntity, String, QQueryOperations>
+      registeredByProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'primerParto');
+      return query.addPropertyName(r'registeredBy');
     });
   }
 
-  QueryBuilder<ReproductivEntity, String, QQueryOperations>
-      registradoPorProperty() {
+  QueryBuilder<ReproductiveEntity, DateTime, QQueryOperations>
+      registrationDateProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'registradoPor');
+      return query.addPropertyName(r'registrationDate');
     });
   }
 
-  QueryBuilder<ReproductivEntity, String?, QQueryOperations>
-      sementalUuidProperty() {
+  QueryBuilder<ReproductiveEntity, String?, QQueryOperations>
+      sireUuidProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'sementalUuid');
+      return query.addPropertyName(r'sireUuid');
     });
   }
 
-  QueryBuilder<ReproductivEntity, int, QQueryOperations> totalCriasProperty() {
+  QueryBuilder<ReproductiveEntity, String, QQueryOperations> statusProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'totalCrias');
+      return query.addPropertyName(r'status');
     });
   }
 
-  QueryBuilder<ReproductivEntity, int, QQueryOperations> totalPartosProperty() {
+  QueryBuilder<ReproductiveEntity, int, QQueryOperations>
+      totalBirthsProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'totalPartos');
+      return query.addPropertyName(r'totalBirths');
     });
   }
 
-  QueryBuilder<ReproductivEntity, DateTime?, QQueryOperations>
-      ultimoPartoProperty() {
+  QueryBuilder<ReproductiveEntity, int, QQueryOperations>
+      totalOffspringProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'ultimoParto');
+      return query.addPropertyName(r'totalOffspring');
     });
   }
 
-  QueryBuilder<ReproductivEntity, String, QQueryOperations> uuidProperty() {
+  QueryBuilder<ReproductiveEntity, String, QQueryOperations> uuidProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'uuid');
     });

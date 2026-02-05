@@ -1,4 +1,4 @@
-import 'package:miganado/features/animals/data/models/animal_entity.dart';
+import 'package:miganado/features/animals/domain/entities/etapa_vida.dart';
 
 /// Tipos de acciones rápidas disponibles
 enum TipoAccionRapida {
@@ -54,12 +54,12 @@ abstract class AnimalTypeConfig {
 
   /// Factory para obtener la configuración correcta
   static AnimalTypeConfig getConfig({
-    required Especie especie,
-    required Sexo sexo,
-    required Categoria categoria,
+    required Species especie,
+    required Sex sexo,
+    required Category categoria,
   }) {
-    if (especie == Especie.bovino) {
-      if (sexo == Sexo.hembra) {
+    if (especie == Species.cattle) {
+      if (sexo == Sex.female) {
         return _BovinoPembraConfig();
       } else {
         return _BovMachoConfig();

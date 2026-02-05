@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:miganado/features/animals/data/models/animal_entity.dart';
+import 'package:miganado/features/animals/domain/entities/etapa_vida.dart';
 import 'package:miganado/features/animals/presentation/providers/register_animal_provider.dart';
 import 'package:miganado/features/animals/presentation/widgets/form_fields.dart';
+import 'package:miganado/core/validators/form_validators.dart';
+import 'package:miganado/core/services/logger_service.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 
 /// Pantalla mejorada para registrar un nuevo animal
 class RegisterAnimalScreen extends ConsumerStatefulWidget {
@@ -36,7 +39,7 @@ class _RegisterAnimalScreenState extends ConsumerState<RegisterAnimalScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Registrar Nuevo Animal'),
+        title: const Text(AppStrings.addAnimalTitle),
         backgroundColor: Colors.green.shade700,
         elevation: 0,
       ),
@@ -56,8 +59,10 @@ class _RegisterAnimalScreenState extends ConsumerState<RegisterAnimalScreen> {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.error, color: Colors.red.shade700),
-                        const SizedBox(width: 12),
+                        const Icon(Icons.error_outline, color: Colors.red),
+                        const SizedBox(width: 8),
+                        const Text('${AppStrings.errorTitle}:'),
+                        const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             state.errorMessage!,
@@ -84,36 +89,30 @@ class _RegisterAnimalScreenState extends ConsumerState<RegisterAnimalScreen> {
               child: Container(
                 color: Colors.orange.shade100,
                 padding: const EdgeInsets.all(16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                child: Row(
                   children: [
-                    Row(
-                      children: [
-                        Icon(Icons.warning, color: Colors.orange.shade700),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Recordatorio: Falta el Arete',
-                                style: TextStyle(
-                                  color: Colors.orange.shade700,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                'Se generará un arete automático',
-                                style: TextStyle(color: Colors.orange.shade700),
-                              ),
-                            ],
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Recordatorio: Falta el Arete', // TODO: Mover a AppStrings y ARB
+                            style: TextStyle(
+                              color: Colors.orange.shade700,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: () => notifier.cerrarAlertaArete(),
-                        ),
-                      ],
+                          Text(
+                            'Se generará un arete automático', // TODO: Mover a AppStrings y ARB
+                            style: TextStyle(color: Colors.orange.shade700),
+                          ),
+                        ],
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () => notifier.cerrarAlertaArete(),
                     ),
                   ],
                 ),
@@ -180,7 +179,7 @@ class _RegisterAnimalScreenState extends ConsumerState<RegisterAnimalScreen> {
                           curve: Curves.easeInOut,
                         );
                       },
-                      child: const Text('Anterior'),
+                      child: const Text(AppStrings.buttonBack),
                     ),
                   ),
                 if (_currentPage > 0) const SizedBox(width: 12),
@@ -267,9 +266,9 @@ class _Page1Categoria extends StatelessWidget {
           const SizedBox(height: 30),
 
           // Etapa de vida - Dropdown con las opciones
-          FormDropdown<EtapaVida>(
+          FormDropdown<LifeStage>(
             label: 'Categoría o Etapa *',
-            value: state.etapa,
+            value: state.lifeStage,
             items: _getEtapaItems(),
             itemLabel: (etapa) => _getEtapaLabel(etapa),
             onChanged: notifier.updateEtapa,
@@ -277,7 +276,7 @@ class _Page1Categoria extends StatelessWidget {
           ),
 
           // Sexo - Automático pero permite cambio
-          if (state.etapa != null)
+          if (state.lifeStage != null)
             Column(
               children: [
                 Container(
@@ -304,22 +303,23 @@ class _Page1Categoria extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                FormDropdown<Sexo>(
+                FormDropdown<Sex>(
                   label: 'Sexo *',
-                  value: state.sexo,
+                  value: state.sex,
                   items: getSexoItems(),
-                  itemLabel: (sexo) => sexo == Sexo.macho ? 'Macho' : 'Hembra',
+                  itemLabel: (sexo) => sexo == Sex.male ? 'Macho' : 'Hembra',
                   onChanged: notifier.updateSexo,
                   required: true,
                 ),
 
                 // Mostrar castración solo para machos bovinos
-                if (state.sexo == Sexo.macho && state.etapa != EtapaVida.torete)
+                if (state.sex == Sex.male &&
+                    state.lifeStage != LifeStage.youngBull)
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: FormCheckbox(
                       label: 'Está castrado',
-                      value: state.esCastrado,
+                      value: state.isCastrated,
                       onChanged: notifier.updateEsCastrado,
                     ),
                   ),
@@ -330,29 +330,34 @@ class _Page1Categoria extends StatelessWidget {
     );
   }
 
-  List<EtapaVida> _getEtapaItems() {
+  List<LifeStage> _getEtapaItems() {
     return [
-      EtapaVida.becerro,
-      EtapaVida.becerra,
-      EtapaVida.vaquilla,
-      EtapaVida.torete,
-      EtapaVida.novillo,
-      EtapaVida.vaca,
-      EtapaVida.toro,
+      LifeStage.calfMale,
+      LifeStage.calfFemale,
+      LifeStage.heifer,
+      LifeStage.youngBull,
+      LifeStage.steer,
+      LifeStage.cow,
+      LifeStage.bull,
     ];
   }
 
-  String _getEtapaLabel(EtapaVida etapa) {
+  String _getEtapaLabel(LifeStage etapa) {
     const labels = {
-      EtapaVida.becerro: 'Becerro',
-      EtapaVida.becerra: 'Becerra',
-      EtapaVida.vaquilla: 'Vaquilla',
-      EtapaVida.torete: 'Torete',
-      EtapaVida.novillo: 'Novillo',
-      EtapaVida.vaca: 'Vaca',
-      EtapaVida.toro: 'Toro',
-      EtapaVida.potro: 'Potro',
-      EtapaVida.adulto: 'Adulto',
+      LifeStage.calfMale: 'Becerro',
+      LifeStage.calfFemale: 'Becerra',
+      LifeStage.heifer: 'Vaquilla',
+      LifeStage.youngBull: 'Torete',
+      LifeStage.steer: 'Novillo',
+      LifeStage.cow: 'Vaca',
+      LifeStage.bull: 'Toro',
+      LifeStage.colt: 'Potro',
+      LifeStage.filly: 'Potranca',
+      LifeStage.horse: 'Caballo',
+      LifeStage.mare: 'Yegua',
+      LifeStage.donkey: 'Burro',
+      LifeStage.donkeyFemale: 'Burra',
+      LifeStage.mule: 'Mula',
     };
     return labels[etapa] ?? etapa.name;
   }
@@ -390,8 +395,19 @@ class _Page2DatosAnimalState extends State<_Page2DatosAnimal> {
           // Número de arete - OPCIONAL
           FormTextField(
             label: 'Número de Arete',
-            initialValue: widget.state.numeroArete,
-            onChanged: widget.notifier.updateArete,
+            initialValue: widget.state.earTagNumber,
+            onChanged: (value) {
+              final error = FormValidators.validateNumeroArete(value);
+              if (error == null && value.isNotEmpty) {
+                LoggerService.validationSuccess(
+                    'earTagNumber', 'RegisterAnimalScreen');
+              } else if (error != null) {
+                LoggerService.validationFailed(
+                    'earTagNumber', error, 'RegisterAnimalScreen');
+              }
+              widget.notifier.updateArete(value);
+            },
+            validator: (value) => FormValidators.validateNumeroArete(value),
             required: false,
             maxLength: 20,
           ),
@@ -399,8 +415,19 @@ class _Page2DatosAnimalState extends State<_Page2DatosAnimal> {
           // Raza - OPCIONAL
           FormTextField(
             label: 'Raza',
-            initialValue: widget.state.raza,
-            onChanged: widget.notifier.updateRaza,
+            initialValue: widget.state.breed,
+            onChanged: (value) {
+              final error = FormValidators.validateNombre(value);
+              if (error == null && value.isNotEmpty) {
+                LoggerService.validationSuccess(
+                    'breed', 'RegisterAnimalScreen');
+              } else if (error != null) {
+                LoggerService.validationFailed(
+                    'breed', error, 'RegisterAnimalScreen');
+              }
+              widget.notifier.updateRaza(value);
+            },
+            validator: (value) => FormValidators.validateNombre(value),
             required: false,
             maxLength: 50,
           ),
@@ -408,8 +435,19 @@ class _Page2DatosAnimalState extends State<_Page2DatosAnimal> {
           // Nombre Personalizado - OPCIONAL
           FormTextField(
             label: 'Nombre Personalizado',
-            initialValue: widget.state.nombrePersonalizado,
-            onChanged: widget.notifier.updateNombrePersonalizado,
+            initialValue: widget.state.customName,
+            onChanged: (value) {
+              final error = FormValidators.validateNombre(value);
+              if (error == null && value.isNotEmpty) {
+                LoggerService.validationSuccess(
+                    'customName', 'RegisterAnimalScreen');
+              } else if (error != null) {
+                LoggerService.validationFailed(
+                    'customName', error, 'RegisterAnimalScreen');
+              }
+              widget.notifier.updateNombrePersonalizado(value);
+            },
+            validator: (value) => FormValidators.validateNombre(value),
             required: false,
             maxLength: 50,
           ),
@@ -417,7 +455,7 @@ class _Page2DatosAnimalState extends State<_Page2DatosAnimal> {
           // Ubicación - NUEVO
           FormTextField(
             label: 'Ubicación',
-            initialValue: widget.state.ubicacion,
+            initialValue: widget.state.location,
             onChanged: widget.notifier.updateUbicacion,
             required: false,
             maxLength: 50,
@@ -524,7 +562,7 @@ class _Page3InfoAdicionalState extends State<_Page3InfoAdicional> {
           if (!widget.state.usarEdadAproximada)
             FormDateField(
               label: 'Fecha de Nacimiento',
-              value: widget.state.fechaNacimiento,
+              value: widget.state.birthDate,
               onChanged: widget.notifier.updateFechaNacimiento,
               lastDate: DateTime.now(),
               required: true,
@@ -532,7 +570,7 @@ class _Page3InfoAdicionalState extends State<_Page3InfoAdicional> {
           else
             FormTextField(
               label: 'Edad Aproximada (meses)',
-              initialValue: widget.state.edadAproximadaMeses?.toString() ?? '',
+              initialValue: widget.state.approximateAgeMonths?.toString() ?? '',
               keyboardType: TextInputType.number,
               onChanged: (value) {
                 final edad = int.tryParse(value);
@@ -561,14 +599,14 @@ class _Page3InfoAdicionalState extends State<_Page3InfoAdicional> {
           // Vacunada
           FormCheckbox(
             label: 'Está vacunado/a',
-            value: widget.state.vacunada,
+            value: widget.state.isVaccinated,
             onChanged: widget.notifier.updateVacunada,
           ),
 
-          if (widget.state.vacunada)
+          if (widget.state.isVaccinated)
             FormTextField(
               label: 'Tipo de Vacuna',
-              initialValue: widget.state.tipoVacuna,
+              initialValue: widget.state.vaccineType,
               onChanged: widget.notifier.updateTipoVacuna,
               required: false,
               maxLength: 50,
@@ -577,7 +615,7 @@ class _Page3InfoAdicionalState extends State<_Page3InfoAdicional> {
           // Peso
           FormTextField(
             label: 'Peso (kg)',
-            initialValue: widget.state.peso?.toString() ?? '',
+            initialValue: widget.state.weight?.toString() ?? '',
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             onChanged: (value) {
               final peso = double.tryParse(value);
@@ -590,7 +628,7 @@ class _Page3InfoAdicionalState extends State<_Page3InfoAdicional> {
           // Observaciones
           FormTextField(
             label: 'Observaciones',
-            initialValue: widget.state.observaciones,
+            initialValue: widget.state.notes,
             onChanged: widget.notifier.updateObservaciones,
             required: false,
             maxLength: 200,
@@ -632,71 +670,69 @@ class _Page4Confirmacion extends StatelessWidget {
               child: Column(
                 children: [
                   // Datos Básicos
-                  _SectionTitle('Datos Básicos'),
+                  const _SectionTitle('Datos Básicos'),
                   _ResumenRow(
                     'Arete',
-                    state.numeroArete.isNotEmpty
-                        ? state.numeroArete
+                    state.earTagNumber.isNotEmpty
+                        ? state.earTagNumber
                         : '(Auto-generado)',
                   ),
-                  if (state.nombrePersonalizado != null)
-                    _ResumenRow('Nombre', state.nombrePersonalizado!),
-                  _ResumenRow('Categoría', _getEtapaLabel(state.etapa)),
+                  if (state.customName != null)
+                    _ResumenRow('Nombre', state.customName!),
+                  _ResumenRow('Categoría', _getEtapaLabel(state.lifeStage)),
                   _ResumenRow(
-                      'Sexo', state.sexo == Sexo.macho ? 'Macho' : 'Hembra'),
-                  if (state.esCastrado) _ResumenRow('Estado', 'Castrado'),
+                      'Sexo', state.sex == Sex.male ? 'Macho' : 'Hembra'),
+                  if (state.isCastrated)
+                    const _ResumenRow('Estado', 'Castrado'),
 
                   const Divider(),
 
                   // Datos del Animal
-                  _SectionTitle('Datos del Animal'),
-                  if (state.raza.isNotEmpty) _ResumenRow('Raza', state.raza),
-                  if (state.ubicacion != null && state.ubicacion!.isNotEmpty)
-                    _ResumenRow('Ubicación', state.ubicacion!),
+                  const _SectionTitle('Datos del Animal'),
+                  if (state.breed.isNotEmpty) _ResumenRow('Raza', state.breed),
+                  if (state.location != null && state.location!.isNotEmpty)
+                    _ResumenRow('Ubicación', state.location!),
 
                   const Divider(),
 
                   // Fecha y Edad
-                  _SectionTitle('Fecha y Edad'),
-                  if (state.fechaNacimiento != null)
+                  const _SectionTitle('Fecha y Edad'),
+                  if (state.birthDate != null)
                     _ResumenRow(
                       'Fecha Nacimiento',
-                      '${state.fechaNacimiento!.day}/${state.fechaNacimiento!.month}/${state.fechaNacimiento!.year}',
+                      '${state.birthDate!.day}/${state.birthDate!.month}/${state.birthDate!.year}',
                     )
-                  else if (state.edadAproximadaMeses != null)
+                  else if (state.approximateAgeMonths != null)
                     _ResumenRow(
                       'Edad Aproximada',
-                      '${state.edadAproximadaMeses} meses',
+                      '${state.approximateAgeMonths} meses',
                     ),
                   _ResumenRow(
                     'Edad Calculada',
-                    _formatearEdad(state.edadMesesFinal),
+                    _formatearEdad(state.ageMonths),
                   ),
 
-                  if (state.vacunada ||
-                      (state.peso != null && state.peso! > 0) ||
-                      (state.observaciones != null &&
-                          state.observaciones!.isNotEmpty))
+                  if (state.isVaccinated ||
+                      (state.weight != null && state.weight! > 0) ||
+                      (state.notes != null && state.notes!.isNotEmpty))
                     const Divider(),
 
                   // Información Adicional
-                  if (state.vacunada ||
-                      (state.peso != null && state.peso! > 0) ||
-                      (state.observaciones != null &&
-                          state.observaciones!.isNotEmpty))
+                  if (state.isVaccinated ||
+                      (state.weight != null && state.weight! > 0) ||
+                      (state.notes != null && state.notes!.isNotEmpty))
                     Column(
                       children: [
-                        _SectionTitle('Información Adicional'),
-                        if (state.vacunada)
+                        const _SectionTitle('Información Adicional'),
+                        if (state.isVaccinated)
                           _ResumenRow(
                             'Vacunado',
-                            state.tipoVacuna ?? 'Sí',
+                            state.vaccineType ?? 'Sí',
                           ),
-                        if (state.peso != null && state.peso! > 0)
-                          _ResumenRow('Peso', '${state.peso} kg'),
-                        if (state.observaciones != null &&
-                            state.observaciones!.isNotEmpty)
-                          _ResumenRow('Obs.', state.observaciones!),
+                        if (state.weight != null && state.weight! > 0)
+                          _ResumenRow('Peso', '${state.weight} kg'),
+                        if (state.notes != null && state.notes!.isNotEmpty)
+                          _ResumenRow('Obs.', state.notes!),
                       ],
                     ),
                 ],
@@ -733,18 +769,23 @@ class _Page4Confirmacion extends StatelessWidget {
     );
   }
 
-  String _getEtapaLabel(EtapaVida? etapa) {
+  String _getEtapaLabel(LifeStage? etapa) {
     if (etapa == null) return 'N/A';
     const labels = {
-      EtapaVida.becerro: 'Becerro',
-      EtapaVida.becerra: 'Becerra',
-      EtapaVida.vaquilla: 'Vaquilla',
-      EtapaVida.torete: 'Torete',
-      EtapaVida.novillo: 'Novillo',
-      EtapaVida.vaca: 'Vaca',
-      EtapaVida.toro: 'Toro',
-      EtapaVida.potro: 'Potro',
-      EtapaVida.adulto: 'Adulto',
+      LifeStage.calfMale: 'Becerro',
+      LifeStage.calfFemale: 'Becerra',
+      LifeStage.heifer: 'Vaquilla',
+      LifeStage.youngBull: 'Torete',
+      LifeStage.steer: 'Novillo',
+      LifeStage.cow: 'Vaca',
+      LifeStage.bull: 'Toro',
+      LifeStage.colt: 'Potro',
+      LifeStage.filly: 'Potranca',
+      LifeStage.horse: 'Caballo',
+      LifeStage.mare: 'Yegua',
+      LifeStage.donkey: 'Burro',
+      LifeStage.donkeyFemale: 'Burra',
+      LifeStage.mule: 'Mula',
     };
     return labels[etapa] ?? etapa.name;
   }

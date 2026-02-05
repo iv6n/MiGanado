@@ -3,57 +3,57 @@ import 'package:miganado/data/database/isar_database.dart';
 import 'package:miganado/features/mantenimiento/data/models/evento_mantenimiento_entity.dart';
 import 'package:miganado/features/mantenimiento/domain/entities/evento_mantenimiento.dart';
 
-/// Use case para registrar un nuevo evento de mantenimiento
-class RegistrarMantenimientoUseCase {
+/// Caso de uso para registrar un nuevo evento de mantenimiento
+class RegisterMaintenanceEventUseCase {
   final MiGanadoDatabase database;
 
-  RegistrarMantenimientoUseCase({required this.database});
+  RegisterMaintenanceEventUseCase({required this.database});
 
-  /// Registrar nuevo mantenimiento para un animal
-  /// Valida que el animal exista
+  /// Registra un nuevo evento de mantenimiento para un animal
+  /// Valida que el animal exista y que la fecha no sea futura
   Future<EventoMantenimiento> call({
     required String animalUuid,
-    required String tipo,
-    required String descripcion,
-    required DateTime fecha,
-    String? veterinario,
-    String? medicamento,
-    String? dosisAplicada,
-    String? rutaAplicacion,
-    DateTime? proximaDosis,
-    String? observaciones,
+    required String type,
+    required String description,
+    required DateTime date,
+    String? veterinarian,
+    String? medicament,
+    String? appliedDosage,
+    String? applicationRoute,
+    DateTime? nextDosage,
+    String? observations,
   }) async {
     try {
       // 1. Validar que el animal existe
       final animal = await database.getAnimalByUuid(animalUuid);
       if (animal == null) {
-        throw RegistrarMantenimientoException('Animal no encontrado');
+        throw RegisterMaintenanceEventException('Animal no encontrado');
       }
 
-      // 2. Validar fecha no en el futuro
-      if (fecha.isAfter(DateTime.now())) {
-        throw RegistrarMantenimientoException(
+      // 2. Validar que la fecha no sea en el futuro
+      if (date.isAfter(DateTime.now())) {
+        throw RegisterMaintenanceEventException(
             'La fecha no puede ser en el futuro');
       }
 
       // 3. Crear entidad de evento
       // Convertir tipo string a enum
-      final tipoEnum = TipoEventoMantenimiento.values.firstWhere(
-        (e) => e.name.toLowerCase() == tipo.toLowerCase(),
+      final typeEnum = TipoEventoMantenimiento.values.firstWhere(
+        (e) => e.name.toLowerCase() == type.toLowerCase(),
         orElse: () => TipoEventoMantenimiento.otro,
       );
 
-      final eventoEntity = EventoMantenimientoEntity(
+      final eventEntity = EventoMantenimientoEntity(
         animalUuid: animalUuid,
-        tipo: tipoEnum,
-        descripcion: descripcion,
-        fecha: fecha,
-        veterinario: veterinario,
-        medicamento: medicamento,
-        dosisAplicada: dosisAplicada,
-        rutaAplicacion: rutaAplicacion,
-        proximaDosis: proximaDosis,
-        observaciones: observaciones,
+        tipo: typeEnum,
+        descripcion: description,
+        fecha: date,
+        veterinario: veterinarian,
+        medicamento: medicament,
+        dosisAplicada: appliedDosage,
+        rutaAplicacion: applicationRoute,
+        proximaDosis: nextDosage,
+        observaciones: observations,
       )
         ..uuid = const Uuid().v4()
         ..fechaCreacion = DateTime.now()
@@ -61,87 +61,86 @@ class RegistrarMantenimientoUseCase {
 
       // 4. Guardar en Isar
       await MiGanadoDatabase.isar.writeTxn(() async {
-        await MiGanadoDatabase.isar.eventoMantenimientoEntitys
-            .put(eventoEntity);
+        await MiGanadoDatabase.isar.eventoMantenimientoEntitys.put(eventEntity);
       });
 
-      print('✓ Mantenimiento registrado: ${animal.numeroArete} - $tipo');
+      print('✓ Mantenimiento registrado: ${animal.earTagNumber} - $type');
 
-      return EventoMantenimiento.fromEntity(eventoEntity);
+      return EventoMantenimiento.fromEntity(eventEntity);
     } catch (e) {
-      if (e is RegistrarMantenimientoException) {
+      if (e is RegisterMaintenanceEventException) {
         rethrow;
       }
-      throw RegistrarMantenimientoException(
+      throw RegisterMaintenanceEventException(
           'Error al registrar mantenimiento: $e');
     }
   }
 }
 
-/// Use case para obtener historial de mantenimiento de un animal
-class ObtenerHistorialMantenimientoUseCase {
+/// Caso de uso para obtener historial de mantenimiento de un animal
+class GetMaintenanceHistoryUseCase {
   final MiGanadoDatabase database;
 
-  ObtenerHistorialMantenimientoUseCase({required this.database});
+  GetMaintenanceHistoryUseCase({required this.database});
 
-  /// Obtener todos los mantenimientos de un animal
+  /// Obtiene todos los eventos de mantenimiento de un animal
   /// Ordena por fecha descendente (más recientes primero)
   Future<List<EventoMantenimiento>> call(String animalUuid) async {
     try {
-      final eventos = await database.getEventosByAnimalUuid(animalUuid);
-      return eventos
+      final events = await database.getEventosByAnimalUuid(animalUuid);
+      return events
           .map((entity) => EventoMantenimiento.fromEntity(entity))
           .toList();
     } catch (e) {
-      throw ObtenerHistorialException('Error al obtener historial: $e');
+      throw GetMaintenanceHistoryException('Error al obtener historial: $e');
     }
   }
 }
 
-/// Use case para obtener próximas dosis pendientes
-class ObtenerProximasDosisUseCase {
+/// Caso de uso para obtener próximas dosis pendientes
+class GetUpcomingDosagesUseCase {
   final MiGanadoDatabase database;
 
-  ObtenerProximasDosisUseCase({required this.database});
+  GetUpcomingDosagesUseCase({required this.database});
 
-  /// Obtener eventos de mantenimiento con próxima dosis pendiente
-  /// Útil para alertas
+  /// Obtiene eventos de mantenimiento con próxima dosis pendiente
+  /// Útil para generar alertas
   Future<List<EventoMantenimiento>> call(String animalUuid) async {
     try {
-      final eventos = await database.getEventosByAnimalUuid(animalUuid);
-      final ahora = DateTime.now();
+      final events = await database.getEventosByAnimalUuid(animalUuid);
+      final now = DateTime.now();
 
-      return eventos
-          .where((evento) =>
-              evento.proximaDosis != null &&
-              evento.proximaDosis!.isAfter(ahora))
+      return events
+          .where((event) =>
+              event.proximaDosis != null && event.proximaDosis!.isAfter(now))
           .map((entity) => EventoMantenimiento.fromEntity(entity))
           .toList();
     } catch (e) {
-      throw ObtenerProximasDosisException(
-          'Error al obtener próximas dosis: $e');
+      throw GetUpcomingDosagesException('Error al obtener próximas dosis: $e');
     }
   }
 }
 
-/// Excepciones personalizadas
-class RegistrarMantenimientoException implements Exception {
+/// Excepción personalizada para registro de mantenimiento
+class RegisterMaintenanceEventException implements Exception {
   final String message;
-  RegistrarMantenimientoException(this.message);
+  RegisterMaintenanceEventException(this.message);
   @override
-  String toString() => 'RegistrarMantenimientoException: $message';
+  String toString() => 'RegisterMaintenanceEventException: $message';
 }
 
-class ObtenerHistorialException implements Exception {
+/// Excepción personalizada para obtener historial
+class GetMaintenanceHistoryException implements Exception {
   final String message;
-  ObtenerHistorialException(this.message);
+  GetMaintenanceHistoryException(this.message);
   @override
-  String toString() => 'ObtenerHistorialException: $message';
+  String toString() => 'GetMaintenanceHistoryException: $message';
 }
 
-class ObtenerProximasDosisException implements Exception {
+/// Excepción personalizada para obtener dosis próximas
+class GetUpcomingDosagesException implements Exception {
   final String message;
-  ObtenerProximasDosisException(this.message);
+  GetUpcomingDosagesException(this.message);
   @override
-  String toString() => 'ObtenerProximasDosisException: $message';
+  String toString() => 'GetUpcomingDosagesException: $message';
 }

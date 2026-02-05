@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:miganado/features/costs/presentation/providers/costos_providers.dart';
 import 'package:miganado/features/costs/presentation/widgets/costos_widgets.dart';
+import 'package:miganado/core/constants/app_strings.dart';
 
 /// Pantalla de gestión de costos para un animal específico
 class AnimalCostosScreen extends ConsumerWidget {
@@ -24,7 +25,7 @@ class AnimalCostosScreen extends ConsumerWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Costos'),
+            const Text(AppStrings.screenCosts),
             Text(
               animalNombre,
               style: Theme.of(context).textTheme.bodySmall,
@@ -45,9 +46,9 @@ class AnimalCostosScreen extends ConsumerWidget {
               // Resumen Financiero
               resumenAsync.when(
                 data: (resumen) => ResumenFinancieroWidget(resumen: resumen),
-                loading: () => Center(
+                loading: () => const Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(24),
+                    padding: EdgeInsets.all(24),
                     child: CircularProgressIndicator(),
                   ),
                 ),
@@ -83,7 +84,7 @@ class AnimalCostosScreen extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Historial de Costos',
+                      'Historial de Costos', // TODO: Mover a AppStrings y ARB
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge
@@ -119,7 +120,7 @@ class AnimalCostosScreen extends ConsumerWidget {
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            'Sin costos registrados',
+                            'Sin costos registrados', // TODO: Mover a AppStrings y ARB
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -127,7 +128,7 @@ class AnimalCostosScreen extends ConsumerWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'Toca el botón + para registrar el primer costo',
+                            'Toca el botón + para registrar el primer costo', // TODO: Mover a AppStrings y ARB
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall
@@ -150,14 +151,16 @@ class AnimalCostosScreen extends ConsumerWidget {
                         onEdit: () {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('Función de editar próximamente'),
+                              content: Text(
+                                  'Función de editar próximamente'), // TODO: Mover a AppStrings y ARB
                             ),
                           );
                         },
                         onDelete: () {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('Función de eliminar próximamente'),
+                              content: Text(
+                                  'Función de eliminar próximamente'), // TODO: Mover a AppStrings y ARB
                             ),
                           );
                         },
@@ -165,9 +168,9 @@ class AnimalCostosScreen extends ConsumerWidget {
                     },
                   );
                 },
-                loading: () => Center(
+                loading: () => const Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(24),
+                    padding: EdgeInsets.all(24),
                     child: CircularProgressIndicator(),
                   ),
                 ),
@@ -210,7 +213,7 @@ class AnimalCostosScreen extends ConsumerWidget {
             ),
           );
         },
-        tooltip: 'Registrar costo',
+        tooltip: 'Registrar costo', // TODO: Mover a AppStrings y ARB
         child: const Icon(Icons.add),
       ),
     );

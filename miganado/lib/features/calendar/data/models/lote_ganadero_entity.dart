@@ -1,62 +1,61 @@
 import 'package:isar/isar.dart';
-import 'package:uuid/uuid.dart';
 
 part 'lote_ganadero_entity.g.dart';
 
-/// Especie del lote
-enum EspecieLote {
-  bovino,
-  equino,
-  ovino,
-  caprino,
+/// Species of the lot
+enum LotSpecies {
+  cattle,
+  equine,
+  ovine,
+  caprine,
 }
 
-/// Tipo de producción del lote
-enum TipoProduccion {
-  carne,
-  leche,
-  doble,
-  reproduccion,
-  engorde,
-  levante,
+/// Production type of the lot
+enum ProductionType {
+  meat,
+  milk,
+  dual,
+  breeding,
+  fattening,
+  raising,
 }
 
-/// Entidad de Lote Ganadero para Isar
-/// Agrupa múltiples animales de características similares
+/// Livestock Lot Entity for Isar
+/// Groups multiple animals with similar characteristics
 @collection
-class LoteGanaderoEntity {
-  /// Identificador único auto-incrementado
+class LivestockLotEntity {
+  /// Unique auto-incremented identifier
   Id id = Isar.autoIncrement;
 
-  /// UUID único para sincronización
+  /// Unique UUID for sync
   @Index(unique: true)
   late String? uuid;
 
-  /// Nombre del lote (ej: "Lote A - Lecherías", "Lote 5 - Terneros")
+  /// Lot name (e.g., "Lot A - Dairy", "Lot 5 - Calves")
   @Index()
-  late String nombre;
+  late String name;
 
-  /// Descripción detallada del lote
-  String? descripcion;
+  /// Detailed description of the lot
+  String? description;
 
-  /// Especie principal del lote
+  /// Main species of the lot
   @enumerated
-  late EspecieLote especie;
+  late LotSpecies species;
 
-  /// Tipo de producción
+  /// Production type
   @enumerated
-  late TipoProduccion tipoProduccion;
+  late ProductionType productionType;
 
-  /// Cantidad total de animales en el lote
-  late int cantidadAnimales;
+  /// Total number of animals in the lot
+  late int animalCount;
 
-  /// Edad promedio en meses
-  int? edadPromedioMeses;
+  /// Average age in months
+  int? averageAgeMonths;
 
-  /// Raza predominante
-  String? razaPredominante;
+  /// Predominant breed
+  String? predominantBreed;
 
-  /// IDs de animales que pertenecen al lote (relación)
+  /// IDs of animals belonging to the lot (relation)
   final List<String> animalIds = [];
 
   /// ID de la ubicación principal del lote (potrero, corral, etc)
@@ -118,45 +117,11 @@ class LoteGanaderoEntity {
   /// Usuario que última vez editó el lote
   String? usuarioActualizacion;
 
-  /// Constructor
-  LoteGanaderoEntity({
-    String? uuid,
-    required this.nombre,
-    this.descripcion,
-    required this.especie,
-    required this.tipoProduccion,
-    required this.cantidadAnimales,
-    this.edadPromedioMeses,
-    this.razaPredominante,
-    this.ubicacionId,
-    this.pesoPromedio,
-    this.pesoMinimo,
-    this.pesoMaximo,
-    this.produccionDiaria,
-    this.unidadProduccion,
-    DateTime? fechaCreacion,
-    this.fechaCierre,
-    this.activo = true,
-    this.datosEspecificosJson,
-    this.notas,
-    this.responsable,
-    this.objetivo,
-    DateTime? fechaRegistro,
-    DateTime? fechaActualizacion,
-    this.usuarioCreacion,
-    this.usuarioActualizacion,
-  }) {
-    this.uuid = uuid ?? const Uuid().v4();
-    this.fechaCreacion = fechaCreacion ?? DateTime.now();
-    this.fechaRegistro = fechaRegistro ?? DateTime.now();
-    this.fechaActualizacion = fechaActualizacion ?? DateTime.now();
-  }
-
   /// Agregar animal al lote
   void agregarAnimal(String animalId) {
     if (!animalIds.contains(animalId)) {
       animalIds.add(animalId);
-      cantidadAnimales++;
+      animalCount++;
       registrarCambio(
         concepto: 'Adición de animal',
         descripcion: 'Animal $animalId agregado al lote',
@@ -167,7 +132,7 @@ class LoteGanaderoEntity {
   /// Remover animal del lote
   void removerAnimal(String animalId) {
     if (animalIds.remove(animalId)) {
-      cantidadAnimales--;
+      animalCount--;
       registrarCambio(
         concepto: 'Remoción de animal',
         descripcion: 'Animal $animalId removido del lote',
@@ -215,32 +180,32 @@ class LoteGanaderoEntity {
 
   /// Obtener nombre de especie legible
   String get nombreEspecie {
-    switch (especie) {
-      case EspecieLote.bovino:
+    switch (species) {
+      case LotSpecies.cattle:
         return 'Bovino';
-      case EspecieLote.equino:
+      case LotSpecies.equine:
         return 'Equino';
-      case EspecieLote.ovino:
+      case LotSpecies.ovine:
         return 'Ovino';
-      case EspecieLote.caprino:
+      case LotSpecies.caprine:
         return 'Caprino';
     }
   }
 
   /// Obtener nombre de tipo de producción
   String get nombreProduccion {
-    switch (tipoProduccion) {
-      case TipoProduccion.carne:
+    switch (productionType) {
+      case ProductionType.meat:
         return 'Carne';
-      case TipoProduccion.leche:
+      case ProductionType.milk:
         return 'Leche';
-      case TipoProduccion.doble:
+      case ProductionType.dual:
         return 'Doble Propósito';
-      case TipoProduccion.reproduccion:
+      case ProductionType.breeding:
         return 'Reproducción';
-      case TipoProduccion.engorde:
+      case ProductionType.fattening:
         return 'Engorde';
-      case TipoProduccion.levante:
+      case ProductionType.raising:
         return 'Levante';
     }
   }
@@ -250,7 +215,7 @@ class LoteGanaderoEntity {
 
   @override
   String toString() =>
-      'LoteGanadero($uuid | $nombre | $cantidadAnimales ${nombreEspecie}s)';
+      'LivestockLot($uuid | $name | $animalCount ${nombreEspecie}s)';
 }
 
 /// Embedded class para historial de cambios en lotes

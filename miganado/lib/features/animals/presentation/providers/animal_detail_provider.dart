@@ -3,6 +3,8 @@ import 'package:miganado/data/database/isar_database.dart';
 import 'package:miganado/features/animals/domain/entities/animal_detail.dart';
 import 'package:miganado/features/animals/domain/usecases/get_animal_detail_usecase.dart';
 import 'package:miganado/features/animals/presentation/providers/animals_providers.dart';
+import 'package:miganado/core/exceptions/app_exception.dart';
+import 'package:miganado/core/services/logger_service.dart';
 
 // ============================================================================
 // PROVIDERS - Casos de uso
@@ -24,8 +26,23 @@ final getAnimalDetailUseCaseProvider = Provider(
 /// Uso: ref.watch(animalDetailProvider(uuid))
 final animalDetailProvider =
     FutureProvider.family<AnimalDetail, String>((ref, uuid) async {
-  final useCase = ref.watch(getAnimalDetailUseCaseProvider);
-  return useCase.call(uuid);
+  try {
+    LoggerService.startOperation('getAnimalDetail', 'animal_detail_provider');
+    final useCase = ref.watch(getAnimalDetailUseCaseProvider);
+    final detail = await useCase.call(uuid);
+    LoggerService.operationCompleted(
+        'getAnimalDetail', 'animal_detail_provider');
+    return detail;
+  } catch (e, st) {
+    final appEx = toAppException(e, st);
+    LoggerService.error('Error obteniendo detalles del animal', appEx, st,
+        'animal_detail_provider');
+    throw DatabaseException(
+      message: 'No se pudo cargar el animal: ${appEx.message}',
+      originalError: e,
+      stackTrace: st,
+    );
+  }
 });
 
 // ============================================================================
@@ -102,8 +119,8 @@ class ObservacionesNotifier extends StateNotifier<ObservacionesState> {
       }
 
       // Actualizar las observaciones
-      animalEntity.observaciones = state.observaciones;
-      animalEntity.fechaActualizacion = DateTime.now();
+      animalEntity.observations = state.observaciones;
+      animalEntity.lastUpdateDate = DateTime.now();
 
       // Guardar a Isar
       await database.updateAnimal(animalEntity);

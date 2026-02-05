@@ -104,7 +104,7 @@ class InputValidators {
     if (value == null || value.trim().isEmpty) {
       return 'El código es requerido';
     }
-    if (value.trim().length < 1) {
+    if (value.trim().isEmpty) {
       return 'El código debe tener al menos 1 carácter';
     }
     if (value.trim().length > 20) {

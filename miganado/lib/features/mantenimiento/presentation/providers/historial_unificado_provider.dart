@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// ...existing code...
 import 'package:miganado/features/mantenimiento/presentation/providers/vacunas_providers.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/tratamientos_providers.dart';
 import 'package:miganado/features/mantenimiento/presentation/providers/nutricion_providers.dart';
@@ -43,7 +42,8 @@ final todoHistorialAnimalProvider =
 
   try {
     // Obtener vacunas
-    final vacunas = await ref.watch(vacunasByAnimalProvider(animalUuid).future);
+    final vacunas =
+        await ref.watch(vaccinesByAnimalProvider(animalUuid).future);
     for (final vacuna in vacunas) {
       eventos.add(EventoHistoricoUnificado(
         id: vacuna.uuid,
@@ -68,7 +68,7 @@ final todoHistorialAnimalProvider =
   try {
     // Obtener tratamientos
     final tratamientos =
-        await ref.watch(tratamientosByAnimalProvider(animalUuid).future);
+        await ref.watch(treatmentsByAnimalProvider(animalUuid).future);
     for (final tratamiento in tratamientos) {
       eventos.add(EventoHistoricoUnificado(
         id: tratamiento.uuid,
@@ -95,7 +95,7 @@ final todoHistorialAnimalProvider =
   try {
     // Obtener nutrición
     final nutricion =
-        await ref.watch(nutricionByAnimalProvider(animalUuid).future);
+        await ref.watch(nutritionByAnimalProvider(animalUuid).future);
     for (final nutriente in nutricion) {
       eventos.add(EventoHistoricoUnificado(
         id: nutriente.uuid,

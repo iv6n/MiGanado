@@ -1,188 +1,326 @@
-import 'package:miganado/features/animals/data/models/animal_entity.dart';
+/// Enumeraciones para animales ganaderos
 
-/// Extensión para Categoria con métodos de validación y descripción
-extension CategoriaHelper on Categoria {
+/// Especies de animales
+enum Species {
+  cattle,
+  equine,
+}
+
+/// Categorías de animales bovinos
+enum Category {
+  cow,
+  bull,
+  horse,
+  mare,
+  donkey,
+  jenny,
+  donkeyFemale,
+  mule,
+}
+
+/// Etapas de vida del animal
+enum LifeStage {
+  calf,
+  calfMale,
+  calfFemale,
+  heifer,
+  youngBull,
+  steer,
+  cow,
+  bull,
+  colt,
+  filly,
+  horse,
+  mare,
+  donkey,
+  donkeyFemale,
+  mule,
+}
+
+/// Estados reproductivos
+enum ReproductiveStatus {
+  virgin,
+  pregnant,
+  lactating,
+  empty,
+  blocked,
+  undefined,
+}
+
+/// Sexo del animal
+enum Sex {
+  male,
+  female,
+}
+
+/// Extensión para Species con métodos de validación y descripción
+extension SpeciesHelper on Species {
   /// Descripción legible en español
   String get descripcion {
     switch (this) {
-      case Categoria.vaca:
+      case Species.cattle:
+        return 'Bovino';
+      case Species.equine:
+        return 'Equino';
+    }
+  }
+
+  /// Categorías válidas para esta especie
+  List<Category> get categoriasValidas {
+    switch (this) {
+      case Species.cattle:
+        return [Category.cow, Category.bull];
+      case Species.equine:
+        return [
+          Category.horse,
+          Category.mare,
+          Category.donkey,
+          Category.donkeyFemale,
+          Category.mule
+        ];
+    }
+  }
+}
+
+/// Extensión para Category con métodos de validación y descripción
+extension CategoryHelper on Category {
+  /// Descripción legible en español
+  String get descripcion {
+    switch (this) {
+      case Category.cow:
         return 'Vaca';
-      case Categoria.caballo:
+      case Category.bull:
+        return 'Toro';
+      case Category.horse:
         return 'Caballo';
-      case Categoria.burro:
+      case Category.mare:
+        return 'Yegua';
+      case Category.donkey:
         return 'Burro';
-      case Categoria.mula:
+      case Category.jenny:
+        return 'Burra';
+      case Category.donkeyFemale:
+        return 'Burra';
+      case Category.mule:
         return 'Mula';
+      default:
+        return name;
     }
   }
 
   /// Icono para la categoría
   String get assetIcon {
     switch (this) {
-      case Categoria.vaca:
+      case Category.cow:
+      case Category.bull:
         return 'assets/images/vaca.png';
-      case Categoria.caballo:
+      case Category.horse:
+      case Category.mare:
         return 'assets/images/caballo.png';
-      case Categoria.burro:
+      case Category.donkey:
+      case Category.jenny:
+      case Category.donkeyFemale:
         return 'assets/images/burro.png';
-      case Categoria.mula:
+      case Category.mule:
         return 'assets/images/mula.png';
+      default:
+        return 'assets/images/animal.png';
     }
   }
 
   /// Obtiene la especie correspondiente a la categoría
-  Especie get especie {
+  Species get especie {
     switch (this) {
-      case Categoria.vaca:
-        return Especie.bovino;
-      case Categoria.caballo:
-      case Categoria.burro:
-      case Categoria.mula:
-        return Especie.equino;
+      case Category.cow:
+      case Category.bull:
+        return Species.cattle;
+      case Category.horse:
+      case Category.mare:
+      case Category.donkey:
+      case Category.jenny:
+      case Category.donkeyFemale:
+      case Category.mule:
+        return Species.equine;
+      default:
+        return Species.cattle;
     }
   }
 }
 
-/// Extensión para Especie con métodos de validación
-extension EspecieHelper on Especie {
+/// Extensión para LifeStage con métodos de descripción e iconografía
+extension LifeStageHelper on LifeStage {
   /// Descripción legible en español
   String get descripcion {
     switch (this) {
-      case Especie.bovino:
-        return 'Bovino';
-      case Especie.equino:
-        return 'Equino';
-    }
-  }
-
-  /// Categorías válidas para esta especie
-  List<Categoria> get categoriasValidas {
-    switch (this) {
-      case Especie.bovino:
-        return [Categoria.vaca];
-      case Especie.equino:
-        return [Categoria.caballo, Categoria.burro, Categoria.mula];
-    }
-  }
-}
-
-/// Extensión para EtapaVida con métodos de descripción e iconografía
-extension EtapaVidaHelper on EtapaVida {
-  /// Descripción legible en español
-  String get descripcion {
-    switch (this) {
-      case EtapaVida.becerro:
+      case LifeStage.calf:
         return 'Becerro';
-      case EtapaVida.becerra:
+      case LifeStage.calfMale:
+        return 'Becerro';
+      case LifeStage.calfFemale:
         return 'Becerra';
-      case EtapaVida.vaquilla:
+      case LifeStage.heifer:
         return 'Vaquilla';
-      case EtapaVida.torete:
+      case LifeStage.youngBull:
         return 'Torete';
-      case EtapaVida.novillo:
+      case LifeStage.steer:
         return 'Novillo';
-      case EtapaVida.vaca:
+      case LifeStage.cow:
         return 'Vaca';
-      case EtapaVida.toro:
+      case LifeStage.bull:
         return 'Toro';
-      case EtapaVida.potro:
+      case LifeStage.colt:
         return 'Potro';
-      case EtapaVida.adulto:
-        return 'Adulto';
+      case LifeStage.filly:
+        return 'Potranca';
+      case LifeStage.horse:
+        return 'Caballo';
+      case LifeStage.mare:
+        return 'Yegua';
+      case LifeStage.donkey:
+        return 'Burro';
+      case LifeStage.donkeyFemale:
+        return 'Burra';
+      case LifeStage.mule:
+        return 'Mula';
     }
   }
 
   /// Icono para la etapa de vida
   String get assetIcon {
     switch (this) {
-      case EtapaVida.becerro:
-      case EtapaVida.becerra:
+      case LifeStage.calf:
+      case LifeStage.calfMale:
+      case LifeStage.calfFemale:
         return 'assets/images/becerro.png';
-      case EtapaVida.vaquilla:
+      case LifeStage.heifer:
+        return 'assets/images/vaquilla.png';
+      case LifeStage.youngBull:
         return 'assets/images/novillo.png';
-      case EtapaVida.torete:
+      case LifeStage.steer:
         return 'assets/images/novillo.png';
-      case EtapaVida.novillo:
-        return 'assets/images/novillo.png';
-      case EtapaVida.vaca:
+      case LifeStage.cow:
         return 'assets/images/vaca.png';
-      case EtapaVida.toro:
+      case LifeStage.bull:
         return 'assets/images/toro.png';
-      case EtapaVida.potro:
+      case LifeStage.colt:
         return 'assets/images/caballo.png';
-      case EtapaVida.adulto:
+      case LifeStage.filly:
         return 'assets/images/caballo.png';
+      case LifeStage.horse:
+        return 'assets/images/caballo.png';
+      case LifeStage.mare:
+        return 'assets/images/caballo.png';
+      case LifeStage.donkey:
+        return 'assets/images/burro.png';
+      case LifeStage.donkeyFemale:
+        return 'assets/images/burro.png';
+      case LifeStage.mule:
+        return 'assets/images/mula.png';
+      default:
+        return 'assets/images/animal.png';
     }
   }
 
   /// Rango de edad en meses (mín, máx)
   (int, int?) get rangoEdadMeses {
     switch (this) {
-      case EtapaVida.becerro:
-      case EtapaVida.becerra:
+      case LifeStage.calf:
+      case LifeStage.calfMale:
+      case LifeStage.calfFemale:
         return (0, 12);
-      case EtapaVida.vaquilla:
-      case EtapaVida.torete:
-      case EtapaVida.novillo:
+      case LifeStage.heifer:
+      case LifeStage.youngBull:
+      case LifeStage.steer:
         return (12, 24);
-      case EtapaVida.vaca:
-      case EtapaVida.toro:
+      case LifeStage.cow:
+      case LifeStage.bull:
         return (24, null);
-      case EtapaVida.potro:
+      case LifeStage.colt:
+      case LifeStage.filly:
         return (0, 36);
-      case EtapaVida.adulto:
+      case LifeStage.horse:
+      case LifeStage.mare:
         return (36, null);
+      case LifeStage.donkey:
+      case LifeStage.donkeyFemale:
+        return (0, null);
+      case LifeStage.mule:
+        return (0, null);
+      default:
+        return (0, null);
     }
   }
 
   /// Valida si una etapa es válida para una especie dada
-  bool esValidaParaEspecie(Especie especie) {
+  bool esValidaParaEspecie(Species especie) {
     switch (especie) {
-      case Especie.bovino:
+      case Species.cattle:
         return [
-          EtapaVida.becerro,
-          EtapaVida.becerra,
-          EtapaVida.vaquilla,
-          EtapaVida.torete,
-          EtapaVida.novillo,
-          EtapaVida.vaca,
-          EtapaVida.toro,
+          LifeStage.calf,
+          LifeStage.calfFemale,
+          LifeStage.heifer,
+          LifeStage.youngBull,
+          LifeStage.steer,
+          LifeStage.cow,
+          LifeStage.bull,
         ].contains(this);
-      case Especie.equino:
-        return [EtapaVida.potro, EtapaVida.adulto].contains(this);
+      case Species.equine:
+        return [
+          LifeStage.colt,
+          LifeStage.filly,
+          LifeStage.horse,
+          LifeStage.mare,
+          LifeStage.donkey,
+          LifeStage.donkeyFemale,
+          LifeStage.mule,
+        ].contains(this);
     }
   }
 }
 
 /// Validación de cambios de sexo: verifica si una etapa es compatible con el nuevo sexo
-extension SexoEtapaValidation on Sexo {
+extension SexoEtapaValidation on Sex {
   /// Etapas válidas para este sexo en bovinos
-  List<EtapaVida> etapasValidasBovino() {
+  List<LifeStage> etapasValidasBovino() {
     switch (this) {
-      case Sexo.macho:
+      case Sex.male:
         return [
-          EtapaVida.becerro,
-          EtapaVida.torete,
-          EtapaVida.novillo,
-          EtapaVida.toro,
+          LifeStage.calf,
+          LifeStage.youngBull,
+          LifeStage.steer,
+          LifeStage.bull,
         ];
-      case Sexo.hembra:
+      case Sex.female:
         return [
-          EtapaVida.becerra,
-          EtapaVida.vaquilla,
-          EtapaVida.vaca,
+          LifeStage.calfFemale,
+          LifeStage.heifer,
+          LifeStage.cow,
         ];
     }
   }
 
   /// Etapas válidas para este sexo en equinos
-  List<EtapaVida> etapasValidasEquino() {
-    return [EtapaVida.potro, EtapaVida.adulto];
+  List<LifeStage> etapasValidasEquino() {
+    switch (this) {
+      case Sex.male:
+        return [
+          LifeStage.colt,
+          LifeStage.horse,
+          LifeStage.donkey,
+        ];
+      case Sex.female:
+        return [
+          LifeStage.filly,
+          LifeStage.mare,
+          LifeStage.donkeyFemale,
+          LifeStage.mule,
+        ];
+    }
   }
 
   /// Valida si una etapa es compatible con este sexo
-  bool etapaCompatible(EtapaVida etapa, Especie especie) {
-    if (especie == Especie.bovino) {
+  bool etapaCompatible(LifeStage etapa, Species especie) {
+    if (especie == Species.cattle) {
       return etapasValidasBovino().contains(etapa);
     } else {
       return etapasValidasEquino().contains(etapa);
@@ -193,18 +331,14 @@ extension SexoEtapaValidation on Sexo {
 /// Extensión para validación de castración
 extension CastracionValidation on bool {
   /// Valida si la castración es válida para una etapa bovino
-  bool esValidaParaEtapaBovino(EtapaVida etapa) {
+  bool esValidaParaEtapaBovino(LifeStage etapa) {
     // La castración solo es válida para machos en etapas específicas
-    // Becerro -> puede o no estar castrado
-    // Torete -> NO debe estar castrado (es macho entero)
-    // Novillo -> DEBE estar castrado
-    // Toro -> NO debe estar castrado
     switch (etapa) {
-      case EtapaVida.torete:
+      case LifeStage.youngBull:
         return !this; // No debe estar castrado
-      case EtapaVida.novillo:
+      case LifeStage.steer:
         return this; // Debe estar castrado
-      case EtapaVida.toro:
+      case LifeStage.bull:
         return !this; // No debe estar castrado
       default:
         return true; // Para otras etapas, cualquier valor es válido
