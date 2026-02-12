@@ -76,7 +76,7 @@ jobs:
           ls -lah release/
 
       - name: 📤 Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ steps.version.outputs.artifact_name }}
           path: release/
@@ -129,7 +129,7 @@ jobs:
         continue-on-error: true
 
       - name: 📤 Upload web build
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         if: success()
         with:
           name: miganado-web
